@@ -3,6 +3,7 @@ from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
+from app2 import theme
 
 api_k = api_kx
 
