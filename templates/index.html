@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ask AI</title>
     <style>
-        /* ... existing styles ... */
-        
-        /* Add Matrix-like character block styles */
         .matrix {
             position: fixed;
             bottom: 0;
@@ -33,24 +30,23 @@
     </style>
 </head>
 <body>
- <body>
      <div class="stripe"></div>
      <br><br>
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
-     <h1 >Ask OptiXs AI service bot</h1>
-     <form  action="/ask" method="POST">
-       <label  for="question">What do you want to ask?</label>
-     <input  type="text" name="question" id="question" required>
-     <br><br>
-     <label for="theme">Library for:</label>
-     <select  name="theme" id="theme">
-       <option  value="chameleon">Chameleon</option>
-       <option  value="powerline">Powerline</option>
-       <option  value="compex">Compex</option>
-     </select>
-     <br><br>
-     <button class="glitch" type="submit" id="submit-button">Submit</button>
-    <br><br>
+     <h1>Ask OptiXs AI service bot</h1>
+     <form action="/ask" method="POST">
+       <label for="question">What do you want to ask?</label>
+       <input type="text" name="question" id="question" required>
+       <br><br>
+       <label for="theme">Library for:</label>
+       <select name="theme" id="theme">
+         <option value="chameleon">Chameleon</option>
+         <option value="powerline">Powerline</option>
+         <option value="compex">Compex</option>
+       </select>
+       <br><br>
+       <button class="glitch" type="submit" id="submit-button">Submit</button>
+       <br><br>
      </form>
      <script>
          const submitButton = document.getElementById('submit-button');
@@ -59,73 +55,5 @@
              submitButton.style.color = 'red';
          });
      </script>
- </body>
-    
- </html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask AI</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: black;
-            color: #00FF00;
-            font-family: 'Lucida Console', monospace;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            padding-top: 50px;
-        }
-        /* Add the matrix styles here */
-        @keyframes matrix {
-            0% {
-                top: -100%;
-            }
-            100% {
-                top: 100%;
-            }
-        }
-        .matrix {
-            overflow: hidden;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 100px;
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: space-around;
-            align-items: flex-end;
-        }
-        .matrix span {
-            font-size: 16px;
-            animation: matrix linear infinite;
-            animation-duration: calc(3s + (3s * var(--delay)));
-        }
-
-        /* Rest of the styles from your original code */
-        ...
-    </style>
-</head>
-<body>
-    <!-- Your original code -->
-    ...
-    <!-- Add the matrix characters at the end -->
-    <div class="matrix">
-        <span style="--delay: 0.1">A</span>
-        <span style="--delay: 0.3">B</span>
-        <span style="--delay: 0.5">C</span>
-        <span style="--delay: 0.7">D</span>
-        <span style="--delay: 0.9">E</span>
-        <span style="--delay: 0.2">F</span>
-        <span style="--delay: 0.4">G</span>
-        <span style="--delay: 0.6">H</span>
-        <span style="--delay: 0.8">I</span>
-        <span style="--delay: 1">J</span>
-    </div>
 </body>
 </html>
