@@ -7,6 +7,9 @@ from main import api_kx
 
 app = Flask(__name__)
 
+def create_app(api_key):
+    app = Flask(__name__)
+    app.config["API_KEY"] = api_kx
 
     @app.route('/')
     def home():
