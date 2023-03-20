@@ -3,7 +3,6 @@ from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
-from app2 import theme
 
 api_k = api_kx
 
@@ -30,6 +29,8 @@ def construct_index(directory_path, theme):
         index_file = "indexCH.json"
     elif theme == "compex":
         index_file = "indexCompex.json"
+    elif theme == "powerline":
+        index_file = "index.json"
     else:
         index_file = "index.json"
 
