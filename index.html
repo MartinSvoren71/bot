@@ -10,7 +10,21 @@
             font-family: 'Courier New', Courier, monospace;
             color: green;
             text-align: center;
-            padding-top: 50px;
+            padding-top: 10px;
+        }
+         canvas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            padding-top: 10px;
+            opacity: 0.3;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            
         }
         img {
             display: block;
@@ -50,12 +64,46 @@
         button:hover {
             background-color: #3e8e41;
         }
+        .stripe {
+            background-color: black;
+            height: 2px;
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: rotateX(45deg);
+            opacity: 0.06;
+        }
+        .stripe::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00FF00; /* Green */
+            animation: stripe 2s linear infinite;
+        }
+        @keyframes stripe {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
      </style>
  </head>
  <body>
+     <div class="stripe"></div>
+      <canvas id="matrixCanvas"></canvas>
+     <div class="content-wrapper">
+         <br><br>
+         <br><br>
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
      <h1>Ask OptiXs AI service bot</h1>
-     <form action="/ask" method="POST">
+      <form action="/ask" method="POST">
      <label for="question">What do you want to ask?</label>
      <input type="text" name="question" id="question" required>
      <br><br>
@@ -63,13 +111,12 @@
      <select name="theme" id="theme">
        <option value="chameleon">Chameleon</option>
        <option value="powerline">Powerline</option>
-     <select  name="theme" id="theme">
-       <option  value="chameleon">Chameleon</option>
-       <option  value="powerline">Powerline</option>
-                <option  value="compex">Compex</option>
+       <option value="compex">Compex</option>
      </select>
      <br><br>
      <button type="submit" id="submit-button">Submit</button>
+          <br><br>
+          <div class="stripe"></div>
      </form>
      <script>
          const submitButton = document.getElementById('submit-button');
@@ -77,7 +124,43 @@
              submitButton.textContent = 'WAIT';
              submitButton.style.color = 'red';
          });
+         
+         const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 1;
+
+        const characters = 'OptXsoPTxS';
+
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
      </script>
  </body>
+</html>
+
     
- </html>

@@ -14,6 +14,20 @@
             text-align: center;
             padding-top: 50px;
         }
+        canvas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            padding-top: 10px;
+            opacity: 0.3;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            
+        }
         img {
             width: 100%;
             height: auto;
@@ -22,34 +36,6 @@
             margin: auto;
             margin-bottom: 50px;
             filter: drop-shadow(0 0 0.75rem white);
-        }
-        .stripe {
-            background-color: black;
-            height: 3px;
-            position: relative;
-            z-index: 1;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transform: rotateX(45deg);
-        }
-        .stripe::before {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #00FF00; /* Green */
-            animation: stripe 2s linear infinite;
-        }
-        @keyframes stripe {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(100%);
-            }
         }
         h1 {
             font-size: 32px;
@@ -75,40 +61,14 @@
         a:hover {
             text-decoration: underline;
         }
-        #matrix {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            pointer-events: none;
-            background-color: black;
-            z-index: -1;
-        }
-        #matrix .column {
-            position: absolute;
-            top: 0;
-            width: 20px;
-            height: 200px;
-            animation: matrix-animation 5s linear infinite;
-        }
-        #matrix .column span {
-            font-size: 14px;
-            font-weight: bold;
-            color: #00FF00;
-        }
-        @keyframes matrix-animation {
-            from {
-                transform: translateY(-200px);
-            }
-            to {
-                transform: translateY(calc(100vh + 200px));
-            }
-        }
+
     </style>
 </head>
-<body>
-    <div class="stripe"></div>
+    <body>
+     <canvas id="matrixCanvas"></canvas>
+     <div class="content-wrapper">
+    <br><br>
+     <br><br>
     <br><br>
     <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
     <h1>OptiXs AI service bot response:</h1>
@@ -117,5 +77,42 @@
     <p>{{ response }}</p>
     <br><br>
     <a href="/">Ask another question</a>
-</body>
+    <script>>
+    const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 1;
+
+        const characters = 'OptXsoPTxS';
+
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+     </script>>
+   </body>
+
 </html>

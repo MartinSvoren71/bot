@@ -6,31 +6,73 @@
     <title>Ask AI</title>
     <style>
         body {
-             background-color: black;
-            color: #00FF00;
-            font-family: 'Lucida Console', monospace;
-            font-size: 16px;
-            font-weight: bold;
+            background-color: black;
+            font-family: 'Courier New', Courier, monospace;
+            color: green;
             text-align: center;
-            padding-top: 50px;
+            padding-top: 10px;
         }
-         img {
-            width: 30%;
-            height: auto;
-            max-width: 400px;
+         canvas {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            padding-top: 10px;
+            opacity: 0.3;
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            
+        }
+        img {
             display: block;
-            margin: auto;
-            margin-bottom: 50px;
-            filter: drop-shadow(0 0 0.75rem white);
+            margin: 0 auto;
+            max-width: 80%;
+        }
+        h1 {
+            font-size: 3em;
+            margin-top: 50px;
+        }
+        form {
+            margin-top: 50px;
+        }
+        label {
+            font-size: 2em;
+            margin-right: 20px;
+        }
+        input[type="text"] {
+            font-size: 2em;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background-color: #1f1f1f;
+            color: red;
+        }
+        button {
+            font-size: 2em;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background-color: #4CAF50;
+            color: black;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3e8e41;
         }
         .stripe {
             background-color: black;
-            height: 3px;
+            height: 2px;
             position: relative;
             z-index: 1;
             transform-style: preserve-3d;
             perspective: 1000px;
             transform: rotateX(45deg);
+            opacity: 0.06;
         }
         .stripe::before {
             content: "";
@@ -51,107 +93,30 @@
                 transform: translateY(100%);
             }
         }
-        .glitch {
-            animation: glitch 0.1s linear infinite alternate;
-        }
-      @keyframes glitch {
-    0% {
-        transform: none;
-    }
-    10% {
-        transform: translateX(0.5px) rotate(0.5deg);
-    }
-    20% {
-        transform: none;
-    }
-    30% {
-        transform: translateX(-0.5px) rotate(-0.5deg);
-    }
-    40% {
-        transform: none;
-    }
-    50% {
-        transform: translateY(0.5px) rotate(0.25deg);
-    }
-    60% {
-        transform: none;
-    }
-    70% {
-        transform: translateY(-0.5px) rotate(-0.25deg);
-    }
-    80% {
-        transform: none;
-    }
-    90% {
-        transform: translateX(-0.25px) rotate(-0.25deg);
-    }
-    100% {
-        transform: none;
-    }
-}
-
-        img {
-                 width: 100%;
-            height: auto;
-            max-width: 320px;
-            display: block;
-            margin: auto;
-            margin-bottom: 50px;
-            filter: drop-shadow(0 0 0.75rem white);
-        }
- h1 {
-        font-size: 32px;
-        margin-bottom: 50px;
-    }
-    form {
-        padding-top: 50px;
-    }
-    label {
-        font-size: 18px;
-        margin-right: 20px;
-    }
-    input[type="text"] {
-        font-size: 16px;
-        padding: 10px;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        background-color: #1f1f1f;
-        color: red;
-    }
-    button {
-        font-size: 2em;
-        padding: 10px 20px;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        background-color: #4CAF50;
-        color: black;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #3e8e41;
-    }
- </style>
+     </style>
  </head>
  <body>
      <div class="stripe"></div>
-     <br><br>
+      <canvas id="matrixCanvas"></canvas>
+     <div class="content-wrapper">
+         <br><br>
+         <br><br>
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
-     <h1 >Ask OptiXs AI service bot</h1>
-     <form  action="/ask" method="POST">
-       <label  for="question">What do you want to ask?</label>
-     <input  type="text" name="question" id="question" required>
+     <h1>Ask OptiXs AI service bot</h1>
+      <form action="/ask" method="POST">
+     <label for="question">What do you want to ask?</label>
+     <input type="text" name="question" id="question" required>
      <br><br>
      <label for="theme">Library for:</label>
-     <select  name="theme" id="theme">
-       <option  value="chameleon">Chameleon</option>
-       <option  value="powerline">Powerline</option>
-       <option  value="compex">Compex</option>
+     <select name="theme" id="theme">
+       <option value="chameleon">Chameleon</option>
+       <option value="powerline">Powerline</option>
+       <option value="compex">Compex</option>
      </select>
      <br><br>
-     <button class="glitch" type="submit" id="submit-button">Submit</button>
-    <br><br>
+     <button type="submit" id="submit-button">Submit</button>
+          <br><br>
+          <div class="stripe"></div>
      </form>
      <script>
          const submitButton = document.getElementById('submit-button');
@@ -159,8 +124,43 @@
              submitButton.textContent = 'WAIT';
              submitButton.style.color = 'red';
          });
+         
+         const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth * 0.8;
+        canvas.height = window.innerHeight * 1;
+
+        const characters = 'OptXsoPTxS';
+
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0f0';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
      </script>
  </body>
-    
- </html>
+</html>
 
+    
