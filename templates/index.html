@@ -5,135 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ask AI</title>
     <style>
-        body {
-             background-color: black;
-            color: #00FF00;
-            font-family: 'Lucida Console', monospace;
-            font-size: 16px;
-            font-weight: bold;
-            text-align: center;
-            padding-top: 50px;
-        }
-         img {
-            width: 30%;
-            height: auto;
-            max-width: 400px;
-            display: block;
-            margin: auto;
-            margin-bottom: 50px;
-            filter: drop-shadow(0 0 0.75rem white);
-        }
-        .stripe {
-            background-color: black;
-            height: 3px;
-            position: relative;
-            z-index: 1;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transform: rotateX(45deg);
-        }
-        .stripe::before {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
+        /* ... existing styles ... */
+        
+        /* Add Matrix-like character block styles */
+        .matrix {
+            position: fixed;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 2px;
-            background-color: #00FF00; /* Green */
-            animation: stripe 2s linear infinite;
+            height: 100px;
+            overflow: hidden;
         }
-        @keyframes stripe {
-            from {
+        .matrix span {
+            font-size: 20px;
+            opacity: 0;
+            animation: matrix 1s linear infinite;
+        }
+        @keyframes matrix {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
                 transform: translateY(-100%);
             }
-            to {
-                transform: translateY(100%);
-            }
         }
-        .glitch {
-            animation: glitch 0.1s linear infinite alternate;
-        }
-      @keyframes glitch {
-    0% {
-        transform: none;
-    }
-    10% {
-        transform: translateX(0.5px) rotate(0.5deg);
-    }
-    20% {
-        transform: none;
-    }
-    30% {
-        transform: translateX(-0.5px) rotate(-0.5deg);
-    }
-    40% {
-        transform: none;
-    }
-    50% {
-        transform: translateY(0.5px) rotate(0.25deg);
-    }
-    60% {
-        transform: none;
-    }
-    70% {
-        transform: translateY(-0.5px) rotate(-0.25deg);
-    }
-    80% {
-        transform: none;
-    }
-    90% {
-        transform: translateX(-0.25px) rotate(-0.25deg);
-    }
-    100% {
-        transform: none;
-    }
-}
-
-        img {
-                 width: 100%;
-            height: auto;
-            max-width: 320px;
-            display: block;
-            margin: auto;
-            margin-bottom: 50px;
-            filter: drop-shadow(0 0 0.75rem white);
-        }
- h1 {
-        font-size: 32px;
-        margin-bottom: 50px;
-    }
-    form {
-        padding-top: 50px;
-    }
-    label {
-        font-size: 18px;
-        margin-right: 20px;
-    }
-    input[type="text"] {
-        font-size: 16px;
-        padding: 10px;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        background-color: #1f1f1f;
-        color: red;
-    }
-    button {
-        font-size: 2em;
-        padding: 10px 20px;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        background-color: #4CAF50;
-        color: black;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #3e8e41;
-    }
- </style>
- </head>
+    </style>
+</head>
+<body>
  <body>
      <div class="stripe"></div>
      <br><br>
@@ -164,3 +63,69 @@
     
  </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ask AI</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            color: #00FF00;
+            font-family: 'Lucida Console', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 50px;
+        }
+        /* Add the matrix styles here */
+        @keyframes matrix {
+            0% {
+                top: -100%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+        .matrix {
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+        .matrix span {
+            font-size: 16px;
+            animation: matrix linear infinite;
+            animation-duration: calc(3s + (3s * var(--delay)));
+        }
+
+        /* Rest of the styles from your original code */
+        ...
+    </style>
+</head>
+<body>
+    <!-- Your original code -->
+    ...
+    <!-- Add the matrix characters at the end -->
+    <div class="matrix">
+        <span style="--delay: 0.1">A</span>
+        <span style="--delay: 0.3">B</span>
+        <span style="--delay: 0.5">C</span>
+        <span style="--delay: 0.7">D</span>
+        <span style="--delay: 0.9">E</span>
+        <span style="--delay: 0.2">F</span>
+        <span style="--delay: 0.4">G</span>
+        <span style="--delay: 0.6">H</span>
+        <span style="--delay: 0.8">I</span>
+        <span style="--delay: 1">J</span>
+    </div>
+</body>
+</html>
