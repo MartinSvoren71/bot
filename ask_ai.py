@@ -33,7 +33,7 @@ def construct_index(directory_path, theme):
    # elif theme == "powerline":
    #     index_file = "index.json"
    # else:
-        index_file = "index.json"
+    index_file = "index.json"
 
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
 
