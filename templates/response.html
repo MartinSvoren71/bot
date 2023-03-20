@@ -6,82 +6,14 @@
     <title>AI Response</title>
     <style>
         body {
-            overflow-x: hidden;
-            background: linear-gradient(to bottom, #000000 0%, #111111 50%, #222222 100%);
-            color: #00FF00; /* Green */
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 16px;
-            line-height: 1.5;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-        .stripe {
             background-color: black;
-            height: 2px;
-            position: relative;
-            z-index: 1;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transform: rotateX(45deg);
+            color: #00FF00;
+            font-family: 'Lucida Console', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 50px;
         }
-        .stripe::before {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #00FF00; /* Green */
-            animation: stripe 2s linear infinite;
-        }
-        @keyframes stripe {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(100%);
-            }
-        }
-        .glitch {
-            animation: glitch 0.1s linear infinite alternate;
-        }
-      @keyframes glitch {
-    0% {
-        transform: none;
-    }
-    10% {
-        transform: translateX(0.5px) rotate(0.5deg);
-    }
-    20% {
-        transform: none;
-    }
-    30% {
-        transform: translateX(-0.5px) rotate(-0.5deg);
-    }
-    40% {
-        transform: none;
-    }
-    50% {
-        transform: translateY(0.5px) rotate(0.25deg);
-    }
-    60% {
-        transform: none;
-    }
-    70% {
-        transform: translateY(-0.5px) rotate(-0.25deg);
-    }
-    80% {
-        transform: none;
-    }
-    90% {
-        transform: translateX(-0.25px) rotate(-0.25deg);
-    }
-    100% {
-        transform: none;
-    }
-}
         img {
             width: 100%;
             height: auto;
@@ -124,6 +56,6 @@
     <h1>OptiXs AI service bot response:</h1>
     <p>{{ question }}</p>
     <p>{{ response }}</p>
-    <a class="glitch" href="/">Ask another question</a>
+    <a href="/">Ask another question</a>
 </body>
 </html>
