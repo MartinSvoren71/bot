@@ -27,6 +27,8 @@ def construct_index(directory_path, theme):
     index.save_to_disk('index.json')
     if theme == "chameleon":
         index_file = "indexCH.json"
+    elif theme == "compex":
+        index_file = "indexCompex.json"
     else:
         index_file = "index.json"
 
