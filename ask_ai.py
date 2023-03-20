@@ -25,7 +25,7 @@ def construct_index(directory_path):
 
 def ask_ai(question):
     os.environ["OPENAI_API_KEY"] = api_k
-    index = GPTSimpleVectorIndex.load_from_disk('indexCompex.json')
+    index = GPTSimpleVectorIndex.load_from_disk('indexCH.json')
     response = index.query(question, response_mode="compact")
     return response.response
 
