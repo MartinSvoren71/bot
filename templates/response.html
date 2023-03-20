@@ -23,7 +23,7 @@
             margin-bottom: 50px;
             filter: drop-shadow(0 0 0.75rem white);
         }
-          .stripe {
+        .stripe {
             background-color: black;
             height: 3px;
             position: relative;
@@ -54,12 +54,11 @@
         h1 {
             font-size: 32px;
             margin-bottom: 50px;
-            
         }
         p {
             margin-top: 50px;
             margin-bottom: 30px;
-            line-height: 1.5;       
+            line-height: 1.5;
             padding: 10px;
             border-radius: 10px;
             border: none;
@@ -68,7 +67,6 @@
             display: block;
             margin: 0 auto;
             max-width: 80%;
-
         }
         a {
             text-decoration: none;
@@ -77,11 +75,41 @@
         a:hover {
             text-decoration: underline;
         }
+        #matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            pointer-events: none;
+            background-color: black;
+            z-index: -1;
+        }
+        #matrix .column {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 200px;
+            animation: matrix-animation 5s linear infinite;
+        }
+        #matrix .column span {
+            font-size: 14px;
+            font-weight: bold;
+            color: #00FF00;
+        }
+        @keyframes matrix-animation {
+            from {
+                transform: translateY(-200px);
+            }
+            to {
+                transform: translateY(calc(100vh + 200px));
+            }
+        }
     </style>
 </head>
 <body>
     <div class="stripe"></div>
-     <br><br>
+    <br><br>
     <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
     <h1>OptiXs AI service bot response:</h1>
     <p>{{ question }}</p>
