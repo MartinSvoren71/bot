@@ -7,10 +7,12 @@
     <style>
         body {
             background-color: black;
-            font-family: 'Courier New', Courier, monospace;
-            color: green;
+            color: #00FF00;
+            font-family: 'Lucida Console', monospace;
+            font-size: 16px;
+            font-weight: bold;
             text-align: center;
-            padding-top: 10px;
+            padding-top: 0px;
         }
          canvas {
             position: fixed;
@@ -26,14 +28,18 @@
             z-index: 1;
             
         }
-        img {
+         img {
+            width: 100%;
+            height: auto;
+            max-width: 320px;
             display: block;
-            margin: 0 auto;
-            max-width: 80%;
+            margin: auto;
+            margin-bottom: 50px;
+            filter: drop-shadow(0 0 0.75rem green);
         }
         h1 {
-            font-size: 3em;
-            margin-top: 50px;
+            max-width: 80%;
+            font-size: 2em;
         }
         form {
             margin-top: 50px;
@@ -53,11 +59,11 @@
         }
         button {
             font-size: 2em;
-            padding: 10px 20px;
-            border-radius: 10px;
+            padding: 10px 10px;
+            border-radius: 8px;
             border: none;
             outline: none;
-            background-color: #4CAF50;
+            background-color: #00FF00;
             color: black;
             cursor: pointer;
         }
@@ -99,6 +105,7 @@
      <div class="stripe"></div>
       <canvas id="matrixCanvas"></canvas>
      <div class="content-wrapper">
+         <br><br>
          <br><br>
          <br><br>
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">

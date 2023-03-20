@@ -7,10 +7,10 @@
     <style>
         body {
             background-color: black;
-            font-family: 'Courier New', Courier, monospace;
-            color: green;
+            color: 00FF00;
+             font-family: 'Lucida Console', monospace;
             text-align: center;
-            padding-top: 10px;
+            padding-top: 50px;
         }
          canvas {
             position: fixed;
@@ -27,9 +27,13 @@
             
         }
         img {
+            width: 100%;
+            height: auto;
+            max-width: 320px;
             display: block;
-            margin: 0 auto;
-            max-width: 80%;
+            margin: auto;
+            margin-bottom: 50px;
+            filter: drop-shadow(0 0 0.75rem green);
         }
         h1 {
             font-size: 3em;
@@ -101,6 +105,8 @@
      <div class="content-wrapper">
          <br><br>
          <br><br>
+         <br><br>
+
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
      <h1>Ask OptiXs AI service bot</h1>
       <form action="/ask" method="POST">
