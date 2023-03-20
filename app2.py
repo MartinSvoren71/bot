@@ -1,44 +1,25 @@
-import os
-import sys
+
 from flask import Flask, request, render_template, redirect, url_for
 from ask_ai import initialize_ai, ask_ai
 from threading import Thread
+api_k = "*"
 from main import api_kx
 
 app = Flask(__name__)
 
-def create_app(api_key):
-    app = Flask(__name__)
-    app.config["API_KEY"] = api_kx
+@app.route('/')
+def home():
+    return render_template('index.html')
 
-    @app.route('/')
-    def home():
-        return render_template('index.html')
-
-    @app.route('/ask', methods=['POST'])
-    def ask_question():
-        question = request.form['question']
-        option = request.form['option']
-
-        if question.strip().lower() == 'exit':
-            return redirect(url_for('home'))
-        else:
-            if option == '1':
-                index_file = 'index.json'
-            elif option == '2':
-                index_file = 'indexCH.json'
-            else:
-                # Default to option 1
-                index_file = 'index.json'
-
-            # Construct index if it doesn't exist
-            if not os.path.exists(index_file):
-                construct_index(directory_path)
-
-            # Load index and get response
-            index = GPTSimpleVectorIndex.load_from_disk(index_file)
-            response = ask_ai(question, index)
-            return render_template('response.html', question=question, response=response)
+@app.route('/ask', methods=['POST'])
+def ask_question():
+    question = request.form['question']
+    if question.strip().lower() == 'exit':
+        return redirect(url_for('home'))
+    else:
+        # Call your ask_ai() function and pass the question as an argument
+        response = ask_ai(question)
+        return render_template('response.html', question=question, response=response)
 
     t = Thread(target=initialize_ai)
     t.start()
@@ -56,5 +37,3 @@ if __name__ == '__main__':
     t.start()
     app.run(host='0.0.0.0', port='5000')
     
-
-   
