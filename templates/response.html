@@ -13,7 +13,6 @@
             font-weight: bold;
             text-align: center;
             padding-top: 50px;
-            position: relative; /* Make body element relative to position child elements */
         }
         img {
             width: 100%;
@@ -24,7 +23,7 @@
             margin-bottom: 50px;
             filter: drop-shadow(0 0 0.75rem white);
         }
-        .stripe {
+          .stripe {
             background-color: black;
             height: 3px;
             position: relative;
@@ -55,6 +54,7 @@
         h1 {
             font-size: 32px;
             margin-bottom: 50px;
+            
         }
         p {
             margin-top: 50px;
@@ -68,6 +68,7 @@
             display: block;
             margin: 0 auto;
             max-width: 80%;
+
         }
         a {
             text-decoration: none;
@@ -77,37 +78,179 @@
             text-decoration: underline;
         }
         #matrix {
-            position: absolute;
+            position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 120px;
-            overflow: hidden;
-            background-color: black;
-            font-size: 16px;
-            font-family: monospace;
-            font-weight: bold;
         }
-        .column {
+        #matrix .column {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 200px;
+            animation: fall 5s infinite linear;
+        }
+        #matrix .column span {
+            display: block;
             position: absolute;
             width: 20px;
-            top: 0;
-            opacity: 0.5;
+            height: 20px;
+            font-size: 18px;
+            color: #0F0;
+            opacity: 0.8;
         }
-        .column span {
-            display: block;
-            animation: matrix 3s linear infinite;
+        #matrix .column span:nth-child(1) {
+            animation: glow-1 1s infinite linear alternate-reverse;
         }
-        @keyframes matrix {
-            0% {
-                transform: translateY(-600px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+        #matrix .column span:nth-child(2) {
+            animation: glow-2 1s infinite linear alternate-reverse;
         }
-    </style>
-</head>
+        #matrix .column span:nth-child(3) {
+            animation: glow-3 1s infinite linear alternate-reverse;
+        }
+        #matrix .column span:nth-child(4) {
+  {
+animation: glow-4 1s infinite linear alternate-reverse;
+}
+#matrix .column span:nth-child(5) {
+animation: glow-5 1s infinite linear alternate-reverse;
+}
+#matrix .column span:nth-child(6) {
+animation: glow-6 1s infinite linear alternate-reverse;
+}
+#matrix .column span:nth-child(7) {
+animation: glow-7 1s infinite linear alternate-reverse;
+}
+#matrix .column span:nth-child(8) {
+animation: glow-8 1s infinite linear alternate-reverse;
+}
+#matrix .column span:nth-child(9) {
+animation: glow-9 1s infinite linear alternate-reverse;
+}
+#matrix .column span:nth-child(10) {
+animation: glow-10 1s infinite linear alternate-reverse;
+}
+@keyframes fall {
+0% {
+transform: translateY(-1000px);
+}
+100% {
+transform: translateY(0);
+}
+}
+@keyframes glow-1 {
+0% {
+opacity: 0.8;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.8;
+}
+}
+@keyframes glow-2 {
+0% {
+opacity: 0.6;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.6;
+}
+}
+@keyframes glow-3 {
+0% {
+opacity: 0.7;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.7;
+}
+}
+@keyframes glow-4 {
+0% {
+opacity: 0.9;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.9;
+}
+}
+@keyframes glow-5 {
+0% {
+opacity: 0.5;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.5;
+}
+}
+@keyframes glow-6 {
+0% {
+opacity: 0.6;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.6;
+}
+}
+@keyframes glow-7 {
+0% {
+opacity: 0.8;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.8;
+}
+}
+@keyframes glow-8 {
+0% {
+opacity: 0.7;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.7;
+}
+}
+@keyframes glow-9 {
+0% {
+opacity: 0.6;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.6;
+}
+}
+@keyframes glow-10 {
+0% {
+opacity: 0.9;
+}
+50% {
+opacity: 1;
+}
+100% {
+opacity: 0.9;
+}
+}
+</style>
+</head>          
+            
 <body>
     <div class="stripe"></div>
     <br><br>
@@ -119,86 +262,54 @@
     <br><br>
 <a href="/">Ask another question</a>
  <div id="matrix">
-        <div class="column" style="left: 0px;">
-            <span>λ</span>
-            <span>ħ</span>
-            <span>φ</span>
-            <span>ψ</span>
-            <span>θ</span>
-            <span>μ</span>
-            <span>ℏ</span>
-            <span>ε</span>
-            <span>Δ</span>
-        </div>
-        <div class="column" style="left: 30px;">
-            <span>β</span>
-            <span>γ</span>
-            <span>δ</span>
-            <span>ω</span>
-            <span>ξ</span>
-            <span>π</span>
-            <span>υ</span>
-            <span>ζ</span>
-            <span>ν</span>
-        </div>
-        <div class="column" style="left: 60px;">
-            <span>μ</span>
-            <span>γ</span>
-            <span>φ</span>
-            <span>θ</span>
-            <span>λ</span>
-            <span>ν</span>
-            <span>ξ</span>
-            <span>δ</span>
-            <span>ε</span>
-        </div>
-        <div class="column" style="left: 90px;">
-            <span>ψ</span>
-            <span>ω</span>
-            <span>υ</span>
-            <span>Δ</span>
-            <span>β</span>
-            <span>π</span>
-            <span>ζ</span>
-            <span>ℏ</span>
-            <span>Ω</span>
-        </div>
-        <div class="column" style="left: 120px;">
-            <span>α</span>
-            <span>Ω</span>
-            <span>ξ</span>
-            <span>θ</span>
-            <span>π</span>
-            <span>υ</span>
-            <span>ζ</span>
-            <span>ℏ</span>
-            <span>β</span>
-        </div>
-        <div class="column" style="left: 150px;">
-            <span>γ</span>
-            <span>ζ</span>
-            <span>δ</span>
-            <span>ω</span>
-            <span>ψ</span>
-            <span>λ</span>
-            <span>Ω</span>
-            <span>ε</span>
-            <span>ν</span>
-        </div>
-    </div>
-    <script>
-        // Generate random matrix animation characters
-        const columns = document.querySelectorAll('.column');
-        const matrixCharacters = ['λ', 'ħ', 'φ', 'ψ', 'θ', 'μ', 'ℏ', 'ε', 'Δ', 'β', 'γ', 'δ', 'ω', 'ξ', 'π', 'υ', 'ζ', 'ν', 'Ω'];
-        columns.forEach(column => {
-            for (let i = 0; i < 6; i++) {
-                const randomIndex = Math.floor(Math.random() * matrixCharacters.length);
-                const randomChar = matrixCharacters[randomIndex];
-                const span = document.createElement('span');
-                span.textContent = randomChar;
-                column.appendChild(span);
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+    <div class="column"></div>
+</div>
+
+<script>
+    const matrix = document.getElementById("matrix");
+    const column = document.getElementsByClassName("column");
+
+    // create matrix columns
+    for (let i = 0; i < column.length; i++) {
+        for (let j = 0; j < 6; j++) {
+            const span = document.createElement("span");
+            span.textContent = getRandomChar();
+            column[i].appendChild(span);
+        }
+    }
+
+    // update matrix every 50ms
+    setInterval(() => {
+        for (let i = 0; i < column.length; i++) {
+            const span = column[i].getElementsByTagName("span");
+
+            // update characters
+            for (let j = 0; j < span.length; j++) {
+                if (Math.floor(Math.random() * 10) == 0) {
+                    span[j].textContent = getRandomChar();
+                }
             }
-        });
-    </script>
+
+            // add new character to top of column
+            const newSpan = document.createElement("span");
+            newSpan.textContent = getRandomChar();
+            column[i].insertBefore(newSpan, span[0]);
+
+            // remove bottom character from column
+            span[span.length - 1].remove();
+        }
+    }, 50);
+
+    // get random character
+    function getRandomChar() {
+        const chars = "0123456789ABCEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        return chars[Math.floor(Math.random() * chars.length)];
+    }
+</script>
 </body>
 </html>
