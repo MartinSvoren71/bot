@@ -13,6 +13,7 @@
             font-weight: bold;
             text-align: center;
             padding-top: 50px;
+            position: relative; /* Make body element relative to position child elements */
         }
         img {
             width: 100%;
@@ -58,7 +59,7 @@
         p {
             margin-top: 50px;
             margin-bottom: 30px;
-            line-height: 1.5;
+            line-height: 1.5;       
             padding: 10px;
             border-radius: 10px;
             border: none;
@@ -76,38 +77,33 @@
             text-decoration: underline;
         }
         #matrix {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            pointer-events: none;
-            background-color: black;
-            z-index: -1;
-            overflow: hidden;
-        }
-        #matrix .column {
             position: absolute;
-            top: 0;
-            width: 20px;
-            height: 200px;
-            animation: matrix-animation 10s linear infinite;
-        }
-        #matrix .column span {
-            font-size: 14px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            background-color: black;
+            font-size: 16px;
+            font-family: monospace;
             font-weight: bold;
-            color: #00FF00;
-            transform-origin: 50% 0%;
         }
-        @keyframes matrix-animation {
+        .column {
+            position: absolute;
+            width: 20px;
+            top: 0;
+            opacity: 0.5;
+        }
+        .column span {
+            display: block;
+            animation: matrix 3s linear infinite;
+        }
+        @keyframes matrix {
             0% {
-                transform: translateY(-100%);
-            }
-            5% {
-                transform: translateY(0%);
+                transform: translateY(-600px);
             }
             100% {
-                transform: translateY(100%);
+                transform: translateY(0);
             }
         }
     </style>
@@ -122,32 +118,87 @@
     <p>{{ response }}</p>
     <br><br>
 <a href="/">Ask another question</a>
-<div id="matrix"></div>
-<script>
-    // Define the characters to be displayed in the matrix animation
-    const matrixChars = "01()[]^*$#!-+/%~,:;<>=@abcdefghijklmnoqprstuvwxyzABDEFGHIJKLMNOPRSTUVWXYZ";
-    const matrixColumnCount = 100; // Number of columns to display in the animation
-    const matrixColumnWidth = 20; // Width of each column in pixels
-    const matrixRowCount = Math.ceil(window.innerHeight / 200); // Number of rows to display based on screen height
-    const matrixContainer = document.getElementById("matrix");
-
-    // Create the columns of characters
-    for (let i = 0; i < matrixColumnCount; i++) {
-        const column = document.createElement("div");
-        column.classList.add("column");
-        column.style.left = `${matrixColumnWidth * i}px`;
-
-        // Add random characters to the column
-        for (let j = 0; j < matrixRowCount; j++) {
-            const char = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
-            const span = document.createElement("span");
-            span.textContent = char;
-            span.style.animationDelay = `${j * 100}ms`;
-            column.appendChild(span);
-        }
-
-        matrixContainer.appendChild(column);
-    }
-</script>
+ <div id="matrix">
+        <div class="column" style="left: 0px;">
+            <span>λ</span>
+            <span>ħ</span>
+            <span>φ</span>
+            <span>ψ</span>
+            <span>θ</span>
+            <span>μ</span>
+            <span>ℏ</span>
+            <span>ε</span>
+            <span>Δ</span>
+        </div>
+        <div class="column" style="left: 30px;">
+            <span>β</span>
+            <span>γ</span>
+            <span>δ</span>
+            <span>ω</span>
+            <span>ξ</span>
+            <span>π</span>
+            <span>υ</span>
+            <span>ζ</span>
+            <span>ν</span>
+        </div>
+        <div class="column" style="left: 60px;">
+            <span>μ</span>
+            <span>γ</span>
+            <span>φ</span>
+            <span>θ</span>
+            <span>λ</span>
+            <span>ν</span>
+            <span>ξ</span>
+            <span>δ</span>
+            <span>ε</span>
+        </div>
+        <div class="column" style="left: 90px;">
+            <span>ψ</span>
+            <span>ω</span>
+            <span>υ</span>
+            <span>Δ</span>
+            <span>β</span>
+            <span>π</span>
+            <span>ζ</span>
+            <span>ℏ</span>
+            <span>Ω</span>
+        </div>
+        <div class="column" style="left: 120px;">
+            <span>α</span>
+            <span>Ω</span>
+            <span>ξ</span>
+            <span>θ</span>
+            <span>π</span>
+            <span>υ</span>
+            <span>ζ</span>
+            <span>ℏ</span>
+            <span>β</span>
+        </div>
+        <div class="column" style="left: 150px;">
+            <span>γ</span>
+            <span>ζ</span>
+            <span>δ</span>
+            <span>ω</span>
+            <span>ψ</span>
+            <span>λ</span>
+            <span>Ω</span>
+            <span>ε</span>
+            <span>ν</span>
+        </div>
+    </div>
+    <script>
+        // Generate random matrix animation characters
+        const columns = document.querySelectorAll('.column');
+        const matrixCharacters = ['λ', 'ħ', 'φ', 'ψ', 'θ', 'μ', 'ℏ', 'ε', 'Δ', 'β', 'γ', 'δ', 'ω', 'ξ', 'π', 'υ', 'ζ', 'ν', 'Ω'];
+        columns.forEach(column => {
+            for (let i = 0; i < 6; i++) {
+                const randomIndex = Math.floor(Math.random() * matrixCharacters.length);
+                const randomChar = matrixCharacters[randomIndex];
+                const span = document.createElement('span');
+                span.textContent = randomChar;
+                column.appendChild(span);
+            }
+        });
+    </script>
 </body>
 </html>
