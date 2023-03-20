@@ -19,7 +19,7 @@ def ask_question():
     else:
         # Call your ask_ai() function and pass the question as an argument
         response = ask_ai(question, theme)
-        return render_template('response.html', question=question,theme=theme response=response)
+        return render_template('response.html', question=question theme=theme response=response)
 
     t = Thread(target=initialize_ai)
     t.start()
