@@ -84,25 +84,30 @@
             pointer-events: none;
             background-color: black;
             z-index: -1;
+            overflow: hidden;
         }
         #matrix .column {
             position: absolute;
             top: 0;
             width: 20px;
             height: 200px;
-            animation: matrix-animation 5s linear infinite;
+            animation: matrix-animation 10s linear infinite;
         }
         #matrix .column span {
             font-size: 14px;
             font-weight: bold;
             color: #00FF00;
+            transform-origin: 50% 0%;
         }
         @keyframes matrix-animation {
-            from {
-                transform: translateY(-200px);
+            0% {
+                transform: translateY(-100%);
             }
-            to {
-                transform: translateY(calc(100vh + 200px));
+            5% {
+                transform: translateY(0%);
+            }
+            100% {
+                transform: translateY(100%);
             }
         }
     </style>
@@ -116,6 +121,33 @@
     <br><br>
     <p>{{ response }}</p>
     <br><br>
-    <a href="/">Ask another question</a>
+<a href="/">Ask another question</a>
+<div id="matrix"></div>
+<script>
+    // Define the characters to be displayed in the matrix animation
+    const matrixChars = "01()[]^*$#!-+/%~,:;<>=@abcdefghijklmnoqprstuvwxyzABDEFGHIJKLMNOPRSTUVWXYZ";
+    const matrixColumnCount = 100; // Number of columns to display in the animation
+    const matrixColumnWidth = 20; // Width of each column in pixels
+    const matrixRowCount = Math.ceil(window.innerHeight / 200); // Number of rows to display based on screen height
+    const matrixContainer = document.getElementById("matrix");
+
+    // Create the columns of characters
+    for (let i = 0; i < matrixColumnCount; i++) {
+        const column = document.createElement("div");
+        column.classList.add("column");
+        column.style.left = `${matrixColumnWidth * i}px`;
+
+        // Add random characters to the column
+        for (let j = 0; j < matrixRowCount; j++) {
+            const char = matrixChars.charAt(Math.floor(Math.random() * matrixChars.length));
+            const span = document.createElement("span");
+            span.textContent = char;
+            span.style.animationDelay = `${j * 100}ms`;
+            column.appendChild(span);
+        }
+
+        matrixContainer.appendChild(column);
+    }
+</script>
 </body>
 </html>
