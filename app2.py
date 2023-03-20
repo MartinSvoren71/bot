@@ -14,6 +14,7 @@ def home():
 @app.route('/ask', methods=['POST'])
 def ask_question():
     question = request.form['question']
+    theme = request.form['theme']
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
     else:
