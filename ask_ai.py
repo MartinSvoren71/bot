@@ -2,9 +2,10 @@ import os
 from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
+from main import api_kx
 
 
-api_k = *
+api_k = api_kx
 
 def initialize_ai(api_key):
     os.environ["*"] = api_key
