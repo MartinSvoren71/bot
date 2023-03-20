@@ -18,7 +18,6 @@ def construct_index(directory_path, theme):
 
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.7, model_name="davinci", max_tokens=num_outputs, openai_api_key=api_k))
 
-    Updated upstream
     documents = SimpleDirectoryReader(directory_path).load_data()
 
     index = GPTSimpleVectorIndex(
@@ -26,14 +25,12 @@ def construct_index(directory_path, theme):
     )
 
     index.save_to_disk('index.json')
-=======
     if theme == "chameleon":
         index_file = "indexCH.json"
     else:
         index_file = "index.json"
 
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
->>>>>>> Stashed changes
 
     return index
 
