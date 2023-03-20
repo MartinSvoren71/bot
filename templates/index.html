@@ -6,12 +6,83 @@
     <title>Ask AI</title>
     <style>
         body {
-            background-color: black;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #000000 0%, #111111 50%, #222222 100%);
+            color: #00FF00; /* Green */
             font-family: 'Courier New', Courier, monospace;
-            color: green;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
             text-align: center;
-            padding-top: 50px;
         }
+        .stripe {
+            background-color: black;
+            height: 2px;
+            position: relative;
+            z-index: 1;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: rotateX(45deg);
+        }
+        .stripe::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00FF00; /* Green */
+            animation: stripe 2s linear infinite;
+        }
+        @keyframes stripe {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+        .glitch {
+            animation: glitch 0.1s linear infinite alternate;
+        }
+      @keyframes glitch {
+    0% {
+        transform: none;
+    }
+    10% {
+        transform: translateX(0.5px) rotate(0.5deg);
+    }
+    20% {
+        transform: none;
+    }
+    30% {
+        transform: translateX(-0.5px) rotate(-0.5deg);
+    }
+    40% {
+        transform: none;
+    }
+    50% {
+        transform: translateY(0.5px) rotate(0.25deg);
+    }
+    60% {
+        transform: none;
+    }
+    70% {
+        transform: translateY(-0.5px) rotate(-0.25deg);
+    }
+    80% {
+        transform: none;
+    }
+    90% {
+        transform: translateX(-0.25px) rotate(-0.25deg);
+    }
+    100% {
+        transform: none;
+    }
+}
+
         img {
             display: block;
             margin: 0 auto;
@@ -53,19 +124,25 @@
      </style>
  </head>
  <body>
+     <div class="stripe"></div>
+     <br><br>
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
-     <h1>Ask OptiXs AI service bot</h1>
-     <form action="/ask" method="POST">
-     <label for="question">What do you want to ask?</label>
-     <input type="text" name="question" id="question" required>
+     <h1 >Ask OptiXs AI service bot</h1>
+     <form  action="/ask" method="POST">
+       <label  for="question">What do you want to ask?</label>
+     <input  type="text" name="question" id="question" required>
      <br><br>
      <label for="theme">Library for:</label>
-     <select name="theme" id="theme">
-       <option value="chameleon">Chameleon</option>
-       <option value="powerline">Powerline</option>
-         <option  value="compex">Compex</option>
+     <select  name="theme" id="theme">
+       <option  value="chameleon">Chameleon</option>
+       <option  value="powerline">Powerline</option>
+       <option  value="compex">Compex</option>
+     </select>
      <br><br>
-     <button type="submit" id="submit-button">Submit</button>
+     <button class="glitch" type="submit" id="submit-button">Submit</button>
+    <br><br>
+     <div class="stripe"></div>
+
      </form>
      <script>
          const submitButton = document.getElementById('submit-button');
@@ -77,3 +154,4 @@
  </body>
     
  </html>
+
