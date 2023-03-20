@@ -21,8 +21,6 @@ def construct_index(directory_path):
     documents = SimpleDirectoryReader(directory_path).load_data()
 
 
-
-
 def ask_ai(question):
     os.environ["OPENAI_API_KEY"] = api_k
     index = GPTSimpleVectorIndex.load_from_disk('indexCH.json')
