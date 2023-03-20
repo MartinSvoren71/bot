@@ -16,7 +16,7 @@ def construct_index(directory_path):
     chunk_size_limit = 600
 
 
-    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.7, model_name="davinci", max_tokens=num_outputs, openai_api_key=api_k))
+    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.2, model_name="davinci", max_tokens=num_outputs, openai_api_key=api_k))
 
     documents = SimpleDirectoryReader(directory_path).load_data()
 
