@@ -60,6 +60,11 @@
             font-size: 2em;
             text-align: center;
         }
+        h2 {
+            max-width: 100%;
+            font-size: 2em;
+            text-align: center;
+        }
         form {
             margin-top: 50px;
         }
@@ -96,7 +101,7 @@
       <canvas id="matrixCanvas"></canvas>
      <div class="content-wrapper">
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
-    <div id="datetime"></div>
+    <h2 id="datetime" style="color: red;"></h2>
      <h1>Ask OptiXs AI service bot</h1>
       <form action="/ask" method="POST">
      <label for="question">What do you want to ask?</label>
