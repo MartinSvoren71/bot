@@ -25,9 +25,12 @@ def ask_ai(question, theme):
     os.environ["OPENAI_API_KEY"] = api_k
 
     index_file = {
-        "chameleon": "indexCH.json",
+        "chameleon": "indexChameleon.json",
         "compex": "indexCompex.json",
-        "powerline": "index.json"
+        "chameleondiscovery": "indexChameleonDiscovery.json"
+        "innova": "indexInnova.json"
+        "powerline": "indexPowerLine.json"
+
     }.get(theme, "indexCH.json")  # Default to "indexCH.json" if the theme value is not recognized
 
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
