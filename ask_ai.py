@@ -24,7 +24,7 @@ def ask_ai(question, theme):
 
     }.get(theme, "indexCH.json")  # Default to "indexCH.json" if the theme value is not recognized
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
-    response = index.query(question, response_mode="compact")
+    response = index.query(question, )
     return response.response
 
 
