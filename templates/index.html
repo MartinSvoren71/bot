@@ -94,6 +94,15 @@
         button:hover {
             background-color: #3e8e41;
         }
+        .input-key {
+            font-size: 1em;
+            padding: 5px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background-color: #1f1f1f;
+            color: red;
+        }
        
      </style>
  </head>
@@ -104,6 +113,9 @@
     <h2 id="datetime" style="color: red;"></h2>
      <h1>Ask Kevin product related question</h1>
       <form action="/ask" method="POST">
+         <label for="key">Provide key:</label>
+        <input type="text" name="key" id="key" class="input-key" required>
+        <br><br>
      <label for="question">What do you want to ask?</label>
      <input type="text" name="question" id="question" required>
      <br><br>
