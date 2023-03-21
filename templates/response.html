@@ -20,15 +20,7 @@
                 responseContainer.textContent += message[index];
                 setTimeout(() => typeResponse(message, index + 1), 60);
             }
-        
         }
-		function updateTime() {
-			var now = new Date();
-			var time = now.toLocaleTimeString();
-			var date = now.toLocaleDateString();
-			document.getElementById('datetime').innerHTML = time + ' on ' + date;
-		}
-		setInterval(updateTime, 1000); // call updateTime every second
 	</script>
     <style>
        body {
@@ -157,10 +149,13 @@
 
         setInterval(draw, 33);
         setTimeout(() => {
-                const response = "{{ response }}";
+             const response = "{{ response }}";
+
+            // Call the typeResponse function with a delay, for example, 2 seconds
+            setTimeout(() => {
                 typeResponse(response);
             }, 2000);
-     </script>
+        </script>
    </body>
 
 </html>
