@@ -12,15 +12,6 @@
 			document.getElementById('datetime').innerHTML = time + ' on ' + date;
 		}
 		setInterval(updateTime, 1000); // call updateTime every second
-
-        // New function to type the response in a Matrix-style terminal
-        function typeResponse(message, index = 0) {
-            if (index < message.length) {
-                const responseContainer = document.getElementById('response-container');
-                responseContainer.textContent += message[index];
-                setTimeout(() => typeResponse(message, index + 1), 60);
-            }
-        }
 	</script>
     <style>
        body {
@@ -73,7 +64,7 @@
             font-size: 1.5em;
             text-align: center;
         }
-       p {
+        p {
             margin-top: 50px;
             font-family: 'Lucida Console', monospace;
             font-size: 14px;
@@ -87,7 +78,6 @@
             display: block;
             margin: 0 auto;
             max-width: 80%;
-            color: #00FF00; /* Ensure the text color is visible */
         }
         a {
             text-decoration: none;
@@ -110,10 +100,9 @@
     
     <p> For {{theme}}: {{ question }}</p>
     <h1>Operator wrote:</h1>
-        <p id="response-container"></p>
+    <p>{{ response }}</p>
     <br><br>
     <script>
-        
     const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth * 0.8;
@@ -148,14 +137,7 @@
         }
 
         setInterval(draw, 33);
-        setTimeout(() => {
-             const response = "{{ response }}";
-
-            // Call the typeResponse function with a delay, for example, 2 seconds
-            setTimeout(() => {
-                typeResponse(response);
-            }, 2000);
-        </script>
+     </script>
    </body>
 
 </html>
