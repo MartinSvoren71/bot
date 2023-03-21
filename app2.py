@@ -18,7 +18,7 @@ def ask():
         response = ask_ai(question, theme)  # Pass the theme value
         return render_template('response.html', question=question, theme=theme, response=response)
     else:
-        return "Invalid key. Please try again."
+        return render_template('badkey.html')
 
 t = Thread(target=initialize_ai)
 t.start()
