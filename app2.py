@@ -16,7 +16,7 @@ def ask():
         return redirect(url_for('home'))
     elif key == "xxx007":  # Check if the key is "xxx007"
         response = ask_ai(question, theme)  # Pass the theme value
-        return render_template('index.html', question=question, theme=theme, response=response)
+        return render_template('response.html', question=question, theme=theme, response=response)
     else:
         return render_template('badkey.html')
 
