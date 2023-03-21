@@ -18,8 +18,8 @@ def ask_ai(question, theme):
         "compex": "indexCompex.json",
         "chameleondiscovery": "indexChameleonDiscovery.json",
         "innova": "indexInnova.json",
-        "powerline": "indexPowerLine.json"
-        "newton": "indexNewton.json"
+        "powerline": "indexPowerLine.json",
+        "newton": "indexNewton.json",
         "kymera": "indexKymera.json"
 
     }.get(theme, "indexCH.json")  # Default to "indexCH.json" if the theme value is not recognized
