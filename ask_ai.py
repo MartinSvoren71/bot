@@ -21,10 +21,18 @@ def construct_index(directory_path):
     documents = SimpleDirectoryReader(directory_path).load_data()
 
 
-def ask_ai(question):
+def ask_ai(question, theme):
     os.environ["OPENAI_API_KEY"] = api_k
-    index = GPTSimpleVectorIndex.load_from_disk('indexCH.json')
+
+    index_file = {
+        "chameleon": "indexCH.json",
+        "compex": "indexCompex.json",
+        "powerline": "index.json"
+    }.get(theme, "indexCH.json")  # Default to "indexCH.json" if the theme value is not recognized
+
+    index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, response_mode="compact")
     return response.response
+
 
 
