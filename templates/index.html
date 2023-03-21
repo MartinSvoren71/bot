@@ -137,10 +137,20 @@
      </form>
      <script>
          const submitButton = document.getElementById('submit-button');
-         submitButton.addEventListener('click', function() {
-             submitButton.textContent = 'WAIT';
-             submitButton.style.color = 'red';
-         });
+submitButton.addEventListener('click', function() {
+    // Save the original values
+    const originalTextContent = submitButton.textContent;
+    const originalColor = submitButton.style.color;
+
+    submitButton.textContent = 'WAIT';
+    submitButton.style.color = 'red';
+
+    setTimeout(() => {
+        // Revert the values back to the original ones after 5 seconds
+        submitButton.textContent = originalTextContent;
+        submitButton.style.color = originalColor;
+    }, 2000);
+});
          
          const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
