@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Response</title>
+	<script>
+		function updateTime() {
+			var now = new Date();
+			var time = now.toLocaleTimeString();
+			var date = now.toLocaleDateString();
+			document.getElementById('datetime').innerHTML = time + ' on ' + date;
+		}
+		setInterval(updateTime, 1000); // call updateTime every second
+	</script>
     <style>
        body {
             background-color: black;
@@ -79,6 +88,8 @@
      <br><br>
     <br><br>
     <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
+             <h2 id="datetime" style="color: red;"></h2>
+
     <h1>OptiXs AI service bot response:</h1>
     <p>{{ question }}</p>
     <br><br>
