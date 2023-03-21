@@ -89,44 +89,12 @@
         button:hover {
             background-color: #3e8e41;
         }
-        .stripe {
-            background-color: black;
-            height: 2px;
-            position: relative;
-            z-index: 1;
-            transform-style: preserve-3d;
-            perspective: 1000px;
-            transform: rotateX(45deg);
-            opacity: 0.06;
-        }
-        .stripe::before {
-            content: "";
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #00FF00; /* Green */
-            animation: stripe 2s linear infinite;
-        }
-        @keyframes stripe {
-            from {
-                transform: translateY(-100%);
-            }
-            to {
-                transform: translateY(100%);
-            }
-        }
+       
      </style>
  </head>
  <body>
-     <div class="stripe"></div>
       <canvas id="matrixCanvas"></canvas>
      <div class="content-wrapper">
-         <br><br>
-         <br><br>
-         <br><br>
      <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
     <div id="datetime"></div>
      <h1>Ask OptiXs AI service bot</h1>
