@@ -17,7 +17,6 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    const url = 'bot/templates/aa.pdf';
     <title>Ask AI</title>
     <style>
         body {
@@ -198,9 +197,9 @@ overflow-y: scroll;
 
         setInterval(draw, 33);
 
-        const url = 'bot/aa.pdf';
-    const pdfReader = document.getElementById('pdf-reader');
-            pdfjsLib.getDocument(url).promise.then(pdfDoc => {
+        const url = 'https://www.optixs.cz/data/ke-stazeni/thermocontrol_datovy-list-d1025.pdf';
+        const pdfReader = document.getElementById('pdf-reader');
+        pdfjsLib.getDocument(url).promise.then(pdfDoc => {
             const totalPages = pdfDoc.numPages;
 
             for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
@@ -229,4 +228,4 @@ overflow-y: scroll;
 
     </script>
 </body>
-    </html>
+</html>
