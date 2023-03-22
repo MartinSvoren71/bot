@@ -197,10 +197,15 @@ overflow-y: scroll;
 
         setInterval(draw, 33);
 
-        const url = 'https://www.optixs.cz/data/ke-stazeni/thermocontrol_datovy-list-d1025.pdf';
-        const pdfReader = document.getElementById('pdf-reader');
-        pdfjsLib.getDocument(url).promise.then(pdfDoc => {
-            const totalPages = pdfDoc.numPages;
+        // Construct the URL of the PDF file based on the form data
+const pdfUrl = `www.optixs.cz/data/ke-stazeni/thermocontrol_datovy-list-d1025.pdf`;
+
+// Load the PDF file
+pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
+    // ...
+}).catch(error => {
+    console.error('Error loading PDF: ', error);
+});
 
             for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
                 pdfDoc.getPage(pageNum).then(page => {
