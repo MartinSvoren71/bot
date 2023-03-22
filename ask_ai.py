@@ -1,10 +1,12 @@
 import os
+from datetime import datetime  # import datetime module
 from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
+
 api_k = api_kx
-log_file = "/home/ec2-user/bot/log.txt"
+log_file = "log.txt"  # specify the log file path and name
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_key
@@ -27,15 +29,16 @@ def ask_ai(question, theme):
          "univet": "indexUnivet.json",
         "kymera": "indexKymera.json",
         "zygomx": "indexZygoMX.json"
+
     }.get(theme, "indexCH.json")  # Default to "indexCH.json" if the theme value is not recognized
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, response_mode="compact")
     
     # log the question, answer, and time to the log file
     with open(log_file, "a") as f:
-        f.write(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
+        f.write(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("=================================\n")
     
     return response.response
