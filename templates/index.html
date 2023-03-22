@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <title>Operator the OptiXs Bot</title>
-<script src="/pdf.js/build/pdf.min.js"></script>
+<script src="/var/www/html/pdf.js/build/pdf.min.js"></script>
 <script>
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.js/build/pdf.worker.min.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/var/www/html/pdf.js/build/pdf.worker.min.js';
 </script>
 
     <script>
@@ -197,15 +197,10 @@ overflow-y: scroll;
 
         setInterval(draw, 33);
 
-        // Construct the URL of the PDF file based on the form data
-const pdfUrl = 'www.optixs.cz/data/ke-stazeni/thermocontrol_datovy-list-d1025.pdf';
-
-// Load the PDF file
-pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc => {
-    // ...
-}).catch(error => {
-    console.error('Error loading PDF: ', error);
-});
+        const PDFurl = 'https://www.optixs.cz/data/ke-stazeni/thermocontrol_datovy-list-d1025.pdf';
+        const pdfReader = document.getElementById('pdf-reader');
+        pdfjsLib.getDocument(PDFurl).promise.then(pdfDoc => {
+            const totalPages = pdfDoc.numPages;
 
             for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
                 pdfDoc.getPage(pageNum).then(page => {
