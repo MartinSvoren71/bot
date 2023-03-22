@@ -4,7 +4,7 @@ from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleV
 from langchain import OpenAI
 from main import api_kx
 api_k = api_kx
-log_file = "log.txt"  # specify the log file path and name
+log_file = "bot/log.txt"  # specify the log file path and name
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_key
@@ -33,9 +33,9 @@ def ask_ai(question, theme):
     
     # log the question, answer, and time to the log file
     with open(log_file, "a") as f:
+        f.write(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
-        f.write(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write("=================================\n")
     
     return response.response
