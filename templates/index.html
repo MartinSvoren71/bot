@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <title>Operator the OptiXs Bot</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+<script src="js/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
+    </script>
     <script>
         function updateTime() {
             var now = new Date();
@@ -14,6 +17,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    const url = '/aa.pdf';
     <title>Ask AI</title>
     <style>
         body {
