@@ -2,10 +2,6 @@
 <html lang="en">
 <head>
     <title>Operator the OptiXs Bot</title>
-<script src="js/pdf.min.js"></script>
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
-    </script>
     <script>
         function updateTime() {
             var now = new Date();
@@ -17,7 +13,6 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    const url = 'www.optixs.cz/data/ke-stazeni/thermocontrol_datovy-list-d1025.pdf';
     <title>Ask AI</title>
     <style>
         body {
@@ -107,14 +102,7 @@
             background-color: #1f1f1f;
             color: red;
         }
-        #pdf-reader {
-            width: 80%;
-            height: 500px;
-            border: 2px solid green;
-            margin: 50px auto;
-background-color: #1f1f1f;
-overflow-y: scroll;
-}
+
 </style>
 
 </head>
@@ -146,7 +134,6 @@ overflow-y: scroll;
             <button type="submit" id="submit-button">Submit</button>
             <br><br>
         </form>
-        <div id="pdf-reader"></div>
         <script>
             const submitButton = document.getElementById('submit-button');
             submitButton.addEventListener('click', function () {
@@ -198,34 +185,7 @@ overflow-y: scroll;
 
         setInterval(draw, 33);
 
-        const url = 'www.optixs.cz/data/ke-stazeni/thermocontrol_datovy-list-d1025.pdf';
-    const pdfReader = document.getElementById('pdf-reader');
-            pdfjsLib.getDocument(url).promise.then(pdfDoc => {
-            const totalPages = pdfDoc.numPages;
-
-            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-                pdfDoc.getPage(pageNum).then(page => {
-                    const scale = 1.5;
-                    const viewport = page.getViewport({ scale });
-
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-
-                    const renderContext = {
-                        canvasContext: ctx,
-                        viewport: viewport
-                    };
-
-                    page.render(renderContext).promise.then(() => {
-                        pdfReader.appendChild(canvas);
-                    });
-                });
-            }
-        }).catch(error => {
-            console.error('Error loading PDF: ', error);
-        });
+      
 
     </script>
 </body>
