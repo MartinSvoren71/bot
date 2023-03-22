@@ -1,6 +1,6 @@
 import os
 from threading import Thread
-from datetime import datetime
+from datetime import Datetime
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
