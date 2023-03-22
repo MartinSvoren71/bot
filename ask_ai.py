@@ -4,7 +4,7 @@ from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleV
 from langchain import OpenAI
 from main import api_kx
 api_k = api_kx
-log_file = "bot/log.txt"  # specify the log file path and name
+log_file = "/home/ec2-user/bot/log.txt"
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_key
