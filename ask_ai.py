@@ -21,7 +21,7 @@ def ask_ai(question, theme):
         "powerline": "indexPowerLine.json",
         "newton": "indexNewton.json",
          "univet": "indexUnivet.json",
-        "kymera": "indexKymera.json"
+        "kymera": "indexKymera.json",
         "zygomx": "indexZygoMX.json"
 
     }.get(theme, "indexCH.json")  # Default to "indexCH.json" if the theme value is not recognized
