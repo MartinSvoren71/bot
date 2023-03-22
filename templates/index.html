@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <title>Operator the OptiXs Bot</title>
-	<script>
-		function updateTime() {
-			var now = new Date();
-			var time = now.toLocaleTimeString();
-			var date = now.toLocaleDateString();
-			document.getElementById('datetime').innerHTML = time + ' on ' + date;
-		}
-		setInterval(updateTime, 1000); // call updateTime every second
-	</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.12.313/pdf.min.js"></script>
+    <script>
+        function updateTime() {
+            var now = new Date();
+            var time = now.toLocaleTimeString();
+            var date = now.toLocaleDateString();
+            document.getElementById('datetime').innerHTML = time + ' on ' + date;
+        }
+        setInterval(updateTime, 1000); // call updateTime every second
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ask AI</title>
@@ -24,30 +25,28 @@
             text-align: center;
             padding-top: 0px;
             position: absolute;
-             overflow-y: hidden;
-    top: 50%;
-    left: 50%;
+            overflow-y: hidden;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             padding-top: 0p
         }
-         canvas {
-     width: 100vh;
-    height: 1400px;
-    z-index: -1;
-    opacity: 0.3;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+        canvas {
+            width: 100vh;
+            height: 1400px;
+            z-index: -1;
+            opacity: 0.3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             padding-top: 0px;
-            
         }
         .content-wrapper {
             position: relative;
             z-index: 1;
-            
         }
-         img {
+        img {
             width: 100%;
             height: auto;
             max-width: 320px;
@@ -104,57 +103,63 @@
             background-color: #1f1f1f;
             color: red;
         }
-       
-     </style>
- </head>
- <body>
-      <canvas id="matrixCanvas"></canvas>
-     <div class="content-wrapper">
-     <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
-    <h2 id="datetime" style="color: red;"></h2>
-     <h1>Ask Operator product related question</h1>
-      <form action="/ask" method="POST">
-         <label for="key">Provide key:</label>
-        <input type="text" name="key" id="key" class="input-key" required>
-        <br><br>
-     <label for="question">What do you want to ask?</label>
-     <input type="text" name="question" id="question" required>
-     <br><br>
-     <label for="theme">Library for:</label>
-     <select name="theme" id="theme">
-       <option value="chameleon">Chameleon</option>
-       <option value="powerline">Powerline</option>
-       <option value="compex">Compex</option>
-         <option value="innova">Innova</option>
-         <option value="chameleondiscovery">ChameleonDiscovery</option>
-         <option value="kymera">Kymera</option>
-         <option value="newton">Newton</option>
-                  <option value="univet">Univet</option>
+        #pdf-reader {
+            width: 80%;
+            height: 500px;
+            border: 2px solid green;
+            margin: 50px auto;
+background-color: #1f1f1f;
+overflow-y: scroll;
+}
+</style>
 
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <div class="content-wrapper">
+        <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
+        <h2 id="datetime" style="color: red;"></h2>
+        <h1>Ask Operator product related question</h1>
+        <form action="/ask" method="POST">
+            <label for="key">Provide key:</label>
+            <input type="text" name="key" id="key" class="input-key" required>
+            <br><br>
+            <label for="question">What do you want to ask?</label>
+            <input type="text" name="question" id="question" required>
+            <br><br>
+            <label for="theme">Library for:</label>
+            <select name="theme" id="theme">
+                <option value="chameleon">Chameleon</option>
+                <option value="powerline">Powerline</option>
+                <option value="compex">Compex</option>
+                <option value="innova">Innova</option>
+                <option value="chameleondiscovery">ChameleonDiscovery</option>
+                <option value="kymera">Kymera</option>
+                <option value="newton">Newton</option>
+                <option value="univet">Univet</option>
+            </select>
+            <br><br>
+            <button type="submit" id="submit-button">Submit</button>
+            <br><br>
+        </form>
+        <div id="pdf-reader"></div>
+        <script>
+            const submitButton = document.getElementById('submit-button');
+            submitButton.addEventListener('click', function () {
+                // Save the original values
+                const originalTextContent = submitButton.textContent;
+                const originalColor = submitButton.style.color; 
+            submitButton.textContent = 'WAIT';
+            submitButton.style.color = 'red';
 
-     </select>
-     <br><br>
-     <button type="submit" id="submit-button">Submit</button>
-          <br><br>
-     </form>
-     <script>
-         const submitButton = document.getElementById('submit-button');
-submitButton.addEventListener('click', function() {
-    // Save the original values
-    const originalTextContent = submitButton.textContent;
-    const originalColor = submitButton.style.color;
+            setTimeout(() => {
+                // Revert the values back to the original ones after 5 seconds
+                submitButton.textContent = originalTextContent;
+                submitButton.style.color = originalColor;
+            }, 2000);
+        });
 
-    submitButton.textContent = 'WAIT';
-    submitButton.style.color = 'red';
-
-    setTimeout(() => {
-        // Revert the values back to the original ones after 5 seconds
-        submitButton.textContent = originalTextContent;
-        submitButton.style.color = originalColor;
-    }, 2000);
-});
-         
-         const canvas = document.getElementById('matrixCanvas');
+        const canvas = document.getElementById('matrixCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth * 0.8;
         canvas.height = window.innerHeight * 1;
@@ -188,8 +193,36 @@ submitButton.addEventListener('click', function() {
         }
 
         setInterval(draw, 33);
-     </script>
- </body>
-</html>
 
-    
+        const url = '/aa.pdf';
+    const pdfReader = document.getElementById('pdf-reader');
+            pdfjsLib.getDocument(url).promise.then(pdfDoc => {
+            const totalPages = pdfDoc.numPages;
+
+            for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+                pdfDoc.getPage(pageNum).then(page => {
+                    const scale = 1.5;
+                    const viewport = page.getViewport({ scale });
+
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    const renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+
+                    page.render(renderContext).promise.then(() => {
+                        pdfReader.appendChild(canvas);
+                    });
+                });
+            }
+        }).catch(error => {
+            console.error('Error loading PDF: ', error);
+        });
+
+    </script>
+</body>
+    </html>
