@@ -5,7 +5,6 @@ from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleV
 from langchain import OpenAI
 from main import api_kx
 import datetime
-from app2 import theme
 api_k = api_kx
 
 def initialize_ai(api_key):
@@ -33,7 +32,7 @@ def ask_ai(question, theme):
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, response_mode="compact")
     log_file = os.path.join(os.getcwd(), 'log.txt')  # Add this line to define the log_file
-
+    theme = request.form['theme']
     # log the question, answer, and time to the log file
     with open(log_file, "r") as f:
         content = f.read()
