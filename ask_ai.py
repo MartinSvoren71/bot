@@ -5,7 +5,6 @@ from langchain import OpenAI
 from main import api_kx
 from clonelogfile import clone_file
 api_k = api_kx
-log_file = "/var/www/html/data/log.txt"
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_key

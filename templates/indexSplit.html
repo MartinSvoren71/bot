@@ -14,10 +14,10 @@ loadLogFile();<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Operator the OptiXs Bot</title>
-    
+
      <script>
      function loadLogFile() {
-    fetch('/home/ec2-user/bot/log.txt')
+    fetch('/var/www/html/data/log.txt')
         .then(response => response.text())
         .then(text => {
             const logContainer = document.getElementById('log-container');
