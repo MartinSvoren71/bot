@@ -3,6 +3,7 @@ from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
+from clonelogfile import clone_file
 api_k = api_kx
 log_file = "/home/ec2-user/bot/log.txt"
 
@@ -39,9 +40,5 @@ def ask_ai(question, theme):
     
     return response.response
 
-def clone_file(/home/ec2-user/bot/log.txt, /var/www/html/data/):
-    try:
-        os.remove(dst_file)
-    except FileNotFoundError:
-        pass
-    shutil.copy2(src_file, dst_file)
+clone_file('/home/ec2-user/bot/log.txt', '/var/www/html/data/', force_overwrite=True)
+
