@@ -28,15 +28,12 @@ def ask():
     response = ask_ai(question, theme)  # Pass the theme value
     return jsonify({'response': response})
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)  # Add this line to start the Flask application
-
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
     elif key == "xxx007":  # Check if the key is "xxx007"
         response = ask_ai(question, theme)  # Pass the theme value     
         
-       # return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('badkey.html')
 
