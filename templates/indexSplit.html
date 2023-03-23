@@ -298,27 +298,3 @@ loadLogFile();
 
 
 
-
-<form id="ask-form" method="post">
-    <input type="text" name="question" placeholder="Enter your question">
-    <input type="text" name="theme" placeholder="Enter theme">
-    <input type="text" name="key" placeholder="Enter key">
-    <input type="submit" value="Ask">
-</form>
-<script>
-
-    .then(response => response.json())
-    .then(data => {
-        if (data.response) {
-            var url = new URL('/display', location.href);
-            url.searchParams.set('question', formData.get('question'));
-            url.searchParams.set('theme', formData.get('theme'));
-            url.searchParams.set('response', data.response);
-            url.searchParams.set('key', formData.get('key'));
-            location.href = url.href;
-        } else {
-            location.href = '/badkey';
-        }
-    });
-});
-</script>
