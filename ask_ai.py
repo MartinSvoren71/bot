@@ -31,20 +31,13 @@ def ask_ai(question, theme):
     }.get(theme, "indexCH.json")
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, response_mode="compact")
-    log_file = os.path.join(os.getcwd(), 'log.txt')  # Add this line to define the log_file
-    theme = request.form['theme']
-    # log the question, answer, and time to the log file
-    with open(log_file, "r") as f:
-        #content = f.read()
-    with open(log_file, "w") as f:
+    log_file = os.path.join(os.getcwd(), 'log.txt')
+    with open(log_file, "a") as f:  # Change "r" to "a" to open the file in append mode
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Theme: {theme}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
         f.write("====================================================================\n")
         f.write("========OPTIXS======================================================\n")
-        f.write("==================================\n")
-
-        f.write(content)
-
+        f.write("====================================================================\n")
     return response.response
