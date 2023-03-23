@@ -104,3 +104,6 @@ cd /var/www/html/pdf.js/build
   883  sudo systemctl restart app2.service
   886  sudo systemctl daemon-reload
   888  cd /etc/systemd/system/
+  
+  
+sudo chown -R ec2-user:ec2-user /var/www/html/    #to alow app access html dir for cloning responses using sudo

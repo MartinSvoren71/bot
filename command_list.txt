@@ -104,3 +104,19 @@ cd /var/www/html/pdf.js/build
   883  sudo systemctl restart app2.service
   886  sudo systemctl daemon-reload
   888  cd /etc/systemd/system/
+  
+  
+  If you need to write to a directory without using sudo, you can change the owner and group of the directory to your user.
+
+Here's an example command that will change the owner and group of the /var/www/html directory to your user:
+
+bash
+Copy code
+sudo chown -R $(whoami):$(whoami) /var/www/html
+This will change the owner and group of the directory to your current user, which will allow you to write to it without using sudo.
+
+Note that changing the ownership of system directories like /var/www/html can be risky, so proceed with caution and make sure you understand the implications before doing so.
+
+
+
+

@@ -1,6 +1,6 @@
 import shutil
 
-        def clone_file(source_path, destination_path, force_overwrite=True):
+        def clone_file(source_path, destination_path, force_overwrite=False):
     try:
         if force_overwrite:
             shutil.copy2(source_path, destination_path)
