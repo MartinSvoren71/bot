@@ -40,13 +40,12 @@ def ask_ai(question, theme):
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n")
-        f.write(f"Theme: {theme}\n")
-        f.write(f"Question: {question}\n")
-        f.write(f"Answer: {response.response}\n")
-        f.write("====================================================================\n")
-        f.write("========OPTIXS======================================================\n")
-        f.write("====================================================================\n")
-        f.write(existing_data)
-        
+    f.write(f"<span class='theme'>Theme: {theme}</span>\n")
+    f.write(f"<span class='question'>Question: {question}</span>\n")
+    f.write(f"<span class='response'>Answer: {response.response}</span>\n")
+    f.write("======================================================================================\n")
+    f.write(" ========OPTIXS==============OPTIXS=============OPTIXS=============OPTIXS=============\n")
+    f.write("======================================================================================\n")
+    f.write(existing_data)        
     return response.response
 
