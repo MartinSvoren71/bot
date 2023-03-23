@@ -306,13 +306,7 @@ loadLogFile();
     <input type="submit" value="Ask">
 </form>
 <script>
-document.getElementById("ask-form").addEventListener("submit", function(event){
-    event.preventDefault();
-    var formData = new FormData(event.target);
-    fetch('/ask', {
-        method: 'POST',
-        body: formData
-    })
+
     .then(response => response.json())
     .then(data => {
         if (data.response) {
