@@ -32,7 +32,13 @@ def ask_ai(question, theme):
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, response_mode="compact")
     log_file = os.path.join(os.getcwd(), 'log.txt')
-    with open(log_file, "a") as f:  # Change "r" to "a" to open the file in append mode
+    
+    # Read the existing data in the log file
+    with open(log_file, "r") as f:
+        existing_data = f.read()
+    
+    # Write the new data followed by the existing data
+    with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Theme: {theme}\n")
         f.write(f"Question: {question}\n")
@@ -40,4 +46,7 @@ def ask_ai(question, theme):
         f.write("====================================================================\n")
         f.write("========OPTIXS======================================================\n")
         f.write("====================================================================\n")
+        f.write(existing_data)
+        
     return response.response
+
