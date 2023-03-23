@@ -40,5 +40,5 @@ def ask_ai(question, theme):
     
     return response.response
 
-clone_file('/home/ec2-user/bot/log.txt', '/var/www/html/data/', force_overwrite=True)
+clone_file('/home/ec2-user/bot/log.txt', '/var/www/html/data/log.txt', force_overwrite=True)
 

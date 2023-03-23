@@ -1,6 +1,6 @@
 import shutil
 
-def clone_file(/home/ec2-user/bot/log.txt, /var/www/html/data/, force_overwrite=False):
+        def clone_file(source_path, destination_path, force_overwrite=False):
     try:
         if force_overwrite:
             shutil.copy2(source_path, destination_path)
@@ -10,8 +10,6 @@ def clone_file(/home/ec2-user/bot/log.txt, /var/www/html/data/, force_overwrite=
     except Exception as e:
         print(f"Error: {e}")
         
-        
-        
-        
+
         
 
