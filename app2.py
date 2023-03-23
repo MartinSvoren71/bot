@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    file_path = os.path.join(os.getcwd(), 'index.txt')
+    file_path = os.path.join(os.getcwd(), 'log.txt')
     with open(file_path, 'r') as file:
         content = file.read()
     return render_template('indexSplit.html', content=content)
