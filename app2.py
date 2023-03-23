@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template('indexSplit.html')
+
 @app.route('/ask', methods=['POST'])
 def ask():
     question = request.form['question']
@@ -16,8 +17,10 @@ def ask():
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
     elif key == "xxx007":  # Check if the key is "xxx007"
-        response = ask_ai(question, theme)  # Pass the theme value
-        return render_template('response.html', question=question, theme=theme, response=response)
+        response = ask_ai(question, theme)  # Pass the theme value     
+        with open('index.txt', 'r') as file:
+        content = file.read()
+        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('badkey.html')
 

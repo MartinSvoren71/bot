@@ -196,18 +196,12 @@ button {
     </div>
 
     <script>
-                     function loadLogFile() {
-fetch('/data/log.txt')
-        .then(response => response.text())
-        .then(text => {
+function loadLogFile() {
             const logContainer = document.getElementById('log-container');
-            logContainer.innerHTML = text;
-        })
+            logContainer.innerHTML = response;
         .catch(error => {
             console.error('Error fetching log.txt:', error);
         });
-}
-
 loadLogFile();   
                   const submitButton = document.getElementById('submit-button');
             submitButton.addEventListener('click', function () {

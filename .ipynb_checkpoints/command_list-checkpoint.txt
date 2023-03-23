@@ -106,4 +106,32 @@ cd /var/www/html/pdf.js/build
   888  cd /etc/systemd/system/
   
   
-sudo chown -R ec2-user:ec2-user /var/www/html/    #to alow app access html dir for cloning responses using sudo
+  If you need to write to a directory without using sudo, you can change the owner and group of the directory to your user.
+
+Here's an example command that will change the owner and group of the /var/www/html directory to your user:
+
+bash
+Copy code
+sudo chown -R $(whoami):$(whoami) /var/www/html
+This will change the owner and group of the directory to your current user, which will allow you to write to it without using sudo.
+
+Note that changing the ownership of system directories like /var/www/html can be risky, so proceed with caution and make sure you understand the implications before doing so.
+
+
+
+
+
+
+To make the file accessible on AWS, you can place the file in the web server's document root directory. By default, the document root directory on Apache web server is /var/www/html/.
+
+To do this, you can copy the file to the document root directory using the following command:
+
+bash
+Copy code
+sudo cp /path/to/your/log.txt /var/www/html/data/
+After copying the file to the document root directory, make sure the file permissions are set correctly so that the web server can access the file. You can set the file permissions to 644 using the following command:
+
+bash
+Copy code
+sudo chmod 644 /var/www/html/data/log.txt
+Finally, you should be able to access the file via the URL http://13.49.237.162/data/log.txt.

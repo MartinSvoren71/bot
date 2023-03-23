@@ -120,3 +120,18 @@ Note that changing the ownership of system directories like /var/www/html can be
 
 
 
+
+
+To make the file accessible on AWS, you can place the file in the web server's document root directory. By default, the document root directory on Apache web server is /var/www/html/.
+
+To do this, you can copy the file to the document root directory using the following command:
+
+bash
+Copy code
+sudo cp /path/to/your/log.txt /var/www/html/data/
+After copying the file to the document root directory, make sure the file permissions are set correctly so that the web server can access the file. You can set the file permissions to 644 using the following command:
+
+bash
+Copy code
+sudo chmod 644 /var/www/html/data/log.txt
+Finally, you should be able to access the file via the URL http://13.49.237.162/data/log.txt.
