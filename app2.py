@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for
 from ask_ai import initialize_ai, ask_ai
 from threading import Thread
 from main import api_kx
+
 app = Flask(__name__)
 @app.route('/')
 def home():

@@ -38,3 +38,11 @@ def ask_ai(question, theme):
         f.write("=================================\n")
     
     return response.response
+
+def clone_file(src_file, dst_file):
+    try:
+        os.remove(dst_file)
+    except FileNotFoundError:
+        pass
+    shutil.copy2(src_file, dst_file)
+    print(f"File {"/home/ec2-user/bot/log.txt"} successfully cloned to {/var/www/html/data/}.")
