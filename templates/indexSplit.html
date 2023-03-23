@@ -197,7 +197,7 @@ button {
 
     <script>
                      function loadLogFile() {
-    fetch('/var/www/html/data/log.txt')
+fetch('/data/log.txt')
         .then(response => response.text())
         .then(text => {
             const logContainer = document.getElementById('log-container');
