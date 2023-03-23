@@ -4,8 +4,14 @@
     <title>Operator the OptiXs Bot</title>
 
     <script>
+window.onload = function() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    document.getElementById("theme").value = savedTheme;
+  }
+};
 
-        
+     
 setInterval(function() {
   // Code to refresh the log container
   loadLogFile();
@@ -180,6 +186,7 @@ button {
             <br><br>
             <label for="theme">Library for:</label>
             <select name="theme" id="theme">
+                <select name="theme" id="theme" onchange="saveTheme()">
                 <option value="chameleon">Chameleon</option>
                 <option value="powerline">Powerline</option>
                 <option value="compex">Compex</option>
@@ -224,6 +231,11 @@ function loadLogFile() {
 }
 
 loadLogFile();
+        
+         function saveTheme() {
+  const selectedTheme = document.getElementById("theme").value;
+  localStorage.setItem("theme", selectedTheme);
+}  
   
                   const submitButton = document.getElementById('submit-button');
             submitButton.addEventListener('click', function () {
