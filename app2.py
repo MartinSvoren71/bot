@@ -22,14 +22,10 @@ def log_content():
 
 @app.route('/')
 def home():
-    key = request.form['key']
-
-    if key == "xxx007":  # Check if the key is "xxx007"
-        return render_template('indexSplit.html')
-       # return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
-    else:
-        return render_template('badkey.html')
-
+    file_path = os.path.join(os.getcwd(), 'log.txt')
+    with open(file_path, 'r') as file:
+        content = file.read()
+    return render_template('indexSplit.html', content=content)
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -50,3 +46,6 @@ def ask():
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port='5000')
+
+
+
