@@ -7,10 +7,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    with open('index.txt', 'r') as file:
-            content = file.read()
-    return render_template('indexSplit.html')
-
+    file_path = os.path.join(os.getcwd(), 'index.txt')
+    with open(file_path, 'r') as file:
+        content = file.read()
+    return render_template('indexSplit.html', content=content)
 
 @app.route('/ask', methods=['POST'])
 def ask():
