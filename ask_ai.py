@@ -3,7 +3,6 @@ from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
-from clonelogfile import clone_file
 api_k = api_kx
 
 def initialize_ai(api_key):
@@ -39,5 +38,4 @@ def ask_ai(question, theme):
     
     return response.response
 
-clone_file('/home/ec2-user/bot/log.txt', '/var/www/html/data/log.txt', force_overwrite=True)
 
