@@ -1,22 +1,10 @@
-function loadLogFile() {
-    fetch('log.txt')
-        .then(response => response.text())
-        .then(text => {
-            const logContainer = document.getElementById('log-container');
-            logContainer.innerHTML = text;
-        })
-        .catch(error => {
-            console.error('Error fetching log.txt:', error);
-        });
-}
-
 loadLogFile();<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Operator the OptiXs Bot</title>
 
-     <script>
-     function loadLogFile() {
+    <script>
+             function loadLogFile() {
     fetch('/var/www/html/data/log.txt')
         .then(response => response.text())
         .then(text => {
@@ -30,8 +18,6 @@ loadLogFile();<!DOCTYPE html>
 
 loadLogFile();   
         
-    </script>
-    <script>
 function updateTime() {
             var now = new Date();
             var time = now.toLocaleTimeString();
