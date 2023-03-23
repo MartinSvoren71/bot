@@ -21,8 +21,7 @@ def log_content():
     return content
 
 @app.route('/')
-
-@def home():
+def home():
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
     elif key == "xxx007":  # Check if the key is "xxx007"
@@ -30,12 +29,7 @@ def log_content():
        # return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('badkey.html')
-    
-def home():
-    file_path = os.path.join(os.getcwd(), 'log.txt')
-    with open(file_path, 'r') as file:
-        content = file.read()
-    return render_template('indexSplit.html', content=content)
+
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -56,6 +50,3 @@ def ask():
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port='5000')
-
-
-
