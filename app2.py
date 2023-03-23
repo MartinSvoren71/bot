@@ -6,6 +6,13 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/log-content')
+def log_content():
+    file_path = os.path.join(os.getcwd(), 'log.txt')
+    with open(file_path, 'r') as file:
+        content = file.read()
+    return content
+
 @app.route('/')
 def home():
     file_path = os.path.join(os.getcwd(), 'log.txt')
