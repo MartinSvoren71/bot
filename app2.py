@@ -22,9 +22,8 @@ def log_content():
 
 @app.route('/')
 def home():
-    if question.strip().lower() == 'exit':
-        return redirect(url_for('home'))
-    elif key == "xxx007":  # Check if the key is "xxx007"
+ 
+    if key == "xxx007":  # Check if the key is "xxx007"
         return render_template('indexSplit.html')
        # return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
