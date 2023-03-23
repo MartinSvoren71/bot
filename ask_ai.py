@@ -5,6 +5,7 @@ from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleV
 from langchain import OpenAI
 from main import api_kx
 import datetime
+from app2 import theme
 api_k = api_kx
 
 def initialize_ai(api_key):

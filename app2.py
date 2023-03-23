@@ -1,5 +1,4 @@
 from flask import Flask, request, render_template, redirect, url_for, jsonify
-
 from ask_ai import initialize_ai, ask_ai
 from threading import Thread
 from main import api_kx
