@@ -5,7 +5,7 @@ from main import api_kx
 app = Flask(__name__)
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('indexSplit.html')
 @app.route('/ask', methods=['POST'])
 def ask():
     question = request.form['question']
