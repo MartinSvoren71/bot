@@ -25,6 +25,8 @@ def ask():
     question = request.form['question']
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
+    response = ask_ai(question, theme)  # Pass the theme value
+    return jsonify({'response': response})
 
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
@@ -39,3 +41,6 @@ def ask():
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port='5000')
+
+
+
