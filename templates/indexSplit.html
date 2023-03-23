@@ -8,7 +8,11 @@ window.onload = function() {
     var logContainer = document.getElementById("log-container");
     logContainer.scrollTop = logContainer.scrollHeight;
 };
-
+        
+setInterval(function() {
+  // Code to refresh the log container
+  loadLogFile();
+}, 2000);
         
 function updateTime() {
             var now = new Date();
