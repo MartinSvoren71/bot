@@ -14,6 +14,23 @@ loadLogFile();<!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Operator the OptiXs Bot</title>
+    
+     <script>
+     function loadLogFile() {
+    fetch('/home/ec2-user/bot/log.txt')
+        .then(response => response.text())
+        .then(text => {
+            const logContainer = document.getElementById('log-container');
+            logContainer.innerHTML = text;
+        })
+        .catch(error => {
+            console.error('Error fetching log.txt:', error);
+        });
+}
+
+loadLogFile();   
+        
+    </script>
     <script>
 function updateTime() {
             var now = new Date();
@@ -286,21 +303,6 @@ button {
 
         setInterval(drawRight, 33);
   </script>
- <script>
-     function loadLogFile() {
-    fetch('/home/ec2-user/bot/log.txt')
-        .then(response => response.text())
-        .then(text => {
-            const logContainer = document.getElementById('log-container');
-            logContainer.innerHTML = text;
-        })
-        .catch(error => {
-            console.error('Error fetching log.txt:', error);
-        });
-}
 
-loadLogFile();   
-        
-    </script>
 </body>
 </html>
