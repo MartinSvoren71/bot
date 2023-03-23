@@ -3,7 +3,7 @@ from ask_ai import initialize_ai, ask_ai
 from threading import Thread
 from main import api_kx
 import os
-
+key = 'xxx007'
 app = Flask(__name__)
 
 @app.route('/display', methods=['GET'])
@@ -33,9 +33,15 @@ def ask():
     question = request.form['question']
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
+    #response = ask_ai(question, theme)  # Pass the theme value
 
-    response = ask_ai(question, theme)  # Pass the theme value      
-   
+    if question.strip().lower() == 'exit':
+        return redirect(url_for('home'))
+    elif key == "xxx007":  # Check if the key is "xxx007"
+        response = ask_ai(question, theme)  # Pass the theme value      
+       # return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+    else:
+        return render_template('badkey.html')
 
 
 t = Thread(target=initialize_ai)
