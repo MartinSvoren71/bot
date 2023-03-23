@@ -16,7 +16,7 @@ def construct_index(directory_path):
 
     
     def ask_ai(question, theme):
-    os.environ["OPENAI_API_KEY"] = api_k
+    os.environ["OPENAI_API_KEY"] = api_kx
     index_file = {
   "chameleon": "indexChameleon.json",
         "compex": "indexCompex.json",
