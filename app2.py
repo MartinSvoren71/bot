@@ -34,10 +34,8 @@ def ask():
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
 
-    if question.strip().lower() == 'exit':
-        return redirect(url_for('home'))
-    else:
-        response = ask_ai(question, theme)  # Pass the theme value      
+    response = ask_ai(question, theme)  # Pass the theme value      
+   
 
 
 t = Thread(target=initialize_ai)
