@@ -4,6 +4,7 @@ from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
+import datetime
 api_k = api_kx
 
 def initialize_ai(api_key):
@@ -33,9 +34,17 @@ def ask_ai(question, theme):
     log_file = os.path.join(os.getcwd(), 'log.txt')  # Add this line to define the log_file
 
     # log the question, answer, and time to the log file
-    with open(log_file, "a") as f:
+    with open(log_file, "r") as f:
+        content = f.read()
+    with open(log_file, "w") as f:
+         f.write(f"Time: {datetime.datetime.now()}\n")
+        f.write(f"Theme: {theme}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
         f.write("=================================\n")
+        f.write("==============OPTIXS=============\n")
+        f.write("=================================\n")
+
+        f.write(content)
 
     return response.response
