@@ -38,7 +38,7 @@ def ask_ai(question, theme):
     with open(log_file, "r") as f:
         content = f.read()
     with open(log_file, "w") as f:
-         f.write(f"Time: {datetime.datetime.now()}\n")
+        f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Theme: {theme}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
