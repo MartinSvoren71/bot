@@ -6,7 +6,7 @@ from main import api_kx
 api_k = api_kx
 
 def initialize_ai(api_key):
-    os.environ[api_k] = api_key
+    os.environ["OPENAI_API_KEY"] = api_kx
 #
 def construct_index(directory_path):
     max_chunk_overlap = 20
