@@ -6,7 +6,7 @@ from main import api_kx
 api_k = api_kx
 
 def initialize_ai(api_key):
-    os.environ["OPENAI_API_KEY"] = api_kx
+    os.environ[api_k] = api_key
 #
 def construct_index(directory_path):
     max_chunk_overlap = 20
@@ -16,7 +16,7 @@ def construct_index(directory_path):
 
     
     def ask_ai(question, theme):
-    os.environ["OPENAI_API_KEY"] = api_kx
+    os.environ["OPENAI_API_KEY"] = api_k
     index_file = {
   "chameleon": "indexChameleon.json",
         "compex": "indexCompex.json",
