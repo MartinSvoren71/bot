@@ -4,6 +4,7 @@
     <title>Operator the OptiXs Bot</title>
 
     <script>
+
         
 setInterval(function() {
   // Code to refresh the log container
@@ -171,6 +172,9 @@ button {
         <h2 id="datetime" style="color: red;"></h2>
         <h1>Ask Operator product related question</h1>
         <form action="/ask" method="POST">
+            <label for="key">Provide key:</label>
+            <input type="text" name="key" id="key" class="input-key" required>
+            <br><br>
             <label for="question">What do you want to ask?</label>
             <input type="text" name="question" id="question" required>
             <br><br>

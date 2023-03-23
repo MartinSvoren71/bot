@@ -3,7 +3,6 @@ from ask_ai import initialize_ai, ask_ai
 from threading import Thread
 from main import api_kx
 import os
-key = 'xxx007'
 app = Flask(__name__)
 
 @app.route('/display', methods=['GET'])
