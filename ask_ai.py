@@ -14,10 +14,11 @@ def construct_index(directory_path):
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.9, model_name="gpt-3.5-turbo", max_tokens=num_outputs, openai_api_key=api_k))
     documents = SimpleDirectoryReader(directory_path).load_data()
 
-def ask_ai(question, theme):
+    
+    def ask_ai(question, theme):
     os.environ["OPENAI_API_KEY"] = api_k
     index_file = {
-        "chameleon": "indexChameleon.json",
+  "chameleon": "indexChameleon.json",
         "compex": "indexCompex.json",
         "chameleondiscovery": "indexChameleonDiscovery.json",
         "innova": "indexInnova.json",
@@ -25,17 +26,19 @@ def ask_ai(question, theme):
         "newton": "indexNewton.json",
          "univet": "indexUnivet.json",
         "kymera": "indexKymera.json",
-        "zygomx": "indexZygoMX.json"
-    }.get(theme, "indexCH.json")  # Default to "indexCH.json" if the theme value is not recognized
+        "zygomx": "indexZygoMX.json"    
+    }.get(theme, "indexCH.json")
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, response_mode="compact")
-    
+    log_file = os.path.join(os.getcwd(), 'log.txt')  # Add this line to define the log_file
+
     # log the question, answer, and time to the log file
     with open(log_file, "a") as f:
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
         f.write("=================================\n")
-    
+
     return response.response
+
 
 
