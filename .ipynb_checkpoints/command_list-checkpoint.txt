@@ -1,0 +1,106 @@
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Mar 23 15:02:02 2023 from 13.48.4.202
+[ec2-user@ip-172-31-1-51 ~]$ 
+
+sudo yum install git
+sudo yum install flask
+git clone https://github.com/MartinSvoren71/OPTappPowerline
+ls
+cd OPTappPowerline
+sudo yum install python
+python app2.py
+yum install flask
+sudo yum install flask
+sudo yum install conda
+sudo yum install anaconda
+sudo yum install pip
+pip install flask
+pip install llama-index
+sudo yum install httpd
+sudo systemctl start httpd
+cd templates
+ls
+index.html
+sudo systemctl start httpd index.html
+ls /mnt/myvolume
+cd..
+cd OPTappPowerline
+python app2.py
+sudo systemctl start httpd
+sudo systemctl start myflaskapp.service
+git clone https://github.com/MartinSvoren71/webtest
+ls
+cd OPTappPowerline
+python app2.py
+ls /mnt/myvolume
+vi app2.py
+git pull
+git clone https://github.com/MartinSvoren71/OPTappPowerline
+git clone --update https://github.com/MartinSvoren71/OPTappPowerline
+pwd
+cd OPTappPowerline/
+git pull
+git reset –hard
+sudo systemctl stop httpd
+sudo nano /etc/systemd/system/app2.service
+sudo mv /etc/systemd/system/app2.servicem-d /etc/systemd/system/app2.service
+sudo systemctl daemon-reload
+sudo systemctl enable app2.service
+sudo systemctl start app2.service
+sudo systemctl status app2.service
+cd bot
+python app2.py
+vi mapn.py
+vi main.py
+git pull
+git pull
+python app2.py
+vi ask_ai.py
+vi ask_app2.py
+ls
+vi app2.py
+cd bot
+history 400
+cd /etc/systemd/system/
+ls
+vi app2.service
+sudo vi app2.service
+sudo systemctl status app2.service
+sudo systemctl start app2.service
+systemctl daemon-reload
+sudo systemctl daemon-reload
+sudo systemctl restart app2.service
+sudo systemctl stop app2.service
+cd bot
+sudo systemctl restart app2.service
+git clone https://github.com/mozilla/pdf.js
+cd pdf.js
+sudo npm install
+sudo yum install -y nodejs
+sudo npm install --legacy-peer-deps
+sudo npm run build:generic
+sudo npm run build
+sudo npm install -g gulp
+gulp generic
+cd /var/www/html
+sudo rm -rf pdf.js
+git clone https://github.com/mozilla/pdf.js.git
+cd pdf.js
+sudo chown -R ec2-user:ec2-user pdf.js
+git checkout gh-pages
+cd /var/www/html/pdf.js/build
+
+ 879  nano app2.service
+  880  sudo nano app2.service
+  883  sudo systemctl restart app2.service
+  886  sudo systemctl daemon-reload
+  888  cd /etc/systemd/system/
