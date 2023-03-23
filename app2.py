@@ -22,7 +22,7 @@ def log_content():
 
 @app.route('/')
 def home():
-     key = request.form['key']
+    key = request.form['key']
 
     if key == "xxx007":  # Check if the key is "xxx007"
         return render_template('indexSplit.html')
