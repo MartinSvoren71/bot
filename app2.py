@@ -7,6 +7,14 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/display', methods=['GET'])
+def display():
+    question = request.args.get('question')
+    theme = request.args.get('theme')
+    response = request.args.get('response')
+    key = request.args.get('key')
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+
 @app.route('/log-content')
 def log_content():
     file_path = os.path.join(os.getcwd(), 'log.txt')

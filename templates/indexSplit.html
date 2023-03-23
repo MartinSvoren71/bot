@@ -178,9 +178,8 @@ button {
                 <option value="zygomx">ZygoMx</option>
             </select>
             <br><br>
-<div class="button-wrapper">
-    <button type="ask" id="submit-button">Ask Operator</button>
-</div>            <br><br>
+<div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
+        <br><br>
             <h3 style="color: grey;">examples:</h3>
              <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
             <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
@@ -294,3 +293,38 @@ loadLogFile();
 
 </body>
 </html>
+
+
+
+
+
+
+<form id="ask-form" method="post">
+    <input type="text" name="question" placeholder="Enter your question">
+    <input type="text" name="theme" placeholder="Enter theme">
+    <input type="text" name="key" placeholder="Enter key">
+    <input type="submit" value="Ask">
+</form>
+<script>
+document.getElementById("ask-form").addEventListener("submit", function(event){
+    event.preventDefault();
+    var formData = new FormData(event.target);
+    fetch('/ask', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.response) {
+            var url = new URL('/display', location.href);
+            url.searchParams.set('question', formData.get('question'));
+            url.searchParams.set('theme', formData.get('theme'));
+            url.searchParams.set('response', data.response);
+            url.searchParams.set('key', formData.get('key'));
+            location.href = url.href;
+        } else {
+            location.href = '/badkey';
+        }
+    });
+});
+</script>
