@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route('/display', methods=['GET'])
 def display():
     question = request.args.get('question')
     theme = request.args.get('theme')
@@ -29,13 +29,12 @@ def home():
         content = file.read()
     return render_template('indexSplit.html', content=content)
 
-@app.route('/', methods=['POST'])
+@app.route('/ask', methods=['POST'])
 def ask():
     question = request.form['question']
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
     response = ask_ai(question, theme)  # Pass the theme value
-    return jsonify({'response': response})
 
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
