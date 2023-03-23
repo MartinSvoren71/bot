@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/display', methods=['GET'])
+@app.route('/', methods=['GET'])
 def display():
     question = request.args.get('question')
     theme = request.args.get('theme')
@@ -29,7 +29,7 @@ def home():
         content = file.read()
     return render_template('indexSplit.html', content=content)
 
-@app.route('/ask', methods=['POST'])
+@app.route('/', methods=['POST'])
 def ask():
     question = request.form['question']
     theme = request.form['theme']
