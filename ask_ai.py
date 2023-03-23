@@ -14,19 +14,18 @@ def construct_index(directory_path):
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.9, model_name="gpt-3.5-turbo", max_tokens=num_outputs, openai_api_key=api_k))
     documents = SimpleDirectoryReader(directory_path).load_data()
 
-    
-    def ask_ai(question, theme):
+def ask_ai(question, theme):
     os.environ["OPENAI_API_KEY"] = api_k
     index_file = {
-  "chameleon": "indexChameleon.json",
+        "chameleon": "indexChameleon.json",
         "compex": "indexCompex.json",
         "chameleondiscovery": "indexChameleonDiscovery.json",
         "innova": "indexInnova.json",
         "powerline": "indexPowerLine.json",
         "newton": "indexNewton.json",
-         "univet": "indexUnivet.json",
+        "univet": "indexUnivet.json",
         "kymera": "indexKymera.json",
-        "zygomx": "indexZygoMX.json"    
+        "zygomx": "indexZygoMX.json"
     }.get(theme, "indexCH.json")
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, response_mode="compact")
@@ -39,6 +38,3 @@ def construct_index(directory_path):
         f.write("=================================\n")
 
     return response.response
-
-
-
