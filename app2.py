@@ -36,11 +36,8 @@ def ask():
 
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
-    elif key == "xxx007":  # Check if the key is "xxx007"
-        response = ask_ai(question, theme)  # Pass the theme value      
-       # return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
-        return render_template('badkey.html')
+        response = ask_ai(question, theme)  # Pass the theme value      
 
 
 t = Thread(target=initialize_ai)
