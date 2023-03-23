@@ -4,6 +4,10 @@
     <title>Operator the OptiXs Bot</title>
 
     <script>
+window.onload = function() {
+    var logContainer = document.getElementById("log-container");
+    logContainer.scrollTop = logContainer.scrollHeight;
+};
 
         
 function updateTime() {
@@ -189,8 +193,10 @@ button {
             <canvas id="matrixCanvasRight"></canvas>
             <div class="right-side"></div>
     <div id="log-container"></div>
+            
+            
+            
 </div>
-
         </div>
     </div>
 
