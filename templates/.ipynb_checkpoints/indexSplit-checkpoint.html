@@ -70,7 +70,7 @@ body {
   background-color: black;
   color: #00FF00;
   font-family: 'Lucida Console', monospace;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: bold;
   overflow: scroll;
   padding-top: 0px;
@@ -90,7 +90,7 @@ body {
 canvas {
   width: 100%;
   height: auto;
-  max-height: 1400px;
+  max-height: 1500px;
   z-index: -1;
   opacity: 0.15;
   position: absolute;
@@ -103,22 +103,22 @@ canvas {
 img {
   width: 100%;
   height: auto;
-  max-width: 320px;
+  max-width: 240px;
   display: block;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   filter: drop-shadow(0 0 0.75rem green);
 }
 
 h1 {
   max-width: 100%;
-  font-size: 1.5em;
+  font-size: 1.1em;
   text-align: center;
 }
 
 h2 {
   max-width: 100%;
-  font-size: 1.2em;
+  font-size: 1.0em;
   text-align: center;
 }
 
@@ -129,16 +129,16 @@ h3 {
 }
 
 form {
-  margin-top: 20px; /* Adjust this value for better spacing */
+  margin-top: 10px; /* Adjust this value for better spacing */
 }
 
 label {
-  font-size: 1.2em; /* Decrease font size for better mobile display */
+  font-size: 1.0em; /* Decrease font size for better mobile display */
   margin-right: 10px; /* Decrease margin for better mobile display */
 }
 
 input[type="text"] {
-  font-size: 1.5em; /* Decrease font size for better mobile display */
+  font-size: 1.2em; /* Decrease font size for better mobile display */
   padding: 10px;
   border-radius: 10px;
   border: none;
@@ -153,7 +153,7 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 button {
@@ -203,15 +203,15 @@ margin-bottom: 50px;
 }
 
 h1 {
-font-size: 3em;
+font-size: 1.2em;
 }
 
 h2 {
-font-size: 2em;
+font-size: 1.2em;
 }
 
 h3 {
-font-size: 1.5em;
+font-size: 0.8em;
 }
 
 form {
@@ -220,17 +220,17 @@ margin-top: 50px;
 }
 
 label {
-font-size: 2em;
+font-size: 1.5em;
 margin-right: 50px;
 }
 
 input[type="text"] {
-font-size: 2.5em;
+font-size: 1.5em;
 padding: 20px;
 }
 
 .button-wrapper {
-margin-top: 50px;
+margin-top: 20px;
 }
 
 button {
@@ -243,6 +243,12 @@ font-size: 1.5em;
 padding: 10px;
 margin-bottom: 20px;
 }
+.select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 }
         
     </style>
@@ -253,7 +259,6 @@ margin-bottom: 20px;
             <canvas id="matrixCanvas"></canvas>
                         <br><br>
             <br><br>
-
        <img src="https://dl.dropboxusercontent.com/s/mn6fuj67lvdtcag/logo1.png" alt="KV Logo">
         <h2 id="datetime" style="color: red;"></h2>
             <h1>Knowledge Vortex to your service</h1>
@@ -262,14 +267,16 @@ margin-bottom: 20px;
         <form action="/ask" method="POST">
             <input type="text" name="question" id="question" required>
             <br><br>
-<label for="theme">library for:</label>
-           <select name="theme" id="theme" onchange="saveTheme()">
-                <option value="windows11">Windows11</option>
-                <option value="python3">Python3</option>
-                <option value="labview">LabView</option>
-                <option value="skodasuperb">SkodaSuperb</option>
-                <option value="mazda6">Mazda6</option>
-            </select>
+       <h2 for="theme">library for:</h2>
+         <div class="select-container">
+  <select name="theme" id="theme" onchange="saveTheme()">
+    <option value="windows11">Windows11</option>
+    <option value="python3">Python3</option>
+    <option value="labview">LabView</option>
+    <option value="skodasuperb">SkodaSuperb</option>
+    <option value="mazda6">Mazda6</option>
+  </select>
+</div>
             <br><br>
 <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
         <br><br>
