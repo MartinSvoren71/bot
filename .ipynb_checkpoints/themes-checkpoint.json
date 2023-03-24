@@ -1,11 +1,7 @@
 {
-    "chameleon": "indexChameleon.json",
-    "compex": "indexCompex.json",
-    "chameleondiscovery": "indexChameleonDiscovery.json",
-    "innova": "indexInnova.json",
-    "powerline": "indexPowerLine.json",
-    "newton": "indexNewton.json",
-    "univet": "indexUnivet.json",
-    "kymera": "indexKymera.json",
-    "zygomx": "indexZygoMX.json"
+    "windows11": "indexWindows11.json",
+    "labview": "indexlabview.json",
+    "python3": "indexPython3.json",
+    "skodasuperb": "indexSkodaSuperb.json",
+    "mazda6": "indexMazda6.json"
 }

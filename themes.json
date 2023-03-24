@@ -2,6 +2,6 @@
     "windows11": "indexWindows11.json",
     "labview": "indexlabview.json",
     "python3": "indexPython3.json",
-    "skodasuperb": "SkodaSuperb.json",
-    "mazda6": "indexmazda6.json"
+    "skodasuperb": "indexSkodaSuperb.json",
+    "mazda6": "indexMazda6.json"
 }
