@@ -78,5 +78,5 @@ def ask():
         return render_template('bad_key.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
 t.start()
-app.run(host='0.0.0.0', port=5001)
+app.run(host='0.0.0.0', port=5000)
 #
