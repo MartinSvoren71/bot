@@ -1,0 +1,7 @@
+pip install git
+sudo yum install pip
+sudo yum install python
+pip install flask
+pip install llm-index
+pip install llama-index
+pip install git
