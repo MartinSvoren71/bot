@@ -51,6 +51,13 @@ def log_content():
         content = file.read()
     return content
 
+@app.route('/ask', methods=['POST'])
+def ask():
+    question = request.form['question']
+    theme = request.form['theme']
+    key = request.form['key']  # Get the value of the key from the form
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+    
 
 t = Thread(target=initialize_ai)
 t.start()
