@@ -64,3 +64,4 @@ def ask():
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
+#
