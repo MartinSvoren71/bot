@@ -1,9 +1,12 @@
-from flask import Flask, request, render_template, redirect, url_for, jsonify
+from flask import Flask, request, render_template, redirect, url_for, flash, session
 from ask_ai import initialize_ai, ask_ai
 from threading import Thread
 from main import api_kx
+from datetime import timedelta
 import os
+
 app = Flask(__name__)
+app.secret_key = "super_secret_key"
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -14,10 +17,10 @@ def login():
             session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("indexSplit.html"))
+            return redirect(url_for("index"))
         else:
             flash("Bad key provided")
-            return redirect(url_for("bad_key.html"))
+            return redirect(url_for("bad_key"))
 
     return render_template("login.html")
 
@@ -25,7 +28,7 @@ def login():
 def bad_key():
     return render_template("badkey.html")
 
-@app.route("/index")
+@app.route("/indexSplit")
 def index():
     if "logged_in" in session:
         return render_template("indexSplit.html")
@@ -48,27 +51,20 @@ def log_content():
         content = file.read()
     return content
 
-
 @app.route('/ask', methods=['POST'])
 def ask():
     question = request.form['question']
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
-    #response = ask_ai(question, theme)  # Pass the theme value
 
     if question.strip().lower() == 'exit':
         return redirect(url_for('home'))
     elif key == "xxx007":  # Check if the key is "xxx007"
-        response = ask_ai(question, theme)  # Pass the theme value      
-       # return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+        response = ask_ai(question, theme)  # Pass the theme value
+        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('badkey.html')
 
-
 t = Thread(target=initialize_ai)
 t.start()
-app.run(host='0.0.0.0', port='5000')
-
-
-
-
+app.run(host='0.0.0.0', port=5000)
