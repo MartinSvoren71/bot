@@ -51,11 +51,6 @@ def log_content():
         content = file.read()
     return content
 
-@app.route("/", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        return redirect(url_for("index"))
-    return render_template("login.html")
 
 t = Thread(target=initialize_ai)
 t.start()
