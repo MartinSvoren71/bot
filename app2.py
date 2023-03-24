@@ -14,10 +14,10 @@ def login():
             session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("index"))
+            return redirect(url_for("indexSplit.html"))
         else:
             flash("Bad key provided")
-            return redirect(url_for("bad_key"))
+            return redirect(url_for("bad_key.html"))
 
     return render_template("login.html")
 
