@@ -14,3 +14,11 @@ moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
 
 login page
 
+
+
+pripravit produktovu webovu stranku s demo aplikaciu
+
+vytypovat 5 fieriem ktorym to ponuknut
+
+
+

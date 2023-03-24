@@ -1,205 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Operator the OptiXs Bot</title>
-    <script>
-        function updateTime() {
-            var now = new Date();
-            var time = now.toLocaleTimeString();
-            var date = now.toLocaleDateString();
-            document.getElementById('datetime').innerHTML = time + ' on ' + date;
-        }
-        setInterval(updateTime, 1000); // call updateTime every second
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask AI</title>
-    <style>
-        body {
-            background-color: black;
-            color: #00FF00;
-            font-family: 'Lucida Console', monospace;
-            font-size: 12px;
-            font-weight: bold;
-            text-align: center;
-            padding-top: 0px;
-            position: absolute;
-            overflow-y: hidden;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding-top: 0p
-        }
-        canvas {
-            width: 100vh;
-            height: 1400px;
-            z-index: -1;
-            opacity: 0.15;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding-top: 0px;
-        }
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
-        img {
-            width: 100%;
-            height: auto;
-            max-width: 320px;
-            display: block;
-            margin: auto;
-            margin-bottom: 50px;
-            filter: drop-shadow(0 0 0.75rem green);
-        }
-        h1 {
-            max-width: 100%;
-            font-size: 2em;
-            text-align: center;
-        }
-        h2 {
-            max-width: 100%;
-            font-size: 1.5em;
-            text-align: center;
-        }
-         h3 {
-            max-width: 100%;
-            font-size: 0.8em;
-            text-align: center;
-        }
-        form {
-            margin-top: 50px;
-        }
-        label {
-            font-size: 2em;
-            margin-right: 20px;
-        }
-        input[type="text"] {
-            font-size: 2em;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            outline: none;
-            background-color: #1f1f1f;
-            color: red;
-        }
-        button {
-            font-size: 2em;
-            padding: 10px 10px;
-            border-radius: 8px;
-            border: none;
-            outline: none;
-            background-color: #00FF00;
-            color: black;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #3e8e41;
-        }
-        .input-key {
-            font-size: 1em;
-            padding: 5px;
-            border-radius: 10px;
-            border: none;
-            outline: none;
-            background-color: #1f1f1f;
-            color: red;
-        }
-
-</style>
-
+	<title>Login</title>
+	<style>
+		body {
+			background-color: black;
+			font-family: 'Lucida Console', monospace;
+			font-size: 16px;
+			color: #00FF00;
+		}
+		canvas {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			opacity: 0.15;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 20%;
+		}
+		label {
+			font-size: 2em;
+			margin-bottom: 20px;
+		}
+		input[type="text"] {
+			font-size: 2em;
+			padding: 10px;
+			border-radius: 10px;
+			border: none;
+			outline: none;
+			background-color: #1f1f1f;
+			color: #00FF00;
+			text-align: center;
+			width: 300px;
+		}
+		button {
+			font-size: 2em;
+			padding: 10px 30px;
+			border-radius: 8px;
+			border: none;
+			outline: none;
+			background-color: #00FF00;
+			color: black;
+			cursor: pointer;
+		}
+		button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
 </head>
 <body>
-    <canvas id="matrixCanvas"></canvas>
-    <div class="content-wrapper">
-        <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
-        <h2 id="datetime" style="color: red;"></h2>
-        <h1>Ask Operator product related question</h1>
-        <form action="/ask" method="POST">
-            <label for="key">Provide key:</label>
-            <input type="text" name="key" id="key" class="input-key" required>
-            <br><br>
-            <label for="question">What do you want to ask?</label>
-            <input type="text" name="question" id="question" required>
-            <br><br>
-            <label for="theme">Library for:</label>
-            <select name="theme" id="theme">
-                <option value="chameleon">Chameleon</option>
-                <option value="powerline">Powerline</option>
-                <option value="compex">Compex</option>
-                <option value="innova">Innova</option>
-                <option value="chameleondiscovery">ChameleonDiscovery</option>
-                <option value="kymera">Kymera</option>
-                <option value="newton">Newton</option>
-                <option value="univet">Univet</option>
-                <option value="zygomx">ZygoMx</option>
+	<canvas id="matrixCanvas"></canvas>
+	<form action="login.php" method="post">
+		<label for="key">enter your matrixs key</label>
+        <br><br>
+		<input type="text" id="key" name="key" required>
+        <br><br>
+		<button type="submit">Enter</button>
+	</form>
+	<script>
+		const canvas = document.getElementById('matrixCanvas');
+		const ctx = canvas.getContext('2d');
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
 
-            </select>
-            <br><br>
-            <button type="submit" id="submit-button">Submit</button>
-            <br><br>
-            <h3 style="color: grey;">examples:</h3>
-             <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
-            <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
-            <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
+		const characters = 'OpTXS$#71@/[*&$';
 
-        </form>
-        
-        <script>
-            const submitButton = document.getElementById('submit-button');
-            submitButton.addEventListener('click', function () {
-                // Save the original values
-                const originalTextContent = submitButton.textContent;
-                const originalColor = submitButton.style.color; 
-            submitButton.textContent = 'WAIT';
-            submitButton.style.color = 'red';
+		const fontSize = 15;
+		const columns = canvas.width / fontSize;
 
-            setTimeout(() => {
-                // Revert the values back to the original ones after 5 seconds
-                submitButton.textContent = originalTextContent;
-                submitButton.style.color = originalColor;
-            }, 2000);
-        });
+		const drops = [];
+		for (let i = 0; i < columns; i++) {
+			drops[i] = 1;
+		}
 
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth * 0.8;
-        canvas.height = window.innerHeight * 1;
+		function draw() {
+			ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const characters = 'OpTXS$#71@/[*&$';
+			ctx.fillStyle = '#0f0';
+			ctx.font = `${fontSize}px monospace`;
 
-        const fontSize = 10;
-        const columns = canvas.width / fontSize;
+			for (let i = 0; i < drops.length; i++) {
+				const text = characters.charAt(Math.floor(Math.random() * characters.length));
+				ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
+				if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+					drops[i] = 0;
+				}
+				drops[i]++;
+			}
+		}
 
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#0f0';
-            ctx.font = `${fontSize}px monospace`;
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-
-        setInterval(draw, 33);
-
-      
-
-    </script>
+		setInterval(draw, 33);
+	</script>
 </body>
-    </html>
+</html>
