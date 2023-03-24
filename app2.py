@@ -5,6 +5,34 @@ from main import api_kx
 import os
 app = Flask(__name__)
 
+@app.route("/", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        password = request.form["password"]
+
+        if password == "correct_password":
+            session["logged_in"] = True
+            session.permanent = True
+            app.permanent_session_lifetime = timedelta(hours=1)
+            return redirect(url_for("index"))
+        else:
+            flash("Bad key provided")
+            return redirect(url_for("bad_key"))
+
+    return render_template("login.html")
+
+@app.route("/bad_key")
+def bad_key():
+    return render_template("badkey.html")
+
+@app.route("/index")
+def index():
+    if "logged_in" in session:
+        return render_template("indexSplit.html")
+    else:
+        flash("Please log in first")
+        return redirect(url_for("login"))
+
 @app.route('/display', methods=['GET'])
 def display():
     question = request.args.get('question')
@@ -20,12 +48,6 @@ def log_content():
         content = file.read()
     return content
 
-@app.route('/')
-def home():
-    file_path = os.path.join(os.getcwd(), 'log.txt')
-    with open(file_path, 'r') as file:
-        content = file.read()
-    return render_template('indexSplit.html', content=content)
 
 @app.route('/ask', methods=['POST'])
 def ask():
