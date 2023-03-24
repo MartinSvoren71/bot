@@ -57,14 +57,30 @@
             font-size: 1.5em;
             text-align: center;
         }
+        h2 {
+            max-width: 100%;
+            font-size: 1.2em;
+            text-align: center;
+        }
+             img {
+    width: 100%;
+    height: auto;
+    max-width: 320px;
+    display: block;
+    margin: 0 auto; /* Updated margin property */
+    margin-bottom: 50px;
+    filter: drop-shadow(0 0 0.75rem green);
+}
 	</style>
 </head>
 <body>
 	<canvas id="matrixCanvas"></canvas>
 	<form action="/" method="post">
+        <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
+        <br><br>
 <h1>Welcome to Knowledge Vortex</h1>
     <br><br>
-    <label for="key">enter your key</label>
+<h2>provide your key</h2>
     <br><br>
     <input type="text" id="key" name="key" required>
     <br><br>
