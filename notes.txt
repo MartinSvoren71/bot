@@ -19,3 +19,4 @@ zobrazenie historickych odpovedi
 moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
 
 login page
+2
