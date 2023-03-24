@@ -185,9 +185,9 @@ button {
             <label for="question">provide question</label>
             <input type="text" name="question" id="question" required>
             <br><br>
-            <label for="theme">library for:</label>
-            <select name="theme" id="theme" onchange="saveTheme()">> name="theme" id="theme" onchange="saveTheme()"</select>
-                            <option value="chameleon">Chameleon</option>
+<label for="theme">library for:</label>
+            <select name="theme" id="theme" onchange="saveTheme()">
+                <option value="chameleon">Chameleon</option>
                 <option value="powerline">Powerline</option>
                 <option value="compex">Compex</option>
                 <option value="innova">Innova</option>
@@ -196,7 +196,9 @@ button {
                 <option value="newton">Newton</option>
                 <option value="univet">Univet</option>
                 <option value="zygomx">ZygoMx</option>
-
+            </select>
+  <select name="theme" id="theme" onchange="saveTheme()">> name="theme" id="theme" onchange="saveTheme()"</select>
+            
             </select>
             <br><br>
 <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
