@@ -226,7 +226,7 @@ margin-right: 50px;
 
 input[type="text"] {
 font-size: 1.5em;
-padding: 20px;
+padding: 10px;
 }
 
 .button-wrapper {
@@ -235,7 +235,7 @@ margin-top: 20px;
 
 button {
 font-size: 2em;
-padding: 20px 40px;
+padding: 10px 28px;
 }
 
 .input-key {
@@ -257,16 +257,12 @@ margin-bottom: 20px;
     <div class="container">
         <div class="content-wrapper">
             <canvas id="matrixCanvas"></canvas>
-                        <br><br>
-            <br><br>
        <img src="https://dl.dropboxusercontent.com/s/mn6fuj67lvdtcag/logo1.png" alt="KV Logo">
         <h2 id="datetime" style="color: red;"></h2>
             <h1>Knowledge Vortex to your service</h1>
-
         <h1>Ask Operator a library related question</h1>
         <form action="/ask" method="POST">
             <input type="text" name="question" id="question" required>
-            <br><br>
        <h2 for="theme">library for:</h2>
          <div class="select-container">
   <select name="theme" id="theme" onchange="saveTheme()">
@@ -277,9 +273,7 @@ margin-bottom: 20px;
     <option value="mazda6">Mazda6</option>
   </select>
 </div>
-            <br><br>
 <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
-        <br><br>
             <h3 style="color: grey;">examples:</h3>
              <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
             <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
