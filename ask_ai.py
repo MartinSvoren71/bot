@@ -44,7 +44,8 @@ def ask_ai(question, theme):
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
         f.write("======================================================================================\n")
-        f.write("                       Knowledge Vortex v1.1                                   \n")    f.write("======================================================================================\n")
+        f.write("                         Knowlege Vortext v1.1                                 \n")
+        f.write("======================================================================================\n")
         f.write(existing_data)
         
     return response.response
