@@ -28,7 +28,7 @@ def login():
 def bad_key():
     return render_template("badkey.html")
 
-@app.route("/indexSplit")
+@app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
         return render_template("indexSplit.html")
