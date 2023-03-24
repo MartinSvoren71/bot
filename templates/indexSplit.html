@@ -30,132 +30,139 @@ function updateTime() {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ask AI</title>
     <style>
-  /* Add container and right-side styles */
-  .container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
+        /* Add container and right-side styles */
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
 
-  .right-side {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
+.right-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  #log-container {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
-    border: 1.3px solid red;
-    padding: 10px;
-    overflow-y: scroll;
-    color: #00FF00;
-    font-family: 'Lucida Console', monospace;
-    font-size: 16px;
-    font-weight: bold;
-    white-space: pre-wrap;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+#log-container {
+  width: 90%;
+  height: 90%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1.3px solid red;
+  padding: 20px;
+  overflow-y: scroll;
+  color: #00FF00;
+  font-family: 'Lucida Console', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: pre-wrap;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
 
-  #log-container::-webkit-scrollbar {
-    display: none;
-  }
+#log-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
 
-  /* Update body styles */
-  body {
-    margin: 0;
-    background-color: black;
-    color: #00FF00;
-    font-family: 'Lucida Console', monospace;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 0;
-  }
+/* Update body styles */
+body {
+  margin: 0;
+  background-color: black;
+  color: #00FF00;
+  font-family: 'Lucida Console', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  overflow: hidden;
+  padding-top: 0px;
+}
 
-  .content-wrapper {
-    flex: 1;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    overflow: hidden;
-  }
+.content-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  overflow: hidden;
+}
 
-  canvas {
-    width: 100%;
-    height: auto;
-    max-height: 50vh;
-    z-index: -1;
-    opacity: 0.15;
-    padding-top: 0px;
-  }
+canvas {
+  width: 100%;
+  height: auto;
+  max-height: 1400px;
+  z-index: -1;
+  opacity: 0.15;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 0px;
+}
 
-  img {
-    width: 100%;
-    height: auto;
-    max-width: 320px;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 30px;
-    filter: drop-shadow(0 0 0.75rem green);
-  }
+img {
+  width: 100%;
+  height: auto;
+  max-width: 320px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 0.75rem green);
+}
 
-  h1 {
-    font-size: 2em;
-    text-align: center;
-  }
+h1 {
+  max-width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+}
 
-  h2 {
-    font-size: 1.6em;
-    text-align: center;
-  }
+h2 {
+  max-width: 100%;
+  font-size: 1.2em;
+  text-align: center;
+}
 
-  h3 {
-    font-size: 1.2em;
-    text-align: center;
-  }
+h3 {
+  max-width: 100%;
+  font-size: 0.8em;
+  text-align: center;
+}
 
-  form {
-    margin-top: 30px;
-    width: 100%;
-  }
+form {
+  margin-top: 20px; /* Adjust this value for better spacing */
+}
 
-  label {
-    font-size: 1.6em;
-    margin-right: 20px;
-  }
+label {
+  font-size: 1.2em; /* Decrease font size for better mobile display */
+  margin-right: 10px; /* Decrease margin for better mobile display */
+}
 
-  input[type="text"] {
-    font-size: 2em;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    background-color: #1f1f1f;
-    color: red;
-    width: 100%;
-  }
+input[type="text"] {
+  font-size: 1.5em; /* Decrease font size for better mobile display */
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #1f1f1f;
+  color: red;
+  width: 100%;
+  margin-bottom: 10px; /* Add margin for better mobile display */
+}
 
-  .button-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 20px;
-  }
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
 
-  button {
-    font-size: 1.6em;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-  background-color: #00FF00;
+button {
+  font-size: 1.2em; 
+  padding: 10px 20px;
+border-radius: 8px;
+border: none;
+outline: none;
+background-color: #00FF00;
 color: black;
 cursor: pointer;
 }
@@ -165,7 +172,7 @@ background-color: #3e8e41;
 }
 
 .input-key {
-font-size: 1.2em;
+font-size: 1em;
 padding: 5px;
 border-radius: 10px;
 border: none;
@@ -173,72 +180,72 @@ outline: none;
 background-color: #1f1f1f;
 color: red;
 width: 100%;
-margin-bottom: 10px;
+margin-bottom: 10px; 
 }
 
-/* Media queries */
 @media only screen and (min-width: 768px) {
 .container {
 flex-direction: row;
 height: auto;
 }
-    .right-side {
-  padding: 50px;
+
+.right-side {
+padding: 50px;
 }
 
 #log-container {
-  font-size: 12px;
-  padding: 20px;
+font-size: 12px;
+padding: 20px;
 }
 
 img {
-  margin-bottom: 50px;
+margin-bottom: 50px;
 }
 
 h1 {
-  font-size: 3em;
+font-size: 3em;
 }
 
 h2 {
-  font-size: 2em;
+font-size: 2em;
 }
 
 h3 {
-  font-size: 1.5em;
+font-size: 1.5em;
 }
 
 form {
-  width: auto;
-  margin-top: 50px;
+width: auto;
+margin-top: 50px;
 }
 
 label {
-  font-size: 2em;
-  margin-right: 50px;
+font-size: 2em;
+margin-right: 50px;
 }
 
 input[type="text"] {
-  font-size: 2.5em;
-  padding: 20px;
+font-size: 2.5em;
+padding: 20px;
 }
 
 .button-wrapper {
-  margin-top: 50px;
+margin-top: 50px;
 }
 
 button {
-  font-size: 2em;
-  padding: 20px 40px;
+font-size: 2em;
+padding: 20px 40px;
 }
 
 .input-key {
-  font-size: 1.5em;
-  padding: 10px;
-  margin-bottom: 20px;
+font-size: 1.5em;
+padding: 10px;
+margin-bottom: 20px;
 }
-        }
-        </style>
-
+}
+        
+    </style>
 </head>
 <body>
     <div class="container">
