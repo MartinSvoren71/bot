@@ -1,0 +1,59 @@
+app2 backup 24.3 
+
+from flask import Flask, request, render_template, redirect, url_for, jsonify
+from ask_ai import initialize_ai, ask_ai
+from threading import Thread
+from main import api_kx
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        key = request.form['key']
+        if key == 'xxx007':
+            return redirect(url_for('indexSplit'))
+        else:
+            return redirect(url_for('wrong_key'))
+    return render_template('login.html')
+
+@app.route('/indexSplit')
+def indexSplit():
+    file_path = os.path.join(os.getcwd(), 'log.txt')
+    with open(file_path, 'r') as file:
+        content = file.read()
+    return render_template('indexSplit.html', content=content)
+
+@app.route('/wrong_key')
+def wrong_key():
+    return render_template('wrong_key.html')
+
+@app.route('/display', methods=['GET'])
+def display():
+    question = request.args.get('question')
+    theme = request.args.get('theme')
+    response = request.args.get('response')
+    key = request.args.get('key')
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+
+@app.route('/ask', methods=['POST'])
+def ask():
+    question = request.form['question']
+    theme = request.form['theme']
+    key = request.form['key']
+    if question.strip().lower() == 'exit':
+        return redirect(url_for('indexSplit'))
+    elif key == 'xxx007':
+        response = ask_ai(question, theme)
+        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+    else:
+        return redirect(url_for('wrong_key'))
+
+t = Thread(target=initialize_ai)
+t.start()
+app.run(host='0.0.0.0', port='5000')

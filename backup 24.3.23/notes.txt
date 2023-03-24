@@ -1,0 +1,24 @@
+
+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
+
+
+response log
+server and error log
+
+
+zobrazenie historickych odpovedi
+
+zobrzenie dokumentu pdf alebo json index
+
+moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
+
+login page
+
+
+
+pripravit produktovu webovu stranku s demo aplikaciu
+
+vytypovat 5 fieriem ktorym to ponuknut
+
+
+
