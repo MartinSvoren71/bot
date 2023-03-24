@@ -1,20 +1,24 @@
-function loadLogFile() {
-    fetch('log.txt')
-        .then(response => response.text())
-        .then(text => {
-            const logContainer = document.getElementById('log-container');
-            logContainer.innerHTML = text;
-        })
-        .catch(error => {
-            console.error('Error fetching log.txt:', error);
-        });
-}
+<!DOCTYPE html>
 
-loadLogFile();<!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <title>Operator the OptiXs Bot</title>
+    <title>Knowledge Vortex Bot</title>
+
     <script>
+window.onload = function() {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) {
+    document.getElementById("theme").value = savedTheme;
+  }
+};
+
+     
+setInterval(function() {
+  // Code to refresh the log container
+  loadLogFile();
+}, 5000);
+        
 function updateTime() {
             var now = new Date();
             var time = now.toLocaleTimeString();
@@ -43,15 +47,22 @@ function updateTime() {
 #log-container {
     width: 90%;
     height: 90%;
-    background-color: rgba(0, 0, 0, 0.8);
-    border: 2px solid #00FF00;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1.3px solid red;
     padding: 20px;
-    overflow-y: auto;
+    overflow-y: scroll;
     color: #00FF00;
     font-family: 'Lucida Console', monospace;
     font-size: 12px;
+    
     font-weight: bold;
     white-space: pre-wrap;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+}
+
+#log-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 
@@ -74,6 +85,8 @@ function updateTime() {
     align-items: center;
     justify-content: flex-start;
     padding-top: 20px; /* Adjust this value to control the space above the logo */
+    overflow: hidden; /* Add this to hide the scroll bar */
+
 }
         canvas {
             width: 100vh;
@@ -98,12 +111,12 @@ function updateTime() {
 
         h1 {
             max-width: 100%;
-            font-size: 2em;
+            font-size: 1.5em;
             text-align: center;
         }
         h2 {
             max-width: 100%;
-            font-size: 1.5em;
+            font-size: 1.2em;
             text-align: center;
         }
          h3 {
@@ -115,7 +128,7 @@ function updateTime() {
             margin-top: 50px;
         }
         label {
-            font-size: 2em;
+            font-size: 1.5em;
             margin-right: 20px;
         }
         input[type="text"] {
@@ -134,7 +147,7 @@ function updateTime() {
 }
 
 button {
-    font-size: 2em;
+    font-size: 1.6em;
     padding: 10px 10px;
     border-radius: 8px;
     border: none;
@@ -155,6 +168,7 @@ button {
             background-color: #1f1f1f;
             color: red;
         }
+        
     </style>
 </head>
 <body>
@@ -164,32 +178,30 @@ button {
                         <br><br>
             <br><br>
 
-       <img src="https://www.optixs.cz/assets/images/bg-logo-optixs.png" alt="OptiXs Logo">
+       <img src="https://dl.dropboxusercontent.com/s/mn6fuj67lvdtcag/logo1.png" alt="KV Logo">
         <h2 id="datetime" style="color: red;"></h2>
+            <h1>Knowledge Vortex to your service</h1>
+
         <h1>Ask Operator product related question</h1>
         <form action="/ask" method="POST">
-            <label for="key">Provide key:</label>
-            <input type="text" name="key" id="key" class="input-key" required>
-            <br><br>
-            <label for="question">What do you want to ask?</label>
+            <label for="question">provide question</label>
             <input type="text" name="question" id="question" required>
             <br><br>
-            <label for="theme">Library for:</label>
-            <select name="theme" id="theme">
-                <option value="chameleon">Chameleon</option>
-                <option value="powerline">Powerline</option>
-                <option value="compex">Compex</option>
-                <option value="innova">Innova</option>
-                <option value="chameleondiscovery">ChameleonDiscovery</option>
-                <option value="kymera">Kymera</option>
-                <option value="newton">Newton</option>
-                <option value="univet">Univet</option>
-                <option value="zygomx">ZygoMx</option>
+<label for="theme">library for:</label>
+           <select name="theme" id="theme" onchange="saveTheme()">
+                <option value="windows11">Windows11</option>
+                <option value="python3">Python3</option>
+                <option value="labview">LabView</option>
+                <option value="skodasuperb">SkodaSuperb</option>
+                <option value="mazda6">Mazda6</option>
+
+            </select>
+  <select name="theme" id="theme" onchange="saveTheme()">> name="theme" id="theme" onchange="saveTheme()"</select>
+            
             </select>
             <br><br>
-<div class="button-wrapper">
-    <button type="ask" id="submit-button">Ask Operator</button>
-</div>            <br><br>
+<div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
+        <br><br>
             <h3 style="color: grey;">examples:</h3>
              <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
             <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
@@ -197,15 +209,36 @@ button {
         </div>
         <div class="right-side">
             <canvas id="matrixCanvasRight"></canvas>
-        <h1>Operator's response:</h1>
-            <div class="right-side">
+            <div class="right-side"></div>
     <div id="log-container"></div>
+            
+            
+            
 </div>
-
         </div>
     </div>
 
     <script>
+function loadLogFile() {
+    const logContainer = document.getElementById('log-container');
+
+    fetch('/log-content')
+        .then(response => response.text())
+        .then(data => {
+            logContainer.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error fetching log.txt:', error);
+        });
+}
+
+loadLogFile();
+        
+         function saveTheme() {
+  const selectedTheme = document.getElementById("theme").value;
+  localStorage.setItem("theme", selectedTheme);
+}  
+  
                   const submitButton = document.getElementById('submit-button');
             submitButton.addEventListener('click', function () {
                 // Save the original values
@@ -218,7 +251,8 @@ button {
                 // Revert the values back to the original ones after 5 seconds
                 submitButton.textContent = originalTextContent;
                 submitButton.style.color = originalColor;
-            }, 2000);
+                location.reload()
+            }, 500);
         });
 
         const canvas = document.getElementById('matrixCanvas');
@@ -283,23 +317,15 @@ button {
                 dropsRight[i]++;
             }
         }
-
         setInterval(drawRight, 33);
-        
-     function loadLogFile() {
-    fetch('/home/ec2-user/bot/log.txt')
-        .then(response => response.text())
-        .then(text => {
-            const logContainer = document.getElementById('log-container');
-            logContainer.innerHTML = text;
-        })
-        .catch(error => {
-            console.error('Error fetching log.txt:', error);
-        });
-}
-
-loadLogFile();   
-        
-    </script>
+  </script>
 </body>
+
+
+
 </html>
+
+
+
+
+
