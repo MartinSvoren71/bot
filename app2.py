@@ -53,12 +53,13 @@ def log_content():
 
 @app.route('/ask', methods=['POST'])
 def ask():
+    key = "nnp"
     question = request.form['question']
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(question, theme)  # Pass the theme value
-        return render_template('bad_key.html', question=question, theme=theme, response=response, key=key)
+        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('indexSplit.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
