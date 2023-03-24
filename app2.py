@@ -6,14 +6,14 @@ from datetime import timedelta
 import os
 
 app = Flask(__name__)
-the_key = 'xxx007'
+app.secret_key = "xxx007"
 
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         password = request.form["key"]
 
-        if password == the_key:
+        if password == app.secret_key :
             session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
