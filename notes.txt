@@ -1,24 +1,21 @@
 
 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
 
+vytvorit config na heslo, api key a zoznam indexov
+
+cloning whole app and storages for diferent clients
+
+creating show up app with data - windwos manual, skoda superb manual a aeste nejake 3-4
+
+oslovit 10 zakaznikov - 2 mesiace testovania zdarma, nasledne mesacne fee + nejaky spravcovsky poplatok , nutnost zautomatizovat nahravanie dokumentov
+zalozit firmu
+
+
 
 response log
 server and error log
-
-
 zobrazenie historickych odpovedi
-
-zobrzenie dokumentu pdf alebo json index
 
 moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
 
 login page
-
-
-
-pripravit produktovu webovu stranku s demo aplikaciu
-
-vytypovat 5 fieriem ktorym to ponuknut
-
-
-
