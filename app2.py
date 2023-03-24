@@ -56,9 +56,12 @@ def ask():
     question = request.form['question']
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
-    return render_template('indexSplit.html', question=question, theme=theme)
-    
-
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+    if key == "nnp":  # Check if the key is "xxx007"
+        response = ask_ai(question, theme)  # Pass the theme value
+        return render_template('bad_key.html', question=question, theme=theme, response=response, key=key)
+    else:
+        return render_template('indexSplit.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
