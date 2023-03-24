@@ -45,7 +45,7 @@ def index():
     {{ html|safe }}
 </select>
         '''
-        return render_template("indexSplit.html")
+        return render_template("indexSplit.html", html=html)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
