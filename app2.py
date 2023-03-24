@@ -6,7 +6,7 @@ from datetime import timedelta
 import os
 
 app = Flask(__name__)
-app.secret_key = "super_secret_key"
+app.secret_key = "xxx007"
 
 @app.route("/", methods=["GET", "POST"])
 def login():
