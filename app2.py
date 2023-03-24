@@ -50,6 +50,7 @@ def index():
         flash("Please log in first")
         return redirect(url_for("login"))
 
+
 @app.route('/display', methods=['GET'])
 def display():
     question = request.args.get('question')
