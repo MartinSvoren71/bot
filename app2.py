@@ -1,10 +1,15 @@
 
-
-from flask import Flask, render_template, request, redirect, url_for, flash, session
-from datetime import timedelta
+from flask import Flask, request, render_template, redirect, url_for, jsonify
+from ask_ai import initialize_ai, ask_ai
+from threading import Thread
+from main import api_kx
+import os
 
 app = Flask(__name__)
-app.secret_key = "super_secret_key"
+
+@app.route('/')
+def home():
+    return redirect(url_for('login'))
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -36,8 +41,15 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
-    
-    
+
+@app.route('/display', methods=['GET'])
+def display():
+    question = request.args.get('question')
+    theme = request.args.get('theme')
+    response = request.args.get('response')
+    key = request.args.get('key')
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+
 @app.route('/ask', methods=['POST'])
 def ask():
     question = request.form['question']
