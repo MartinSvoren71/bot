@@ -11,7 +11,7 @@ app.secret_key = "super_secret_key"
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        password = request.form["password"]
+        password = request.form["key"]
 
         if password == "correct_password":
             session["logged_in"] = True
