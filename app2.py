@@ -56,7 +56,7 @@ def ask():
     question = request.form['question']
     theme = request.form['theme']
     key = request.form['key']  # Get the value of the key from the form
-    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+    return render_template('indexSplit.html', question=question, theme=theme)
     
 
 t = Thread(target=initialize_ai)
