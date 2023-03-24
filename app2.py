@@ -42,8 +42,8 @@ def index():
         # Render the HTML with the dynamic <option> elements
         html = f'''
         <select name="theme" id="theme" onchange="saveTheme()">
-            {options}
-        </select>
+    {{ html|safe }}
+</select>
         '''
         return render_template("indexSplit.html")
     else:
