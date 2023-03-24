@@ -33,8 +33,8 @@ function updateTime() {
         /* Add container and right-side styles */
 .container {
   display: flex;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .right-side {
@@ -258,9 +258,8 @@ margin-bottom: 20px;
         <h2 id="datetime" style="color: red;"></h2>
             <h1>Knowledge Vortex to your service</h1>
 
-        <h1>Ask Operator product related question</h1>
+        <h1>Ask Operator a library related question</h1>
         <form action="/ask" method="POST">
-            <label for="question">provide question</label>
             <input type="text" name="question" id="question" required>
             <br><br>
 <label for="theme">library for:</label>
@@ -270,10 +269,6 @@ margin-bottom: 20px;
                 <option value="labview">LabView</option>
                 <option value="skodasuperb">SkodaSuperb</option>
                 <option value="mazda6">Mazda6</option>
-
-            </select>
-  <select name="theme" id="theme" onchange="saveTheme()">> name="theme" id="theme" onchange="saveTheme()"</select>
-            
             </select>
             <br><br>
 <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
