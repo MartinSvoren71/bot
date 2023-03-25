@@ -1,7 +1,11 @@
-pip install git
-sudo yum install pip
-sudo yum install python
-pip install flask
-pip install llm-index
-pip install llama-index
-pip install git
+sudo yum install pip;
+sudo yum install python;
+pip install flask;
+pip install llm-index;
+pip install llama-index;
+pip install git;
+sudo cp -p  app2.service.txt /etc/systemd/system/app2.service;
+sudo systemctl daemon-reload;
+sudo systemctl enable app2.service;
+sudo systemctl start app2.service;
+sudo systemctl status app2.service;
