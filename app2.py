@@ -7,10 +7,8 @@ from main import api_kx
 from datetime import timedelta
 import os
 import json
-pdf_urls = [
-    "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf",
-    "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf",
-]
+pdf_urls = "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
+
 app = Flask(__name__)
 app.secret_key = "xxx007"
 
@@ -79,12 +77,12 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "ChatGPTdatabase" :
             response = ask_GPT(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_urls)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            pdf_url = random.choice(pdf_urls)
+            pdf_url = pdf_urls
 
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_url)
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_urls)
             
     else:
         return render_template('bad_key.html', question=question, theme=theme)
