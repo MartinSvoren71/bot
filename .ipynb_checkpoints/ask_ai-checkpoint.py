@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import os
+import openai
 from threading import Thread
 from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
