@@ -84,7 +84,7 @@ def ask_ai(question, theme):
     
     os.environ["OPENAI_API_KEY"] = api_k
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
-    response = index.query(question, response_mode="compact", temperature=0.9, model_name="gpt-3.5-turbo",)
+    response = index.query(question, response_mode="compact")
     log_file = os.path.join(os.getcwd(), 'log.txt')
     
     # Read the existing data in the log file
@@ -104,3 +104,4 @@ def ask_ai(question, theme):
         
     return response.response
 
+response.response

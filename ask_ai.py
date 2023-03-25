@@ -18,7 +18,17 @@ initialize_ai(api_k)
 def ask_ai(question, theme):
     os.environ["OPENAI_API_KEY"] = api_kx
     prompt = f"{question}"
-    response = openai.query(question, response_mode="compact", temperature=0.9, model_name="gpt-3.5-turbo",)
+    response = openai.Completion.create(
+        engine="gpt-3.5-turbo",
+        prompt=prompt,
+        max_tokens=550,
+        n=1,
+        stop=None,
+        temperature=0.6,
+    )
+
+    answer = response.choices[0].text.strip()
+
     log_file = os.path.join(os.getcwd(), 'log.txt')
     
     # Read the existing data in the log file
@@ -36,4 +46,4 @@ def ask_ai(question, theme):
         f.write("======================================================================================\n")
         f.write(existing_data)
         
-    return response.response
+    return answer
