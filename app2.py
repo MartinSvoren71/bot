@@ -7,7 +7,7 @@ from main import api_kx
 from datetime import timedelta
 import os
 import json
-pdf_urls = "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
+
 
 app = Flask(__name__)
 app.secret_key = "xxx007"
@@ -80,8 +80,8 @@ def ask():
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            pdf_url = pdf_urls
-            return render_template("indexSplit.html", pdf_url=pdf_url)
+            pdf_urla = https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf
+            return render_template("indexSplit.html", pdf_urla=pdf_url)
 
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
             
