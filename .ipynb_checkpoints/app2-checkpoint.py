@@ -77,12 +77,13 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "ChatGPTdatabase" :
             response = ask_GPT(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_urls)
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
             pdf_url = pdf_urls
+            return render_template("indexSplit.html", pdf_url=pdf_url)
 
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_urls)
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
             
     else:
         return render_template('bad_key.html', question=question, theme=theme)
