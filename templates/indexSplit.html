@@ -335,15 +335,15 @@
                  setInterval(drawRight, 33);
            
       </script>
-       <body>
-           <div id="pdf-container">
+      <div id="pdf-container">
         <iframe id="pdf-frame" type="application/pdf"></iframe>
     </div>
     <script>
         function setPdfUrl(url) {
             document.querySelector("#pdf-frame").src = url + "#toolbar=1&navpanes=0&scrollbar=1";
         }
+
+        setPdfUrl('{{ pdf_url }}');
     </script>
-           </body>
    </body>
 </html>

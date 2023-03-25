@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 
@@ -70,19 +70,18 @@ def log_content():
 
 @app.route('/ask', methods=['POST'])
 def ask():
-    
-    pdf_url = "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
-    
     question = request.form['question']
     theme = request.form['theme']
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "ChatGPTdatabase" :
             response = ask_GPT(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, data={"pdf_url": pdf_url})
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, data={"pdf_url": pdf_url})
+            url = 'https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf'
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=url))
+            
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
