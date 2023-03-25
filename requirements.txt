@@ -4,8 +4,10 @@ pip install flask;
 pip install llm-index;
 pip install llama-index;
 pip install git;
+git clone 
+cd bot;
 sudo cp -p  app2.service.txt /etc/systemd/system/app2.service;
 sudo systemctl daemon-reload;
 sudo systemctl enable app2.service;
-sudo systemctl start app2.service;
+sudo systemctl restart app2.service;
 sudo systemctl status app2.service;
