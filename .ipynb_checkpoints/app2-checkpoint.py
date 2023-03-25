@@ -83,13 +83,15 @@ def ask():
             pdf_urla = "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
 
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
-            
+            return jsonify("pdf_url": pdf_url)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
 #
+
+
 @app.route('/ask2', methods=['POST'])
 def ask2():
     question = request.form['question']

@@ -186,7 +186,13 @@
          outline: none;
          background-color: #1f1f1f;
          color: red;
-          
+          }
+          document {
+          border: 1.3px solid red;
+         padding: 20px;
+         width: 30%;
+         height: 90%;
+          }
       </style>
    </head>
    <body>
@@ -341,9 +347,19 @@
             margin: 0;
         }
         #pdf-container {
-            width: 50%;
-            height: 1000px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        width: 40%;
+         height: 90%;
+         background-color: rgba(0, 0, 0, 0.2);
+         border: 1.3px solid red;
+         padding: 20px;
+         overflow-y: hidden;
+         color: #00FF00;
+         font-family: 'Lucida Console', monospace;
+         font-size: 12px;
+         font-weight: bold;
+         white-space: pre-wrap;
+         -ms-overflow-style: none;
+         scrollbar-width: none;
         }
         #pdf-frame {
             width: 100%;
@@ -355,7 +371,7 @@
 </head>
 <body>
     <div id="pdf-container">
-        <iframe id="pdf-frame" type="application/pdf" src="{{ pdf_url }}#toolbar=1&navpanes=0&scrollbar=1"></iframe>
+        <iframe id="pdf-frame" type="application/pdf" src="{{ pdf_url }}"></iframe>
     </div>
 </body>
 </html>
