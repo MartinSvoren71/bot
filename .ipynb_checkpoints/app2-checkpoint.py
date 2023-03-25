@@ -34,7 +34,7 @@ def bad_key():
 
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
-    if "logged_in" in session:
+     if "logged_in" in session:
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
@@ -42,13 +42,14 @@ def index():
         # Generate the <option> elements dynamically
         options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
 
-        # Render the HTML with the dynamic <option> elements
-        html = f'''
-        <select name="theme" id="theme" onchange="saveTheme()">
-            {options}
-        </select>
-        '''
-        return render_template("indexSplit.html", html=html)
+        # Load the config.json file
+        with open('config.json', 'r') as f:
+            config = json.load(f)
+
+        pdf_url = config['pdf_url']
+
+        # Render the HTML with the dynamic <option> elements and the PDF URL
+        return render_template("indexSplit.html", html=options, pdf_url=pdf_url)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
