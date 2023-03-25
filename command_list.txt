@@ -53,7 +53,10 @@ git reset –hard
 sudo systemctl stop httpd
 sudo nano /etc/systemd/system/app2.service
 sudo mv /etc/systemd/system/app2.servicem-d /etc/systemd/system/app2.service
+
 sudo systemctl daemon-reload
+
+StandardOutput=file:/home/ec2-user/bot/log/server_log.log
 sudo systemctl enable app2.service
 sudo systemctl start app2.service
 sudo systemctl status app2.service
