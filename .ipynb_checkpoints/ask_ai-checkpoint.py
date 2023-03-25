@@ -19,12 +19,12 @@ def ask_ai(question, theme):
     os.environ["OPENAI_API_KEY"] = api_kx
     prompt = f"{theme}: {question}"
     response = openai.Completion.create(
-        engine="text-davinci-002",
+        engine="gpt-3.5-turbo",
         prompt=prompt,
         max_tokens=150,
         n=1,
         stop=None,
-        temperature=0.9,
+        temperature=0.6,
     )
 
     answer = response.choices[0].text.strip()
