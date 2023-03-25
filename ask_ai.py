@@ -10,13 +10,13 @@ api_k = api_kx
 import json
 
 def initialize_ai(api_key):
-    os.environ["OPENAI_API_KEY"] = api_key
+    os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
 
 initialize_ai(api_k)
 
 def ask_ai(question, theme):
-    os.environ["OPENAI_API_KEY"] = api_key
+    os.environ["OPENAI_API_KEY"] = api_kx
     prompt = f"{theme}: {question}"
     response = openai.Completion.create(
         engine="text-davinci-002",
