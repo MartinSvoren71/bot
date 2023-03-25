@@ -48,4 +48,3 @@ def ask_ai(question, theme):
         
     return response.response
 
-response.response
