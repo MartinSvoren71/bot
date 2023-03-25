@@ -49,3 +49,5 @@ def ask_ai(question, theme):
         f.write(existing_data)
         
     return response.response
+
+    return answer
