@@ -1,5 +1,5 @@
 [Unit]
-Describtion=KnowledgeVortexService
+Descrition=My Flask Application
 After=network.target
 
 [Service]
