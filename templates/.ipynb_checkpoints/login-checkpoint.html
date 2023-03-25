@@ -1,7 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Login</title>
+	<title>Knowledge Vortex login</title>
+    <script>
+  const form = document.getElementById('my-form');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // prevent default form submission
+    // handle form submission here
+  });
+
+  // Listen for Enter key press on input field
+  const inputField = form.querySelector('input[name="input-field"]');
+  inputField.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // prevent Enter key from creating a new line
+      form.submit(); // submit the form
+    }
+  });
+</script>
 	<style>
 		body {
 			background-color: black;

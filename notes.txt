@@ -12,7 +12,7 @@ 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
    https na web aj appku 
    
    
-
+   citanie odpovedi by bola parada
 
 X vytvorit config na heslo, api key a zoznam indexov
 
