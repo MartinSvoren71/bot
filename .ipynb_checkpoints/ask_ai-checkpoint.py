@@ -10,13 +10,7 @@ api_k = api_kx
 import json
 
 def initialize_ai(api_key):
-    os.environ[api_k] = api_k
-#
-def construct_index(directory_path):
-    max_chunk_overlap = 20
-    chunk_size_limit = 600
-    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.9, model_name="gpt-3.5-turbo", max_tokens=num_outputs, openai_api_key=api_k))
-    documents = SimpleDirectoryReader(directory_path).load_data()
+    os.environ[api_k] = api_kx
 
     
 def ask_ai(question, theme):
@@ -50,5 +44,5 @@ def ask_ai(question, theme):
         f.write("======================================================================================\n")
         f.write(existing_data)
         
-    return response.response
+    return answer
 
