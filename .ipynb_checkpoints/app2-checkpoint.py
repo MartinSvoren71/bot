@@ -70,6 +70,16 @@ def log_content():
 
 @app.route('/ask', methods=['POST'])
 def ask():
+    
+    pdf_url = "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
+
+    response = requests.post("http://localhost:5000/set_pdf_url", data={"pdf_url": pdf_url})
+
+    if response.status_code == 200:
+        print("PDF URL set successfully")
+    else:
+        print("Failed to set PDF URL")
+    
     question = request.form['question']
     theme = request.form['theme']
     key = "nnp"

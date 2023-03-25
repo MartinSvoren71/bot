@@ -182,6 +182,20 @@
          background-color: #1f1f1f;
          color: red;
          }
+           #pdf-container {
+            height: 100vh;
+            width: 50%;
+            overflow: show;
+            border: 1px solid #ccc;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            justify-content: center;
+            align-items: center;
+        }
+          
       </style>
    </head>
    <body>
@@ -321,5 +335,15 @@
                  setInterval(drawRight, 33);
            
       </script>
+       <body>
+           <div id="pdf-container">
+        <iframe id="pdf-frame" type="application/pdf"></iframe>
+    </div>
+    <script>
+        function setPdfUrl(url) {
+            document.querySelector("#pdf-frame").src = url + "#toolbar=1&navpanes=0&scrollbar=1";
+        }
+    </script>
+           </body>
    </body>
 </html>
