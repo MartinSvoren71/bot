@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, session
 from ask_ai import initialize_ai, ask_ai
+from ask_GPT import initialize_ai, ask_ai
+
 from threading import Thread
 from main import api_kx
 from datetime import timedelta
