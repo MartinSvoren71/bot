@@ -41,198 +41,199 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Ask AI</title>
-      <style>
-         /* left side */
-         .container {
-         display: flex;
-         width: 100%;
-         height: 100%;
-         margin-left: 10px;
-         }
-         .right-side {
-         flex: 1;
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         }
-         #log-container {
-         width: 90%;
-         height: 90%;
-         background-color: rgba(0, 0, 0, 0.2);
-         border: 1.3px solid red;
-         padding: 20px;
-         overflow-y: scroll;
-         color: #00FF00;
-         font-family: 'Lucida Console', monospace;
-         font-size: 12px;
-         font-weight: bold;
-         white-space: pre-wrap;
-         -ms-overflow-style: none; /* Internet Explorer 10+ */
-         scrollbar-width: none; /* Firefox */
-         }
-         #log-container::-webkit-scrollbar {
-         display: none; /* Chrome, Safari, Opera */
-         }
-         /* Update body styles */
-         body {
-         margin: 0;
-         background-color: black;
-         color: #00FF00;
-         font-family: 'Lucida Console', monospace;
-         font-size: 10px;
-         font-weight: bold;
-         overflow: scroll;
-         padding-top: 0px;
-         }
-         .content-wrapper {
-         flex: 1;
-         position: relative;
-         display: flex;
-         flex-direction: column;
-         align-items: center;
-         justify-content: flex-start;
-         padding: 20px;
-         overflow: hidden;
-         }
-         canvas {
-         width: 100%;
-         height: auto;
-         z-index: -1;
-         opacity: 0.15;
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         padding-top: 0px;
-         }
-         img {
-         width: 100%;
-         height: auto;
-         max-width: 200px;
-         display: block;
-         margin: 0 auto;
-         margin-bottom: 40px;
-         filter: drop-shadow(0 0 0.55rem green);
-         }
-         h1 {
-         max-width: 100%;
-         font-size: 1.3em;
-         text-align: center;
-         }
-         h2 {
-         max-width: 100%;
-         font-size: 1.5em;
-         text-align: center;
-         }
-         h3 {
-         max-width: 100%;
-         font-size: 1.1em;
-         text-align: center;
-         }
-         form {
-         margin-top: 10px; /* Adjust this value for better spacing */
-         }
-         label {
-         font-size: 1.0em; /* Decrease font size for better mobile display */
-         margin-right: 10px; /* Decrease margin for better mobile display */
-         }
-         input[type="text"] {
-         font-size: 1.2em; /* Decrease font size for better mobile display */
-         padding: 10px;
-         border-radius: 10px;
-         border: none;
-         outline: none;
-         background-color: #1f1f1f;
-         color: red;
-         width: 100%;
-         margin-bottom: 10px; /* Add margin for better mobile display */
-         }
-         .button-wrapper {
-         display: flex;
-         justify-content: center;
-         width: 100%;
-         margin-top: 5px;
-         }
-         button {
-         font-size: 1.2em; 
-         padding: 10px 20px;
-         border-radius: 8px;
-         border: none;
-         outline: none;
-         background-color: #00FF00;
-         color: black;
-         cursor: pointer;
-         }
-         button:hover {
-         background-color: #3e8e41;
-         }
-         .input-key {
-         font-size: 1em;
-         padding: 5px;
-         border-radius: 10px;
-         border: none;
-         outline: none;
-         background-color: #1f1f1f;
-         color: red;
-         width: 100%;
-         margin-bottom: 10px; 
-         }
-         @media only screen and (min-width: 768px) {
-         .container {
-         flex-direction: row;
-         height: auto;
-         }
-         .right-side {
-         padding: 50px;
-         }
-         #log-container {
-         font-size: 12px;
-         padding: 20px;
-         }
-         img {
-         margin-bottom: 20px;
-         margin-top: 90px;
-         }
-         h1 {
-         font-size: 1.2em;
-         }
-         h2 {
-         font-size: 1.2em;
-         }
-         h3 {
-         font-size: 0.8em;
-         }
-         form {
-         width: auto;
-         margin-top: 20px;
-         }
-         label {
-         font-size: 1.5em;
-         margin-right: 20px;
-         }
-         input[type="text"] {
-         font-size: 1.5em;
-         padding: 10px;
-         }
-         .button-wrapper {
-         margin-top: 20px;
-         }
-         button {
-         font-size: 2em;
-         padding: 10px 28px;
-         }
-         .input-key {
-         font-size: 1.5em;
-         padding: 10px;
-         margin-bottom: 20px;
-         }
-         .select-container {
-         display: flex;
-         justify-content: center;
-         align-items: center;
-         width: 100%;
-         }
-         }
+       <style>
+      /* left side */
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  flex-direction: column;
+}
+.right-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#log-container {
+  width: 90%;
+  height: 90%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1.3px solid red;
+  padding: 20px;
+  overflow-y: scroll;
+  color: #00FF00;
+  font-family: 'Lucida Console', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: pre-wrap;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+#log-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+/* Update body styles */
+body {
+  margin: 0;
+  background-color: black;
+  color: #00FF00;
+  font-family: 'Lucida Console', monospace;
+  font-size: 10px;
+  font-weight: bold;
+  overflow: scroll;
+  padding-top: 0px;
+}
+.content-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  overflow: hidden;
+}
+canvas {
+  width: 100%;
+  height: auto;
+  z-index: -1;
+  opacity: 0.15;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 0px;
+}
+img {
+  width: 100%;
+  height: auto;
+  max-width: 200px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  filter: drop-shadow(0 0 0.55rem green);
+}
+h1 {
+  max-width: 100%;
+  font-size: 1.3em;
+  text-align: center;
+}
+h2 {
+  max-width: 100%;
+  font-size: 1.5em;
+  text-align: center;
+}
+h3 {
+  max-width: 100%;
+  font-size: 1.1em;
+  text-align: center;
+}
+form {
+  margin-top: 10px; /* Adjust this value for better spacing */
+}
+label {
+  font-size: 1.0em; /* Decrease font size for better mobile display */
+  margin-right: 10px; /* Decrease margin for better mobile display */
+}
+input[type="text"] {
+  font-size: 1.2em; /* Decrease font size for better mobile display */
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #1f1f1f;
+  color: red;
+  width: 100%;
+  margin-bottom: 10px; /* Add margin for better mobile display */
+}
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5px;
+}
+button {
+  font-size: 1.2em;
+padding: 10px 20px;
+border-radius: 8px;
+border: none;
+outline: none;
+background-color: #00FF00;
+color: black;
+cursor: pointer;
+}
+button:hover {
+background-color: #3e8e41;
+}
+.input-key {
+font-size: 1em;
+padding: 5px;
+border-radius: 10px;
+border: none;
+outline: none;
+background-color: #1f1f1f;
+color: red;
+width: 100%;
+margin-bottom: 10px;
+}
+@media only screen and (min-width: 768px) {
+.container {
+flex-direction: row;
+height: auto;
+}
+.right-side {
+padding: 50px;
+}
+#log-container {
+font-size: 12px;
+padding: 20px;
+}
+img {
+margin-bottom: 20px;
+margin-top: 90px;
+}
+h1 {
+font-size: 1.2em;
+}
+h2 {
+font-size: 1.2em;
+}
+h3 {
+font-size: 0.8em;
+}
+form {
+width: auto;
+margin-top: 20px;
+}
+label {
+font-size: 1.5em;
+margin-right: 20px;
+}
+input[type="text"] {
+font-size: 1.5em;
+padding: 10px;
+}
+.button-wrapper {
+margin-top: 20px;
+}
+button {
+font-size: 2em;
+padding: 10px 28px;
+}
+.input-key {
+font-size: 1.5em;
+padding: 10px;
+margin-bottom: 20px;
+}
+.select-container {
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+}
+}
       </style>
    </head>
    <body>
