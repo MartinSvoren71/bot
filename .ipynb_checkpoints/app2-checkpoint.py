@@ -72,6 +72,24 @@ def ask():
     theme = request.form['theme']
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
+        if theme == "general"
+            response = ask_ai2(question, theme)  # Pass the theme value
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+        else :
+            response = ask_ai(question, theme)  # Pass the theme value
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+    else:
+        return render_template('bad_key.html', question=question, theme=theme)
+t = Thread(target=initialize_ai)
+t.start()
+app.run(host='0.0.0.0', port=5000)
+#
+@app.route('/ask2', methods=['POST'])
+def ask2():
+    question = request.form['question']
+    theme = request.form['theme']
+    key = "nnp"
+    if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(question, theme)  # Pass the theme value
         return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
