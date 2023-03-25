@@ -50,7 +50,7 @@ def ask_ai(question, theme):
     log_file = os.path.join(os.getcwd(), 'log.txt')
     
     # Read the existing data in the log file
-@ -40,11 +40,10 @@ def ask_ai(question, theme):
+def ask_ai(question, theme):
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Theme: {theme}\n")
         f.write(f"Question: {question}\n")
