@@ -10,7 +10,7 @@ api_k = api_kx
 import json
 
 def initialize_ai(api_key):
-    os.environ[api_k] = api_key
+    os.environ[api_k] = api_k
 #
 def construct_index(directory_path):
     max_chunk_overlap = 20
