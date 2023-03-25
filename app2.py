@@ -34,7 +34,7 @@ def bad_key():
 
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
-     if "logged_in" in session:
+    if "logged_in" in session:
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
