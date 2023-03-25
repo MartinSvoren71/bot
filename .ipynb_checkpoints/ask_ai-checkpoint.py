@@ -17,11 +17,11 @@ initialize_ai(api_k)
 
 def ask_ai(question, theme):
     os.environ["OPENAI_API_KEY"] = api_kx
-    prompt = f"{theme}: {question}"
+    prompt = f"{question}"
     response = openai.Completion.create(
         engine="gpt-3.5-turbo",
         prompt=prompt,
-        max_tokens=150,
+        max_tokens=550,
         n=1,
         stop=None,
         temperature=0.6,
