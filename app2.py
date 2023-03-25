@@ -74,7 +74,7 @@ def ask():
     theme = request.form['theme']
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
-        if theme == "general" :
+        if theme == "ChatGPTdatabase" :
             response = ask_GPT(question, theme)  # Pass the theme value
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
         else :
