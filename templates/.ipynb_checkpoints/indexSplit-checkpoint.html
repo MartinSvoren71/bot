@@ -332,18 +332,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Viewer</title>
     <style>
-        #pdf-container {
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 60%;
-            height: 800px;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+        }
+        #pdf-container {
+            width: 50%;
+            height: 1000px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
         }
         #pdf-frame {
             width: 100%;
             height: 100%;
             border: 10px;
+       
         }
     </style>
 </head>
