@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, requests
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 
@@ -82,7 +82,7 @@ def ask():
             response = ask_ai(question, theme)  # Pass the theme value
             pdf_url = "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
            
-            response = requests.post("http://localhost:5000/indexSplit.html", data={"pdf_url": pdf_url})
+            response = request.post("http://localhost:5000/indexSplit.html", data={"pdf_url": pdf_url})
             return jsonify({"pdf_url": pdf_url})
 
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
