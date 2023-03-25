@@ -10,11 +10,13 @@ api_k = api_kx
 import json
 
 def initialize_ai(api_key):
-    os.environ[api_k] = api_kx
+    os.environ["OPENAI_API_KEY"] = api_key
+    openai.api_key = api_kx
 
-    
+initialize_ai(api_k)
+
 def ask_ai(question, theme):
-    os.environ["OPENAI_API_KEY"] = api_k
+    os.environ["OPENAI_API_KEY"] = api_key
     prompt = f"{theme}: {question}"
     response = openai.Completion.create(
         engine="text-davinci-002",
@@ -38,11 +40,10 @@ def ask_ai(question, theme):
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Theme: {theme}\n")
         f.write(f"Question: {question}\n")
-        f.write(f"Answer: {response.answer}\n")
+        f.write(f"Answer: {answer}\n")  # Replace response.answer with answer
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.1                                 \n")
         f.write("======================================================================================\n")
         f.write(existing_data)
         
     return answer
-
