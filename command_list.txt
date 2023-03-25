@@ -13,7 +13,7 @@ Last login: Thu Mar 23 15:02:02 2023 from 13.48.4.202
 
 sudo yum install git
 sudo yum install flask
-git clone https://github.com/MartinSvoren71/OPTappPowerline
+git clone https://github.com/MartinSvoren71/bot -b DEMO
 ls
 cd OPTappPowerline
 sudo yum install python
@@ -53,6 +53,10 @@ git reset –hard
 sudo systemctl stop httpd
 sudo nano /etc/systemd/system/app2.service
 sudo mv /etc/systemd/system/app2.servicem-d /etc/systemd/system/app2.service
+
+sudo systemctl daemon-reload
+
+StandardOutput=file:/home/ec2-user/bot/log/server_log.log
 sudo systemctl daemon-reload
 sudo systemctl enable app2.service
 sudo systemctl start app2.service
