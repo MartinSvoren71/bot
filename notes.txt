@@ -1,21 +1,34 @@
 
 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
 
-vytvorit config na heslo, api key a zoznam indexov
 
-cloning whole app and storages for diferent clients
+    formatovanie appky style nefunguje na mobile
 
-creating show up app with data - windwos manual, skoda superb manual a aeste nejake 3-4
+   email knowledgevertex@martinsvoren.com
+   
+   
+   webova stranka produktu? 
+   
+   https na web aj appku 
+   
+   
+
+
+X vytvorit config na heslo, api key a zoznam indexov
+
+X cloning whole app and storages for diferent clients
+
+X creating show up app with data - windwos manual, skoda superb manual a aeste nejake 3-4
 
 oslovit 10 zakaznikov - 2 mesiace testovania zdarma, nasledne mesacne fee + nejaky spravcovsky poplatok , nutnost zautomatizovat nahravanie dokumentov
 zalozit firmu
 
 
 
-response log
-server and error log
-zobrazenie historickych odpovedi
+X response log
+X server and error log
+X zobrazenie historickych odpovedi
 
-moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
+X moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
 
-login page
+X login page
