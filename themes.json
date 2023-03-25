@@ -1,5 +1,5 @@
 {
-    "chameleon": "indexChameleon.json",
+   "chameleon": "indexChameleon.json",
     "compex": "indexCompex.json",
     "chameleondiscovery": "indexChameleonDiscovery.json",
     "innova": "indexInnova.json",
@@ -7,5 +7,6 @@
     "newton": "indexNewton.json",
     "univet": "indexUnivet.json",
     "kymera": "indexKymera.json",
-    "zygomx": "indexZygoMX.json"
+    "zygomx": "indexZygoMX.json",
+    "general" : "general"
 }
