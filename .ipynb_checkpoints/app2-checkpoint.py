@@ -80,7 +80,7 @@ def ask():
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            pdf_urla = https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf
+            pdf_urla = "https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
             return render_template("indexSplit.html", pdf_urla=pdf_url)
 
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
