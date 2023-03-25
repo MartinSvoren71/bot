@@ -3,6 +3,11 @@
    <head>
       <title>Knowledge Vortex Bot</title>
       <script>
+          function setPdfUrl(url) {
+            document.querySelector("#pdf-frame").src = url;
+        }
+
+        
          window.onload = function() {
            const savedTheme = localStorage.getItem("theme");
            if (savedTheme) {
@@ -233,6 +238,7 @@
          </div>
       </div>
       </div>
+       </body>
       <script>
          function loadLogFile() {
              const logContainer = document.getElementById('log-container');
@@ -335,15 +341,9 @@
                  setInterval(drawRight, 33);
            
       </script>
-      <div id="pdf-container">
-        <iframe id="pdf-frame" type="application/pdf"></iframe>
+<body>   
+    <div id="pdf-container">
+        <iframe id="pdf-frame" type="application/pdf" src="{{ pdf_url }}#toolbar=1&navpanes=0&scrollbar=1"></iframe>
     </div>
-    <script>
-        function setPdfUrl(url) {
-            document.querySelector("#pdf-frame").src = url + "#toolbar=1&navpanes=0&scrollbar=1";
-        }
-
-        setPdfUrl('{{ pdf_url }}');
-    </script>
    </body>
 </html>
