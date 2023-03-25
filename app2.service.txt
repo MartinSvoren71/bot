@@ -1,13 +1,13 @@
 [Unit]
-Describtion=My Flask Application
+Descrition=My Flask Application
 After=network.target
 
 [Service]
 User=ec2-user
 WorkingDirectory=/home/ec2-user/bot
-ExecStart= /user/bin/python3 /home/ec2-user/bot/app2.py
+ExecStart=/usr/bin/python3 /home/ec2-user/bot/app2.py
 StandardOutput=file:/home/ec2-user/bot/log/server_log.log
-StandardError=file:/home/ec2-user/bot/log/error_log.log
+StandardError=file:/home/ec2-user/bot/error_log.log
 Restart=always
 
 [Install]
