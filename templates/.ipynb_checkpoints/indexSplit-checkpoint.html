@@ -43,160 +43,145 @@
       <title>Ask AI</title>
       <style>
          .container {
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  margin-left:10px;
-  justify-content: center;
-}
-
-.right-side {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right:10px;
-}
-
-#log-container {
-  width: 90%;
-  height: 90%;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: 1.3px solid red;
-  padding: 20px;
-  overflow-y: scroll;
-  color: #00FF00;
-  font-family: 'Lucida Console', monospace;
-  font-size: 12px;
-  font-weight: bold;
-  white-space: pre-wrap;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-#log-container::-webkit-scrollbar {
-  display: none;
-}
-
-body {
-  margin: 0;
-  background-color: black;
-  color: #00FF00;
-  font-family: 'Lucida Console', monospace;
-  font-size: 12px;
-  font-weight: bold;
-  overflow: hidden;
-  padding-top: 0p;
-  justify-content: center;
-  align-items: center;
-}
-
-.content-wrapper {
-  flex: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding-top: 20px;
-  overflow: hidden;
-}
-
-canvas {
-  width: 100vh;
-  height: 1400px;
-  z-index: -1;
-  opacity: 0.15;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding-top: 0px;
-}
-
-img {
-  width: 100%;
-  height: auto;
-  max-width: 320px;
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 50px;
-  filter: drop-shadow(0 0 0.75rem green);
-}
-
-h1 {
-  max-width: 100%;
-  font-size: 1.5em;
-  text-align: center;
-}
-
-h2 {
-  max-width: 100%;
-  font-size: 1.2em;
-  text-align: center;
-}
-
-h3 {
-  max-width: 100%;
-  font-size: 0.8em;
-  text-align: center;
-}
-
-form {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-label {
-  font-size: 1.5em;
-  margin-right: 20px;
-}
-
-input[type="text"] {
-  font-size: 2em;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background-color: #1f1f1f;
-  color: red;
-  justify-content: center;
-  align-items: center;
-}
-
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-button {
-  font-size: 1.6em;
-  padding: 10px;
-border-radius: 8px;
-border: none;
-outline: none;
-background-color: #00FF00;
-color: black;
-cursor: pointer;
-}
-
-button:hover {
-background-color: #3e8e41;
-}
-
-.input-key {
-font-size: 1em;
-padding: 5px;
-border-radius: 10px;
-border: none;
-outline: none;
-background-color: #1f1f1f;
-color: red;
-}
+         display: flex;
+         width: 100vw;
+         height: 100vh;
+         margin-left:10px;
+         justify-content: center;
+         }
+         .right-side {
+         flex: 1;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-right:10px;
+         max-width: 60%;
+         }
+         #log-container {
+         width: 90%;
+         height: 90%;
+         background-color: rgba(0, 0, 0, 0.2);
+         border: 1.3px solid red;
+         padding: 20px;
+         overflow-y: scroll;
+         color: #00FF00;
+         font-family: 'Lucida Console', monospace;
+         font-size: 12px;
+         font-weight: bold;
+         white-space: pre-wrap;
+         -ms-overflow-style: none;
+         scrollbar-width: none;
+         }
+         #log-container::-webkit-scrollbar {
+         display: none;
+         }
+         body {
+         margin: 0;
+         background-color: black;
+         color: #00FF00;
+         font-family: 'Lucida Console', monospace;
+         font-size: 12px;
+         font-weight: bold;
+         overflow: hidden;
+         padding-top: 0p;
+         justify-content: center;
+         align-items: center;
+         }
+         .content-wrapper {
+         flex: 1;
+         position: relative;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         padding-top: 20px;
+         overflow: hidden;
+         }
+         canvas {
+         width: 100vh;
+         height: 1400px;
+         z-index: -1;
+         opacity: 0.15;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         padding-top: 0px;
+         }
+         img {
+         width: 100%;
+         height: auto;
+         max-width: 320px;
+         display: block;
+         margin: 0 auto;
+         margin-bottom: 50px;
+         filter: drop-shadow(0 0 0.75rem green);
+         }
+         h1 {
+         max-width: 100%;
+         font-size: 1.5em;
+         text-align: center;
+         }
+         h2 {
+         max-width: 100%;
+         font-size: 1.2em;
+         text-align: center;
+         }
+         h3 {
+         max-width: 100%;
+         font-size: 0.8em;
+         text-align: center;
+         }
+         form {
+         margin-top: 50px;
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         }
+         label {
+         font-size: 1.5em;
+         margin-right: 20px;
+         }
+         input[type="text"] {
+         font-size: 2em;
+         margin-top: 0px;
+         border-radius: 10px;
+         border: none;
+         outline: none;
+         background-color: #1f1f1f;
+         color: red;
+         justify-content: center;
+         align-items: center;
+         }
+         .button-wrapper {
+         display: flex;
+         justify-content: center;
+         width: 100%;
+         }
+         button {
+         font-size: 1.6em;
+         padding: 10px;
+         border-radius: 8px;
+         margin-top: 15px;
+         border: none;
+         outline: none;
+         background-color: #00FF00;
+         color: black;
+         cursor: pointer;
+         }
+         button:hover {
+         background-color: #3e8e41;
+         }
+         .input-key {
+         font-size: 1em;
+         padding: 5px;
+         border-radius: 10px;
+         border: none;
+         outline: none;
+         background-color: #1f1f1f;
+         color: red;
+         }
       </style>
    </head>
    <body>
