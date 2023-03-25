@@ -25,26 +25,39 @@ def ask_ai(question, theme):
 
     # Get the file name for the current theme
     index_file = themes.get(theme, "indexCH.json")
-    
     os.environ["OPENAI_API_KEY"] = api_k
-    index = GPTSimpleVectorIndex.load_from_disk(index_file)
-    response = index.query(question, response_mode="compact")
+
+    if theme == "general":
+        prompt = f"{theme}: {question}"
+        response = openai.Completion.create(
+            engine="gpt-3.5-turbo",
+            prompt=prompt,
+            max_tokens=150,
+            n=1,
+            stop=None,
+            temperature=0.6,
+        )
+        answer = response.choices[0].text.strip()
+    else:
+        index = GPTSimpleVectorIndex.load_from_disk(index_file)
+        response = index.query(question, response_mode="compact")
+        answer = response.response
+
     log_file = os.path.join(os.getcwd(), 'log.txt')
-    
+
     # Read the existing data in the log file
     with open(log_file, "r") as f:
         existing_data = f.read()
-    
+
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Theme: {theme}\n")
         f.write(f"Question: {question}\n")
-        f.write(f"Answer: {response.response}\n")
+        f.write(f"Answer: {answer}\n")
         f.write("======================================================================================\n")
-        f.write("                         Knowlege Vortex v1.1                                 \n")
+        f.write("                         Knowledge Vortex v1.1                                 \n")
         f.write("======================================================================================\n")
         f.write(existing_data)
-        
-    return response.response
 
+    return answer

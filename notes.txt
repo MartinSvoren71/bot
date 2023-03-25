@@ -2,6 +2,8 @@
 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
 
 
+    moznost dotazat sa na openai databazu miesto vlastnej?
+
     formatovanie appky style nefunguje na mobile
 
    email knowledgevertex@martinsvoren.com

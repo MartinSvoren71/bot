@@ -1,0 +1,36 @@
+
+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
+
+
+    moznost dotazat sa na openai databazu miesto vlastnej?
+
+    formatovanie appky style nefunguje na mobile
+
+   email knowledgevertex@martinsvoren.com
+   
+   
+   webova stranka produktu? 
+   
+   https na web aj appku 
+   
+   
+   citanie odpovedi by bola parada
+
+X vytvorit config na heslo, api key a zoznam indexov
+
+X cloning whole app and storages for diferent clients
+
+X creating show up app with data - windwos manual, skoda superb manual a aeste nejake 3-4
+
+oslovit 10 zakaznikov - 2 mesiace testovania zdarma, nasledne mesacne fee + nejaky spravcovsky poplatok , nutnost zautomatizovat nahravanie dokumentov
+zalozit firmu
+
+
+
+X response log
+X server and error log
+X zobrazenie historickych odpovedi
+
+X moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
+
+X login page
