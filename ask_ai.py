@@ -38,10 +38,11 @@ def ask_ai(question, theme):
             temperature=0.6,
         )
         answer = response.choices[0].text.strip()
+        response.response = answer 
     else:
         index = GPTSimpleVectorIndex.load_from_disk(index_file)
         response = index.query(question, response_mode="compact")
-        answer = response.response
+        
 
     log_file = os.path.join(os.getcwd(), 'log.txt')
 
@@ -60,4 +61,4 @@ def ask_ai(question, theme):
         f.write("======================================================================================\n")
         f.write(existing_data)
 
-    return answer
+    return response.response
