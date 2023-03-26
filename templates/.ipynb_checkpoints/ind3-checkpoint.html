@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Vortex</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: black;
+         font-family: 'Lucida Console', monospace;
+              font-size: 0.9em; /* Adjust the size as needed */
+    color: #00ff00; /* Green color */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            height: 90vh;
+        }
+
+        .segment {
+            height: 100%;
+            padding: 1rem;
+        }
+
+        .segment-1 {
+            flex: 0 0 20%;
+        }
+
+        .segment-2,
+        .segment-3,
+        .segment-4 {
+            flex: 0 0 30%;
+            border: 1px solid red;
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        .segment-4 {
+            flex: 0 0 20%;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .select-container {
+            margin-bottom: 1rem;
+        }
+
+        .button-wrapper {
+            text-align: center;
+        }
+
+        @media (max-width: 767px) {
+            .segment {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="segment segment-1">
+            <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/logo1.png" alt="KV Logo">
+            <h2 id="datetime" style="color: red;"></h2>
+            <h1>Knowledge Vortex to your service</h1>
+            <h1>Ask Operator a library related question</h1>
+            <form action="/ask" method="POST">
+                <input type="text" name="question" id="question" required>
+                <h2 for="theme">library for:</h2>
+                <div class="select-container">
+                    <select name="theme" id="theme" onchange="saveTheme()">
+                        <option value="windows11">Windows11</option>
+                        <option value="python3">Python3</option>
+                        <option value="labview">LabView</option>
+                        <option value="skodasuperb">SkodaSuperb</option>
+                        <option value="mazda6">Mazda6</option>
+                        <option value="sonya7ii">SonyA7ii</option>
+                        <option value="general">ChatGPTdatabase</option>
+                    </select>
+                </div>
+                <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
+            </form>
+        </div>
+        <div class="segment segment-2"></div>
+        <div class="segment segment-3"></div>
+        <div class="segment segment-4"></div>
+    </div>
+</body>
+</html>

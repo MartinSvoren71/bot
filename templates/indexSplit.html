@@ -252,47 +252,14 @@
             <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
             <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
          </div>
-<!-- Modify the .right-side div to include the three containers -->
-<div class="right-side">
-  <canvas id="matrixCanvasRight"></canvas>
-  <div class="nav-links">
-    <a href="#" id="chat-link">Chat</a>
-    <a href="#" id="index-link">Index</a>
-    <a href="#" id="pdf-link">PDF</a>
-  </div>
-  <div id="log-container" class="content-container active"></div>
-  <div id="container-2" class="content-container"></div>
-  <div id="container-3" class="content-container"></div>
-</div>
+         <div class="right-side">
+            <canvas id="matrixCanvasRight"></canvas>
+            <div class="right-side"></div>
+             <ul id="file-list"></ul>
          </div>
-      
+      </div>
        </body>
       <script>
-          document.getElementById('chat-link').addEventListener('click', (event) => {
-  event.preventDefault();
-  setActiveContainer('log-container');
-});
-
-document.getElementById('index-link').addEventListener('click', (event) => {
-  event.preventDefault();
-  setActiveContainer('container-2');
-});
-
-document.getElementById('pdf-link').addEventListener('click', (event) => {
-  event.preventDefault();
-  setActiveContainer('container-3');
-});
-
-          function setActiveContainer(containerId) {
-  const containers = document.getElementsByClassName('content-container');
-  for (const container of containers) {
-    if (container.id === containerId) {
-      container.classList.add('active');
-    } else {
-      container.classList.remove('active');
-    }
-  }
-}
          function loadLogFile() {
              const logContainer = document.getElementById('log-container');
          
