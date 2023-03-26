@@ -8,6 +8,7 @@ import os
 import json
 import boto3
 from botocore.exceptions import ClientError
+
 aws_access_key_id = 'AKIA5BVJA3S5MNPVO2MP'
 aws_secret_access_key = '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'
 aws_default_region = 'eu-central-1'
