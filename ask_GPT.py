@@ -15,7 +15,7 @@ def initialize_ai(api_key):
 
 initialize_ai(api_k)
 
-def ask_ai(question, theme):
+def ask_GPT(question, theme):
     os.environ["OPENAI_API_KEY"] = api_kx
     prompt = f"{question}"
     response = openai.Completion.create(
