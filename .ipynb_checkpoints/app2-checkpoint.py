@@ -8,16 +8,49 @@ import os
 import json
 from s3_connect import list_files
 import subprocess
+import boto3
+
 
 app = Flask(__name__)
 app.secret_key = "xxx007"
+
+AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_DEFAULT_REGION = 'eu-central-1'
+BUCKET_NAME = 'knowledgevortex'
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    region_name=AWS_DEFAULT_REGION
+)
+
+def generate_presigned_url(bucket, key, expiration=3600):
+    try:
+        response = s3_client.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': bucket, 'Key': key},
+            ExpiresIn=expiration
+        )
+    except ClientError as e:
+        print(e)
+        return None
+    return response
+
+@app.route('/')
+def list_files():
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+    files = contents['Contents']
+
+    for file in files:
+        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+    return render_template('indexSplit.html', files=files)
 
 
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         password = request.form["key"]
-
         if password == app.secret_key :
             session["logged_in"] = True
             session.permanent = True
@@ -26,12 +59,13 @@ def login():
         else:
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
-
     return render_template("login.html")
+
 
 @app.route("/bad_key")
 def bad_key():
     return render_template("badkey.html")
+
 
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
@@ -55,12 +89,14 @@ def index():
         return redirect(url_for("login"))
 
 
+    
 @app.route('/log-content')
 def log_content():
     file_path = os.path.join(os.getcwd(), 'log.txt')
     with open(file_path, 'r') as file:
         content = file.read()
     return content
+
 
 
 
