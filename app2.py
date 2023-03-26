@@ -160,9 +160,9 @@ def index():
 @app.route('/display', methods=['GET'])
 def display():
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-        files = contents['Contents']
+    files = contents['Contents']
 
-        for file in files:
+    for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     question = request.args.get('question')
     theme = request.args.get('theme')
