@@ -10,6 +10,7 @@ import json
 app = Flask(__name__)
 app.secret_key = "xxx007"
 pdf_urla="https://knowledgevortex.s3.eu-north-1.amazonaws.com/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
+ pdf_url=pdf_urla
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -44,7 +45,7 @@ def index():
             {options}
         </select>
         '''
-        return render_template("indexSplit.html", html=html)
+        return render_template("indexSplit.html", html=html, pdf_url=pdf_url)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
@@ -54,7 +55,7 @@ def display():
     theme = request.args.get('theme')
     response = request.args.get('response')
     key = request.args.get('key')
-    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_url)
 @app.route('/log-content')
 def log_content():
     file_path = os.path.join(os.getcwd(), 'log.txt')
@@ -65,7 +66,6 @@ def log_content():
 def ask():
     question = request.form['question']
     theme = request.form['theme']
-    pdf_url=pdf_urla
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general":
