@@ -348,17 +348,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PDF Viewer</title>
      <script>
-    function updatePdfUrl(themeKey) {
-        fetch(`/get_pdf_url?theme=${themeKey}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    setPdfUrl(data.pdf_url);
-                }
-            });
-    }
 </script>
-         </script>
     <style>
         body {
             display: flex;
@@ -385,8 +375,7 @@
        
         }
     </style>
-<body>
-   <body>
+
     <div id="pdf-container">
         <iframe id="pdf-frame" type="application/pdf"></iframe>
     </div>
@@ -397,5 +386,4 @@
 
         setPdfUrl('{{ pdf_url }}');
     </script>
-</body>
 </html>
