@@ -4,6 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>4 Quadrants</title>
+    <script>
+                function fetchFiles() {
+            fetch('/list_files')
+                .then(response => response.json())
+                .then(data => displayFiles(data.files))
+                .catch(error => console.error('Error fetching files:', error));
+        }
+
+        function displayFiles(files) {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+
+            files.forEach(file => {
+                const listItem = document.createElement('li');
+                listItem.textContent = file.Key;
+                fileList.appendChild(listItem);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchFiles);
+           AWS.config.update({
+  accessKeyId: 'your_access_key_id',
+  secretAccessKey: 'your_secret_access_key',
+  region: 'your_aws_region'
+});
+       const s3 = new AWS.S3();
+          function setPdfUrl(url) {
+            document.querySelector("#pdf-frame").src = url;
+        }
+
+        
+         window.onload = function() {
+           const savedTheme = localStorage.getItem("theme");
+           if (savedTheme) {
+             document.getElementById("theme").value = savedTheme;
+           }
+         };
+         
+              
+         setInterval(function() {
+           // Code to refresh the log container
+           loadLogFile();
+         }, 5000);
+                 
+         function updateTime() {
+                     var now = new Date();
+                     var time = now.toLocaleTimeString();
+                     var date = now.toLocaleDateString();
+                     document.getElementById('datetime').innerHTML = time + ' on ' + date;
+                 }
+                 setInterval(updateTime, 1000); 
+            const form = document.getElementById('submit-button');
+         form.addEventListener('submit', (event) => {
+         event.preventDefault(); // prevent default form submission
+         // handle form submission here
+         });
+         
+         // Listen for Enter key press on input field
+         const inputField = form.querySelector('input[name="input-field"]');
+         inputField.addEventListener('keydown', (event) => {
+         if (event.key === 'Enter') {
+         event.preventDefault(); // prevent Enter key from creating a new line
+         form.submit(); // submit the form
+         }
+         });
+      </script>
 <style>
     body {
         margin: 0;
@@ -11,6 +77,27 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
+    .content-wrapper {
+         flex: 1;
+         position: relative;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         padding-top: 20px;
+         overflow: hidden;
+         }
+         canvas {
+         width: 100vh;
+         height: 1400px;
+         z-index: -1;
+         opacity: 0.15;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         padding-top: 0px;
+         }
     .container {
         display: flex;
         flex-wrap: wrap;
@@ -21,14 +108,12 @@
         width: 50%;
         height: 50%;
         box-sizing: border-box;
-        padding: 1rem;
         position: relative;
     }
     .content {
         background-color: rgba(255, 255, 255, 0.7);
         width: 100%;
         height: 100%;
-        padding: 1rem;
         box-sizing: border-box;
     }
     .list-container, .pdf-container {
@@ -51,132 +136,15 @@
     
     
     
-    #log-container {
-         width: 90%;
-         height: 90%;
-         background-color: rgba(0, 0, 0, 0.2);
-         border: 0.1px solid red;
-         padding: 2px;
-         overflow-y: scroll;
-         color: #00FF00;
-         font-family: 'Lucida Console', monospace;
-         font-size: 12px;
-         font-weight: bold;
-         white-space: pre-wrap;
-         -ms-overflow-style: none;
-         scrollbar-width: none;
-         }
-         #log-container::-webkit-scrollbar {
-         display: none;
-         }
-         canvas {
-         width: 100vh;
-         height: 1400px;
-         z-index: -1;
-         opacity: 0.15;
-         position: absolute;
-         top: 50%;
-         left: 50%;
-         transform: translate(-50%, -50%);
-         padding-top: 0px;
-         }
-         img {
-         width: 50%;
-         height: auto;
-         max-width: 320px;
-         display: block;
-         margin: 0 auto;
-         margin-bottom: 50px;
-         filter: drop-shadow(0 0 0.75rem green);
-         }
-         h1 {
-         max-width: 100%;
-         font-size: 1.5em;
-         text-align: center;
-         }
-         h2 {
-         max-width: 100%;
-         font-size: 1.2em;
-         text-align: center;
-         }
-         h3 {
-         max-width: 100%;
-         font-size: 0.8em;
-         text-align: center;
-         }
-         form {
-         margin-top: 50px;
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         align-items: center;
-         }
-         label {
-         font-size: 1.5em;
-         margin-right: 20px;
-         }
-         input[type="text"] {
-         font-size: 2em;
-         margin-top: 0px;
-         border-radius: 10px;
-         border: none;
-         outline: none;
-         background-color: #1f1f1f;
-         color: red;
-         justify-content: center;
-         align-items: center;
-         }
-         .button-wrapper {
-         display: flex;
-         justify-content: center;
-         width: 100%;
-         }
-         button {
-         font-size: 1.6em;
-         padding: 10px;
-         border-radius: 8px;
-         margin-top: 15px;
-         border: none;
-         outline: none;
-         background-color: #00FF00;
-         color: black;
-         cursor: pointer;
-         }
-         button:hover {
-         background-color: #3e8e41;
-         }
-         .input-key {
-         font-size: 1em;
-         padding: 5px;
-         border-radius: 10px;
-         border: none;
-         outline: none;
-         background-color: #1f1f1f;
-         color: red;
-          }
-          document {
-          border: 1.3px solid red;
-         padding: 20px;
-         width: 30%;
-         height: 90%;
-          }
-          .file-list-container {
-  border: 2px solid red;
-  padding: 10px;
-  margin-top: 15px;
-  width: 60%;
-}
-    
-    
-    
     
 </style>
 </head>
 <body>
-<div class="container">
+     <div class="container">
+         <div class="content-wrapper">
+            <canvas id="matrixCanvas"></canvas>
     <div class="quadrant">
         <div class="content">
-            <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/logo1.png" alt="KV Logo">
             <h2 id="datetime" style="color: red;"></h2>
             <h1>Knowledge Vortex to your service</h1>
             <h1>Ask Operator a library related question</h1>
@@ -195,11 +163,6 @@
                </select>
             </div>
             <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
-                
-            <h3 style="color: grey;">examples:</h3>
-            <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
-            <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
-            <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
                 </form>
         </div>
     </div>
