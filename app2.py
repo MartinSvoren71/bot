@@ -11,17 +11,10 @@ app = Flask(__name__)
 app.secret_key = "xxx007"
 pdf_urla="https://knowledgevortex.s3.eu-north-1.amazonaws.com/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
 
-@app.route('/get_pdf_url', methods=['GET'])
-def get_pdf_url():
-    theme_key = request.args.get('theme')
-
-    with open('themes.json', 'r') as f:
-        themes = json.load(f)
-
-    
-    pdf_url = pdf_urla
-    return jsonify({"success": True, "pdf_url": pdf_url})
-
+@app.route('/pdf_url', methods=['GET'])
+def pdf_url():
+    url = pdf_urla
+    return render_template('pdf.html', pdf_url=url)
     
 
 @app.route("/", methods=["GET", "POST"])
