@@ -11,6 +11,32 @@ app = Flask(__name__)
 app.secret_key = "xxx007"
 pdf_urla="https://knowledgevortex.s3.eu-north-1.amazonaws.com/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
 
+
+@app.route("/indexSplit", methods=["GET", "POST"])
+def index():
+    if "logged_in" in session:
+        # Load the themes from the themes.json file
+        with open('themes.json', 'r') as f:
+            themes = json.load(f)
+
+        # Generate the <option> elements dynamically
+        options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
+
+        # Load the config.json file
+        with open('config.json', 'r') as f:
+            config = json.load(f)
+
+        pdf_url = config['pdf_url']
+
+        # Render the HTML with the dynamic <option> elements and the PDF URL
+        return render_template("indexSplit.html", html=options, pdf_url=pdf_url)
+    else:
+        flash("Please log in first")
+        return redirect(url_for("login"))
+
+# ...
+
+
 @app.route('/pdf_url', methods=['GET'])
 def pdf_url():
     url = pdf_urla
