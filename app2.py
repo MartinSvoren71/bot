@@ -9,6 +9,21 @@ import json
 
 app = Flask(__name__)
 app.secret_key = "xxx007"
+pdf_url="https://knowledgevortex.s3.eu-north-1.amazonaws.com/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
+
+@app.route('/get_pdf_url', methods=['GET'])
+def get_pdf_url():
+    theme_key = request.args.get('theme')
+
+    with open('themes.json', 'r') as f:
+        themes = json.load(f)
+
+    if theme_key in themes:
+        pdf_url = themes[theme_key]['pdf_url']
+        return jsonify({"success": True, "pdf_url": pdf_url})
+    else:
+        return jsonify({"success": False, "message": "Theme not found"})
+    
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -36,9 +51,10 @@ def index():
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
+            
 
         # Generate the <option> elements dynamically
-        options = ''.join([f'<option value="theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
+        options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
 
         # Render the HTML with the dynamic <option> elements
         html = f'''
