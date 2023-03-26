@@ -24,17 +24,7 @@ s3_client = boto3.client(
     region_name=AWS_DEFAULT_REGION
 )
 
-def generate_presigned_url(bucket, key, expiration=3600):
-    try:
-        response = s3_client.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': bucket, 'Key': key},
-            ExpiresIn=expiration
-        )
-    except ClientError as e:
-        print(e)
-        return None
-    return response
+
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -73,7 +63,11 @@ def index():
             {options}
         </select>
         '''
-        return render_template("indexSplit.html", html=html)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        files = contents['Contents']
+    for file in files:
+        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+        return render_template("indexSplit.html", html=html, files=files)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
@@ -88,7 +82,17 @@ def log_content():
     return content
 
 
-
+def generate_presigned_url(bucket, key, expiration=3600):
+    try:
+        response = s3_client.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': bucket, 'Key': key},
+            ExpiresIn=expiration
+        )
+    except ClientError as e:
+        print(e)
+        return None
+    return response
 
 @app.route('/ask', methods=['POST'])
 def ask():
