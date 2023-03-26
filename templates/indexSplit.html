@@ -208,8 +208,7 @@
                </select>
             </div>
             <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
-                <button onclick="myFunction()">ASK</button>
-
+                
             <h3 style="color: grey;">examples:</h3>
             <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
             <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
@@ -234,24 +233,7 @@
       </div>
    </body>
    <script>
-             function myFunction() {
-  const formData = new FormData(event.target);
-      
-      // Send the data to the server using AJAX
-      fetch('/ask', {
-      method: 'POST',
-      body: formData,
-      })
-      .then((response) => response.text())
-      .then((html) => {
-        // Replace the content of the page with the new HTML received from the server
-        document.documentElement.innerHTML = html;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-      });
-}
+             
              
               window.onload = function() {
              const savedTheme = localStorage.getItem("theme");
