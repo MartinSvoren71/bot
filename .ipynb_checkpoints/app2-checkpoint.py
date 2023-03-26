@@ -65,8 +65,8 @@ def index():
         '''
         contents = s3_client.list_objects(Bucket=BUCKET_NAME)
         files = contents['Contents']
-    for file in files:
-        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+        for file in files:
+            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
         return render_template("indexSplit.html", html=html, files=files)
     else:
         flash("Please log in first")
