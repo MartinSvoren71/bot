@@ -6,7 +6,6 @@ from main import api_kx
 from datetime import timedelta
 import os
 import json
-from s3_connect import list_files
 import subprocess
 import boto3
 
