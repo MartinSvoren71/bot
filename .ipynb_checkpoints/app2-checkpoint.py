@@ -37,7 +37,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
-@app.route('/')
+@app.route('/indexSplit')
 def list_files():
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
     files = contents['Contents']
