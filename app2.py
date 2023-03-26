@@ -110,7 +110,7 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general":
             response = ask_GPT(question)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, response=response, key=key, pdf_url=pdf_url)
+            return render_template('indexSplit.html', question=question, response=response, key=key)
         else:
             response = ask_ai(question, theme)  # Pass the theme value
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_url)
