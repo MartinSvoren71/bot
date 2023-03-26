@@ -91,7 +91,7 @@ def ask():
         
         if theme == "general" :
             response = ask_GPT(question)  # Pass the theme value
-            pdf_url = themes.get(theme, {}).get('pdf_url', '')
+            pdf_url = pdf_urla
             return render_template('indexSplit.html', question=question, response=response, key=key, pdf_url=pdf_url)
         
         
