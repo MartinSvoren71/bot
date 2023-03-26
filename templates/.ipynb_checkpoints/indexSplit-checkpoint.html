@@ -22,8 +22,6 @@
         }
 
         document.addEventListener('DOMContentLoaded', fetchFiles);
-          
-          
            AWS.config.update({
   accessKeyId: 'your_access_key_id',
   secretAccessKey: 'your_secret_access_key',
@@ -256,13 +254,9 @@
          <div class="right-side">
             <canvas id="matrixCanvasRight"></canvas>
             <div class="right-side"></div>
-            <ul id="file-list"></ul>  <!-- Move file-list here -->
+             <ul id="file-list"></ul>
             <div id="log-container"></div>
-        </div>
-    </div>
-    <div id="pdf-container">
-        <iframe id="pdf-frame" type="application/pdf" src="{{ pdf_url }}"></iframe>
-    </div>
+         </div>
       </div>
       </div>
        </body>
@@ -399,9 +393,15 @@
     </style>
 </head>
 <body>
-    <body>
+   <div class="right-side">
+            <canvas id="matrixCanvasRight"></canvas>
+            <div>
+            <ul id="file-list"></ul>  <!-- Move file-list here -->
+        </div>
     <div id="pdf-container">
         <iframe id="pdf-frame" type="application/pdf" src="{{ pdf_url }}"></iframe>
     </div>
 </body>
+    
+ </body>   
 </html>
