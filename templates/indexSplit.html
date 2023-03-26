@@ -3,6 +3,16 @@
    <head>
       <title>Knowledge Vortex Bot</title>
       <script>
+          
+          function updatePdfUrl(themeKey) {
+        fetch(`/get_pdf_url?theme=${themeKey}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    setPdfUrl(data.pdf_url);
+                }
+            });
+    }
           function setPdfUrl(url) {
             document.querySelector("#pdf-frame").src = url;
         }

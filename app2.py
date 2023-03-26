@@ -18,11 +18,10 @@ def get_pdf_url():
     with open('themes.json', 'r') as f:
         themes = json.load(f)
 
-    if theme_key in themes:
-        pdf_url = themes[theme_key]['pdf_url']
-        return jsonify({"success": True, "pdf_url": pdf_url})
-    else:
-        return jsonify({"success": False, "message": "Theme not found"})
+    
+    pdf_url = pdf_url
+    return jsonify({"success": True, "pdf_url": pdf_url})
+
     
 
 @app.route("/", methods=["GET", "POST"])
