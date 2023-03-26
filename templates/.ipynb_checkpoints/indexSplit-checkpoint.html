@@ -5,6 +5,85 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Ask AI</title>
+        <script>
+            function loadLogFile() {
+      const logContainer = document.getElementById('log-container');
+      
+      fetch('/log-content')
+      .then(response => response.text())
+      .then(data => {
+      logContainer.innerHTML = data;
+      })
+      .catch(error => {
+      console.error('Error fetching log.txt:', error);
+      });
+      }
+      
+      loadLogFile();
+            const canvas = document.getElementById('matrixCanvas');
+             const ctx = canvas.getContext('2d');
+             canvas.width = window.innerWidth * 0.8;
+             canvas.height = window.innerHeight * 1;
+      
+             const characters = 'OpTXS$#71@/[*&$';
+      
+             const fontSize = 10;
+             const columns = canvas.width / fontSize;
+      
+             const drops = [];
+             for (let i = 0; i < columns; i++) {
+                 drops[i] = 1;
+             }
+      
+             function draw() {
+                 ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                 ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+                 ctx.fillStyle = '#0f0';
+                 ctx.font = `${fontSize}px monospace`;
+      
+                 for (let i = 0; i < drops.length; i++) {
+                     const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      
+                     if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                         drops[i] = 0;
+                     }
+                     drops[i]++;
+                 }
+             }
+      
+             setInterval(draw, 33);
+      
+             const canvasRight = document.getElementById('matrixCanvasRight');
+             const ctxRight = canvasRight.getContext('2d');
+             canvasRight.width = window.innerWidth * 0.8;
+             canvasRight.height = window.innerHeight * 1;
+      
+             const dropsRight = [];
+             for (let i = 0; i < columns; i++) {
+                 dropsRight[i] = 1;
+             }
+      
+             function drawRight() {
+                 ctxRight.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                 ctxRight.fillRect(0, 0, canvasRight.width, canvasRight.height);
+      
+                 ctxRight.fillStyle = '#0f0';
+                 ctxRight.font = `${fontSize}px monospace`;
+      
+                 for (let i = 0; i < dropsRight.length; i++) {
+                     const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                     ctxRight.fillText(text, i * fontSize, dropsRight[i] * fontSize);
+      
+                     if (dropsRight[i] * fontSize > canvasRight.height && Math.random() > 0.975) {
+                         dropsRight[i] = 0;
+                     }
+                     dropsRight[i]++;
+                 }
+             }
+             setInterval(drawRight, 33);
+       </script>
       <style>
          .container {
          display: flex;
@@ -184,22 +263,7 @@
          overflow-y: scroll;
          }
       </style>
-       <script>
-            function loadLogFile() {
-      const logContainer = document.getElementById('log-container');
       
-      fetch('/log-content')
-      .then(response => response.text())
-      .then(data => {
-      logContainer.innerHTML = data;
-      })
-      .catch(error => {
-      console.error('Error fetching log.txt:', error);
-      });
-      }
-      
-      loadLogFile();
-       </script>
    </head>
    <body>
       <div class="container">
@@ -336,69 +400,7 @@
                  }, 500);
              });
       
-             const canvas = document.getElementById('matrixCanvas');
-             const ctx = canvas.getContext('2d');
-             canvas.width = window.innerWidth * 0.8;
-             canvas.height = window.innerHeight * 1;
-      
-             const characters = 'OpTXS$#71@/[*&$';
-      
-             const fontSize = 10;
-             const columns = canvas.width / fontSize;
-      
-             const drops = [];
-             for (let i = 0; i < columns; i++) {
-                 drops[i] = 1;
-             }
-      
-             function draw() {
-                 ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-                 ctx.fillStyle = '#0f0';
-                 ctx.font = `${fontSize}px monospace`;
-      
-                 for (let i = 0; i < drops.length; i++) {
-                     const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-      
-                     if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                         drops[i] = 0;
-                     }
-                     drops[i]++;
-                 }
-             }
-      
-             setInterval(draw, 33);
-      
-             const canvasRight = document.getElementById('matrixCanvasRight');
-             const ctxRight = canvasRight.getContext('2d');
-             canvasRight.width = window.innerWidth * 0.8;
-             canvasRight.height = window.innerHeight * 1;
-      
-             const dropsRight = [];
-             for (let i = 0; i < columns; i++) {
-                 dropsRight[i] = 1;
-             }
-      
-             function drawRight() {
-                 ctxRight.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                 ctxRight.fillRect(0, 0, canvasRight.width, canvasRight.height);
-      
-                 ctxRight.fillStyle = '#0f0';
-                 ctxRight.font = `${fontSize}px monospace`;
-      
-                 for (let i = 0; i < dropsRight.length; i++) {
-                     const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                     ctxRight.fillText(text, i * fontSize, dropsRight[i] * fontSize);
-      
-                     if (dropsRight[i] * fontSize > canvasRight.height && Math.random() > 0.975) {
-                         dropsRight[i] = 0;
-                     }
-                     dropsRight[i]++;
-                 }
-             }
-             setInterval(drawRight, 33);
+             
        
    </script>    
 </html>
