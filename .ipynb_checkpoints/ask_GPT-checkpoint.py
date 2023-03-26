@@ -13,7 +13,7 @@ def initialize_GPT(api_key):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
 
-initialize_ai(api_k)
+initialize_GPT(api_k)
 
 def ask_GPT():
     os.environ["OPENAI_API_KEY"] = api_kx
