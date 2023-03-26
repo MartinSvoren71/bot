@@ -1,4 +1,3 @@
-
 from flask import Flask, request, render_template, redirect, url_for, flash, session
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
@@ -9,7 +8,6 @@ import os
 import json
 import boto3
 from botocore.exceptions import ClientError
-
 
 app = Flask(__name__)
 app.secret_key = "xxx007"
@@ -26,8 +24,6 @@ s3_client = boto3.client(
     region_name=AWS_DEFAULT_REGION
 )
 
-
-
 def generate_presigned_url(bucket, key, expiration=3600):
     try:
         response = s3_client.generate_presigned_url(
@@ -40,25 +36,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
-
-@app.route('/')
-def list_files():
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-    files = contents['Contents']
-
-    for file in files:
-        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-
-    return render_template('connection_test.html', files=files, bucket_name=BUCKET_NAME)
-if __name__ == '__main__':
-    app.run(debug=True)
-
-
-    
-    
-    
-
-@app.route("/", methods=["GET", "POST"])
+@app.route('/', methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         password = request.form["key"]
@@ -73,11 +51,10 @@ def login():
             return redirect(url_for("bad_key"))
     return render_template("login.html")
 
-
-
 @app.route("/bad_key")
 def bad_key():
     return render_template("badkey.html")
+
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
@@ -88,7 +65,6 @@ def index():
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
 
         # Load the themes from the themes.json file
-    
         with open('themes.json', 'r') as f:
             themes = json.load(f)
         # Generate the <option> elements dynamically
@@ -103,8 +79,7 @@ def index():
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
-    
-    
+
 @app.route('/display', methods=['GET'])
 def display():
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
@@ -112,12 +87,12 @@ def display():
 
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+
     question = request.args.get('question')
     theme = request.args.get('theme')
     response = request.args.get('response')
     key = request.args.get('key')
-    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME )
-
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME)
 
 @app.route('/log-content')
 def log_content():
@@ -126,7 +101,6 @@ def log_content():
         content = file.read()
     return content
 
-
 @app.route('/ask', methods=['POST'])
 def ask():
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
@@ -134,9 +108,11 @@ def ask():
 
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+
     question = request.form['question']
     theme = request.form['theme']
     key = "nnp"
+
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general":
             response = ask_GPT(question)  # Pass the theme value
@@ -147,9 +123,8 @@ def ask():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 
-    
 t = Thread(target=initialize_ai)
 t.start()
-app.run(host='0.0.0.0', port=5000)
-#
 
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
