@@ -8,5 +8,5 @@
     "univet": "indexUnivet.json",
     "kymera": "indexKymera.json",
     "zygomx": "indexZygoMX.json",
-    "general" : "ChatGPTdatabase"
+    "general" : "general"
 }
