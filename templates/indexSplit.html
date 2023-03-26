@@ -298,21 +298,28 @@ loadLogFile();
            localStorage.setItem("theme", selectedTheme);
          }  
            
-                           const submitButton = document.getElementById('submit-button');
-                     submitButton.addEventListener('click', function () {
-                         // Save the original values
-                         const originalTextContent = submitButton.textContent;
-                         const originalColor = submitButton.style.color; 
-                     submitButton.textContent = 'WAIT';
-                     submitButton.style.color = 'red';
-         
-                     setTimeout(() => {
-                         // Revert the values back to the original ones after 5 seconds
-                         submitButton.textContent = originalTextContent;
-                         submitButton.style.color = originalColor;
-                         location.reload()
-                     }, 500);
-                 });
+                           onst form = document.getElementById('submit-button');
+form.addEventListener('submit', (event) => {
+    event.preventDefault(); // prevent default form submission
+
+    // Move the form submission handling code from button click event to here
+    const originalTextContent = submitButton.textContent;
+    const originalColor = submitButton.style.color;
+    submitButton.textContent = 'WAIT';
+    submitButton.style.color = 'red';
+
+    setTimeout(() => {
+        submitButton.textContent = originalTextContent;
+        submitButton.style.color = originalColor;
+        location.reload()
+    }, 500);
+});
+
+// ...
+
+submitButton.addEventListener('click', function () {
+    form.submit(); // submit the form
+});
          
                  const canvas = document.getElementById('matrixCanvas');
                  const ctx = canvas.getContext('2d');
