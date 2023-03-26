@@ -137,7 +137,7 @@ def index():
         files = contents['Contents']
 
         for file in files:
-        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
 
         # Load the themes from the themes.json file
     
