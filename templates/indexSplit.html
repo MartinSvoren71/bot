@@ -6,6 +6,43 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Ask AI</title>
         <script>
+            
+                 
+              window.onload = function() {
+             const savedTheme = localStorage.getItem("theme");
+             if (savedTheme) {
+                 document.getElementById("theme").value = savedTheme;
+             }
+         };
+          
+               
+          setInterval(function() {
+            // Code to refresh the log container
+            loadLogFile();
+          }, 5000);
+                  
+          function updateTime() {
+                      var now = new Date();
+                      var time = now.toLocaleTimeString();
+                      var date = now.toLocaleDateString();
+                      document.getElementById('datetime').innerHTML = time + ' on ' + date;
+                  }
+                  setInterval(updateTime, 1000); 
+             const form = document.getElementById('submit-button');
+          form.addEventListener('submit', (event) => {
+          event.preventDefault(); // prevent default form submission
+          // handle form submission here
+          });
+          
+          // Listen for Enter key press on input field
+          const inputField = form.querySelector('input[name="input-field"]');
+          inputField.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') {
+          event.preventDefault(); // prevent Enter key from creating a new line
+          form.submit(); // submit the form
+          }
+          });
+            
             function loadLogFile() {
       const logContainer = document.getElementById('log-container');
       
@@ -83,8 +120,7 @@
                  }
              }
              setInterval(drawRight, 33);
-                        loadLogFile();
-
+            
        </script>
       <style>
          .container {
@@ -312,44 +348,9 @@
          </div>
          <div class="pdf-container" id="pdf-container"></div>
       </div>
-   </body>
    <script>
              
-             
-              window.onload = function() {
-             const savedTheme = localStorage.getItem("theme");
-             if (savedTheme) {
-                 document.getElementById("theme").value = savedTheme;
-             }
-         };
-          
-               
-          setInterval(function() {
-            // Code to refresh the log container
-            loadLogFile();
-          }, 5000);
-                  
-          function updateTime() {
-                      var now = new Date();
-                      var time = now.toLocaleTimeString();
-                      var date = now.toLocaleDateString();
-                      document.getElementById('datetime').innerHTML = time + ' on ' + date;
-                  }
-                  setInterval(updateTime, 1000); 
-             const form = document.getElementById('submit-button');
-          form.addEventListener('submit', (event) => {
-          event.preventDefault(); // prevent default form submission
-          // handle form submission here
-          });
-          
-          // Listen for Enter key press on input field
-          const inputField = form.querySelector('input[name="input-field"]');
-          inputField.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') {
-          event.preventDefault(); // prevent Enter key from creating a new line
-          form.submit(); // submit the form
-          }
-          });
+        
     
              
              
@@ -403,6 +404,7 @@
              });
       
              
+   </body>          
        
    </script>    
 </html>
