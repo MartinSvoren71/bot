@@ -6,11 +6,12 @@ from main import api_kx
 from datetime import timedelta
 import os
 import json
-from s3_connect import files
+from s3_connect import list_files
+import subprocess
 
 app = Flask(__name__)
 app.secret_key = "xxx007"
-pdf_urla="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
+
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -35,8 +36,7 @@ def bad_key():
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        response = ask_ai(question, theme)  # Pass the theme value
-        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME)
+        command = ['python', 's3_connect.py']
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
@@ -58,11 +58,13 @@ def index():
 
 @app.route('/display', methods=['GET'])
 def display():
+    command = ['python', 's3_connect.py']
+
     question = request.args.get('question')
     theme = request.args.get('theme')
     response = request.args.get('response')
     key = request.args.get('key')
-    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME)
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
 
 @app.route('/log-content')
 def log_content():
@@ -81,10 +83,14 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
             response = ask_GPT(question)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, response=response, key=key, files=files, bucket_name=BUCKET_NAME)
+            command = ['python', 's3_connect.py']
+
+            return render_template('indexSplit.html', question=question, response=response, key=key)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME)
+            command = ['python', 's3_connect.py']
+
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
@@ -101,7 +107,7 @@ def ask2():
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(question, theme)  # Pass the theme value
-        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME)
+        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
         pdf_url = random.choice(pdf_urls)
         return render_template("pdf_viewer.html", pdf_url=pdf_urla)
     else:

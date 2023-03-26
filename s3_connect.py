@@ -37,8 +37,7 @@ def list_files():
 
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-    return render_template('connection_test.html', files=files, bucket_name=BUCKET_NAME)
-    return render_template('indexSplit.html', files=files, bucket_name=BUCKET_NAME)
+    return render_template('indexSplit.html', files=files)
 
 if __name__ == '__main__':
     app.run(debug=True)
