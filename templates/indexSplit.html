@@ -3,6 +3,34 @@
    <head>
       <title>Knowledge Vortex Bot</title>
       <script>
+          async function fetchFiles() {
+            const response = await fetch('/list_files');
+            const data = await response.json();
+            displayFiles(data.files);
+        }
+
+        function displayFiles(files) {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+
+            files.forEach(file => {
+                const listItem = document.createElement('li');
+                listItem.textContent = file.Key;
+                fileList.appendChild(listItem);
+            });
+        }
+           document.addEventListener('DOMContentLoaded', fetchFiles);
+          
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
+           AWS.config.update({
+  accessKeyId: 'your_access_key_id',
+  secretAccessKey: 'your_secret_access_key',
+  region: 'your_aws_region'
+});
+       const s3 = new AWS.S3();
+
+
+
           function setPdfUrl(url) {
             document.querySelector("#pdf-frame").src = url;
         }
@@ -226,6 +254,7 @@
          <div class="right-side">
             <canvas id="matrixCanvasRight"></canvas>
             <div class="right-side"></div>
+             <ul id="file-list"></ul>
             <div id="log-container"></div>
          </div>
       </div>

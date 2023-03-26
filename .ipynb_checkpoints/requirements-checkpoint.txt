@@ -5,6 +5,7 @@ git clone https://github.com/MartinSvoren71/bot -b DEMO;
 pip install flask;
 pip install llm-index;
 pip install llama-index;
+pip install Flask boto3;
 cd bot;
 sudo cp -p  app2.service.txt /etc/systemd/system/app2.service;
 sudo systemctl daemon-reload;
