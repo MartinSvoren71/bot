@@ -24,18 +24,19 @@ app.secret_key = "xxx007"
 pdf_urla="https://knowledgevortex.s3.eu-north-1.amazonaws.com/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
 pdf_url=pdf_urla
 
-@app.route('/list_files')
+@app.route('/list_files', methods=['GET'])
 def list_files():
-    bucket_name = 'knowledgewortex'
-    folder_path = 's3/data/'
+    s3 = boto3.client(
+        's3',
+        aws_access_key_id='your_access_key_id',
+        aws_secret_access_key='your_secret_access_key',
+        region_name='your_aws_region'
+    )
+
+    response = s3.list_objects(Bucket='your_bucket_name')
+    files = response['Contents']
     
-    try:
-        response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=folder_path)
-    except ClientError as e:
-        return {'error': str(e)}
-    
-    files = [{'Key': item['Key'], 'Size': item['Size']} for item in response.get('Contents', [])]
-    return {'files': files}
+    return jsonify({'files': files})
 
 
 @app.route("/", methods=["GET", "POST"])

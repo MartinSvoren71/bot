@@ -3,7 +3,7 @@
    <head>
       <title>Knowledge Vortex Bot</title>
       <script>
-                function fetchFiles() {
+        function fetchFiles() {
             fetch('/list_files')
                 .then(response => response.json())
                 .then(data => displayFiles(data.files))
@@ -22,26 +22,17 @@
         }
 
         document.addEventListener('DOMContentLoaded', fetchFiles);
-           AWS.config.update({
-  accessKeyId: 'your_access_key_id',
-  secretAccessKey: 'your_secret_access_key',
-  region: 'your_aws_region'
-});
-       const s3 = new AWS.S3();
 
-
-
-          function setPdfUrl(url) {
+        function setPdfUrl(url) {
             document.querySelector("#pdf-frame").src = url;
         }
 
-        
-         window.onload = function() {
-           const savedTheme = localStorage.getItem("theme");
-           if (savedTheme) {
-             document.getElementById("theme").value = savedTheme;
-           }
-         };
+        window.onload = function() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) {
+                document.getElementById("theme").value = savedTheme;
+            }
+        };
          
               
          setInterval(function() {
