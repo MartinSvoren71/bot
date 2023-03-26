@@ -46,7 +46,7 @@ def index():
             {options}
         </select>
         '''
-        return render_template("indexSplit.html", html=html, pdf_url=pdf_url)
+        return render_template("indexSplit.html", html=html)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
@@ -58,7 +58,7 @@ def display():
     theme = request.args.get('theme')
     response = request.args.get('response')
     key = request.args.get('key')
-    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_url)
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, )
 
 
 @app.route('/log-content')
@@ -80,7 +80,7 @@ def ask():
             return render_template('indexSplit.html', question=question, response=response, key=key)
         else:
             response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_url)
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 
