@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, session
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
-
 from threading import Thread
 from main import api_kx
 from datetime import timedelta
@@ -68,6 +67,8 @@ def log_content():
         content = file.read()
     return content
 
+
+
 @app.route('/ask', methods=['POST'])
 def ask():
     question = request.form['question']
@@ -86,6 +87,9 @@ t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
 #
+
+
+
 @app.route('/ask2', methods=['POST'])
 def ask2():
     question = request.form['question']
