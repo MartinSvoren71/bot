@@ -27,7 +27,7 @@ pdf_url=pdf_urla
 @app.route('/list_files')
 def list_files():
     bucket_name = 'knowledgewortex'
-    folder_path = '/s3/data/'
+    folder_path = 's3/data/'
     
     try:
         response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=folder_path)

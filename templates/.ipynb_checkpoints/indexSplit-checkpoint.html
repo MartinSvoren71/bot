@@ -256,9 +256,13 @@
          <div class="right-side">
             <canvas id="matrixCanvasRight"></canvas>
             <div class="right-side"></div>
-             <ul id="file-list"></ul>
+            <ul id="file-list"></ul>  <!-- Move file-list here -->
             <div id="log-container"></div>
-         </div>
+        </div>
+    </div>
+    <div id="pdf-container">
+        <iframe id="pdf-frame" type="application/pdf" src="{{ pdf_url }}"></iframe>
+    </div>
       </div>
       </div>
        </body>
