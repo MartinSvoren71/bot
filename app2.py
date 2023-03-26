@@ -38,7 +38,7 @@ def index():
             themes = json.load(f)
 
         # Generate the <option> elements dynamically
-        options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
+        options = ''.join([f'<option value="theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
 
         # Render the HTML with the dynamic <option> elements
         html = f'''
