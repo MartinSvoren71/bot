@@ -9,7 +9,7 @@ import datetime
 api_k = api_kx
 import json
 
-def initialize_ai(api_key):
+def initialize_GPT(api_key):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
 
