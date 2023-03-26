@@ -3,45 +3,12 @@
    <head>
       <title>Knowledge Vortex Bot</title>
       <script>
-                function fetchFiles() {
-            fetch('/list_files')
-                .then(response => response.json())
-                .then(data => displayFiles(data.files))
-                .catch(error => console.error('Error fetching files:', error));
-        }
-
-        function displayFiles(files) {
-            const fileList = document.getElementById('file-list');
-            fileList.innerHTML = '';
-
-            files.forEach(file => {
-                const listItem = document.createElement('li');
-                listItem.textContent = file.Key;
-                fileList.appendChild(listItem);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', fetchFiles);
-           AWS.config.update({
-  accessKeyId: 'your_access_key_id',
-  secretAccessKey: 'your_secret_access_key',
-  region: 'your_aws_region'
-});
-       const s3 = new AWS.S3();
-
-
-
-          function setPdfUrl(url) {
-            document.querySelector("#pdf-frame").src = url;
-        }
-
-        
-         window.onload = function() {
-           const savedTheme = localStorage.getItem("theme");
-           if (savedTheme) {
-             document.getElementById("theme").value = savedTheme;
-           }
-         };
+        window.onload = function() {
+            const savedTheme = localStorage.getItem("theme");
+            if (savedTheme) {
+                document.getElementById("theme").value = savedTheme;
+            }
+        };
          
               
          setInterval(function() {
@@ -221,6 +188,12 @@
          width: 30%;
          height: 90%;
           }
+          .file-list-container {
+  border: 2px solid red;
+  padding: 10px;
+  margin-top: 15px;
+  width: 60%;
+}
       </style>
    </head>
    <body>
@@ -246,8 +219,8 @@
                </select>
             </div>
             <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
-             </form>            
-             <h3 style="color: grey;">examples:</h3>
+                
+            <h3 style="color: grey;">examples:</h3>
             <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
             <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
             <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
@@ -255,8 +228,9 @@
          <div class="right-side">
             <canvas id="matrixCanvasRight"></canvas>
             <div class="right-side"></div>
-             <ul id="file-list"></ul>
+            <div id="log-container"></div>
          </div>
+      </div>
       </div>
        </body>
       <script>
@@ -360,6 +334,6 @@
                  }
                  setInterval(drawRight, 33);
            
-      </script> 
-
+      </script>    
+    
 </html>
