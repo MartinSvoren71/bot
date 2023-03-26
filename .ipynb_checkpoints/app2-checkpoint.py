@@ -46,6 +46,9 @@ def list_files():
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     return render_template('indexSplit.html', files=files)
 
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 @app.route("/", methods=["GET", "POST"])
 def login():
