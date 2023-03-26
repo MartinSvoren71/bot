@@ -17,7 +17,7 @@ initialize_GPT(api_k)
 
 def ask_GPT(question):
     os.environ["OPENAI_API_KEY"] = api_kx
-    prompt = "{question}"
+    prompt = "question"
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=prompt,
