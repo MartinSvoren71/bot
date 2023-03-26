@@ -6,7 +6,7 @@ from main import api_kx
 from datetime import timedelta
 import os
 import json
-from s3_connect import filest, BUCKET_NAME, 
+from s3_connect import bucket, files
 
 app = Flask(__name__)
 app.secret_key = "xxx007"
