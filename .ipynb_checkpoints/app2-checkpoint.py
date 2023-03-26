@@ -11,6 +11,8 @@ app = Flask(__name__)
 app.secret_key = "xxx007"
 pdf_urla="https://knowledgevortex.s3.eu-north-1.amazonaws.com/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
 
+
+
 @app.route('/pdf_url', methods=['GET'])
 def pdf_url():
     url = pdf_urla
@@ -83,17 +85,31 @@ def ask():
     theme = request.form['theme']
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
+        
+        
+        
+        
         if theme == "general" :
             response = ask_GPT(question)  # Pass the theme value
             pdf_url = themes.get(theme, {}).get('pdf_url', '')
-            return render_template('indexSplit.html', question=question, response=response, key=key)
+            return render_template('indexSplit.html', question=question, response=response, key=key, pdf_url=pdf_url)
+        
+        
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
-            pdf_url = themes.get(theme, {}).get('pdf_url', '')
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_url)
+            
 
+            
+            
+            
     else:
         return render_template('bad_key.html', question=question, theme=theme)
+    
+    
+    
+    
+    
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
