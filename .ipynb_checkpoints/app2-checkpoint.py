@@ -84,15 +84,27 @@ def generate_presigned_url(bucket, key, expiration=3600):
             Params={'Bucket': bucket, 'Key': key},
             ExpiresIn=expiration
         )
-        except ClientError as e:
-            print(e)
-            return None
-        return response
-    
+    except ClientError as e:
+        print(e)
+        return None
+    return response
+
+@app.route("/indexSplit", methods=["GET", "POST"])
+def index():
+    if "logged_in" in session:
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        files = contents['Contents']
+
+        for file in files:
+            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+
+        # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
+
         # Generate the <option> elements dynamically
         options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
+
         # Render the HTML with the dynamic <option> elements
         html = f'''
         <select name="theme" id="theme" onchange="saveTheme()">
@@ -104,39 +116,37 @@ def generate_presigned_url(bucket, key, expiration=3600):
         flash("Please log in first")
         return redirect(url_for("login"))
     
-    
 @app.route('/display', methods=['GET'])
 def display():
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_DEFAULT_REGION
+    )
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
     files = contents['Contents']
-    s3_client = boto3.client(
-    's3',
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    region_name=AWS_DEFAULT_REGION
-)
 
-
-
-def generate_presigned_url(bucket, key, expiration=3600):
-    try:
-        response = s3_client.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': bucket, 'Key': key},
-            ExpiresIn=expiration
-        )
+    def generate_presigned_url(bucket, key, expiration=3600):
+        try:
+            response = s3_client.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': bucket, 'Key': key},
+                ExpiresIn=expiration
+            )
+            return response
         except ClientError as e:
             print(e)
             return None
-        return response
 
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+
     question = request.args.get('question')
     theme = request.args.get('theme')
     response = request.args.get('response')
     key = request.args.get('key')
-    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME )
+    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files, bucket_name=BUCKET_NAME)
 
 
 @app.route('/log-content')
@@ -150,28 +160,31 @@ def log_content():
 @app.route('/ask', methods=['POST'])
 def ask():
     s3_client = boto3.client(
-    's3',
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    region_name=AWS_DEFAULT_REGION
-)
+        's3',
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_DEFAULT_REGION
+    )
+    files = []
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+    if 'Contents' in contents:
+        files = contents['Contents']
 
-
-
-def generate_presigned_url(bucket, key, expiration=3600):
-    try:
-        response = s3_client.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': bucket, 'Key': key},
-            ExpiresIn=expiration
-        )
+    def generate_presigned_url(bucket, key, expiration=3600):
+        try:
+            response = s3_client.generate_presigned_url(
+                'get_object',
+                Params={'Bucket': bucket, 'Key': key},
+                ExpiresIn=expiration
+            )
+            return response
         except ClientError as e:
             print(e)
             return None
-        return response
 
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+
     question = request.form['question']
     theme = request.form['theme']
     key = "nnp"
@@ -185,9 +198,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 
-    
+
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
-#
-
