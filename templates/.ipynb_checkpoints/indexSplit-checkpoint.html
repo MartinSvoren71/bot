@@ -3,10 +3,11 @@
    <head>
       <title>Knowledge Vortex Bot</title>
       <script>
-          async function fetchFiles() {
-            const response = await fetch('/list_files');
-            const data = await response.json();
-            displayFiles(data.files);
+                function fetchFiles() {
+            fetch('/list_files')
+                .then(response => response.json())
+                .then(data => displayFiles(data.files))
+                .catch(error => console.error('Error fetching files:', error));
         }
 
         function displayFiles(files) {
@@ -19,9 +20,10 @@
                 fileList.appendChild(listItem);
             });
         }
-           document.addEventListener('DOMContentLoaded', fetchFiles);
+
+        document.addEventListener('DOMContentLoaded', fetchFiles);
           
-        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
+          
            AWS.config.update({
   accessKeyId: 'your_access_key_id',
   secretAccessKey: 'your_secret_access_key',
