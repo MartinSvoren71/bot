@@ -36,7 +36,6 @@ def bad_key():
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        command = ['python', 's3_connect.py']
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
@@ -56,16 +55,6 @@ def index():
         return redirect(url_for("login"))
 
 
-@app.route('/display', methods=['GET'])
-def display():
-    command = ['python', 's3_connect.py']
-
-    question = request.args.get('question')
-    theme = request.args.get('theme')
-    response = request.args.get('response')
-    key = request.args.get('key')
-    return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
-
 @app.route('/log-content')
 def log_content():
     file_path = os.path.join(os.getcwd(), 'log.txt')
@@ -83,13 +72,9 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
             response = ask_GPT(question)  # Pass the theme value
-            command = ['python', 's3_connect.py']
-
             return render_template('indexSplit.html', question=question, response=response, key=key)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            command = ['python', 's3_connect.py']
-
             return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
@@ -98,21 +83,3 @@ t.start()
 app.run(host='0.0.0.0', port=5000)
 #
 
-
-
-@app.route('/ask2', methods=['POST'])
-def ask2():
-    question = request.form['question']
-    theme = request.form['theme']
-    key = "nnp"
-    if key == "nnp":  # Check if the key is "xxx007"
-        response = ask_ai(question, theme)  # Pass the theme value
-        return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key)
-        pdf_url = random.choice(pdf_urls)
-        return render_template("pdf_viewer.html", pdf_url=pdf_urla)
-    else:
-        return render_template('bad_key.html', question=question, theme=theme)
-t = Thread(target=initialize_ai)
-t.start()
-app.run(host='0.0.0.0', port=5000)
-#
