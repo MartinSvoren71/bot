@@ -15,7 +15,8 @@ def initialize_ai(api_key):
 
 initialize_ai(api_k)
 
-def ask_GPT(question):
+@app.route('/ask2', methods=['POST'])
+def ask_GPT():
     os.environ["OPENAI_API_KEY"] = api_kx
     prompt = f"{question}"
     response = openai.Completion.create(
