@@ -7,50 +7,9 @@ from datetime import timedelta
 import os
 import json
 import boto3
-from botocore.exceptions import ClientError
-
-aws_access_key_id = 'AKIA5BVJA3S5MNPVO2MP'
-aws_secret_access_key = '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'
-aws_default_region = 'eu-central-1'
-
-# Create an S3 client
-s3_client = boto3.client(
-    's3',
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-    region_name=aws_default_region
-)
-
-# Name of your S3 bucket
-bucket_name = 'knowledgevortex'
-
-# List the contents of your S3 bucket
-def list_bucket_contents():
-    response = s3_client.list_objects_v2(Bucket=bucket_name)
-    for content in response.get('Contents', []):
-        print(content['Key'])
-
-if __name__ == '__main__':
-    list_bucket_contents()
 
 app = Flask(__name__)
 app.secret_key = "xxx007"
-pdf_urla="https://knowledgevortex.s3.eu-north-1.amazonaws.com/s3/data/ChameleonDiscovery/Chameleon_Discovery_TPC_1313627_RevAC_press_covers.pdf"
-pdf_url=pdf_urla
-
-@app.route('/list_files', methods=['GET'])
-def list_files():
-    s3 = boto3.client(
-        's3',
-        aws_access_key_id='your_access_key_id',
-        aws_secret_access_key='your_secret_access_key',
-        region_name='your_aws_region'
-    )
-
-    response = s3.list_objects(Bucket='your_bucket_name')
-    files = response['Contents']
-    
-    return jsonify({'files': files})
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -67,6 +26,8 @@ def login():
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
     return render_template("login.html")
+
+
 
 @app.route("/bad_key")
 def bad_key():
@@ -89,6 +50,8 @@ def index():
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
+    
+    
 @app.route('/display', methods=['GET'])
 def display():
     question = request.args.get('question')
@@ -96,12 +59,16 @@ def display():
     response = request.args.get('response')
     key = request.args.get('key')
     return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, pdf_url=pdf_url)
+
+
 @app.route('/log-content')
 def log_content():
     file_path = os.path.join(os.getcwd(), 'log.txt')
     with open(file_path, 'r') as file:
         content = file.read()
     return content
+
+
 @app.route('/ask', methods=['POST'])
 def ask():
     question = request.form['question']
@@ -117,6 +84,7 @@ def ask():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 
+    
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)

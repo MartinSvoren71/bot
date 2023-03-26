@@ -3,30 +3,6 @@
    <head>
       <title>Knowledge Vortex Bot</title>
       <script>
-        function fetchFiles() {
-            fetch('/list_files')
-                .then(response => response.json())
-                .then(data => displayFiles(data.files))
-                .catch(error => console.error('Error fetching files:', error));
-        }
-
-        function displayFiles(files) {
-            const fileList = document.getElementById('file-list');
-            fileList.innerHTML = '';
-
-            files.forEach(file => {
-                const listItem = document.createElement('li');
-                listItem.textContent = file.Key;
-                fileList.appendChild(listItem);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', fetchFiles);
-
-        function setPdfUrl(url) {
-            document.querySelector("#pdf-frame").src = url;
-        }
-
         window.onload = function() {
             const savedTheme = localStorage.getItem("theme");
             if (savedTheme) {
@@ -243,9 +219,7 @@
                </select>
             </div>
             <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
-<div class="file-list-container"> <!-- Add this line -->
-  <ul id="file-list"></ul>
-</div> <!-- Add this line -->
+                
             <h3 style="color: grey;">examples:</h3>
             <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
             <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
@@ -360,41 +334,5 @@
                  }
                  setInterval(drawRight, 33);
            
-      </script> 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF Viewer</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-            margin: 0;
-        }
-        #pdf-container {
-        width: 40%;
-         height: 90%;
-         padding: 0px;
-         overflow-y: hidden;
-         font-weight: bold;
-         white-space: pre-wrap;
-         -ms-overflow-style: none;
-         scrollbar-width: none;
-        }
-        #pdf-frame {
-            width: 90%;
-            height: 100%;
-            border: 0px;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="pdf-container">
-        <iframe id="pdf-frame" type="application/pdf" src="{{ pdf_url }}"></iframe>
-    </div>    
- </body>   
+      </script>    
 </html>
