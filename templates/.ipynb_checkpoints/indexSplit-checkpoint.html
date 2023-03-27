@@ -271,5 +271,132 @@ knowledgevortex@martinsvoren.com
         </div>
     </body>
     <script>
-       
+        document.getElementById('ask-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting and refreshing the page
+        
+        // Collect the form data
+        const formData = new FormData(event.target);
+        
+        // Send the data to the server using AJAX
+        fetch('/ask', {
+        method: 'POST',
+        body: formData,
+        })
+        .then((response) => response.text())
+        .then((html) => {
+          // Replace the content of the page with the new HTML received from the server
+          document.documentElement.innerHTML = html;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+        });
+          
+        function openPdf(presignedUrl) {
+        console.log('Presigned URL:', presignedUrl);
+        document.getElementById('pdf-container').innerHTML = `<iframe src="${presignedUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
+        }
+        
+        
+        function loadLogFile() {
+        const logContainer = document.getElementById('log-container');
+        
+        fetch('/log-content')
+        .then(response => response.text())
+        .then(data => {
+        logContainer.innerHTML = data;
+        })
+        .catch(error => {
+        console.error('Error fetching log.txt:', error);
+        });
+        }
+        
+        loadLogFile();
+               
+                function saveTheme() {
+         const selectedTheme = document.getElementById("theme").value;
+         localStorage.setItem("theme", selectedTheme);
+        }  
+         
+                         const submitButton = document.getElementById('submit-button');
+                   submitButton.addEventListener('click', function () {
+                       // Save the original values
+                       const originalTextContent = submitButton.textContent;
+                       const originalColor = submitButton.style.color; 
+                   submitButton.textContent = 'WAIT';
+                   submitButton.style.color = 'red';
+        
+                   setTimeout(() => {
+                       // Revert the values back to the original ones after 5 seconds
+                       submitButton.textContent = originalTextContent;
+                       submitButton.style.color = originalColor;
+                       location.reload()
+                   }, 500);
+               });
+        
+               const canvas = document.getElementById('matrixCanvas');
+               const ctx = canvas.getContext('2d');
+               canvas.width = window.innerWidth * 0.8;
+               canvas.height = window.innerHeight * 1;
+        
+               const characters = 'OpTXS$#71@/[*&$';
+        
+               const fontSize = 10;
+               const columns = canvas.width / fontSize;
+        
+               const drops = [];
+               for (let i = 0; i < columns; i++) {
+                   drops[i] = 1;
+               }
+        
+               function draw() {
+                   ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                   ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+                   ctx.fillStyle = '#0f0';
+                   ctx.font = `${fontSize}px monospace`;
+        
+                   for (let i = 0; i < drops.length; i++) {
+                       const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                       ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+                       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                           drops[i] = 0;
+                       }
+                       drops[i]++;
+                   }
+               }
+        
+               setInterval(draw, 33);
+        
+               const canvasRight = document.getElementById('matrixCanvasRight');
+               const ctxRight = canvasRight.getContext('2d');
+               canvasRight.width = window.innerWidth * 0.8;
+               canvasRight.height = window.innerHeight * 1;
+        
+               const dropsRight = [];
+               for (let i = 0; i < columns; i++) {
+                   dropsRight[i] = 1;
+               }
+        
+               function drawRight() {
+                   ctxRight.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                   ctxRight.fillRect(0, 0, canvasRight.width, canvasRight.height);
+        
+                   ctxRight.fillStyle = '#0f0';
+                   ctxRight.font = `${fontSize}px monospace`;
+        
+                   for (let i = 0; i < dropsRight.length; i++) {
+                       const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                       ctxRight.fillText(text, i * fontSize, dropsRight[i] * fontSize);
+        
+                       if (dropsRight[i] * fontSize > canvasRight.height && Math.random() > 0.975) {
+                           dropsRight[i] = 0;
+                       }
+                       dropsRight[i]++;
+                   }
+               }
+               setInterval(drawRight, 33);
+         
+    </script>    
 </html>
