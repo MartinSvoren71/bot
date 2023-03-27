@@ -94,24 +94,29 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
-@app.route('/ask', methods=['POST'])
-def ask():
-    question = request.form['question']
-    theme = request.form['theme']
-    key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-    files = contents['Contents']
-    for file in files:
-        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-    if key == "nnp":  # Check if the key is "xxx007"
-        if theme == "general" :
-            response = ask_GPT(question)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
-        else :
-            response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
+@app.route('/', methods=['GET', 'POST'])
+def index_split():
+    if request.method == 'POST':
+        question = request.form['question']
+        theme = request.form['theme']
+        key = "nnp"
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        files = contents['Contents']
+        for file in files:
+            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+        if key == "nnp":
+            if theme == "general":
+                response = ask_GPT(question)
+              #  return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
+            else:
+                response = ask_ai(question, theme)
+              #  return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
+        else:
+            return render_template('bad_key.html', question=question, theme=theme)
     else:
-        return render_template('bad_key.html', question=question, theme=theme)
+        return render_template('indexSplit.html')
+
+    
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
