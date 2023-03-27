@@ -34,3 +34,6 @@ X zobrazenie historickych odpovedi
 X moznost chatovat , teda zobrazovat otazku. odpoved v jednom okne
 
 X login page
+
+
+https://medium.com/@martin-thissen/llama-alpaca-chatgpt-on-your-local-computer-tutorial-17adda704c23
