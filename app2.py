@@ -107,10 +107,10 @@ def index_split():
         if key == "nnp":
             if theme == "general":
                 response = ask_GPT(question)
-              #  return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
+                return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
             else:
                 response = ask_ai(question, theme)
-              #  return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
+                return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
         else:
             return render_template('bad_key.html', question=question, theme=theme)
     else:

@@ -260,15 +260,15 @@ knowledgevortex@martinsvoren.com
         </div>
         </div>
         <div class="container">
-  <div class="list-container">
-    <ul>
-      {% for file in files %}
-        <li><a href="#" onclick="openPdf('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="pdf-container" id="pdf-container"></div>
-</div>
+            <div class="list-container">
+                <ul>
+                    {% for file in files %}
+                    <li><a href="#" onclick="openPdf('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="pdf-container" id="pdf-container"></div>
+        </div>
     </body>
     <script>
         document.getElementById('ask-form').addEventListener('submit', function (event) {
