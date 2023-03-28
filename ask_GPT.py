@@ -17,17 +17,24 @@ initialize_GPT(api_k)
 
 def ask_GPT(question, model, theme):
     os.environ["OPENAI_API_KEY"] = api_kx
-    response = openai.Completion.create(
-    engine=model,
-    prompt=question,
-    max_tokens=1000,
-    n=1,
-   # stop=["\n", "Conclusion:"],
-    temperature=0.7,
-    # top_p=0.7,
-   # frequency_penalty=0,
-   # presence_penalty=0
-)
+    
+    if model == "gpt-3.5-turbo":
+        response = openai.ChatCompletion.create(
+            engine=model,
+            messages=[
+                {"role": "user", "content": question}
+            ],
+            max_tokens=1000,
+            temperature=0.7,
+        )
+    else:
+        response = openai.Completion.create(
+            engine=model,
+            prompt=question,
+            max_tokens=1000,
+            n=1,
+            temperature=0.7,
+        )
     
 
     answer = response.choices[0].text.strip()
