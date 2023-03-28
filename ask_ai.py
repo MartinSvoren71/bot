@@ -24,7 +24,7 @@ def construct_index(directory_path):
 initialize_ai(api_k)
 
     
-def ask_ai(question, theme):
+def ask_ai(question, theme, model):
     # Load the theme file names from the themes.json file
     with open('themes.json', 'r') as f:
         themes = json.load(f)
