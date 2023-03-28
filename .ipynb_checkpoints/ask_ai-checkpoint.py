@@ -15,7 +15,8 @@ def initialize_ai(api_key):
 def construct_index(directory_path):
     max_chunk_overlap = 20
     chunk_size_limit = 600
-    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.9, model_name="text-davinci-003", max_tokens=num_outputs, openai_api_key=api_k))
+    max_tokens = 2800
+    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.9, model_name="text-davinci-003", max_tokens=max_tokens, openai_api_key=api_k))
     documents = SimpleDirectoryReader(directory_path).load_data()
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
