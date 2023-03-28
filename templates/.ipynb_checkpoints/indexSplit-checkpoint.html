@@ -1,4 +1,4 @@
-v1.3.optx
+v1.4
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,11 +45,11 @@ v1.3.optx
         <style>
             .container {
             display: fixed;
-            width: 100vw;
-            height: 100vh;
-                margin-left:1%;
-                margin-right:1%;
-                margin-top:1%;
+            width: 98vw;
+            height: 99vh;
+                margin-left:1vw;
+                margin-right:1vw;
+                margin-top:1vw;
             justify-content: center;
             }
             .content-wrapper {
@@ -124,13 +124,22 @@ v1.3.optx
             padding-top: 0px;
             }
             img {
-            width: 100%;
+            width: 17vw;
             height: auto;
             max-width: 320px;
             display: block;
             margin: 0 auto;
             margin-bottom: 50px;
             filter: drop-shadow(0 0 0.75rem green);
+            }
+            
+            #footer_image {
+            width: 35vw;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 35px;
+            filter: drop-shadow(0 0 0.75rem green);   
             }
             
             #log-container {
@@ -230,7 +239,7 @@ v1.3.optx
             margin-top: 15px;
             width: 60%;
             height: 800px;
-                                        overflow: hide;
+                                        overflow: hiden;
 
 
             }
@@ -252,7 +261,7 @@ v1.3.optx
             .list-container, .pdf-container {
             width: 50vw;
             height: 100vh; /* Change the height value here */
-            overflow: hide;
+            overflow: hiden;
                             border: 0.1px solid red;
 
             }
@@ -283,20 +292,19 @@ v1.3.optx
                   <option value="general">ChatGPTdatabase</option>
                </select>
                 </div>
-                <div class="button-wrapper"><button type="ask" id="submit-button">Ask Operator</button></div>
+                <div class="button-wrapper"><button type="submit" id="submit-button">Ask Operator</button></div>
                 <h3 style="color: grey;">examples:</h3>
                 <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
                 <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
                 <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
             </div>
-                     </div>
-                
+                   
+                </div>
             <div class="right-side">
                 <canvas id="matrixCanvasRight"></canvas>
                 <div class="right-side"></div>
                 <div id="log-container"></div>
             </div>
-        </div>
         </div>
         <div class="container">
             <div class="list-container">
@@ -308,6 +316,10 @@ v1.3.optx
             </div>
             <div class="pdf-container" id="pdf-container"></div>
         </div>
+            <div class="footer_image">
+        <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/p6.png" alt="KV Logo">
+                </div>
+
     </body>
     <script>
         document.getElementById('ask-form').addEventListener('submit', function (event) {
