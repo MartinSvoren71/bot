@@ -15,7 +15,7 @@ def initialize_GPT(api_key):
 
 initialize_GPT(api_k)
 
-def ask_GPT(question):
+def ask_GPT(question, model):
     os.environ["OPENAI_API_KEY"] = api_kx
     response = openai.Completion.create(
         engine=model,
