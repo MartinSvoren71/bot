@@ -22,11 +22,11 @@ def ask_GPT(question, model, theme):
     prompt=question,
     max_tokens=1000,
     n=1,
-    stop=["\n", "Conclusion:"],
+   # stop=["\n", "Conclusion:"],
     temperature=0.7,
-    top_p=0.7,
-    frequency_penalty=0,
-    presence_penalty=0
+    # top_p=0.7,
+   # frequency_penalty=0,
+   # presence_penalty=0
 )
     
 
