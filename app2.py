@@ -96,8 +96,9 @@ def generate_presigned_url(bucket, key, expiration=3600):
 
 @app.route('/ask', methods=['POST'])
 def ask():
-    question = request.form['question']
+    question = request.form['question', 'theme', 'model']
     theme = request.form['theme']
+    model = request.form['model']
     key = "nnp"
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
     files = contents['Contents']
@@ -105,7 +106,7 @@ def ask():
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
-            response = ask_GPT(question)  # Pass the theme value
+            response = ask_GPT(question, model)  # Pass the theme value
             return render_template('"indexSplit.html"', question=question, response=response, key=key, files=files)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
