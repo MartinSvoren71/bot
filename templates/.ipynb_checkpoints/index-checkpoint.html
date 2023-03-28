@@ -2472,8 +2472,8 @@ th {
         document.getElementById('pdf-container').innerHTML = `<iframe src="${presignedUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
         }
         function loadLogFile() {
-        const logContainer = document.getElementById('container_data_2');
-        fetch('/container_data_2')
+        const logContainer = document.getElementById('section_3');
+        fetch('/section_3 ')
         .then(response => response.text())
         .then(data => {
         logContainer.innerHTML = data;
