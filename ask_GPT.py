@@ -28,7 +28,7 @@ def ask_GPT(question, model, theme):
     frequency_penalty=0,
     presence_penalty=0
 )
-    )
+    
 
     answer = response.choices[0].text.strip()
 
