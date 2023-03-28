@@ -19,7 +19,7 @@ def ask_GPT(question, model, theme):
     os.environ["OPENAI_API_KEY"] = api_kx
     
     if model == "gpt-3.5-turbo":
-        response = openai.ChatCompletion.create(
+        response = openai.Completion.create(
             engine=model,
             messages=[
                 {"role": "user", "content": question}
