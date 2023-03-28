@@ -2430,7 +2430,13 @@ th {
     </div>
   </div>
   <div class="section_3 wf-section">
-    <div class="container_data_2_w-container"></div>
+    <div class="container_data_2 w-container">
+      
+        <ul>
+                    {% for file in files %}
+                    <li><a href="#" onclick="openPdf('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
+                    {% endfor %}
+                </ul></div>
   </div>
   <div class="section_4 wf-section">
     <div id="pdf-container" class="container_data_3 w-container"></div>
@@ -2472,8 +2478,8 @@ th {
         document.getElementById('pdf-container').innerHTML = `<iframe src="${presignedUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
         }
         function loadLogFile() {
-        const logContainer = document.getElementById('container_data_2_w-container');
-        fetch('/container_data_2_w-container')
+        const logContainer = document.getElementById('container_data_2');
+        fetch('/container_data_2')
         .then(response => response.text())
         .then(data => {
         logContainer.innerHTML = data;
