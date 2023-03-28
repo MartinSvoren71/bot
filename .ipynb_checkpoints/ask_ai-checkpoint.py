@@ -45,6 +45,7 @@ def ask_ai(question, theme, model):
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Theme: {theme}\n")
+        f.write(f"AI_Model: {model}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
         f.write("======================================================================================\n")
