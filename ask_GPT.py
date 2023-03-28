@@ -20,7 +20,7 @@ def ask_GPT(question):
     response = openai.Completion.create(
         engine="gpt-3.5-turbo",
         prompt=question,
-        max_tokens=6550,
+        max_tokens=1550,
         n=1,
         stop=None,
         temperature=0.6,
