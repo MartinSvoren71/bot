@@ -18,12 +18,16 @@ initialize_GPT(api_k)
 def ask_GPT(question, model, theme):
     os.environ["OPENAI_API_KEY"] = api_kx
     response = openai.Completion.create(
-        engine=model,
-        prompt=question,
-        max_tokens=2897,
-        n=1,
-        stop=None,
-        temperature=0.6,
+    engine=model,
+    prompt=question,
+    max_tokens=1000,
+    n=1,
+    stop=["\n", "Conclusion:"],
+    temperature=0.7,
+    top_p=0.7,
+    frequency_penalty=0,
+    presence_penalty=0
+)
     )
 
     answer = response.choices[0].text.strip()
