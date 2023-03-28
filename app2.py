@@ -96,7 +96,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
 
 @app.route('/ask', methods=['POST'])
 def ask():
-    question = request.form['question', 'theme', 'model']
+    question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
     key = "nnp"
