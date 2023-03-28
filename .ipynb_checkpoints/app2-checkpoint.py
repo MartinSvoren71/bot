@@ -109,8 +109,8 @@ def ask():
             response = ask_GPT(question, model)  # Pass the theme value
             return render_template('"indexSplit.html"', question=question, response=response, key=key, files=files, model=model)
         else :
-            response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('"indexSplit.html"', question=question, theme=theme, response=response, key=key, files=files)
+            response = ask_ai(question, theme, model)  # Pass the theme value
+            return render_template('"indexSplit.html"', question=question, theme=theme, response=response, key=key, files=files, model=model)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
