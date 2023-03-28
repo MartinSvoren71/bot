@@ -1,9 +1,0 @@
-{
-    "windows11": "indexWindows11.json",
-    "labview": "indexlabview.json",
-    "python3": "indexPython3.json",
-    "skodasuperb": "indexSkodaSuperb.json",
-    "sonya7ii": "indexSonyA7ii.json",
-    "mazda6": "indexMazda6.json",
-    "general" : "general"
-}
