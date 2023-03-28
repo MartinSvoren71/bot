@@ -35,16 +35,16 @@ def login():
             session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("index"))
+            return redirect(url_for("https://s3.eu-north-1.amazonaws.com//knowledgevortex/KV_2/templates/index.html"))
         else:
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
-    return render_template("login.html")
+    return render_template("https://s3.eu-north-1.amazonaws.com//knowledgevortex/KV_2/templates/login.html")
 
 
 @app.route("/bad_key")
 def bad_key():
-    return render_template("badkey.html")
+    return render_template("https://s3.eu-north-1.amazonaws.com//knowledgevortex/KV_2/templates/badkey.html")
 
 
 @app.route("/index", methods=["GET", "POST"])
@@ -67,7 +67,7 @@ def index():
         files = contents['Contents']
         for file in files:
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-        return render_template("index.html", html=html, files=files)
+        return render_template("https://s3.eu-north-1.amazonaws.com//knowledgevortex/KV_2/templates/index.html", html=html, files=files)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
@@ -106,10 +106,10 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
             response = ask_GPT(question)  # Pass the theme value
-            return render_template('index.html', question=question, response=response, key=key, files=files)
+            return render_template('https://s3.eu-north-1.amazonaws.com//knowledgevortex/KV_2/templates/index.html', question=question, response=response, key=key, files=files)
         else :
             response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('index.html', question=question, theme=theme, response=response, key=key, files=files)
+            return render_template('https://s3.eu-north-1.amazonaws.com//knowledgevortex/KV_2/templates/index.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
