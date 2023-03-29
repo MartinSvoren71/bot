@@ -330,7 +330,7 @@ v1.5
                <h1>PDF Keyword Search</h1>
     <form id="search-form">
     <input type="text" name="keyword" placeholder="Enter keyword">
-    <button type="button" id="search-button">Search</button>
+<button type="button" onclick="searchFiles()">Search</button>
 </form>
         
              
@@ -363,6 +363,8 @@ v1.5
                          <h3>Knowledge Vortex 2023</h3>
 
    </body>
+       
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
       document.getElementById('ask-form').addEventListener('submit', function (event) {
       event.preventDefault(); // Prevent the form from submitting and refreshing the page
@@ -494,26 +496,25 @@ v1.5
                  }
              }
              setInterval(drawRight, 33);
-       document.getElementById("search-button").addEventListener("click", function() {
-    var xhr = new XMLHttpRequest();
-    var keyword = document.querySelector("input[name='keyword']").value;
-    var formData = new FormData();
-    formData.append("keyword", keyword);
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-            var results = response.results;
-            var encrypted_files = response.encrypted_files;
-
-            // Update your page with the search results and encrypted_files
-            // ...
-        }
-    };
-
-    xhr.open("POST", "/search", true);
-    xhr.send(formData);
-});
-
+       
+       
+           function searchFiles() {
+        const keyword = $('#keyword').val();
+        $.ajax({
+            url: '/search_pdf_files',
+            method: 'POST',
+            data: {
+                keyword: keyword,
+            },
+            success: function(data) {
+                // Render the search results
+                // You may need to update this according to your HTML structure
+                console.log(data);
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        });
+    }
    </script>    
 </html>
