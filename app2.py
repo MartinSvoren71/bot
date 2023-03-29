@@ -119,7 +119,7 @@ def ask():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-    
+@app.route('/search_pdf_files', methods=['POST']    
 def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
@@ -147,13 +147,6 @@ def search_pdf_files(keyword, file_paths):
             print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
     print("traceroute: finished search_pdf_files")
-
-
-    search_files()
-
-
-
-def search_files():
     search_results = {}
     encrypted_files = []
     if request.method == 'POST':
