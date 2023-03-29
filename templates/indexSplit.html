@@ -332,7 +332,7 @@ v1.5
       <div class="list-container">
       <ul>
       {% for file in files %}
-      <li><a href="#" onclick="openPdf('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
+      <li><a href="#" onclick="showPDF('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
       {% endfor %}
       </ul>
       </div></div>
