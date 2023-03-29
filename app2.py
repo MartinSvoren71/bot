@@ -156,9 +156,9 @@ def search_pdf_files(keyword, file_paths):
     encrypted_files = []
     if request.method == 'POST':
         
-    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword)
-    print("traceroute: finished search_files")
-    print(search_results)
+        return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword)
+        print("traceroute: finished search_files")
+        print(search_results)
 
     
 
