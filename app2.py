@@ -67,7 +67,14 @@ def index():
             {options}
         </select>
         '''
-        
+        keyword = request.form['keyword']
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
+        file_paths = [content['Key'] for content in contents['Contents']
+        if content['Key'].lower().endswith('.pdf')]
+        files = contents['Contents']
+        for file in files:
+            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+        return search_pdf_files(keyword, file_paths, files)
         contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
         files = contents['Contents']
         for file in files:
@@ -121,14 +128,7 @@ def ask():
     
 @app.route('/search_pdf_files', methods=['POST'])
 def search_pdf_files_request():
-    keyword = request.form['keyword']
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
-    file_paths = [content['Key'] for content in contents['Contents']
-                  if content['Key'].lower().endswith('.pdf')]
-    files = contents['Contents']
-    for file in files:
-        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-    return search_pdf_files(keyword, file_paths, files)
+   
 
 
 def search_pdf_files(keyword, file_paths, files):
