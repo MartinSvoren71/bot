@@ -10,6 +10,7 @@ import json
 import subprocess
 import boto3
 from PyPDF4 import PdfFileReader
+import io
 
 
 
