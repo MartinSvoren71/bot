@@ -149,6 +149,8 @@ def search_pdf_files(keyword, file_paths):
 
 
 
+import os
+
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
@@ -158,6 +160,17 @@ def search_files():
         contents = s3_client.list_objects(Bucket=BUCKET_NAME)
         file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
+
+        # Write search results to a text file
+        with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
+            f.write(f"Search keyword: {keyword}\n")
+            for filepath, matches in search_results.items():
+                f.write(f"{filepath}\n")
+                for page_num, match in matches:
+                    f.write(f"  Page {page_num + 1}: {match}\n")
+                f.write(os.linesep)
+            f.write('-' * 80 + '\n')  # Add a separator line between different search results
+
     return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
 
     
