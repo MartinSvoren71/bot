@@ -67,14 +67,7 @@ def index():
             {options}
         </select>
         '''
-        keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
-        file_paths = [content['Key'] for content in contents['Contents']
-        if content['Key'].lower().endswith('.pdf')]
-        files = contents['Contents']
-        for file in files:
-            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-        return search_pdf_files(keyword, file_paths, files)
+        
         contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
         files = contents['Contents']
         for file in files:
@@ -127,37 +120,6 @@ def ask():
         return render_template('bad_key.html', question=question, theme=theme)
     
 
-def search_pdf_files(keyword, file_paths, files):
-    results = {}
-    encrypted_files = []  # List to store encrypted files
-    for filepath in file_paths:
-        try:
-            file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
-            pdf_file = io.BytesIO(file_obj['Body'].read())
-
-            pdf_reader = PdfFileReader(pdf_file)
-            if pdf_reader.isEncrypted:
-                print(f"Skipping encrypted file: {filepath}")
-                encrypted_files.append(filepath)  # Add the encrypted file to the list
-                continue
-            for page_num in range(pdf_reader.getNumPages()):
-                text = pdf_reader.getPage(page_num).extractText()
-                pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
-                matches = pattern.findall(text)
-                if matches:
-                    if filepath not in results:
-                        results[filepath] = []
-                    results[filepath].extend([(page_num, match) for match in matches])
-
-        except Exception as e:
-            print(f"Error processing {filepath}: {str(e)}")
-    return render_template('indexSplit.html', results=results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword, files=files)
-
-
-    
-
-
-    
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
