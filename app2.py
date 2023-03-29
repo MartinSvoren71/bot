@@ -126,8 +126,7 @@ def search_pdf_files(keyword, file_paths):
     encrypted_files = []  # List to store encrypted files
 
     for filepath in file_paths:
-        if file.endswith('.pdf'):
-                filepath = os.path.join(root[len(directory) - 1:], file)
+        if filepath.endswith('.pdf'):
             try:
                 file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
                 pdf_file = io.BytesIO(file_obj['Body'].read())
@@ -148,7 +147,8 @@ def search_pdf_files(keyword, file_paths):
 
             except Exception as e:
                 print(f"Error processing {filepath}: {str(e)}")
-        return results, encrypted_files
+    return results, encrypted_files
+
 
 
 
