@@ -516,15 +516,5 @@ v1.5
 function showPDF(url) {
     document.getElementById('pdf-embed').src = url;
 }
-       function showPDF(event, url) {
-    event.preventDefault();
-    let pdfIframe = document.getElementById('pdf-embed');
-    pdfIframe.src = '';
-    setTimeout(() => {
-        pdfIframe.src = url;
-    }, 100);
-}
-       
-       
    </script>    
 </html>
