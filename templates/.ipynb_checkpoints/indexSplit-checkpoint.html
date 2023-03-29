@@ -514,7 +514,14 @@ v1.5
     });
 }
 function showPDF(url) {
-    document.getElementById('pdf-embed').src = url;
-}   
+    const pdfEmbed = document.getElementById('pdf-embed');
+    
+    // Clear the contents of the PDF viewer
+    pdfEmbed.src = '';
+
+    // Load the new PDF document
+    pdfEmbed.src = url;
+    window.scrollTo(0, 1000);
+}  
    </script>    
 </html>
