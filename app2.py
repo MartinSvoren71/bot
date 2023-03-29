@@ -126,10 +126,6 @@ def ask():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-@app.route('/search_pdf_files', methods=['POST'])
-def search_pdf_files_request():
-   
-
 
 def search_pdf_files(keyword, file_paths, files):
     results = {}
