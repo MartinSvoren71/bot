@@ -148,7 +148,7 @@ def search_pdf_files(keyword, directory):
     return results, encrypted_files
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/search_pdf_files', methods=['GET', 'POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
