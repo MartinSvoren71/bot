@@ -120,14 +120,13 @@ def ask():
         return render_template('bad_key.html', question=question, theme=theme)
     
 @app.route('/search_pdf_files', methods=['POST'])    
-def search_pdf_files(keyword, file_paths):
+def search_pdf_files():
     results = {}
     encrypted_files = []  # List to store encrypted files
     keyword = request.form['keyword']
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
     file_paths = [content['Key'] for content in contents['Contents'] 
     if content['Key'].lower().endswith('.pdf')]
-    search_results, encrypted_files = search_pdf_files(keyword, file_paths)
 
     for filepath in file_paths:
         try:
@@ -150,15 +149,8 @@ def search_pdf_files(keyword, file_paths):
 
         except Exception as e:
             print(f"Error processing {filepath}: {str(e)}")
-    return results, encrypted_files
-    print("traceroute: finished search_pdf_files")
-    search_results = {}
-    encrypted_files = []
-    if request.method == 'POST':
-        
-        return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword)
-        print("traceroute: finished search_files")
-        print(search_results)
+    return render_template('indexSplit.html', results=results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword)
+
 
     
 
