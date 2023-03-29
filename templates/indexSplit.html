@@ -70,7 +70,6 @@ v1.5
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-
          }
          .left-side {
          top: 0;
@@ -80,8 +79,6 @@ v1.5
          justify-content: center;
          align-items: center;
          max-width: 50%;
-                  
-
          }
          .left-down-side {
          top: 100vh;
@@ -91,8 +88,7 @@ v1.5
          justify-content: center;
          align-items: center;
          max-width: 50%;
-                      border: 0.1px solid red;
-
+         border: 0.1px solid red;
          }
          .right-down-side {
          top: 100vh;
@@ -102,10 +98,9 @@ v1.5
          justify-content: center;
          align-items: center;
          max-width: 50%;
-                      border: 0.1px solid red;
-
+         border: 0.1px solid red;
          }
-             .left-down-down-side {
+         .left-down-down-side {
          top: 200vh;
          left:0;
          flex: 1;
@@ -113,8 +108,7 @@ v1.5
          justify-content: center;
          align-items: center;
          max-width: 50%;
-                          border: 0.1px solid red;
-
+         border: 0.1px solid red;
          }
          .right-down-down-side {
          top: 200vh;
@@ -124,8 +118,7 @@ v1.5
          justify-content: center;
          align-items: center;
          max-width: 50%;
-                      border: 0.1px solid red;
-
+         border: 0.1px solid red;
          }
          body {
          margin: 0;
@@ -137,8 +130,6 @@ v1.5
          overflow: scroll;
          justify-content: center;
          align-items: center;
-                     
-
          }
          canvas {
          width: 100vw;
@@ -184,7 +175,6 @@ v1.5
          margin-top:2%;
          margin-bottom:0%;
          }
-          
          #log-container::-webkit-scrollbar {
          display: none;
          }
@@ -202,9 +192,9 @@ v1.5
          max-width: 100%;
          font-size: 0.8em;
          text-align: center;
-             margin: 0px;
+         margin: 0px;
          }
-             h4 {
+         h4 {
          max-width: 100%;
          font-size: 0.8em;
          text-align: center;
@@ -277,7 +267,6 @@ v1.5
          .list-container {
          color: green;
          margin-bottom: 3%;
-
          }
          a {
          color: red;
@@ -290,7 +279,6 @@ v1.5
          width: 50vw;
          height: 100vh; /* Change the height value here */
          overflow: hiden;
-         
          }
       </style>
    </head>
@@ -304,109 +292,91 @@ v1.5
                <h1>Knowledge Vortex to your service</h1>
                <h1>Ask Operator a library related question</h1>
                <form id="ask-form" action="/ask" method="POST">
-               <input type="text" name="question" id="question" required>
-               <h2 for="theme">library for:</h2>
-               <div class="select-container">
-                  <select name="theme" id="theme" onchange="saveTheme()">
-                     <option value="chameleon">Chameleon</option>
-                     <option value="chameleondiscovery">Chameleon Discovery</option>
-                     <option value="innova">Innova</option>
-                     <option value="powerline">Power Line</option>
-                     <option value="compex">Compex</option>
-                     <option value="kymera">Kymera</option>
-                     <option value="newton">Newton</option>
-                     <option value="zygomx">Zygo MX</option>
-                     <option value="general">ChatGPTdatabase</option>
-                  </select>
-               </div>
-               <div class="select-container-2" id="select-container-2">
-                  <select name="model" id="model" onchange="saveModel()">
-                     <option value="text-davinci-003">text-davinci-003	</option>
-                     <option value="gpt-4">gpt-4</option>
-                     <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-                  </select>
-               </div>
-               <div class="button-wrapper"><button type="submit" id="submit-button">Ask Operator</button></div>
-               <h3 style="color: grey;">examples:</h3>
-               <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
-               <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
-               <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
+                  <input type="text" name="question" id="question" required>
+                  <h2 for="theme">library for:</h2>
+                  <div class="select-container">
+                     <select name="theme" id="theme" onchange="saveTheme()">
+                        <option value="chameleon">Chameleon</option>
+                        <option value="chameleondiscovery">Chameleon Discovery</option>
+                        <option value="innova">Innova</option>
+                        <option value="powerline">Power Line</option>
+                        <option value="compex">Compex</option>
+                        <option value="kymera">Kymera</option>
+                        <option value="newton">Newton</option>
+                        <option value="zygomx">Zygo MX</option>
+                        <option value="general">ChatGPTdatabase</option>
+                     </select>
+                  </div>
+                  <div class="select-container-2" id="select-container-2">
+                     <select name="model" id="model" onchange="saveModel()">
+                        <option value="text-davinci-003">text-davinci-003	</option>
+                        <option value="gpt-4">gpt-4</option>
+                        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                     </select>
+                  </div>
+                  <div class="button-wrapper"><button type="submit" id="submit-button">Ask Operator</button></div>
+                  <h3 style="color: grey;">examples:</h3>
+                  <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
+                  <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
+                  <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
             </div>
          </div>
          <div class="right-side">
-            <canvas id="matrixCanvasRight"></canvas>
-            <div class="right-side"></div>
-            <div id="log-container"></div>
+         <canvas id="matrixCanvasRight"></canvas>
+         <div class="right-side"></div>
+         <div id="log-container"></div>
          </div>
       </div>
       <div class="container">
-          <div class="left-down-side">
-         <div class="list-container">
-            <ul>
-               {% for file in files %}
-               <li><a href="#" onclick="openPdf('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
-               {% endfor %}
-            </ul>
-         </div></div>
-        <div class="right-down-side">
-
-         <div class="pdf-container" id="pdf-container"></div>
+      <div class="left-down-side">
+      <div class="list-container">
+      <ul>
+      {% for file in files %}
+      <li><a href="#" onclick="openPdf('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
+      {% endfor %}
+      </ul>
       </div></div>
-          
-          
-           <div class="container">
-        <div class="left-down-down-side">
+      <div class="right-down-side">
+      <div class="pdf-container" id="pdf-container"></div>
+      </div></div>
+      <div class="container">
+      <div class="left-down-down-side">
+      <div class="list-container">
+      <ul>
+      <h1>PDF Keyword Search</h1>
+      <form id="search-form">
+      <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
+      <button type="button" onclick="searchFiles()">Search</button>
+      </form>
 
-         <div class="list-container">
-            <ul>
-               <h1>PDF Keyword Search</h1>
-    <form id="search-form">
-<input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
-<button type="button" onclick="searchFiles()">Search</button>
-</form>
-                 </div> </div>
-
-          
-          
-      
-                     <div class="right-down-down-side">
-                                    
-
-
-             
-<h2>---------------------------------</h2>
-        
- <div class="results">
-        {% if encrypted_files %}
-    <h3>Encrypted files (not processed):</h3>
-    <ul>
-        {% for filepath in encrypted_files %}
-            <li>{{ filepath }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-        {% for filepath, matches in results.items() %}
-            <h2>{{ filepath }}</h2>
-            <ul>
-                {% for page_num, match in matches %}
-<li><a href="{{ url_for('static', filename=filepath[1:]) }}#page={{ page_num + 1 }}" target="_blank">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
-                {% endfor %}
-            </ul>
-        {% endfor %}
-        
-    </div>
-
-     
+      <div class="right-down-down-side">
+      <h2>---------------------------------</h2>
+      <div class="results">
+      {% if encrypted_files %}
+      <h3>Encrypted files (not processed):</h3>
+      <ul>
+      {% for filepath in encrypted_files %}
+      <li>{{ filepath }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+      {% for filepath, matches in results.items() %}
+      <h2>{{ filepath }}</h2>
+      <ul>
+      {% for page_num, match in matches %}
+      <li><a href="{{ url_for('static', filename=filepath[1:]) }}#page={{ page_num + 1 }}" target="_blank">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
+      {% endfor %}
+      </ul>
+      {% endfor %}
       </div>
-           </div>
+      </div>
+      </div>
       <div class="footer_image">
          <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/p6.png" alt="KV Logo">
       </div>
-                         <h3>Knowledge Vortex 2023</h3>
-
+      <h3>Knowledge Vortex 2023</h3>
    </body>
-       
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
       document.getElementById('ask-form').addEventListener('submit', function (event) {
       event.preventDefault(); // Prevent the form from submitting and refreshing the page
@@ -557,6 +527,6 @@ v1.5
                 console.log(err);
             }
         });
-    }
+      }
    </script>    
 </html>
