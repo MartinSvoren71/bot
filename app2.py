@@ -119,15 +119,21 @@ def ask():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-@app.route('/search_pdf_files', methods=['POST'])    
-def search_pdf_files():
+@app.route('/search_pdf_files', methods=['POST'])
+def search_pdf_files_request():
+    keyword = request.form['keyword']
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
+    file_paths = [content['Key'] for content in contents['Contents']
+                  if content['Key'].lower().endswith('.pdf')]
+    files = contents['Contents']
+    for file in files:
+        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+    return search_pdf_files(keyword, file_paths, files)
+
+
+def search_pdf_files(keyword, file_paths, files):
     results = {}
     encrypted_files = []  # List to store encrypted files
-    keyword = request.form['keyword']
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-    file_paths = [content['Key'] for content in contents['Contents'] 
-    if content['Key'].lower().endswith('.pdf')]
-
     for filepath in file_paths:
         try:
             file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
@@ -149,7 +155,7 @@ def search_pdf_files():
 
         except Exception as e:
             print(f"Error processing {filepath}: {str(e)}")
-        return render_template('indexSplit.html', results=results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword, files=files)
+    return render_template('indexSplit.html', results=results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword, files=files)
 
 
     
