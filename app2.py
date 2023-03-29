@@ -148,15 +148,14 @@ def search_pdf_files(keyword, directory):
     return results, encrypted_files
 
 
-@app.route('/search_pdf_files', methods=['POST'])
-def search_files():
+@app.route('/', methods=['GET', 'POST'])
+def index12():
     search_results = {}
     encrypted_files = []
     if request.method == 'POST':
         keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
-        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
+        directory = "/"  # Replace with the specific directory you want to search
+        search_results, encrypted_files = search_pdf_files(keyword, directory)
     return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
 
     
