@@ -512,9 +512,13 @@ v1.5
             console.log(err);
         }
     });
-}
-function showPDF(url) {
-    document.getElementById('pdf-embed').src = url;
+function showPDF(event, url) {
+    event.preventDefault();
+    const iframe = document.getElementById('pdf-iframe');
+    iframe.src = ''; // Clear the current src
+    setTimeout(() => {
+        iframe.src = url; // Set the new src after a small delay
+    }, 100);
 }
    </script>    
 </html>
