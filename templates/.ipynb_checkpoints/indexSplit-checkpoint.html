@@ -514,14 +514,15 @@ v1.5
     });
 }
 
-       function showPDF(event, url) {
+ function showPDF(event, url) {
     event.preventDefault();
-    let pdfIframe = document.getElementById('pdf-embed');
-    pdfIframe.src = '';
+    let pdfEmbed = document.getElementById('pdf-embed');
+    pdfEmbed.src = '';
     setTimeout(() => {
-        pdfIframe.src = url;
+        pdfEmbed.src = url;
     }, 100);
 }
+
        
        
    </script>    
