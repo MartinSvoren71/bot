@@ -11,6 +11,6 @@
 <ul>
 {% for page_num, match in matches %}
     <li><a href="#" onclick="showPDF('https://knowledgevortex.s3.eu-north-1.amazonaws.com/{{ filepath }}#page={{ page_num + 1 }}')">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
-                {% endfor %}
+{% endfor %}
 </ul>
 {% endfor %}
