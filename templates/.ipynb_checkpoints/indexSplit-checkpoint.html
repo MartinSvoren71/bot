@@ -513,16 +513,17 @@ v1.5
         }
     });
 }
-
- function showPDF(event, url) {
+function showPDF(url) {
+    document.getElementById('pdf-embed').src = url;
+}
+       function showPDF(event, url) {
     event.preventDefault();
-    let pdfEmbed = document.getElementById('pdf-embed');
-    pdfEmbed.src = '';
+    let pdfIframe = document.getElementById('pdf-embed');
+    pdfIframe.src = '';
     setTimeout(() => {
-        pdfEmbed.src = url;
+        pdfIframe.src = url;
     }, 100);
 }
-
        
        
    </script>    
