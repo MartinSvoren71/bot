@@ -125,7 +125,8 @@ def search_pdf_files(keyword, file_paths):
     encrypted_files = []  # List to store encrypted files
     keyword = request.form['keyword']
     contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-    file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
+    file_paths = [content['Key'] for content in contents['Contents'] 
+    if content['Key'].lower().endswith('.pdf')]
     search_results, encrypted_files = search_pdf_files(keyword, file_paths)
 
     for filepath in file_paths:
