@@ -11,7 +11,7 @@ import json
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
-#
+
 def construct_index(directory_path):
     max_chunk_overlap = 20
     chunk_size_limit = 600
@@ -21,9 +21,20 @@ def construct_index(directory_path):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
 
-initialize_ai(api_k)
+def print_index_contents(question, theme):
+    # Load the theme file names from the themes.json file
+    with open('themes.json', 'r') as f:
+        themes = json.load(f)
 
-    
+    # Get the file name for the current theme
+    index_file = themes.get(theme, "indexCH.json")
+
+    os.environ["OPENAI_API_KEY"] = api_k
+    index = GPTSimpleVectorIndex.load_from_disk(index_file)
+    response = index.query(question, response_mode="compact")
+    print("Question:", question)
+    print("Index contents:", response.index)
+
 def ask_ai(question, theme, model):
     # Load the theme file names from the themes.json file
     with open('themes.json', 'r') as f:
