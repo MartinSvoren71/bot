@@ -47,7 +47,7 @@ def bad_key():
     return render_template("badkey.html")
 
 
-@app.route("/index", methods=["GET", "POST"])
+@app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
         # Load the themes from the themes.json file
