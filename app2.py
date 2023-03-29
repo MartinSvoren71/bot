@@ -158,7 +158,7 @@ def search_files():
         keyword = request.form['keyword']
         directory = "/"  # Replace with the specific directory you want to search
         search_results, encrypted_files = search_pdf_files(keyword, directory)
-    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
+    return render_template('index.html', results=search_results, encrypted_files=encrypted_files)
     print(results + "2")
     
 t = Thread(target=initialize_ai)
