@@ -376,7 +376,8 @@ v1.5
              
 <h2>---------------------------------</h2>
         
-{% if encrypted_files %}
+<div class="results">
+        {% if encrypted_files %}
     <h3>Encrypted files (not processed):</h3>
     <ul>
         {% for filepath in encrypted_files %}
@@ -384,18 +385,16 @@ v1.5
         {% endfor %}
     </ul>
 {% endif %}
-{% for filepath, matches in results.items() %}
-    <h2>{{ filepath }}</h2>
-    <ul>
-        {% for page_num, match in matches %}
-            {% for file in files %}
-                {% if file['Key'] == filepath %}
-                    <li><a href="{{ file['PresignedURL'] }}#page={{ page_num + 1 }}" target="_blank">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
-                {% endif %}
-            {% endfor %}
+        {% for filepath, matches in results.items() %}
+            <h2>{{ filepath }}</h2>
+            <ul>
+                {% for page_num, match in matches %}
+<li><a href="{{ url_for('static', filename=filepath[1:]) }}#page={{ page_num + 1 }}" target="_blank">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
+                {% endfor %}
+            </ul>
         {% endfor %}
-    </ul>
-{% endfor %}
+        
+    </div>
 
      </div>
       </div>
