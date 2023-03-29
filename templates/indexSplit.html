@@ -338,7 +338,7 @@ v1.5
       </div></div>
       <div class="right-down-side">
      <div class="pdf-container">
-    <embed id="pdf-embed" src="" type="application/pdf">
+    <iframe id="pdf-iframe" src="" width="100%" height="600px"></iframe>
 </div>
       </div></div>
       <div class="container">
@@ -514,7 +514,8 @@ v1.5
     });
 }
 function showPDF(url) {
-    document.getElementById('pdf-container').src = url;
+    document.getElementById('pdf-iframe').src = url;
 }
+
    </script>    
 </html>
