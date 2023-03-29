@@ -99,6 +99,26 @@ v1.5
          max-width: 50%;
          border: 0.1px solid red;
          }
+             .left-down-down-side {
+         top: 200vh;
+         left:0;
+         flex: 1;
+         display: fixed;
+         justify-content: center;
+         align-items: center;
+         max-width: 50%;
+         border: 0.1px solid red ;
+         }
+         .right-down-down-side {
+         top: 200vh;
+         right:0;
+         flex: 1;
+         display: fixed;
+         justify-content: center;
+         align-items: center;
+         max-width: 50%;
+         border: 0.1px solid red;
+         }
          body {
          margin: 0;
          background-color: black;
@@ -313,18 +333,23 @@ v1.5
          </div>
       </div>
       <div class="container">
+          <div class="left-down-side">
          <div class="list-container">
             <ul>
                {% for file in files %}
                <li><a href="#" onclick="openPdf('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
                {% endfor %}
             </ul>
-         </div>
+         </div></div>
+        <div class="right-down-side">
+
          <div class="pdf-container" id="pdf-container"></div>
-      </div>
+      </div></div>
           
           
            <div class="container">
+        <div class="left-down-down-side">
+
          <div class="list-container">
             <ul>
                <h1>PDF Keyword Search</h1>
@@ -332,7 +357,13 @@ v1.5
 <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
 <button type="button" onclick="searchFiles()">Search</button>
 </form>
-        
+                 </div> </div>
+
+          
+          
+         <div class="container">
+                     <div class="left-down-down-side">
+
              
         <h2>---------------------------------</h2>
         
@@ -354,7 +385,7 @@ v1.5
             </ul>
         {% endfor %}
         
-    
+     </div>
       </div>
            </div>
       <div class="footer_image">
