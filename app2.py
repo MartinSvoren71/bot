@@ -20,7 +20,7 @@ app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_DEFAULT_REGION = 'eu-north-1'
-BUCKET_NAME = 'knowledgevortex'
+BUCKET_NAME = 'knowledgevortex/s3/'
 s3_client = boto3.client(
     's3',
     aws_access_key_id=AWS_ACCESS_KEY_ID,
