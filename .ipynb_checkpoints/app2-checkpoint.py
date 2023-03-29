@@ -146,6 +146,8 @@ def search_pdf_files(keyword, directory):
                 except Exception as e:
                     print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
+    print(results)
+
 
 
 @app.route('/search_pdf_files', methods=['GET', 'POST'])
@@ -157,7 +159,7 @@ def search_files():
         directory = "/"  # Replace with the specific directory you want to search
         search_results, encrypted_files = search_pdf_files(keyword, directory)
     return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
-
+    print(results + "2")
     
 t = Thread(target=initialize_ai)
 t.start()
