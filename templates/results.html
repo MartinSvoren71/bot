@@ -10,7 +10,7 @@
 <h2>{{ filepath }}</h2>
 <ul>
 {% for page_num, match in matches %}
-    <li><a href="{{ url_for('static', filename=filepath[1:]) }}#page={{ page_num + 1 }}" target="_blank">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
+    <li><a href="{{ url_for('https://knowledgevortex.s3.eu-north-1.amazonaws.com/', filename=filepath[1:]) }}#page={{ page_num + 1 }}" target="_blank">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
 {% endfor %}
 </ul>
 {% endfor %}
