@@ -514,9 +514,11 @@ v1.5
     });
 }
 function showPDF(url) {
-    document.getElementById('pdf-embed').src = "*";
+    document.getElementById('pdf-embed').src = '';
 
-    document.getElementById('pdf-embed').src = url;
+    setTimeout(() => {
+        document.getElementById('pdf-embed').src = url;
+    }, 100); // 1000 milliseconds (1 second) delay
 }
    </script>    
 </html>
