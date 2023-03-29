@@ -513,19 +513,14 @@ v1.5
         }
     });
 }
-function showPDF(event, url) {
-    // Prevent the default behavior of the link
-    event.preventDefault();
+function showPDF(url) {
+      event.preventDefault();
+    document.getElementById('pdf-embed').src = '';
 
-    const pdfEmbed = document.getElementById('pdf-embed');
-
-    // Clear the contents of the PDF viewer
-    pdfEmbed.src = '';
-
-    // Load the new PDF document
-    pdfEmbed.src = url;
-
-    // Scroll to a defined height (e.g., 100 pixels from the top)
+    setTimeout(() => {
+        document.getElementById('pdf-embed').src = url;
+    }, 100); // 1000 milliseconds (1 second) delay
+    
     window.scrollTo(0, 100);
 }
    </script>    
