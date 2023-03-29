@@ -35,7 +35,7 @@ def login():
             session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("indexSplit.html"))
+            return redirect(url_for("index"))
         else:
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
@@ -107,10 +107,10 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
             response = ask_GPT(question, model, theme)  # Pass the theme value
-            return render_template('"indexSplit.html"', question=question, response=response, key=key, files=files, model=model, theme=theme)
+            return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme)
         else :
             response = ask_ai(question, theme, model)  # Pass the theme value
-            return render_template('"indexSplit.html"', question=question, theme=theme, response=response, key=key, files=files, model=model)
+            return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
 t = Thread(target=initialize_ai)
