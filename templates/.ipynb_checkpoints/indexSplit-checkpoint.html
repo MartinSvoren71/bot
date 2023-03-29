@@ -339,6 +339,7 @@ v1.5
       <div class="right-down-side">
       <div class="pdf-viewer">
     <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="600px">
+    <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="100%">
 </div>
       </div></div>
       <div class="container">
@@ -513,15 +514,8 @@ v1.5
         }
     });
 }
-function showPDF(event, url) {
-    const pdfEmbed = document.getElementById('pdf-embed');
-    
-    // Clear the contents of the PDF viewer
-    pdfEmbed.src = '';
-
-    // Load the new PDF document
-    pdfEmbed.src = url;
-    
-}  
+function showPDF(url) {
+    document.getElementById('pdf-embed').src = url;
+}
    </script>    
 </html>
