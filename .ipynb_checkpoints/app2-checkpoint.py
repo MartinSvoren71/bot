@@ -160,6 +160,11 @@ def search_files():
         file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
     return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
+    print("traceroute: finished search_files")
+    print(search_results)
+
+    
+
 
     
 t = Thread(target=initialize_ai)
