@@ -68,7 +68,7 @@ def index():
         </select>
         '''
         
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Key=(folder_name))
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
         files = contents['Contents']
         for file in files:
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
@@ -105,7 +105,7 @@ def ask():
     theme = request.form['theme']
     model = request.form['model']
     key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Key=(folder_name))
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
     files = contents['Contents']
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
