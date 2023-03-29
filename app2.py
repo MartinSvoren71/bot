@@ -119,47 +119,46 @@ def ask():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-
-
-def search_pdf_files(keyword, directory):
+    
+def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
-    for root, _, files in os.walk(directory):
-        for file in files:
-            if file.endswith('.pdf'):
-                filepath = os.path.join(root[len(directory) - 1:], file)
-                try:
-                    with open(filepath, 'rb') as pdf_file:
-                        pdf_reader = PdfFileReader(pdf_file)
-                        if pdf_reader.isEncrypted:
-                            print(f"Skipping encrypted file: {filepath}")
-                            encrypted_files.append(filepath)  # Add the encrypted file to the list
-                            continue
-                        for page_num in range(pdf_reader.getNumPages()):
-                            text = pdf_reader.getPage(page_num).extractText()
-                            pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
-                            matches = pattern.findall(text)
-                            if matches:
-                                if filepath not in results:
-                                    results[filepath] = []
-                                results[filepath].extend([(page_num, match) for match in matches])
-                except Exception as e:
-                    print(f"Error processing {filepath}: {str(e)}")
+
+    for filepath in file_paths:
+        try:
+            file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
+            pdf_file = io.BytesIO(file_obj['Body'].read())
+
+            pdf_reader = PdfFileReader(pdf_file)
+            if pdf_reader.isEncrypted:
+                print(f"Skipping encrypted file: {filepath}")
+                encrypted_files.append(filepath)  # Add the encrypted file to the list
+                continue
+            for page_num in range(pdf_reader.getNumPages()):
+                text = pdf_reader.getPage(page_num).extractText()
+                pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+                matches = pattern.findall(text)
+                if matches:
+                    if filepath not in results:
+                        results[filepath] = []
+                    results[filepath].extend([(page_num, match) for match in matches])
+
+        except Exception as e:
+            print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
-    print(results)
 
 
 
-@app.route('/search_pdf_files', methods=['GET', 'POST'])
+@app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
     if request.method == 'POST':
         keyword = request.form['keyword']
-        directory = "/"  # Replace with the specific directory you want to search
-        search_results, encrypted_files = search_pdf_files(keyword, directory)
-    
-    return render_template('index.html', results=search_results, encrypted_files=encrypted_files)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
+        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
+    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
 
     
 t = Thread(target=initialize_ai)
