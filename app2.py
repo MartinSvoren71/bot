@@ -119,7 +119,6 @@ def ask():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-    
 def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
@@ -148,17 +147,14 @@ def search_pdf_files(keyword, file_paths):
     return results, encrypted_files
 
 
-
-
-@app.route('/search_pdf_files', methods=['POST'])
+@app.route('/search_pdf_files', methods=['POST'])    
 def search_files():
     search_results = {}
     encrypted_files = []
     if request.method == 'POST':
         keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
-        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
+        directory = s3_client.list_objects(Bucket=BUCKET_NAME)
+        search_results, encrypted_files = search_pdf_files(keyword, directory)
     return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
 
     
