@@ -328,10 +328,10 @@ v1.5
          <div class="list-container">
             <ul>
                <h1>PDF Keyword Search</h1>
-    <form method="POST">
-        <input type="text" name="keyword" placeholder="Enter keyword" required>
-        <button type="submit">Search</button>
-    </form>
+    <form id="search-form">
+    <input type="text" name="keyword" placeholder="Enter keyword">
+    <button type="button" id="search-button">Search</button>
+</form>
         
              
         <h2>---------------------------------</h2>
@@ -494,6 +494,26 @@ v1.5
                  }
              }
              setInterval(drawRight, 33);
-       
+       document.getElementById("search-button").addEventListener("click", function() {
+    var xhr = new XMLHttpRequest();
+    var keyword = document.querySelector("input[name='keyword']").value;
+    var formData = new FormData();
+    formData.append("keyword", keyword);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            var results = response.results;
+            var encrypted_files = response.encrypted_files;
+
+            // Update your page with the search results and encrypted_files
+            // ...
+        }
+    };
+
+    xhr.open("POST", "/search", true);
+    xhr.send(formData);
+});
+
    </script>    
 </html>

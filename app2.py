@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 from threading import Thread
@@ -155,7 +155,12 @@ def index2():
         search_results, encrypted_files = search_pdf_files(keyword, directory)
     return render_template('indexSplit .html', results=search_results, encrypted_files=encrypted_files)
 
-    
+@app.route('/search', methods=['POST'])
+def search():
+    keyword = request.form['keyword']
+    directory = "/"  # Replace with the specific directory you want to search
+    results, encrypted_files = search_pdf_files(keyword, directory)
+    return jsonify(results=results, encrypted_files=encrypted_files)    
     
     
 t = Thread(target=initialize_ai)
