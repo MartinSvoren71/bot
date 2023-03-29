@@ -120,13 +120,10 @@ def ask():
         return render_template('bad_key.html', question=question, theme=theme)
     
     
-    
-    
-    
-
 def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
+
     for filepath in file_paths:
         try:
             file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
@@ -144,24 +141,23 @@ def search_pdf_files(keyword, file_paths):
                 if matches:
                     if filepath not in results:
                         results[filepath] = []
-                        results[filepath].extend([(page_num, match) for match in matches])
+                    results[filepath].extend([(page_num, match) for match in matches])
+
         except Exception as e:
-                    print(f"Error processing {filepath}: {str(e)}")
+            print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
 
 
 
-
-
-
-@app.route('/search_pdf_files', methods=['POST'])    
+@app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
     if request.method == 'POST':
         keyword = request.form['keyword']
-        directory = s3_client.list_objects(Bucket=BUCKET_NAME)
-        search_results, encrypted_files = search_pdf_files(keyword, directory)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
+        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
     return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
 
     
