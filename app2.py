@@ -149,7 +149,7 @@ def search_pdf_files(keyword, directory):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def index12():
+def search_files():
     search_results = {}
     encrypted_files = []
     if request.method == 'POST':
