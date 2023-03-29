@@ -154,7 +154,7 @@ def search_pdf_files(keyword, file_paths):
         contents = s3_client.list_objects(Bucket=BUCKET_NAME)
         file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
-    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
+    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword)
     print("traceroute: finished search_files")
     print(search_results)
 
