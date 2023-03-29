@@ -70,7 +70,7 @@ def index():
         files = contents['Contents']
         for file in files:
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-        return render_template("indexSplit.html", html=html, files=files)
+        return render_template("indexSplit.html", html=html, files=files, results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
@@ -110,10 +110,10 @@ def ask():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
             response = ask_GPT(question, model, theme)  # Pass the theme value
-            return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme)
+            return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
         else :
             response = ask_ai(question, theme, model)  # Pass the theme value
-            return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model)
+            return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
@@ -153,7 +153,7 @@ def index2():
         keyword = request.form['keyword']
         directory = "/"  # Replace with the specific directory you want to search
         search_results, encrypted_files = search_pdf_files(keyword, directory)
-    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
+    return render_template('indexSplit .html', results=search_results, encrypted_files=encrypted_files)
 
     
     
