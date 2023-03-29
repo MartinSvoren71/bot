@@ -146,14 +146,14 @@ def search_pdf_files(keyword, directory):
 
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def index2():
     search_results = {}
     encrypted_files = []
     if request.method == 'POST':
         keyword = request.form['keyword']
         directory = "/"  # Replace with the specific directory you want to search
         search_results, encrypted_files = search_pdf_files(keyword, directory)
-    return render_template('index.html', results=search_results, encrypted_files=encrypted_files)
+    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
 
     
     
