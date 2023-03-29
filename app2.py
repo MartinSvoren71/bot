@@ -20,7 +20,7 @@ app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_DEFAULT_REGION = 'eu-north-1'
-BUCKET_NAME = 'knowledgevortex/s3/'
+BUCKET_NAME = 'knowledgevortex'
 s3_client = boto3.client(
     's3',
     aws_access_key_id=AWS_ACCESS_KEY_ID,
@@ -67,7 +67,8 @@ def index():
             {options}
         </select>
         '''
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Key=(folder_name))
         files = contents['Contents']
         for file in files:
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
@@ -104,7 +105,7 @@ def ask():
     theme = request.form['theme']
     model = request.form['model']
     key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Key=(folder_name))
     files = contents['Contents']
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
