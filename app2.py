@@ -157,7 +157,7 @@ def search_pdf_files(keyword, file_paths):
     return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
     print("traceroute: finished search_files")
     print(search_results)
-
+          )
     
 
 
