@@ -149,7 +149,7 @@ def search_pdf_files():
 
         except Exception as e:
             print(f"Error processing {filepath}: {str(e)}")
-    return render_template('indexSplit.html', results=results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword)
+        return render_template('indexSplit.html', results=results, encrypted_files=encrypted_files, file_paths=file_paths, keyword=keyword, files=files)
 
 
     
