@@ -146,11 +146,13 @@ def search_pdf_files(keyword, file_paths):
         except Exception as e:
             print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
+    print("traceroute: finished search_pdf_files")
+
 
     search_files()
 
 
-@app.route('/search_pdf_files', methods=['POST'])
+
 def search_files():
     search_results = {}
     encrypted_files = []
