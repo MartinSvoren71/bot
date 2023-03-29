@@ -171,8 +171,8 @@ def search_files():
                 f.write(os.linesep)
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
 
-    return render_template('indexSplit.html', results=search_results, encrypted_files=encrypted_files)
-
+    rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
+    return jsonify({'rendered_template': rendered_template})
     
 t = Thread(target=initialize_ai)
 t.start()
