@@ -99,8 +99,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
-@app.route('/ask_GPT', methods=['POST'])
-def ask_GPT(keyword, file_paths):
+def ask_Library(keyword, file_paths):
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
@@ -118,7 +117,25 @@ def ask_GPT(keyword, file_paths):
            # return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
     else:
         return render_template('bad_key.html', question=question, theme=theme)
-    
+
+def ask_OpenAI(keyword, file_paths):
+    question = request.form['question']
+    theme = request.form['theme']
+    model = request.form['model']
+    key = "nnp"
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
+    files = contents['Contents']
+    for file in files:
+        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
+    if key == "nnp":  # Check if the key is "xxx007"
+        if theme == "general" :
+            response = ask_GPT(question, model, theme)  # Pass the theme value
+            #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
+        else :
+            response = ask_ai(question, theme, model)  # Pass the theme value
+           # return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
+    else:
+        return render_template('bad_key.html', question=question, theme=theme)
     
 def search_pdf_files(keyword, file_paths):
     results = {}
