@@ -112,7 +112,7 @@ def ask_GPT():
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
-            response = ask_GPT(question, model, theme)  # Pass the theme value
+            response = ask_GPT()  # Pass the theme value
             #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
         else :
             response = ask_ai(question, theme, model)  # Pass the theme value
