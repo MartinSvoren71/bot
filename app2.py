@@ -99,8 +99,8 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
-@app.route('/ask_library', methods=['POST'])
-def ask_library():
+@app.route('/ask_GPT', methods=['POST'])
+def ask_GPT  ask_GPT(keyword, file_paths):
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
@@ -112,58 +112,15 @@ def ask_library():
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
             response = ask_GPT(question, model, theme)  # Pass the theme value
-            #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
+            return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
         else :
             response = ask_ai(question, theme, model)  # Pass the theme value
-           # return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
+            return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-@app.route('/ask_openai', methods=['POST'])
-def ask_openai():
-    question = request.form['question']
-    theme = request.form['theme']
-    model = request.form['model']
-    key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
-    files = contents['Contents']
-    for file in files:
-        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-    if key == "nnp":  # Check if the key is "xxx007"
-        if theme == "general" :
-            response = ask_GPT(question, model, theme)  # Pass the theme value
-            #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
-        else :
-            response = ask_ai(question, theme, model)  # Pass the theme value
-           # return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
-    else:
-        return render_template('bad_key.html', question=question, theme=theme)
     
-@app.route('/search_pdf_files', methods=['POST'])
-def search_files():
-    search_results = {}
-    encrypted_files = []
-    if request.method == 'POST':
-        keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
-        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
-
-        # Write search results to a text file
-        with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
-            f.write(f"Search keyword: {keyword}\n")
-            for filepath, matches in search_results.items():
-                f.write(f"{filepath}\n")
-                for page_num, match in matches:
-                    f.write(f"  Page {page_num + 1}: {match}\n")
-                f.write(os.linesep)
-            f.write('-' * 80 + '\n')  # Add a separator line between different search results
-
-    rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
-    return jsonify({'rendered_template': rendered_template})
-    
-    
-def search_pdf_files(keyword, file_paths):
+def search_pdf_filesdef search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
 
@@ -191,7 +148,29 @@ def search_pdf_files(keyword, file_paths):
     return results, encrypted_files
 
 
+@app.route('/search_pdf_files', methods=['POST'])
+def search_files():
+    search_results = {}
+    encrypted_files = []
+    if request.method == 'POST':
+        keyword = request.form['keyword']
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
+        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
 
+        # Write search results to a text file
+        with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
+            f.write(f"Search keyword: {keyword}\n")
+            for filepath, matches in search_results.items():
+                f.write(f"{filepath}\n")
+                for page_num, match in matches:
+                    f.write(f"  Page {page_num + 1}: {match}\n")
+                f.write(os.linesep)
+            f.write('-' * 80 + '\n')  # Add a separator line between different search results
+
+    rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
+    return jsonify({'rendered_template': rendered_template})
+    
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
