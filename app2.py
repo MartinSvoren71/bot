@@ -147,7 +147,7 @@ def search_pdf_files(keyword, file_paths):
 def search_files():
     search_results = {}
     encrypted_files = []
-    folder_name = 's3/data/choherent_chameleon/'
+    folder_name = 's3/data/coherent_chameleon/'
 
     if request.method == 'POST':
         keyword = request.form['keyword']
