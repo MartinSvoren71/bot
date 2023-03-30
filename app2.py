@@ -112,7 +112,7 @@ def ask_GPT_route():
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_GPT(question)  # Pass the theme value
-        return jsonify({"question": question, "response": response})
+        #return jsonify({"question": question, "response": response})
             #return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
@@ -129,7 +129,7 @@ def ask_LIB_route():
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(theme, question)  # Pass the theme value
-        return jsonify({"question": question, "response": response})
+        #return jsonify({"question": question, "response": response})
             #return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
