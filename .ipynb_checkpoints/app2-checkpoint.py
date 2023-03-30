@@ -174,7 +174,7 @@ def text_editor_rpute():
         text = request.form['text']
         pdf_buffer = BytesIO()
         pdf_writer = PdfFileWriter()
-        pdf_writer.addBlankPage()
+        pdf_writer.addBlankPage(width=595.44, height=841.68)  # Updated this line
         page = pdf_writer.getPage(0)
         page.insertText(0, 0, text)
         pdf_writer.write(pdf_buffer)
@@ -182,7 +182,6 @@ def text_editor_rpute():
 
         return send_file(pdf_buffer, mimetype='application/pdf', as_attachment=True, attachment_filename='download.pdf')
 
-    
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
