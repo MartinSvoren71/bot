@@ -526,26 +526,7 @@ v1.5
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
        
-      document.getElementById('ask-form').addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent the form from submitting and refreshing the page
-      
-      // Collect the form data
-      const formData = new FormData(event.target);
-      
-      // Send the data to the server using AJAX
-      fetch('/ask', {
-      method: 'POST',
-      body: formData,
-      })
-      .then((response) => response.text())
-      .then((html) => {
-        // Replace the content of the page with the new HTML received from the server
-        document.documentElement.innerHTML = html;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-      });
+     
         
       function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
