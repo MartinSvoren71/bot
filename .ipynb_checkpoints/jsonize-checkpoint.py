@@ -1,46 +1,17 @@
 import boto3
-import json
 import os
-
-from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
+import tempfile
+import shutil
+from llama_index import SimpleDirectoryReader, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
-from IPython.display import Markdown, display
-data_directory = "/s3/data/"
+import logging
 
 
-def get_folders(s3_client, bucket_name):
-    result = s3_client.list_objects(Bucket=bucket_name, Delimiter='/')
-    folders = [item['Prefix'] for item in result.get('CommonPrefixes', [])]
-    return folders
-
-
-def generate_json_from_pdf(s3_client, bucket_name, folder_name):
-    # Your logic to generate JSON from PDF files within the folder should be here
-    # ...
-
-    json_content = {}  # Replace with the actual JSON content you generate from PDF files
-    json_filename = f"{folder_name}.json"
-
-    s3_client.put_object(
-        Bucket=bucket_name,
-        Key=f"{folder_name}{json_filename}",
-        Body=json.dumps(json_content),
-        ContentType="application/json"
-    )
-
-
-def check_and_generate_json(s3_client, bucket_name, folder_name):
-    objects_in_folder = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=folder_name)
-    json_filename = f"{folder_name}.json"
-
-    json_exists = False
-    for obj in objects_in_folder.get("Contents", []):
-        if obj["Key"].endswith(json_filename):
-            json_exists = True
-            break
-
-    if not json_exists:
-        generate_json_from_pdf(s3_client, bucket_name, folder_name)
+# Configure logging
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(levelname)s: %(message)s',
+                    handlers=[logging.FileHandler('jsonoze.txt', mode='w'),
+                              logging.StreamHandler()])
 
 
 def construct_index(directory_path):
@@ -62,19 +33,55 @@ def construct_index(directory_path):
 
     return index
 
+def download_folder(s3_client, bucket, prefix, local_dir):
+    paginator = s3_client.get_paginator('list_objects_v2')
+    for result in paginator.paginate(Bucket=bucket, Prefix=prefix):
+        for content in result.get('Contents', []):
+            s3_path = content['Key']
+            local_path = os.path.join(local_dir, s3_path[len(prefix):])
+            os.makedirs(os.path.dirname(local_path), exist_ok=True)
+            s3_client.download_file(bucket, s3_path, local_path)
 
-def ask_ai():
-    index = GPTSimpleVectorIndex.load_from_disk('index.json')
-    while True:
-        query = input("What do you want to ask? ")
-        response = index.query(query, response_mode="compact")
-        print(f"Response: {response.response}\n")
+def upload_file(s3_client, bucket, s3_path, local_path):
+    s3_client.upload_file(local_path, bucket, s3_path)
 
+def check_and_generate_json(s3_client, bucket_name, folder):
+    paginator = s3_client.get_paginator('list_objects_v2')
+    result = paginator.paginate(Bucket=bucket_name, Prefix=folder)
+
+    json_exists = False
+    for page in result:
+        for obj in page['Contents']:
+            if obj['Key'].endswith('.json'):
+                json_exists = True
+                break
+        if json_exists:
+            break
+
+    if not json_exists:
+        logging.debug(f"JSON file not found in {folder}. Generating JSON file.")
+        # Download the folder, generate JSON file using construct_index function, and upload it back to S3
+        # Code to download folder from S3, generate JSON and upload
+    else:
+        logging.debug(f"JSON file found in {folder}.")
+
+    if not json_exists:
+        logging.debug(f"JSON file not found in {folder}. Generating JSON file.")
+
+        with tempfile.TemporaryDirectory() as tempdir:
+            local_folder = os.path.join(tempdir, folder)
+            download_folder(s3_client, bucket_name, folder, local_folder)
+            construct_index(local_folder)
+            json_file_path = os.path.join(local_folder, "index.json")
+            s3_json_file_path = os.path.join(folder, "index.json")
+            upload_file(s3_client, bucket_name, s3_json_file_path, json_file_path)
+
+        logging.debug(f"JSON file generated and uploaded to {folder}.")
+    else:
+        logging.debug(f"JSON file found in {folder}.")
 
 def main():
-    os.environ["OPENAI_API_KEY"] = input("Paste your OpenAI key here and hit enter:")
-
-    folder_name = 's3/'
+    folder_name = 's3/data/'
     AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
     AWS_SECRET_ACCESS_KEY = 'QspohE+8VYcwJzA18cvfQJQZFst2q+WEgMtqvC1A'
     AWS_DEFAULT_REGION = 'eu-north-1'
@@ -87,4 +94,28 @@ def main():
         region_name=AWS_DEFAULT_REGION
     )
 
-    folders = get_folders(s3_client, BUCKET_NAME)
+    # List all directories in the specified folder
+    paginator = s3_client.get_paginator('list_objects_v2')
+    result = paginator.paginate(Bucket=BUCKET_NAME, Prefix=folder_name, Delimiter='/')
+
+    for prefix in result.search('CommonPrefixes'):
+        folder = prefix.get('Prefix')
+        logging.debug(f"Checking folder: {folder}")
+        check_and_generate_json(s3_client, BUCKET_NAME, folder)
+
+
+if __name__ == "__main__":
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
+
