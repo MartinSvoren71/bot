@@ -44,4 +44,4 @@ def ask_GPT(question):
         f.write("======================================================================================\n")
         f.write(existing_data)
         
-   # return answer
+    return answer

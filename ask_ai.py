@@ -51,4 +51,4 @@ def ask_ai(question, theme):
         f.write("======================================================================================\n")
         f.write(existing_data)
         
-   # return response.response
+    return response.response
