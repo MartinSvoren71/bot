@@ -11,7 +11,7 @@ import subprocess
 import boto3
 from PyPDF4 import PdfFileReader
 import io
-folder_name = 's3/data/'
+folder_name = 's3/data/chameleon_ultra'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
@@ -147,8 +147,7 @@ def search_pdf_files(keyword, file_paths):
 def search_files():
     search_results = {}
     encrypted_files = []
-    folder_name = "teraview_teracotta/"
-
+    
     if request.method == 'POST':
         keyword = request.form['keyword']
         contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
