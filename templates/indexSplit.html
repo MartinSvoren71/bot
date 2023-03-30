@@ -57,15 +57,14 @@ v1.5
   --matrix-green-6:                #0e1c0d;  
               --matrix-amber-1:   #997334;
               --matrix-amber-2:   #ffdd9d;
-              font-family: 'Lucida Console', monospace;  
+              
           }       
       
          
          .container {
          display: fixed;
          width: 98vw;
-                  
-
+             
          height: 99vh;
          margin-left:1vw;
          margin-right:1vw;
@@ -144,7 +143,7 @@ v1.5
          margin: 0;
          background-color: black;
          color: #00FF00;
-       
+         font-family: 'Lucida Console', monospace;
          font-size: 12px;
          font-weight: bold;
          overflow: scroll;
@@ -187,7 +186,7 @@ v1.5
          background-color: rgba(0, 0, 0, 0.2);
          overflow-y: scroll;
          color: #00FF00;
-     
+         font-family: 'Lucida Console', monospace;
          font-size: 13px;
          font-weight: bold;
          white-space: pre-wrap;
@@ -295,27 +294,27 @@ v1.5
          color: black;
          cursor: pointer;
          }
-       buttonGPT {
+       #buttonGPT {
          font-size: 1.6em;
          padding: 10px;
          border-radius: 8px;
          margin-top: 15px;
          border: none;
          outline: none;
-         background-color: var(--matrix-red-pill);
+         background-color: var(--matrix-green-3);
          color: black;
          cursor: pointer;
                     filter: drop-shadow(0 0 0.35rem red);
 
          }
-        buttonAI {
+        #buttonAI {
          font-size: 1.6em;
          padding: 10px;
          border-radius: 8px;
          margin-top: 15px;
          border: none;
          outline: none;
-         background-color: var(--matrix-blue-pill);
+         background-color: var(--matrix-green-3);
          color: black;
          cursor: pointer;
                      filter: drop-shadow(0 0 0.35rem red);
@@ -323,17 +322,17 @@ v1.5
          }
          button:hover {
          background-color: var(--matrix-amber-1);
-                                  filter: drop-shadow(0 0 0.65rem var(--matrix-amber-1));
+                                  filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
 
          }
            #button-AI:hover {
          background-color: var(--matrix-blue-pill);
-                        filter: drop-shadow(0 0 0.65rem var(--matrix-blue-pill));
+                        filter: drop-shadow(0 0 0.35rem var(--matrix-blue-pill));
 
          }
            #button-GPT:hover {
          background-color: var(--matrix-red-pill);
-                        filter: drop-shadow(0 0 0.85rem var(--matrix-red-pill));
+                        filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
 
          }
          .input-key {
@@ -463,9 +462,9 @@ v1.5
                <h3>Ask Operator a library related question</h3>
                <form id="ask-form" enctype="multipart/form-data" >
                    <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
-                   <div>
-                  <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">Ask within OpenAI </button>
-                  <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">Ask within library</button>  
+                   <div style="display: inline-block;">
+                  <button id="button-GPT" onclick="ask_GPT(event)">Ask within OpenAI </button>
+                  <button id="button-AI" onclick="ask_LIB(event)">Ask within library</button>  
                    </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
