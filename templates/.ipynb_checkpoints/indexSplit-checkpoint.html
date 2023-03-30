@@ -510,7 +510,7 @@ v1.5
           
         <form id="save_pdf">
         <textarea name="text" rows="20" cols="100"></textarea><br>
-        <button style="button" id="button-download" onclick="text_editor(event)">Download</button>  
+        <button style="button" id="button-download" onclick="save(event)">Download</button>  
 
           </form>
  
@@ -590,15 +590,34 @@ v1.5
        }  
        
        
-        async function text_editor(event) {
+       function save(event) {
         event.preventDefault();   
-        const form = document.getElementById("save_pdf");
-        const formData = new FormData(form);
-        const response =  fetch("/text_editor", {
-            method: "POST",
-            body: formData,
-        });     
-       }   
+        fetch('/text_editor', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ text: '' }),
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.blob();
+            }
+            throw new Error('Network response was not ok.');
+        })
+        .then((blob) => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'download.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        })
+        .catch((error) => {
+            console.error('There has been a problem with your fetch operation:', error);
+        });
+}
        
 
        
