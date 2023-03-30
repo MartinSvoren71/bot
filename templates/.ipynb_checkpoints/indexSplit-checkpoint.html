@@ -425,7 +425,7 @@ v1.5
           }
       </style>
    </head>
-   <body>
+   <body onsubmit="event.preventDefault();">
       <div class="container">
          <div class="content-wrapper">
             <canvas id="matrixCanvas"></canvas>
@@ -434,7 +434,7 @@ v1.5
                <h2 id="datetime" style="color: red;"></h2>
                <h1>Knowledge Vortex to your service</h1>
                <h3>Ask Operator a library related question</h3>
-               <form id="ask-form" enctype="multipart/form-data" onsubmit="event.preventDefault();">
+               <form id="ask-form" enctype="multipart/form-data" >
                   <input type="text" name="question" id="question" placeholder="How can I help?"required>
                    <div style="display: inline-block;">
                   <button id="button-GPT" onclick="ask_GPT(event)">Ask within OpenAI </button>
