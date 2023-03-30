@@ -292,7 +292,7 @@ v1.5
                <h1>Knowledge Vortex to your service</h1>
                <h1>Ask Operator a library related question</h1>
                <form id="ask-form" action="/ask" method="POST">
-                  <input type="text" name="question" id="question" placeholder="How can I help?"required>
+                  <input type="text" name="question" id="question" required>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
                      <select name="theme" id="theme" onchange="saveTheme()">
@@ -315,18 +315,10 @@ v1.5
                      </select>
                   </div>
                   <div class="button-wrapper"><button type="submit" id="submit-button">Ask Operator</button></div>
-                     <h3 style="color: grey;">examples:</h3>
+                  <h3 style="color: grey;">examples:</h3>
                   <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
                   <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
                   <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
-                             <br><br>
-
-                    <h1>PDF Keyword Search</h1>
-      <form id="search-form">
-      <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
-      <button type="button" onclick="searchFiles()">Search</button>
-      </form>
-                
             </div>
          </div>
          <div class="right-side">
@@ -353,7 +345,11 @@ v1.5
       <div class="left-down-down-side">
       <div class="list-container">
       <ul>
-     
+      <h1>PDF Keyword Search</h1>
+      <form id="search-form">
+      <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
+      <button type="button" onclick="searchFiles()">Search</button>
+      </form>
       </div> </div>
        
       <div class="right-down-down-side">
