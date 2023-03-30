@@ -99,6 +99,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
+@app.route('/ask_Library', methods=['POST'])
 def ask_Library(keyword, file_paths):
     question = request.form['question']
     theme = request.form['theme']
@@ -117,7 +118,8 @@ def ask_Library(keyword, file_paths):
            # return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
     else:
         return render_template('bad_key.html', question=question, theme=theme)
-
+    
+@app.route('/Ask_OpenAI', methods=['POST'])
 def ask_OpenAI(keyword, file_paths):
     question = request.form['question']
     theme = request.form['theme']

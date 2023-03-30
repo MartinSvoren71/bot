@@ -437,8 +437,8 @@ v1.5
                <form id="ask-form" >
                   <input type="text" name="question" id="question" placeholder="How can I help?"required>
                    <div style="display: inline-block;">
-                  <button type="buttonGPT" id="button-GPT" onclick="">Ask within OpenAI </button>
-                  <button type="buttonAI" id="button-AI" onclick="">Ask within library</button>
+                  <button type="buttonGPT" id="button-GPT" onclick="ask_OpenAI">Ask within OpenAI </button>
+                  <button type="buttonAI" id="button-AI" onclick="ask_Library">Ask within library</button>
                    </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
@@ -568,8 +568,8 @@ v1.5
       loadLogFile();
              
               function saveTheme() {
-       const selectedModel = document.getElementById("model").value;
-       localStorage.setItem("model", selectedModel);
+       const selectedModel = document.getElementById("theme").value;
+       localStorage.setItem("theme", selectedModel);
       }  
        function saveModel() {
        const selectedModel = document.getElementById("model").value;
