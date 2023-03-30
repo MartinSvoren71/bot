@@ -148,6 +148,8 @@ def search_pdf_files(keyword, file_paths, theme):
 def search_files():
     search_results = {}
     encrypted_files = []
+    theme = request.form['theme']
+
     folder_name = f's3/data/{theme}'
     if request.method == 'POST':
         keyword = request.form['keyword']
