@@ -122,7 +122,6 @@ def ask_LIB_route():
 def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
-    theme = request.form['theme']
     for filepath in file_paths:
         try:
             file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
@@ -148,9 +147,8 @@ def search_pdf_files(keyword, file_paths):
 def search_files():
     search_results = {}
     encrypted_files = []
-    theme = request.form['theme']
+    folder_name = 's3/data/coherent_chameleon/'
 
-    folder_name = f's3/data/{theme}/'
     if request.method == 'POST':
         keyword = request.form['keyword']
         contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
