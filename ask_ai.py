@@ -12,6 +12,7 @@ import boto3
 
 folder_name = 's3/'
 
+
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_DEFAULT_REGION = 'eu-north-1'
@@ -68,4 +69,3 @@ def ask_ai(question, theme):
         f.write(existing_data)
         
    # return response.response
-

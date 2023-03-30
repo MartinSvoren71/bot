@@ -8,6 +8,23 @@ from main import api_kx
 import datetime
 api_k = api_kx
 import json
+import boto3
+
+folder_name = 's3/'
+
+
+AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_DEFAULT_REGION = 'eu-north-1'
+BUCKET_NAME = 'knowledgevortex'
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    region_name=AWS_DEFAULT_REGION
+)
+
+
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
