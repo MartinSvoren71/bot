@@ -100,7 +100,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
     return response
 
 @app.route('/ask_GPT', methods=['POST'])
-def ask_GPT  ask_GPT(keyword, file_paths):
+def ask_GPT(keyword, file_paths):
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
