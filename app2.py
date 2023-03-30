@@ -24,6 +24,8 @@ s3_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
+
+
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -38,6 +40,7 @@ def login():
             return redirect(url_for("bad_key"))
     return render_template("login.html")
 @app.route("/bad_key")
+
 def bad_key():
     return render_template("badkey.html")
 @app.route("/indexSplit", methods=["GET", "POST"])
@@ -54,7 +57,6 @@ def index():
             {options}
         </select>
         '''
-        
         contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
         files = contents['Contents']
         for file in files:
@@ -82,6 +84,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
         print(e)
         return None
     return response
+
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
     question = request.form['question']
@@ -116,9 +119,6 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-    
-    
-    
 def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
@@ -142,13 +142,16 @@ def search_pdf_files(keyword, file_paths):
         except Exception as e:
             print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
+
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
+    folder_name = "coherent_chameleon"
+
     if request.method == 'POST':
         keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
         file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
         # Write search results to a text file
@@ -162,6 +165,7 @@ def search_files():
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
+    
     
 t = Thread(target=initialize_ai)
 t.start()
