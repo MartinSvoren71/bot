@@ -564,7 +564,7 @@ v1.5
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
 
-        const response = await fetch("/ask_lib", {
+        const response =  fetch("/ask_lib", {
             method: "POST",
             body: formData,
         });
@@ -573,7 +573,7 @@ v1.5
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
 
-        const response = await fetch("/ask_gpt", {
+        const response =  fetch("/ask_gpt", {
             method: "POST",
             body: formData,
         });     
