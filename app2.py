@@ -119,7 +119,7 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-def search_pdf_files(keyword, file_paths, theme):
+def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
     theme = request.form['theme']
