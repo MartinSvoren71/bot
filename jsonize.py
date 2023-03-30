@@ -5,6 +5,7 @@ import shutil
 from llama_index import SimpleDirectoryReader, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 import logging
+import openai
 from main import api_kx
 
 # Configure logging
@@ -13,9 +14,8 @@ logging.basicConfig(level=logging.DEBUG,
                     handlers=[logging.FileHandler('jsonoze.txt', mode='w'),
                               logging.StreamHandler()])
 
-def initialize_GPT(api_key):
+def initialize_GPT(api_kx):
     os.environ["OPENAI_API_KEY"] = api_kx
-    openai.api_key = api_kx
 
 initialize_GPT(api_kx)
 
