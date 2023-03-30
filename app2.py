@@ -10,7 +10,7 @@ import json
 import subprocess
 import boto3
 from PyPDF4 import PdfFileReader
-import io
+import io import BytesIO
 folder_name = 's3/data/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
