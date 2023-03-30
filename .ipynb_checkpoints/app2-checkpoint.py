@@ -11,7 +11,7 @@ import subprocess
 import boto3
 from PyPDF4 import PdfFileReader
 import io
-folder_name = 's3/'
+folder_name = 's3/data/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
