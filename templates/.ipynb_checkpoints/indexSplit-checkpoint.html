@@ -437,8 +437,8 @@ v1.5
                <form id="ask-form" enctype="multipart/form-data">
                   <input type="text" name="question" id="question" placeholder="How can I help?"required>
                    <div style="display: inline-block;">
-                  <button type="buttonGPT" id="button-GPT" onclick="ask_GPT()">Ask within OpenAI </button>
-                  <button type="buttonAI" id="button-AI" onclick="ask_LIB()">Ask within library</button>  
+                  <button id="button-GPT" onclick="ask_GPT()">Ask within OpenAI </button>
+                  <button id="button-AI" onclick="ask_LIB()">Ask within library</button>  
                    </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
@@ -587,7 +587,7 @@ v1.5
             method: "POST",
             body: formData,
         });
-           
+    } 
        async function ask_GPT() {
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
@@ -596,7 +596,7 @@ v1.5
             method: "POST",
             body: formData,
         });     
-             
+       }      
        
        
         function searchFiles() {
