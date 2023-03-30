@@ -181,7 +181,7 @@ v1.5
          }
          #log-container {
          width: 100%;
-         height: 90%;
+         height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
          overflow-y: scroll;
          color: #00FF00;
@@ -411,6 +411,19 @@ v1.5
 #model:active {
   border-color: var(--matrix-red-1);
 }
+ #results {
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.2);
+         overflow-y: scroll;
+         color: #00FF00;
+         font-family: 'Lucida Console', monospace;
+         font-size: 13px;
+         font-weight: bold;
+         white-space: pre-wrap;
+         -ms-overflow-style: none;
+         scrollbar-width: none;     
+          }
       </style>
    </head>
    <body>
@@ -482,7 +495,7 @@ v1.5
           
       <div class="right-down-side">
       <h2>---------------------------------</h2>
-      <div class="results">
+      <div class="results" id="results">
       </div>  
 </div></div>
           
