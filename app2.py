@@ -11,12 +11,9 @@ import subprocess
 import boto3
 from PyPDF4 import PdfFileReader
 import io
-
 folder_name = 's3/'
-
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
-
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_DEFAULT_REGION = 'eu-north-1'
@@ -27,10 +24,6 @@ s3_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
-
-
-
-
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -44,23 +37,17 @@ def login():
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
     return render_template("login.html")
-
-
 @app.route("/bad_key")
 def bad_key():
     return render_template("badkey.html")
-
-
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
-
         # Generate the <option> elements dynamically
         options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
-
         # Render the HTML with the dynamic <option> elements
         html = f'''
         <select name="theme" id="theme" onchange="saveTheme()">
@@ -76,8 +63,6 @@ def index():
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
-
-
     
     
 @app.route('/log-content')
@@ -86,8 +71,6 @@ def log_content():
     with open(file_path, 'r') as file:
         content = file.read()
     return content
-
-
 def generate_presigned_url(bucket, key, expiration=3600):
     try:
         response = s3_client.generate_presigned_url(
@@ -99,7 +82,6 @@ def generate_presigned_url(bucket, key, expiration=3600):
         print(e)
         return None
     return response
-
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
     question = request.form['question']
@@ -121,7 +103,6 @@ def ask_GPT_route():
 def ask_LIB_route():
     question = request.form['question']
     theme = request.form['theme']
-    model = request.form['model']
     model = "text-davinci-003"
     key = "nnp"
     contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
@@ -141,12 +122,10 @@ def ask_LIB_route():
 def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
-
     for filepath in file_paths:
         try:
             file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
             pdf_file = io.BytesIO(file_obj['Body'].read())
-
             pdf_reader = PdfFileReader(pdf_file)
             if pdf_reader.isEncrypted:
                 print(f"Skipping encrypted file: {filepath}")
@@ -160,12 +139,9 @@ def search_pdf_files(keyword, file_paths):
                     if filepath not in results:
                         results[filepath] = []
                     results[filepath].extend([(page_num, match) for match in matches])
-
         except Exception as e:
             print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
-
-
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
@@ -175,7 +151,6 @@ def search_files():
         contents = s3_client.list_objects(Bucket=BUCKET_NAME)
         file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
-
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
             f.write(f"Search keyword: {keyword}\n")
@@ -185,7 +160,6 @@ def search_files():
                     f.write(f"  Page {page_num + 1}: {match}\n")
                 f.write(os.linesep)
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
-
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
     
