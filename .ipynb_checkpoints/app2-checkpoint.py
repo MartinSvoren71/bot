@@ -120,7 +120,7 @@ def ask_GPT(keyword, file_paths):
         return render_template('bad_key.html', question=question, theme=theme)
     
     
-def search_pdf_filesdef(keyword, file_paths):
+def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
 
