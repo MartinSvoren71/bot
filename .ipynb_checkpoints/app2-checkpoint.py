@@ -147,7 +147,7 @@ def search_pdf_files(keyword, file_paths, theme):
 def search_files():
     search_results = {}
     encrypted_files = []
-    folder_name = f's3/data/{theme}'
+    folder_name = f"s3/data/{theme}"
     if request.method == 'POST':
         keyword = request.form['keyword']
         contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
