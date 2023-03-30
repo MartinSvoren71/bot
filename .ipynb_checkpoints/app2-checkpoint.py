@@ -101,7 +101,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
     return response
 
 @app.route('/ask_gpt', methods=['POST'])
-def ask_GPT(theme):
+def ask_GPT():
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
@@ -112,11 +112,11 @@ def ask_GPT(theme):
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
-            response = ask_GPT()  # Pass the theme value
-            #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
+            response = ask_GPT(question)  # Pass the theme value
+            return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
         else :
-            response = ask_ai()  # Pass the theme value
-           # return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
+            response = ask_ai(question, theme)  # Pass the theme value
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
@@ -132,11 +132,11 @@ def ask_LIB(theme):
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
-            response = ask_GPT()  # Pass the theme value
-            #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
+            response = ask_GPT(question)  # Pass the theme value
+            return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
         else :
-            response = ask_ai()  # Pass the theme value
-           # return render_template("indexSplit.html", question=question, theme=theme, response=response, key=key, files=files, model=model, results={})
+            response = ask_ai(question, theme)  # Pass the theme value
+            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
