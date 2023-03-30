@@ -549,18 +549,28 @@ v1.5
        
        
        
-    function ask_OpenAI() {
+async function ask_OpenAI() {
         const form = document.getElementById("ask-form");
-        form.action = "/Ask_OpenAI";
-        form.method = "POST";
-        form.submit();
+        const formData = new FormData(form);
+
+        const response = await fetch("/Ask_OpenAI", {
+            method: "POST",
+            body: formData,
+        });
+
+        // Process the response here
     }
 
-    function ask_Library() {
+    async function ask_Library() {
         const form = document.getElementById("ask-form");
-        form.action = "/ask_Library";
-        form.method = "POST";
-        form.submit();
+        const formData = new FormData(form);
+
+        const response = await fetch("/ask_Library", {
+            method: "POST",
+            body: formData,
+        });
+
+        // Process the response here
     }
         
       function openPdf(presignedUrl) {
