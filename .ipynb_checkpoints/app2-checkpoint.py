@@ -101,7 +101,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
     return response
 
 @app.route('/ask_gpt', methods=['POST'])
-def ask_GPT():
+def ask_GPT(theme):
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
@@ -112,7 +112,7 @@ def ask_GPT():
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
-            response = ask_GPT(theme)  # Pass the theme value
+            response = ask_GPT()  # Pass the theme value
             #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
         else :
             response = ask_ai()  # Pass the theme value
@@ -121,7 +121,7 @@ def ask_GPT():
         return render_template('bad_key.html', question=question, theme=theme)
     
 @app.route('/ask_lib', methods=['POST'])
-def ask_LIB():
+def ask_LIB(theme):
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
@@ -132,7 +132,7 @@ def ask_LIB():
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         if theme == "general" :
-            response = ask_GPT(theme)  # Pass the theme value
+            response = ask_GPT()  # Pass the theme value
             #return render_template("indexSplit.html", question=question, response=response, key=key, files=files, model=model, theme=theme,results={})
         else :
             response = ask_ai()  # Pass the theme value
