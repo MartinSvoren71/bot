@@ -434,12 +434,13 @@ v1.5
                <h2 id="datetime" style="color: red;"></h2>
                <h1>Knowledge Vortex to your service</h1>
                <h3>Ask Operator a library related question</h3>
-               <form id="ask-form" >
-                  <input type="text" name="question" id="question" placeholder="How can I help?"required>
-                   <div style="display: inline-block;">
-                  <button type="buttonGPT" id="button-GPT" onclick="ask_OpenAI">Ask within OpenAI </button>
-                  <button type="buttonAI" id="button-AI" onclick="ask_Library">Ask within library</button>
-                   </div>
+              <form id="ask-form">
+    <input type="text" name="question" id="question" placeholder="How can I help?" required>
+    <div style="display: inline-block;">
+        <button type="button" id="button-GPT" onclick="ask_OpenAI()">Ask within OpenAI</button>
+        <button type="button" id="button-AI" onclick="ask_Library()">Ask within library</button>
+    </div>
+</form>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
                      <select name="theme" id="theme" onchange="saveTheme()">
@@ -545,6 +546,22 @@ v1.5
         console.error('Error:', error);
       });
       });
+       
+       
+       
+    function ask_OpenAI() {
+        const form = document.getElementById("ask-form");
+        form.action = "/Ask_OpenAI";
+        form.method = "POST";
+        form.submit();
+    }
+
+    function ask_Library() {
+        const form = document.getElementById("ask-form");
+        form.action = "/ask_Library";
+        form.method = "POST";
+        form.submit();
+    }
         
       function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);

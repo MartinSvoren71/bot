@@ -100,7 +100,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
     return response
 
 @app.route('/ask_Library', methods=['POST'])
-def ask_Library(keyword, file_paths):
+def ask_Library():
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
@@ -120,7 +120,7 @@ def ask_Library(keyword, file_paths):
         return render_template('bad_key.html', question=question, theme=theme)
     
 @app.route('/Ask_OpenAI', methods=['POST'])
-def ask_OpenAI(keyword, file_paths):
+def ask_OpenAI():
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
