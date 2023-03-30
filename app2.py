@@ -101,7 +101,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
     return response
 
 @app.route('/ask_gpt', methods=['POST'])
-def ask_GPT(theme):
+def ask_GPT_route(theme):
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
@@ -117,7 +117,7 @@ def ask_GPT(theme):
         return render_template('bad_key.html', question=question, theme=theme)
     
 @app.route('/ask_lib', methods=['POST'])
-def ask_LIB(theme):
+def ask_LIB_route(theme):
     question = request.form['question']
     theme = request.form['theme']
     model = request.form['model']
