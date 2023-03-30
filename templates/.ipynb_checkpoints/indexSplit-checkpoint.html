@@ -434,11 +434,11 @@ v1.5
                <h2 id="datetime" style="color: red;"></h2>
                <h1>Knowledge Vortex to your service</h1>
                <h3>Ask Operator a library related question</h3>
-               <form id="ask-form" >
+               <form id="ask-form" enctype="multipart/form-data">
                   <input type="text" name="question" id="question" placeholder="How can I help?"required>
                    <div style="display: inline-block;">
-                  <button type="buttonGPT" id="button-GPT" onclick="">Ask within OpenAI </button>
-                  <button type="buttonAI" id="button-AI" onclick="">Ask within library</button>  
+                  <button type="buttonGPT" id="button-GPT" onclick="ask_GPT()">Ask within OpenAI </button>
+                  <button type="buttonAI" id="button-AI" onclick="ask_LIB()">Ask within library</button>  
                    </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
@@ -576,7 +576,25 @@ v1.5
        localStorage.setItem("model", selectedModel);
       }  
        
-                      
+          
+       
+    async function ask_LIB() {
+        const form = document.getElementById("ask-form");
+        const formData = new FormData(form);
+
+        const response = await fetch("/ask_lib", {
+            method: "POST",
+            body: formData,
+        });
+           
+       async function ask_GPT() {
+        const form = document.getElementById("ask-form");
+        const formData = new FormData(form);
+
+        const response = await fetch("/ask_gpt", {
+            method: "POST",
+            body: formData,
+        });     
              
        
        
