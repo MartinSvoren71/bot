@@ -246,8 +246,9 @@ v1.5
          color: red;
          justify-content: center;
          align-items: center;
-               margin: 1% auto;
+               margin: 4% auto;
          filter: drop-shadow(0 0 0.35rem green);
+             text-align: center;
          }
          .button-wrapper {
          display: flex;
@@ -448,14 +449,8 @@ v1.5
                         <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
                      </select>
                   </div>
-
-                     <h3 style="color: grey;">examples:</h3>
-                  <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
-                  <h3 style="color: grey;"> for ChameleonDiscovery: How to train customer for operating the laser?</h3>
-                  <h3 style="color: grey;"> for newton: How to set external trigger?</h3>
-                             <br><br>
-
-                    <h1>PDF Keyword Search</h1>
+                  <h4 style="color: grey;"> example for ZygoMX: write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
+                    <h1>Vortex keyword search</h1>
       <form id="search-form">
       <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
       <button type="button" onclick="searchFiles()">Search</button>
@@ -477,7 +472,12 @@ v1.5
       <li><a href="#" onclick="showPDF('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
       {% endfor %}
       </ul>
-      </div></div>
+     
+            <h2>---------------------------------</h2>
+      <div class="results">
+      </div>
+           </div>
+          </div>
       <div class="right-down-side">
       <div class="pdf-viewer">
     <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="100%">
