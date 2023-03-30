@@ -9,7 +9,7 @@ import re
 import json
 import subprocess
 import boto3
-from PyPDF4 import PdfFileReader
+from PyPDF4 import PdfFileReader PdfFileWriter
 import io 
 from io import BytesIO
 
