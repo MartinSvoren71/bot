@@ -147,7 +147,7 @@ def search_pdf_files(keyword, file_paths):
 def search_files():
     search_results = {}
     encrypted_files = []
-    folder_name = "coherent_chameleon/"
+    folder_name = "teraview_teracotta/"
 
     if request.method == 'POST':
         keyword = request.form['keyword']
