@@ -1,5 +1,5 @@
 {
-    "chameleon": "indexChameleon.json",
+    "Chameleon": "indexChameleon.json",
     "labview": "indexlabview.json",
     "python3": "indexPython3.json",
     "skodasuperb": "indexSkodaSuperb.json",

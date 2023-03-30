@@ -29,7 +29,7 @@ def ask_ai(question, theme):
         themes = json.load(f)
 
     # Get the file name for the current theme
-    index_file = themes.get(theme, "indexCH.json")
+    index_file = themes.get(theme, "indexChameleon.json")
     
     os.environ["OPENAI_API_KEY"] = api_k
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
