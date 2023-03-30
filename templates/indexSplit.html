@@ -570,7 +570,7 @@ v1.5
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
 
-        const response = await fetch("/Ask_OpenAI", {
+        const response = await fetch("/ask_openai", {
             method: "POST",
             body: formData,
         });
