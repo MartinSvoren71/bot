@@ -15,14 +15,15 @@ def initialize_GPT(api_key):
 
 initialize_GPT(api_k)
 
-def ask_GPT(question, model, theme):
+def ask_GPT(question):
     os.environ["OPENAI_API_KEY"] = api_kx
     response = openai.Completion.create(
-    engine=model,
-    prompt=question,
-    max_tokens=2000,
-    temperature=0.6, 
-    stop=["\n", "Conclusion:"],
+        engine="text-davinci-003",
+        prompt=question,
+        max_tokens=1550,
+        n=1,
+        stop=None,
+        temperature=0.6,
     )
 
     answer = response.choices[0].text.strip()
@@ -36,8 +37,6 @@ def ask_GPT(question, model, theme):
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n")
-        f.write(f"Theme: {theme}\n")
-        f.write(f"AI_Model: {model}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {answer}\n")  # Replace response.answer with answer
         f.write("======================================================================================\n")

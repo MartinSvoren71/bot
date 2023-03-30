@@ -111,12 +111,8 @@ def ask_GPT():
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
-        if theme == "general" :
-            response = ask_GPT(question)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
-        else :
-            response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
+        response = ask_GPT(question)  # Pass the theme value
+            #return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
@@ -131,12 +127,8 @@ def ask_LIB(theme):
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
-        if theme == "general" :
-            response = ask_GPT(question)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
-        else :
-            response = ask_ai(question, theme)  # Pass the theme value
-            return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
+        response = ask_ai(question, theme)  # Pass the theme value
+            #return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
