@@ -12,7 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader
 import io
 
-folder_name = 's3/data/'
+folder_name = 's3/'
 
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
@@ -121,6 +121,7 @@ def ask_GPT_route():
 def ask_LIB_route():
     question = request.form['question']
     theme = request.form['theme']
+    model = request.form['model']
     model = "text-davinci-003"
     key = "nnp"
     contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
