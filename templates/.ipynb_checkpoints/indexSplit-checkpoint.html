@@ -437,8 +437,8 @@ v1.5
               <form id="ask-form">
     <input type="text" name="question" id="question" placeholder="How can I help?" required>
     <div style="display: inline-block;">
-        <button type="button" id="button-GPT" onclick="ask_OpenAI()">Ask within OpenAI</button>
-        <button type="button" id="button-AI" onclick="ask_Library()">Ask within library</button>
+        <button type="button" id="button-GPT" onclick="ask_ppenai()">Ask within OpenAI</button>
+        <button type="button" id="button-AI" onclick="ask_library()">Ask within library</button>
     </div>
 </form>
                   <h2 for="theme">library for:</h2>
@@ -547,9 +547,26 @@ v1.5
       });
       });
        
+    
+        function searchFiles() {
+    const keyword = $('#keyword').val();
+    $.ajax({
+        url: '/search_pdf_files',
+        method: 'POST',
+        data: {
+            keyword: keyword,
+        },
+        success: function(data) {
+            // Render the search results
+            $('.results').html(data.rendered_template);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}       
        
-       
-async function ask_OpenAI() {
+ function ask_OpenAI() {
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
 
@@ -557,11 +574,23 @@ async function ask_OpenAI() {
             method: "POST",
             body: formData,
         });
-
-        // Process the response here
+        $.ajax({
+        url: '/ask_openai',
+        method: 'POST',
+        data: {
+            question: question, theme: theme, mode:model,
+        },
+        success: function(data) {
+            // Render the search results
+            $('.results').html(data.rendered_template);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
     }
 
-    async function ask_Library() {
+     function ask_Library() {
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
 
@@ -606,24 +635,7 @@ async function ask_OpenAI() {
                       
              
        
-       
-        function searchFiles() {
-    const keyword = $('#keyword').val();
-    $.ajax({
-        url: '/search_pdf_files',
-        method: 'POST',
-        data: {
-            keyword: keyword,
-        },
-        success: function(data) {
-            // Render the search results
-            $('.results').html(data.rendered_template);
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    });
-}
+   
 function showPDF(url) {
     document.getElementById('pdf-embed').src = '/lurl.pdf';
 
