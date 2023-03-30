@@ -12,7 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader
 import io
 
-folder_name = 's3/'
+folder_name = 's3/data/coherent_chameleon/'
 
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
@@ -121,14 +121,14 @@ def ask_GPT_route():
 def ask_LIB_route():
     question = request.form['question']
     theme = request.form['theme']
-    model = request.form['model']
+    model = "text-davinci-003"
     key = "nnp"
     contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
     files = contents['Contents']
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
-        response = ask_ai(question, question)  # Pass the theme value
+        response = ask_ai(question, theme)  # Pass the theme value
         #return jsonify({"question": question, "response": response})
             #return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
