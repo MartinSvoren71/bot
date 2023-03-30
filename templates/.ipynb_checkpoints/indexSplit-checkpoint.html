@@ -434,13 +434,12 @@ v1.5
                <h2 id="datetime" style="color: red;"></h2>
                <h1>Knowledge Vortex to your service</h1>
                <h3>Ask Operator a library related question</h3>
-              <form id="ask-form">
-    <input type="text" name="question" id="question" placeholder="How can I help?" required>
-    <div style="display: inline-block;">
-        <button type="button" id="button-GPT" onclick="ask_ppenai()">Ask within OpenAI</button>
-        <button type="button" id="button-AI" onclick="ask_library()">Ask within library</button>
-    </div>
-</form>
+               <form id="ask-form" >
+                  <input type="text" name="question" id="question" placeholder="How can I help?"required>
+                   <div style="display: inline-block;">
+                  <button type="buttonGPT" id="button-GPT" onclick="">Ask within OpenAI </button>
+                  <button type="buttonAI" id="button-AI" onclick="">Ask within library</button>  
+                   </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
                      <select name="theme" id="theme" onchange="saveTheme()">
@@ -546,61 +545,6 @@ v1.5
         console.error('Error:', error);
       });
       });
-       
-    
-        function searchFiles() {
-    const keyword = $('#keyword').val();
-    $.ajax({
-        url: '/search_pdf_files',
-        method: 'POST',
-        data: {
-            keyword: keyword,
-        },
-        success: function(data) {
-            // Render the search results
-            $('.results').html(data.rendered_template);
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    });
-}       
-       
- function ask_OpenAI() {
-        const form = document.getElementById("ask-form");
-        const formData = new FormData(form);
-
-        const response = await fetch("/ask_openai", {
-            method: "POST",
-            body: formData,
-        });
-        $.ajax({
-        url: '/ask_openai',
-        method: 'POST',
-        data: {
-            question: question, theme: theme, mode:model,
-        },
-        success: function(data) {
-            // Render the search results
-            $('.results').html(data.rendered_template);
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    });
-    }
-
-     function ask_Library() {
-        const form = document.getElementById("ask-form");
-        const formData = new FormData(form);
-
-        const response = await fetch("/ask_Library", {
-            method: "POST",
-            body: formData,
-        });
-
-        // Process the response here
-    }
         
       function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
@@ -635,7 +579,24 @@ v1.5
                       
              
        
-   
+       
+        function searchFiles() {
+    const keyword = $('#keyword').val();
+    $.ajax({
+        url: '/search_pdf_files',
+        method: 'POST',
+        data: {
+            keyword: keyword,
+        },
+        success: function(data) {
+            // Render the search results
+            $('.results').html(data.rendered_template);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
 function showPDF(url) {
     document.getElementById('pdf-embed').src = '/lurl.pdf';
 
