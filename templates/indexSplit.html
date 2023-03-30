@@ -153,11 +153,15 @@ v1.5
          width: 100vw;
          height: 100vh;
          z-index: -1;
-         opacity: 0.15;
+         opacity: 0.35;
          position: fixed;
          top: 0%;
          left: 0%;
          padding-top: 0px;
+         color: var(--matrix-green-1);
+
+             filter: drop-shadow(0 0 0.95rem var(--matrix-red-pill));
+
          }
          img {
          width: 13vw;
@@ -549,85 +553,8 @@ v1.5
        localStorage.setItem("model", selectedModel);
       }  
        
-                       const submitButton = document.getElementById('submit-button');
-                 submitButton.addEventListener('click', function () {
-                     // Save the original values
-                     const originalTextContent = submitButton.textContent;
-                     const originalColor = submitButton.style.color; 
-                 submitButton.textContent = 'WAIT';
-                 submitButton.style.color = 'red';
-      
-                 setTimeout(() => {
-                     // Revert the values back to the original ones after 5 seconds
-                     submitButton.textContent = originalTextContent;
-                     submitButton.style.color = originalColor;
-                     location.reload()
-                 }, 500);
-             });
-      
-             const canvas = document.getElementById('matrixCanvas');
-             const ctx = canvas.getContext('2d');
-             canvas.width = window.innerWidth * 0.8;
-             canvas.height = window.innerHeight * 1;
-      
-             const characters = 'OpTXS$#71@/[*&$';
-      
-             const fontSize = 10;
-             const columns = canvas.width / fontSize;
-      
-             const drops = [];
-             for (let i = 0; i < columns; i++) {
-                 drops[i] = 1;
-             }
-      
-             function draw() {
-                 ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                 ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-                 ctx.fillStyle = '#0f0';
-                 ctx.font = `${fontSize}px monospace`;
-      
-                 for (let i = 0; i < drops.length; i++) {
-                     const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-      
-                     if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                         drops[i] = 0;
-                     }
-                     drops[i]++;
-                 }
-             }
-      
-             setInterval(draw, 33);
-      
-             const canvasRight = document.getElementById('matrixCanvasRight');
-             const ctxRight = canvasRight.getContext('2d');
-             canvasRight.width = window.innerWidth * 1;
-             canvasRight.height = window.innerHeight * 1;
-      
-             const dropsRight = [];
-             for (let i = 0; i < columns; i++) {
-                 dropsRight[i] = 1;
-             }
-      
-             function drawRight() {
-                 ctxRight.fillStyle = 'rgba(0, 0, 0, 0.05)';
-                 ctxRight.fillRect(0, 0, canvasRight.width, canvasRight.height);
-      
-                 ctxRight.fillStyle = '#0f0';
-                 ctxRight.font = `${fontSize}px monospace`;
-      
-                 for (let i = 0; i < dropsRight.length; i++) {
-                     const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                     ctxRight.fillText(text, i * fontSize, dropsRight[i] * fontSize);
-      
-                     if (dropsRight[i] * fontSize > canvasRight.height && Math.random() > 0.975) {
-                         dropsRight[i] = 0;
-                     }
-                     dropsRight[i]++;
-                 }
-             }
-             setInterval(drawRight, 33);
+                      
+             
        
        
         function searchFiles() {
@@ -654,6 +581,40 @@ function showPDF(url) {
         document.getElementById('pdf-embed').src = url;
     }, 300);
 }
+        const canvas = document.getElementById('matrixCanvas');
+         const ctx = canvas.getContext('2d');
+         canvas.width = window.innerWidth;
+         canvas.height = window.innerHeight;
+         
+const characters = '゠ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶヷヸヹヺ・ーヽヾゝゞー１２３４５６７８９０';
+         
+         const fontSize = 12;
+         const columns = canvas.width / fontSize;
+         
+         const drops = [];
+         for (let i = 0; i < columns; i++) {
+         	drops[i] = 1;
+         }
+         
+         function draw() {
+         	ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+         	ctx.fillRect(0, 0, canvas.width, canvas.height);
+         
+         	ctx.fillStyle = '#0f0';
+         	ctx.font = `${fontSize}px monospace`;
+         
+         	for (let i = 0; i < drops.length; i++) {
+         		const text = characters.charAt(Math.floor(Math.random() * characters.length));
+         		ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+         
+         		if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+         			drops[i] = 0;
+         		}
+         		drops[i]++;
+         	}
+         }
+         
+         setInterval(draw, 33);
 
    </script>    
 </html>
