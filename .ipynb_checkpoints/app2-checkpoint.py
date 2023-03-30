@@ -166,6 +166,20 @@ def search_files():
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
     
+@app.route('/text_editor', methods=['GET', 'POST'])
+def text_editor_rpute():
+    if request.method == 'POST':
+        text = request.form['text']
+        pdf_buffer = BytesIO()
+        pdf_writer = PdfFileWriter()
+        pdf_writer.addBlankPage()
+        page = pdf_writer.getPage(0)
+        page.insertText(0, 0, text)
+        pdf_writer.write(pdf_buffer)
+        pdf_buffer.seek(0)
+
+        return send_file(pdf_buffer, mimetype='application/pdf', as_attachment=True, attachment_filename='download.pdf')
+
     
 t = Thread(target=initialize_ai)
 t.start()

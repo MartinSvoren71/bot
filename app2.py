@@ -166,7 +166,7 @@ def search_files():
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
     
-    @app.route('/text_editor', methods=['GET', 'POST'])
+@app.route('/text_editor', methods=['GET', 'POST'])
 def text_editor_rpute():
     if request.method == 'POST':
         text = request.form['text']
