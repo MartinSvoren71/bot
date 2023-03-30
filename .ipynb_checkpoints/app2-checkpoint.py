@@ -150,7 +150,7 @@ def search_files():
     encrypted_files = []
     theme = request.form['theme']
 
-    folder_name = f's3/data/{theme}'
+    folder_name = f's3/data/{theme}/'
     if request.method == 'POST':
         keyword = request.form['keyword']
         contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
