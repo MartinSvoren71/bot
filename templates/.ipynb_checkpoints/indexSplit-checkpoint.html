@@ -507,7 +507,13 @@ v1.5
       <div class="container">
       <div class="left-down-down-side">
       <div class="list-container">
-      <ul>
+          
+        <form id="save_pdf">
+        <textarea name="text" rows="20" cols="100"></textarea><br>
+        <button style="button" id="button-download" onclick="text_editor(event)">Download</button>  
+
+          </form>
+ 
       </div> </div>
           
           
@@ -581,8 +587,20 @@ v1.5
             method: "POST",
             body: formData,
         });     
-       }      
+       }  
        
+       
+        async function text_editor(event) {
+        event.preventDefault();   
+        const form = document.getElementById("save_pdf");
+        const formData = new FormData(form);
+        const response =  fetch("/text_editor", {
+            method: "POST",
+            body: formData,
+        });     
+       }   
+       
+
        
         function searchFiles() {
     const keyword = $('#keyword').val();
