@@ -7,7 +7,6 @@ from langchain import OpenAI
 import logging
 from main import api_kx
 
-
 # Configure logging
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s: %(message)s',
@@ -18,7 +17,7 @@ def initialize_GPT(api_key):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
 
-initialize_GPT(api_k)
+initialize_GPT(api_kx)
 
 def construct_index(directory_path):
     max_input_size = 4096
