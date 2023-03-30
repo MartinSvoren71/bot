@@ -43,6 +43,24 @@ v1.5
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Ask AI</title>
       <style>
+          
+          
+          :root {
+  --matrix-red-1:                  #ff000c;
+  --matrix-red-2:                  #6b0c08;  
+  --matrix-green-1:                #2d6e43;
+  --matrix-green-2:                #295844;
+  --matrix-green-3:                #295844;
+  --matrix-green-5:                #0e1c0d;
+  --matrix-blue-pill:                #0fc1c7;
+  --matrix-red-pill:                #ff000c;        
+  --matrix-green-6:                #0e1c0d;  
+              --matrix-amber-1:   #997334;
+              --matrix-amber-2:   #ffdd9d;
+              
+          }       
+      
+         
          .container {
          display: fixed;
          width: 98vw;
@@ -142,12 +160,11 @@ v1.5
          padding-top: 0px;
          }
          img {
-         width: 17vw;
+         width: 13vw;
          height: auto;
          max-width: 320px;
          display: block;
-         margin: 0 auto;
-         margin-bottom: 50px;
+         margin: 4% auto;
          filter: drop-shadow(0 0 0.75rem green);
          }
          #footer_image {
@@ -178,21 +195,42 @@ v1.5
          #log-container::-webkit-scrollbar {
          display: none;
          }
+          
+          @keyframes matrix {
+  0% {
+    text-shadow: 0 0 10px var(--matrix-green), 0 0 20px var(--matrix-green), 0 0 30px var(--matrix-green), 0 0 40px var(--matrix-green);
+  }
+  100% {
+    text-shadow: 0 0 10px var(--matrix-green), 0 0 20px var(--matrix-green), 0 0 30px var(--matrix-green), 0 0 40px var(--matrix-green), 0 0 50px var(--matrix-green), 0 0 60px var(--matrix-green), 0 0 70px var(--matrix-green), 0 0 80px var(--matrix-green);
+  }
+}
+          
          h1 {
          max-width: 100%;
          font-size: 1.5em;
          text-align: center;
+                                     filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+               animation: matrix 1s infinite alternate;
+
+
          }
          h2 {
          max-width: 100%;
          font-size: 1.2em;
          text-align: center;
+                                     filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+               animation: matrix 1s infinite alternate;
+
+
          }
          h3 {
          max-width: 100%;
-         font-size: 0.8em;
+         font-size: 1em;
          text-align: center;
-         margin: 0px;
+                                     filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+               animation: matrix 1s infinite alternate;
+
+
          }
          h4 {
          max-width: 100%;
@@ -200,11 +238,12 @@ v1.5
          text-align: center;
          }
          form {
-         margin-top: 50px;
+         margin: 2% auto;
          display: flex;
          flex-direction: column;
          justify-content: center;
          align-items: center;
+             
          }
          label {
          font-size: 1.5em;
@@ -212,14 +251,15 @@ v1.5
          }
          input[type="text"] {
          font-size: 2em;
-         margin-top: 0px;
-         border-radius: 10px;
+         margin: 0px;
          border: none;
          outline: none;
          background-color: #1f1f1f;
          color: red;
          justify-content: center;
          align-items: center;
+               margin: 1% auto;
+         filter: drop-shadow(0 0 0.35rem green);
          }
          .button-wrapper {
          display: flex;
@@ -233,12 +273,52 @@ v1.5
          margin-top: 15px;
          border: none;
          outline: none;
-         background-color: #00FF00;
+         background-color: var(--matrix-green-1);
+                                 filter: drop-shadow(0 0 0.35rem var(--matrix-amber-2));
+
          color: black;
          cursor: pointer;
          }
+       #buttonGPT {
+         font-size: 1.6em;
+         padding: 10px;
+         border-radius: 8px;
+         margin-top: 15px;
+         border: none;
+         outline: none;
+         background-color: var(--matrix-green-3);
+         color: black;
+         cursor: pointer;
+                    filter: drop-shadow(0 0 0.35rem red);
+
+         }
+        #buttonAI {
+         font-size: 1.6em;
+         padding: 10px;
+         border-radius: 8px;
+         margin-top: 15px;
+         border: none;
+         outline: none;
+         background-color: var(--matrix-green-3);
+         color: black;
+         cursor: pointer;
+                     filter: drop-shadow(0 0 0.35rem red);
+
+         }
          button:hover {
-         background-color: #3e8e41;
+         background-color: var(--matrix-amber-1);
+                                  filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
+
+         }
+           #button-AI:hover {
+         background-color: var(--matrix-blue-pill);
+                        filter: drop-shadow(0 0 0.35rem var(--matrix-blue-pill));
+
+         }
+           #button-GPT:hover {
+         background-color: var(--matrix-red-pill);
+                        filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+
          }
          .input-key {
          font-size: 1em;
@@ -272,6 +352,10 @@ v1.5
          color: red;
          text-decoration: none;
          }
+      .question {
+          margin: 1% auto;
+         filter: drop-shadow(0 0 0.75rem green);
+          } 
          a:hover {
          color: #aaa;
          }
@@ -280,6 +364,64 @@ v1.5
          height: 100vh; /* Change the height value here */
          overflow: hiden;
          }
+          #theme {
+  padding: 1%;
+  border-radius: 4px;
+  border: 1px solid var(--matrix-red-1);
+  outline: none;
+  background-color: var(--matrix-green-1);
+  color: #333;
+  cursor: pointer;
+}
+
+#theme option {
+  font-size: 1.2em;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: var(--matrix-green-1);;
+  color: #333;
+  cursor: pointer;
+}
+
+#theme option:hover {
+  background-color: var(--matrix-green-1);
+}
+
+#theme:focus,
+#theme:active {
+  border-color: var(--matrix-red-1);
+}
+  #model {
+  padding: 1%;
+  border-radius: 4px;
+  border: 1px solid var(--matrix-red-1);
+  outline: none;
+  background-color: var(--matrix-green-1);
+  color: #333;
+  cursor: pointer;
+}
+
+#model option {
+  font-size: 1.2em;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: var(--matrix-green-1);;
+  color: #333;
+  cursor: pointer;
+}
+
+#model option:hover {
+  background-color: var(--matrix-green-1);
+}
+
+#model:focus,
+#model:active {
+  border-color: var(--matrix-red-1);
+}
       </style>
    </head>
    <body>
@@ -290,9 +432,13 @@ v1.5
                <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/logo1.png" alt="KV Logo">
                <h2 id="datetime" style="color: red;"></h2>
                <h1>Knowledge Vortex to your service</h1>
-               <h1>Ask Operator a library related question</h1>
+               <h3>Ask Operator a library related question</h3>
                <form id="ask-form" action="/ask" method="POST">
                   <input type="text" name="question" id="question" placeholder="How can I help?"required>
+                   <div style="display: inline-block;">
+                  <button type="buttonGPT" id="button-GPT" onclick="searchFiles()">Ask within OpenAI </button>
+                  <button type="buttonAI" id="button-AI" onclick="searchFiles()">Ask within library</button>
+                   </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
                      <select name="theme" id="theme" onchange="saveTheme()">
@@ -314,9 +460,6 @@ v1.5
                         <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
                      </select>
                   </div>
-                  <div class="button-wrapper"><button type="submit" id="submit-button">Ask Operator</button></div>
-                         <button type="buttonAI" onclick="searchFiles()">Ask within library</button>
-                          <button type="buttonGPT" onclick="searchFiles()">Ask within OpenAI </button>
 
                      <h3 style="color: grey;">examples:</h3>
                   <h3 style="color: grey;"> for ZygoMX : write procedure for measurement profile of metal surface using 1x zoom and 10x objective</h3>
@@ -371,7 +514,26 @@ v1.5
    </body>
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
+      document.getElementById('ask-form').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the form from submitting and refreshing the page
       
+      // Collect the form data
+      const formData = new FormData(event.target);
+      
+      // Send the data to the server using AJAX
+      fetch('/ask', {
+      method: 'POST',
+      body: formData,
+      })
+      .then((response) => response.text())
+      .then((html) => {
+        // Replace the content of the page with the new HTML received from the server
+        document.documentElement.innerHTML = html;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+      });
         
       function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
@@ -484,24 +646,6 @@ v1.5
              setInterval(drawRight, 33);
        
        
-               function searchFiles() {
-    const keyword = $('#keyword').val();
-    $.ajax({
-        url: '/search_pdf_files',
-        method: 'POST',
-        data: {
-            keyword: keyword,
-        },
-        success: function(data) {
-            // Render the search results
-            $('.results').html(data.rendered_template);
-        },
-        error: function(err) {
-            console.log(err);
-        }
-    });
-}
-       
         function searchFiles() {
     const keyword = $('#keyword').val();
     $.ajax({
@@ -519,33 +663,6 @@ v1.5
         }
     });
 }
-       
-       
-       document.getElementById('ask-form').addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent the form from submitting and refreshing the page
-      
-      // Collect the form data
-      const formData = new FormData(event.target);
-      
-      // Send the data to the server using AJAX
-      fetch('/ask', {
-      method: 'POST',
-      body: formData,
-      })
-      .then((response) => response.text())
-      .then((html) => {
-        // Replace the content of the page with the new HTML received from the server
-        document.documentElement.innerHTML = html;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-      });
-       
-       
-       
-       
-       
 function showPDF(url) {
     document.getElementById('pdf-embed').src = '/lurl.pdf';
 
