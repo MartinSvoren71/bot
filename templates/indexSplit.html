@@ -595,9 +595,13 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-                   <select id="folder-select">
+    <select id="folder-select">
   <option value="">Choose a folder</option>
+  {% for folder in folders %}
+    <option value="{{ folder }}">{{ folder }}</option>
+  {% endfor %}
 </select>
+
                   </div>
                     </form>
                   <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>

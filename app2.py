@@ -45,6 +45,7 @@ def login():
 
 def bad_key():
     return render_template("badkey.html")
+
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
@@ -65,8 +66,7 @@ def index():
         files = contents['Contents']
         for file in files:
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-        return render_template("indexSplit.html", html=html, files=files, results={})
-        return jsonify(folders)
+        return render_template("indexSplit.html", html=html,folders=folders files=files, results={})
 
     else:
         flash("Please log in first")
