@@ -6,10 +6,9 @@ import boto3
 from IPython.display import Markdown, display
 from main import api_kx
 
-
 folder_name = 's3/data/coherent_chameleon'
-AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
-AWS_SECRET_ACCESS_KEY = 'QspohE+8VYcwJzA18cvfQJQZFst2q+WEgMtqvC1A'
+AWS_ACCESS_KEY_ID = 'your_access_key'
+AWS_SECRET_ACCESS_KEY = 'your_secret_key'
 AWS_DEFAULT_REGION = 'eu-north-1'
 BUCKET_NAME = 'knowledgevortex'
 s3_client = boto3.client(
@@ -19,12 +18,8 @@ s3_client = boto3.client(
     region_name=AWS_DEFAULT_REGION
 )
 
-def initialize_ai(api_key_name, api_key_value):
-    os.environ[api_key_name] = api_key_value
-
-
-#
-initialize_ai("OPENAI_API_KEY", api_kx)
+def initialize_ai(api_key_value):
+    os.environ["OPENAI_API_KEY"] = api_key_value
 
 def construct_index(directory_path, api_key, bucket_name):
     max_input_size = 4096
@@ -32,8 +27,7 @@ def construct_index(directory_path, api_key, bucket_name):
     max_chunk_overlap = 20
     chunk_size_limit = 600
 
-    os.environ["OPENAI_API_KEY"] = api_kx
-    openai.api_key = api_kx
+    openai.api_key = api_key
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.5, model_name="text-curie-001", max_tokens=num_outputs))
     prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
 
@@ -52,7 +46,6 @@ def construct_index(directory_path, api_key, bucket_name):
 
     return index
 
-
 def check_and_construct_index(directory_path, api_key, bucket_name):
     index_file = "index.json"
 
@@ -64,7 +57,6 @@ def check_and_construct_index(directory_path, api_key, bucket_name):
         index = GPTSimpleVectorIndex.load_from_disk('index.json')
 
     return index
-
 
 def main():
     api_key = input("Paste your OpenAI key here and hit enter:")
