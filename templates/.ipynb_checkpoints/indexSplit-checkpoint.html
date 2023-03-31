@@ -867,11 +867,12 @@ async function save_doc() {
     content: [
       {
         image: imageDataUrl,
-        width: canvas.width * 0.75,
-        height: canvas.height * 0.75,
+        width: canvas.width * 0.85,
+        height: canvas.height * 0.85,
       },
       {
-       
+        text: '',
+        pageBreak: 'after',
       },
     ],
     pageMargins: [40, 60, 40, 60],
