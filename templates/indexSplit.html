@@ -516,6 +516,13 @@ v1.5
   cursor: pointer;
     
 }
+          
+ .large-image {
+  width: 70%; /* Adjust the width as desired */
+  max-width: 900px; /* Adjust the maximum width as desired */
+  height: auto;
+}
+          
 #theme option:hover {
   background-color: var(--matrix-green-1);
 }
@@ -825,7 +832,18 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
        
 // Initialize Quill editor
 var quill = new Quill('#quill-editor', {
-  theme: 'snow'
+  theme: 'snow',
+    modules: {
+    toolbar: {
+      container: [
+        // ...
+        ['image'],
+      ],
+      handlers: {
+        image: customImageHandler,
+      },
+    },
+  },
 });
 
 async function save_doc() {
@@ -844,7 +862,7 @@ async function save_doc() {
   document.body.appendChild(container);
 
   // Render the content as an image using html2canvas
-  const canvas = await html2canvas(container, { scale: 1 });
+  const canvas = await html2canvas(container, { scale: 0.8 });
 
   // Remove the temporary container
   document.body.removeChild(container);
@@ -855,7 +873,6 @@ async function save_doc() {
   // Get the current date and time
   const now = new Date();
   const dateString = now.toLocaleDateString();
-  const timeString = now.toLocaleTimeString();
 
   // Define the PDF content using pdfmake
   const docDefinition = {
@@ -874,7 +891,7 @@ async function save_doc() {
        
       },
     ],
-    pageMargins: [00, 60, 00, 60],
+    pageMargins: [40, 60, 40, 60],
     styles: {
       header: {
         fontSize: 14,
@@ -891,7 +908,26 @@ async function save_doc() {
 }
 
 
+function customImageHandler() {
+  const input = document.createElement('input');
+  input.setAttribute('type', 'file');
+  input.setAttribute('accept', 'image/*');
+  input.click();
 
+  input.onchange = () => {
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const range = quill.getSelection(true);
+      quill.insertEmbed(range.index, 'image', reader.result);
+      quill.formatText(range.index, 1, 'class', 'large-image');
+      quill.setSelection(range.index + 1);
+    };
+
+    reader.readAsDataURL(file);
+  };
+}
 
        
        
