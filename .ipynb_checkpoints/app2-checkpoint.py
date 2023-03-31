@@ -52,8 +52,8 @@ def index():
         contents = s3_client.list_objects(Bucket=BUCKET_NAME)
         response = s3_client.list_objects(Bucket=BUCKET_NAME, Delimiter='/')
 
-        for prefix in response['CommonPrefixes']:
-            print(prefix['Prefix'][:-1])
+        folders = [prefix['Prefix'][:-1] for prefix in response['CommonPrefixes']]
+
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
