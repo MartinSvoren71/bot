@@ -518,7 +518,7 @@ v1.5
 }
           
  .large-image {
-  width: 70%; /* Adjust the width as desired */
+  width: 80%; /* Adjust the width as desired */
   max-width: 900px; /* Adjust the maximum width as desired */
   height: auto;
 }
@@ -849,8 +849,6 @@ var quill = new Quill('#quill-editor', {
 async function save_doc() {
   // Get content from Quill editor
   const content = quill.root.innerHTML;
-const now = new Date();
-const timeString = now.toLocaleTimeString();
 
   // Create a temporary container for rendering
   const container = document.createElement('div');
