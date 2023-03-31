@@ -20,7 +20,7 @@ s3_client = boto3.client(
 )
 
 def initialize_ai(api_key):
-    os.environ[api_k] = api_kx
+    os.environ[api_key] = api_kx
 #
 initialize_ai(api_kx)
 
