@@ -3,6 +3,11 @@ v1.5
 <html lang="en">
    <head>
       <title>Knowledge Vortex Bot</title>
+       <!-- Include Quill stylesheet -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- Include Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
       <script>
          window.onload = function() {
              const savedTheme = localStorage.getItem("theme");
@@ -356,7 +361,7 @@ v1.5
          width: 100%;
          }
           
-          out_text{
+          quill-editor{
           width: 100%;
          height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
@@ -613,12 +618,9 @@ v1.5
 <div class="container flex-container" style="container3">
       <div class="left-down-down-side">
            <div><h1>__create new document__</h1></div>
-        <form id="save_pdf">
-        <textarea style="out_text" name="text"></textarea><br>
-        <button style="button" id="button-download" onclick="save(event)">download</button>  
+     <div id="quill-editor"></div>
 
-          </form>
- 
+
        </div>
           
           
@@ -783,5 +785,14 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
          }
          
          setInterval(draw, 33);
+       
+  // Initialize Quill editor
+  var quill = new Quill('#quill-editor', {
+    theme: 'snow'
+  });
+
+       
+       
+       
    </script>    
 </html>
