@@ -5,6 +5,7 @@ import os
 import boto3
 from IPython.display import Markdown, display
 from main import api_kx
+api_key=api_kx
 
 folder_name = 's3/data/coherent_chameleon'
 AWS_ACCESS_KEY_ID = 'your_access_key'
