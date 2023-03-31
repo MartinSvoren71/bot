@@ -10,8 +10,7 @@ v1.5
                  document.getElementById("theme").value = savedTheme;
              }
          };
-          
-               
+                 
           setInterval(function() {
             // Code to refresh the log container
             loadLogFile();
@@ -138,6 +137,7 @@ v1.5
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
+       
          }
          body {
          margin: 0;
@@ -250,6 +250,25 @@ v1.5
     min-height: 5vh; /* Adjust this to the desired minimum height */
     resize: vertical; /* Allow vertical resizing */
 }
+          
+     out_text  {
+    font-size: 1.5em;
+    margin: 0px;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: red;
+    justify-content: center;
+    align-items: center;
+    margin: 4% auto;
+    filter: drop-shadow(0 0 0.35rem green);
+    text-align: left;
+    padding: 10px;
+    width: 100%; /* Adjust this to the desired width */
+    min-height: 5vh; /* Adjust this to the desired minimum height */
+    resize: vertical; /* Allow vertical resizing */
+}     
+          
            input[type="text"] {
         font-size: 1.5em;
     margin: 0px;
@@ -441,6 +460,8 @@ v1.5
           }
       </style>
    </head>
+    
+    
    <body onsubmit="event.preventDefault();" onclick="event.preventDefault();">
       <div class="container">
          <div class="content-wrapper">
@@ -518,7 +539,7 @@ v1.5
           
       <div class="container">
       <div class="left-down-down-side">
-      <div class="list-container">
+
           
         <form id="save_pdf">
         <textarea style="out_text" name="text"></textarea><br>
@@ -526,7 +547,7 @@ v1.5
 
           </form>
  
-      </div> </div>
+       </div>
           
           
           
