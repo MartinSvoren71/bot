@@ -4,6 +4,8 @@ import sys
 import os
 import boto3
 from IPython.display import Markdown, display
+from main import api_kx
+api_key=api_kx
 
 folder_name = 's3/data/coherent_chameleon'
 app = Flask(__name__, static_folder='/')
