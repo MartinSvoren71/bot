@@ -836,6 +836,7 @@ var quill = new Quill('#quill-editor', {
 async function save_doc() {
   // Get content from Quill editor
   const content = quill.root.innerHTML;
+  const contentWithStyles = content.replace(/<p>/g, '<p style="color: black;">').replace(/<(h[1-6])>/g, '<$1 style="text-shadow: 2px 2px 4px red;">');
 
   // Create a temporary container for rendering
   const container = document.createElement('div');
