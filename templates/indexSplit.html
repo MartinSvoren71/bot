@@ -849,6 +849,8 @@ var quill = new Quill('#quill-editor', {
 async function save_doc() {
   // Get content from Quill editor
   const content = quill.root.innerHTML;
+const now = new Date();
+const timeString = now.toLocaleTimeString();
 
   // Create a temporary container for rendering
   const container = document.createElement('div');
