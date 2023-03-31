@@ -852,16 +852,35 @@ async function save_doc() {
   // Convert the canvas to a data URL
   const imageDataUrl = canvas.toDataURL('image/png');
 
+  // Get the current date and time
+  const now = new Date();
+  const dateString = now.toLocaleDateString();
+  const timeString = now.toLocaleTimeString();
+
   // Define the PDF content using pdfmake
   const docDefinition = {
+    header: {
+      text: `Procedure Knowledge Vortex - ${dateString} ${timeString}`,
+      margin: [40, 20, 40, 0],
+      style: 'header',
+    },
     content: [
       {
         image: imageDataUrl,
         width: canvas.width * 0.75,
         height: canvas.height * 0.75,
       },
+      {
+       
+      },
     ],
     pageMargins: [40, 60, 40, 60],
+    styles: {
+      header: {
+        fontSize: 14,
+        bold: true,
+      },
+    },
   };
 
   // Create a new pdfmake instance
@@ -870,6 +889,7 @@ async function save_doc() {
   // Save and download the PDF
   pdfDoc.download('document.pdf');
 }
+
 
 
 
