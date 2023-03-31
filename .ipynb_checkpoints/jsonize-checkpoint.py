@@ -23,7 +23,7 @@ def upload_file_to_s3(file_path, bucket_name, object_key):
     s3 = boto3.resource('s3')
     s3.Object(bucket_name, object_key).put(Body=open(file_path, "rb"))
 
-ddef construct_index(directory_path, api_key, bucket_name):
+def construct_index(directory_path, api_key, bucket_name):
     index_file = "index.json"
     
     if not os.path.exists(index_file):
