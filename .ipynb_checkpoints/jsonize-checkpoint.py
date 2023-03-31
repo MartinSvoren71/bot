@@ -1,34 +1,40 @@
-import boto3
-import os
-import tempfile
-import shutil
-from llama_index import SimpleDirectoryReader, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
+from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
-import logging
-import openai
-from main import api_kx
+import sys
+import os
+import boto3
+from IPython.display import Markdown, display
 
-# Configure logging
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s: %(message)s',
-                    handlers=[logging.FileHandler('jsonoze.txt', mode='w'),
-                              logging.StreamHandler()])
+folder_name = 's3/data/coherent_chameleon'
+app = Flask(__name__, static_folder='/')
+app.secret_key = "xxx007"
+AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_DEFAULT_REGION = 'eu-north-1'
+BUCKET_NAME = 'knowledgevortex'
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    region_name=AWS_DEFAULT_REGION
+)
 
-def initialize_GPT(api_kx):
-    os.environ["OPENAI_API_KEY"] = api_kx
-
-initialize_GPT(api_kx)
-
-def construct_index(directory_path):
+def construct_index(directory_path, api_key, bucket_name):
     max_input_size = 4096
     num_outputs = 2000
     max_chunk_overlap = 20
     chunk_size_limit = 600
 
+    os.environ["OPENAI_API_KEY"] = api_key
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.5, model_name="text-curie-001", max_tokens=num_outputs))
     prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
 
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(bucket_name)
     documents = SimpleDirectoryReader(directory_path).load_data()
+    for doc in documents:
+        s3_object = bucket.Object(f"{directory_path}/{doc}")
+        s3_object.put(Body=doc)
 
     index = GPTSimpleVectorIndex(
         documents, llm_predictor=llm_predictor, prompt_helper=prompt_helper
@@ -38,89 +44,38 @@ def construct_index(directory_path):
 
     return index
 
-def download_folder(s3_client, bucket, prefix, local_dir):
-    paginator = s3_client.get_paginator('list_objects_v2')
-    for result in paginator.paginate(Bucket=bucket, Prefix=prefix):
-        for content in result.get('Contents', []):
-            s3_path = content['Key']
-            local_path = os.path.join(local_dir, s3_path[len(prefix):])
-            os.makedirs(os.path.dirname(local_path), exist_ok=True)
-            s3_client.download_file(bucket, s3_path, local_path)
 
-def upload_file(s3_client, bucket, s3_path, local_path):
-    s3_client.upload_file(local_path, bucket, s3_path)
+def check_and_construct_index(directory_path, api_key, bucket_name):
+    index_file = "index.json"
 
-def check_and_generate_json(s3_client, bucket_name, folder):
-    paginator = s3_client.get_paginator('list_objects_v2')
-    result = paginator.paginate(Bucket=bucket_name, Prefix=folder)
-
-    json_exists = False
-    for page in result:
-        for obj in page['Contents']:
-            if obj['Key'].endswith('.json'):
-                json_exists = True
-                break
-        if json_exists:
-            break
-
-    if not json_exists:
-        logging.debug(f"JSON file not found in {folder}. Generating JSON file.")
-        # Download the folder, generate JSON file using construct_index function, and upload it back to S3
-        # Code to download folder from S3, generate JSON and upload
+    if not os.path.exists(index_file):
+        print(f"Constructing index from data in {directory_path}...")
+        index = construct_index(directory_path, api_key, bucket_name)
+        print("Index constructed and saved to disk.")
     else:
-        logging.debug(f"JSON file found in {folder}.")
+        index = GPTSimpleVectorIndex.load_from_disk('index.json')
 
-    if not json_exists:
-        logging.debug(f"JSON file not found in {folder}. Generating JSON file.")
+    return index
 
-        with tempfile.TemporaryDirectory() as tempdir:
-            local_folder = os.path.join(tempdir, folder)
-            download_folder(s3_client, bucket_name, folder, local_folder)
-            construct_index(local_folder)
-            json_file_path = os.path.join(local_folder, "index.json")
-            s3_json_file_path = os.path.join(folder, "index.json")
-            upload_file(s3_client, bucket_name, s3_json_file_path, json_file_path)
-
-        logging.debug(f"JSON file generated and uploaded to {folder}.")
-    else:
-        logging.debug(f"JSON file found in {folder}.")
 
 def main():
-    folder_name = 's3/data/'
-    AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
-    AWS_SECRET_ACCESS_KEY = 'QspohE+8VYcwJzA18cvfQJQZFst2q+WEgMtqvC1A'
-    AWS_DEFAULT_REGION = 'eu-north-1'
-    BUCKET_NAME = 'knowledgevortex'
+    api_key = input("Paste your OpenAI key here and hit enter:")
+    bucket_name = 'knowledgevortex'
 
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id=AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-        region_name=AWS_DEFAULT_REGION
-    )
+    data_directory = "context_data/data"
+    index_file = "index.json"
 
-    # List all directories in the specified folder
-    paginator = s3_client.get_paginator('list_objects_v2')
-    result = paginator.paginate(Bucket=BUCKET_NAME, Prefix=folder_name, Delimiter='/')
+    index = check_and_construct_index(data_directory, api_key, bucket_name)
 
-    for prefix in result.search('CommonPrefixes'):
-        folder = prefix.get('Prefix')
-        logging.debug(f"Checking folder: {folder}")
-        check_and_generate_json(s3_client, BUCKET_NAME, folder)
+    print("\nYou can now ask questions. Type 'exit' to quit.\n")
+    while True:
+        question = input("What do you want to ask? ")
+        if question.strip().lower() == "exit":
+            break
+        else:
+            response = index.query(question, response_mode="compact")
+            print(f"Response: {response.response}\n")
 
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
