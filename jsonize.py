@@ -3,15 +3,21 @@ import boto3
 from llama_index import SimpleDirectoryReader, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain import OpenAI
 from main import api_kx
-
+api_key=api_kx
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_DEFAULT_REGION = 'eu-north-1'
-BUCKET_NAME = 'knowledgevortex'
-
+bucket_name = 'knowledgevortex'
+directory_path = 's3/data/coherent_chameleon/'
+s3_client = boto3.client(
+    's3',
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    region_name=AWS_DEFAULT_REGION
+)
 
 def initialize_ai(api_key_value):
-    os.environ["OPENAI_API_KEY"] = api_key_value
+    os.environ["OPENAI_API_KEY"] = api_key
 
 def download_files_from_s3(bucket_name, directory_path):
     s3 = boto3.resource('s3')
