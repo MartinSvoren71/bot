@@ -49,7 +49,6 @@ def bad_key():
 def index():
     if "logged_in" in session:
         # Load the themes from the themes.json file
-        return render_template('new_document.html')
         with open('themes.json', 'r') as f:
             themes = json.load(f)
         # Generate the <option> elements dynamically
