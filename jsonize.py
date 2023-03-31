@@ -8,7 +8,6 @@ from main import api_kx
 api_key=api_kx
 
 folder_name = 's3/data/coherent_chameleon'
-app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
 AWS_SECRET_ACCESS_KEY = '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'
