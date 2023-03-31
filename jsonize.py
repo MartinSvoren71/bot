@@ -19,8 +19,8 @@ s3_client = boto3.client(
     region_name=AWS_DEFAULT_REGION
 )
 
-def initialize_ai(api_key_value):
-    os.environ["OPENAI_API_KEY"] = api_key_value
+def initialize_ai(api_key):
+    os.environ["OPENAI_API_KEY"] = api_key
 
 def construct_index(directory_path, api_key, bucket_name):
     max_input_size = 4096
