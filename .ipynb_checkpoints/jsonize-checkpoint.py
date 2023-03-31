@@ -4,10 +4,11 @@ from llama_index import SimpleDirectoryReader, GPTSimpleVectorIndex, LLMPredicto
 from langchain import OpenAI
 from main import api_kx
 
-AWS_ACCESS_KEY_ID = 'your_access_key'
-AWS_SECRET_ACCESS_KEY = 'your_secret_key'
+AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
+AWS_SECRET_ACCESS_KEY = 'QspohE+8VYcwJzA18cvfQJQZFst2q+WEgMtqvC1A'
 AWS_DEFAULT_REGION = 'eu-north-1'
 BUCKET_NAME = 'knowledgevortex'
+
 
 def initialize_ai(api_key_value):
     os.environ["OPENAI_API_KEY"] = api_key_value
