@@ -66,7 +66,7 @@ def index():
         files = contents['Contents']
         for file in files:
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-        return render_template("indexSplit.html", html=html,folders=folders files=files, results={})
+        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
         flash("Please log in first")
