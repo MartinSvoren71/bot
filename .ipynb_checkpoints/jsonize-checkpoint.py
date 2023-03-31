@@ -60,7 +60,6 @@ def check_and_construct_index(directory_path, api_key, bucket_name):
     return index
 
 def main():
-    api_key = input("Paste your OpenAI key here and hit enter:")
     bucket_name = 'knowledgevortex'
 
     data_directory = "context_data/data"
@@ -68,15 +67,5 @@ def main():
 
     index = check_and_construct_index(data_directory, api_key, bucket_name)
 
-    print("\nYou can now ask questions. Type 'exit' to quit.\n")
-    while True:
-        question = input("What do you want to ask? ")
-        if question.strip().lower() == "exit":
-            break
-        else:
-            response = index.query(question, response_mode="compact")
-            print(f"Response: {response.response}\n")
-
-
-if __name__ == "__main__":
-    main()
+    print("\I am done.\n")
+    
