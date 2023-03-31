@@ -48,6 +48,8 @@ def bad_key():
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
+        bucket_name = 'your-bucket-name'
+        folders = list_folders(bucket_name)
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
@@ -64,6 +66,8 @@ def index():
         for file in files:
             file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
         return render_template("indexSplit.html", html=html, files=files, results={})
+        return jsonify(folders)
+
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
@@ -176,6 +180,13 @@ def generate_pdf_route():
     content = request.form['content']
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
+
+def list_folders(bucket_name):
+    s3 = boto3.client('s3')
+    response = s3.list_objects_v2(Bucket=bucket_name, Delimiter='/')
+    folders = [common_prefix['Prefix'] for common_prefix in response.get('CommonPrefixes', [])]
+    return folders
+
 
 
 t = Thread(target=initialize_ai)

@@ -595,11 +595,9 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-                     <select name="model" id="model" onchange="saveModel()">
-                        <option value="text-davinci-003">text-davinci-003	</option>
-                        <option value="gpt-4">gpt-4</option>
-                        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-                     </select>
+                   <select id="folder-select">
+  <option value="">Choose a folder</option>
+</select>
                   </div>
                     </form>
                   <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
@@ -893,6 +891,20 @@ async function save_doc() {
   pdfDoc.download('document.pdf');
 }
 
+async function load_folders() {
+  const response = await fetch('/list_folders');
+  const folders = await response.json();
+  const folderSelect = document.getElementById('folder-select');
+
+  folders.forEach((folder) => {
+    const option = document.createElement('option');
+    option.value = folder;
+    option.textContent = folder;
+    folderSelect.appendChild(option);
+  });
+}
+
+load_folders();
 
 
 
