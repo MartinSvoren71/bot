@@ -50,7 +50,7 @@ def bad_key():
 def index():
     if "logged_in" in session:
         contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-        response = s3_client.list_objects(Bucket=BUCKET_NAME, Delimiter='/')
+        response = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name, Delimiter='/')
 
         folders = [prefix['Prefix'][:-1] for prefix in response['CommonPrefixes']]
 
