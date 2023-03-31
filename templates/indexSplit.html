@@ -816,7 +816,13 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
          
          setInterval(draw, 33);
        
-/ Your existing Quill initialization code
+  // Initialize Quill editor
+  var quill = new Quill('#quill-editor', {
+    theme: 'snow'
+  });
+
+       
+       / Your existing Quill initialization code
   var quill = new Quill('#quill-editor', {
     theme: 'snow'
   });
@@ -855,8 +861,6 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
       console.error('Error generating PDF:', error);
     });
   });
-       
-       
        
    </script>    
 </html>
