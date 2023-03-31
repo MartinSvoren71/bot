@@ -10,7 +10,8 @@ v1.5
                  document.getElementById("theme").value = savedTheme;
              }
          };
-                 
+          
+               
           setInterval(function() {
             // Code to refresh the log container
             loadLogFile();
@@ -56,41 +57,19 @@ v1.5
   --matrix-green-6:                #0e1c0d;  
               --matrix-amber-1:   #997334;
               --matrix-amber-2:   #ffdd9d;
-              font-family: 'Lucida Console', monospace;  
+              
           }       
       
          
          .container {
-         display: flex;
+         display: fixed;
          width: 98vw;
-             height:98vh;
-                  padding:1%;
-         height: auto;
+         height: 99vh;
          margin-left:1vw;
          margin-right:1vw;
+         margin-top:1vw;
          justify-content: center;
-
          }
-        #container2 {
-            max-height: 80vh;
-            min-height: 20vh;
-            width: 98vw;
-
-         padding:1%;
-         margin-left:1vw;
-         margin-right:1vw;
-         justify-content: center;
-
-         }
-          
-     .flex-container {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-container > div {
-  flex: 1;
-}
          .content-wrapper {
          flex: 1;
          position: relative;
@@ -98,19 +77,17 @@ v1.5
          flex-direction: column;
          align-items: center;
          justify-content: center;
+         overflow: hidden;
          }
          .right-side {
          top: 0;
-        max-height:98vh;
-
          right: 0;
          flex: 1;
-         display: flex;
+         display: fixed;
          justify-content: center;
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-            
          }
          .left-side {
          top: 0;
@@ -125,29 +102,24 @@ v1.5
          top: 100vh;
          left:0;
          flex: 1;
+         display: fixed;
          justify-content: center;
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-      
-
          }
          .right-down-side {
-         top: auto;
+         top: 100vh;
          right:0;
          flex: 1;
+         display: fixed;
          justify-content: center;
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-     
-
-             
-  flex-direction: column;
-  overflow-y: auto;
          }
          .left-down-down-side {
-         top: auto;
+         top: 200vh;
          left:0;
          flex: 1;
          display: fixed;
@@ -157,7 +129,7 @@ v1.5
          border: 0.1px solid red;
          }
          .right-down-down-side {
-         top: auto;
+         top: 200vh;
          right:0;
          flex: 1;
          display: fixed;
@@ -165,22 +137,21 @@ v1.5
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-       
          }
          body {
          margin: 0;
          background-color: black;
          color: #00FF00;
-       
+         font-family: 'Lucida Console', monospace;
          font-size: 12px;
          font-weight: bold;
          overflow: scroll;
          justify-content: center;
          align-items: center;
-        
          }
          canvas {
          width: 100vw;
+         height: 100vh;
          z-index: -1;
          opacity: 0.35;
          position: fixed;
@@ -188,7 +159,9 @@ v1.5
          left: 0%;
          padding-top: 0px;
          color: var(--matrix-green-1);
+
              filter: drop-shadow(0 0 0.95rem var(--matrix-red-pill));
+
          }
          img {
          width: 13vw;
@@ -207,19 +180,17 @@ v1.5
          filter: drop-shadow(0 0 0.75rem green);   
          }
          #log-container {
-         width: 98%;
-        max-height:98vh;
-
-                      justify-content: center;
-         align-items: center;
+         width: 100%;
+         height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
+         overflow-y: scroll;
          color: #00FF00;
+         font-family: 'Lucida Console', monospace;
          font-size: 13px;
          font-weight: bold;
-            white-space: pre-wrap;
+         white-space: pre-wrap;
          -ms-overflow-style: none;
          scrollbar-width: none;
-
          }
          #select-container-2{
          margin-top:2%;
@@ -233,18 +204,21 @@ v1.5
          font-size: 1.5em;
          text-align: center;
                                      filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+
          }
          h2 {
          max-width: 100%;
          font-size: 1.2em;
          text-align: center;
                                      filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+
          }
          h3 {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
                                      filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+
          }
          h4 {
          max-width: 100%;
@@ -263,74 +237,24 @@ v1.5
          font-size: 1.5em;
          margin-right: 20px;
          }
-   textarea {
-    font-size: 1.5em;
-    margin: 0px;
-    border: none;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: red;
-    justify-content: center;
-    align-items: center;
-    margin: 4% auto;
-    filter: drop-shadow(0 0 0.35rem green);
-    text-align: left;
-    padding: 10px;
-    width: 100%; /* Adjust this to the desired width */
-    min-height: 5vh; /* Adjust this to the desired minimum height */
-    resize: vertical; /* Allow vertical resizing */
-}
-          
-     out_text  {
-    font-size: 1.5em;
-    margin: 0px;
-    border: none;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: red;
-    justify-content: center;
-    align-items: center;
-    margin: 4% auto;
-    filter: drop-shadow(0 0 0.35rem green);
-    text-align: left;
-    padding: 10px;
-    width: 100%; /* Adjust this to the desired width */
-    min-height: 5vh; /* Adjust this to the desired minimum height */
-    resize: vertical; /* Allow vertical resizing */
-}     
-          
-           input[type="text"] {
-        font-size: 1.5em;
-    margin: 0px;
-    border: none;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: red;
-    justify-content: center;
-    align-items: center;
-    margin: 4% auto;
-    filter: drop-shadow(0 0 0.35rem green);
-    text-align: left;
-    padding: 10px;
-    width: 100%; /* Adjust this to the desired width */
-          
+         input[type="text"] {
+         font-size: 2em;
+         margin: 0px;
+         border: none;
+         outline: none;
+         background-color: #1f1f1f;
+         color: red;
+         justify-content: center;
+         align-items: center;
+               margin: 4% auto;
+         filter: drop-shadow(0 0 0.35rem green);
+             text-align: center;
          }
          .button-wrapper {
          display: flex;
          justify-content: center;
          width: 100%;
          }
-          
-          out_text{
-          width: 100%;
-         height: 100%;
-         background-color: rgba(0, 0, 0, 0.2);
-         color: #00FF00;
-     
-         font-size: 13px;
-         font-weight: bold;
-         white-space: pre-wrap;
-          }
          button {
          font-size: 1.6em;
          padding: 10px;
@@ -340,44 +264,50 @@ v1.5
          outline: none;
          background-color: var(--matrix-green-1);
                                  filter: drop-shadow(0 0 0.35rem var(--matrix-amber-2));
+
          color: black;
          cursor: pointer;
          }
-       buttonGPT {
+       #buttonGPT {
          font-size: 1.6em;
          padding: 10px;
          border-radius: 8px;
          margin-top: 15px;
          border: none;
          outline: none;
-         background-color: var(--matrix-red-pill);
+         background-color: var(--matrix-green-3);
          color: black;
          cursor: pointer;
                     filter: drop-shadow(0 0 0.35rem red);
+
          }
-        buttonAI {
+        #buttonAI {
          font-size: 1.6em;
          padding: 10px;
          border-radius: 8px;
          margin-top: 15px;
          border: none;
          outline: none;
-         background-color: var(--matrix-blue-pill);
+         background-color: var(--matrix-green-3);
          color: black;
          cursor: pointer;
                      filter: drop-shadow(0 0 0.35rem red);
+
          }
          button:hover {
          background-color: var(--matrix-amber-1);
                                   filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
+
          }
            #button-AI:hover {
          background-color: var(--matrix-blue-pill);
-                        filter: drop-shadow(0 0 0.85rem var(--matrix-blue-pill));
+                        filter: drop-shadow(0 0 0.35rem var(--matrix-blue-pill));
+
          }
            #button-GPT:hover {
          background-color: var(--matrix-red-pill);
-                        filter: drop-shadow(0 0 0.85rem var(--matrix-red-pill));
+                        filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+
          }
          .input-key {
          font-size: 1em;
@@ -396,7 +326,9 @@ v1.5
          .file-list-container {
          padding: 0x;
          margin-top: 15px;
-         width: auto;
+         width: 60%;
+         height: 800px;
+         overflow: hiden;
          }
          .container {
          display: flex;
@@ -418,6 +350,7 @@ v1.5
          }
          .list-container, .pdf-container {
          width: 50vw;
+         height: 100vh; /* Change the height value here */
          overflow: hiden;
          }
           #theme {
@@ -429,6 +362,7 @@ v1.5
   color: #333;
   cursor: pointer;
 }
+
 #theme option {
   font-size: 1.2em;
   padding: 8px 12px;
@@ -439,9 +373,11 @@ v1.5
   color: #333;
   cursor: pointer;
 }
+
 #theme option:hover {
   background-color: var(--matrix-green-1);
 }
+
 #theme:focus,
 #theme:active {
   border-color: var(--matrix-red-1);
@@ -455,6 +391,7 @@ v1.5
   color: #333;
   cursor: pointer;
 }
+
 #model option {
   font-size: 1.2em;
   padding: 8px 12px;
@@ -465,9 +402,11 @@ v1.5
   color: #333;
   cursor: pointer;
 }
+
 #model option:hover {
   background-color: var(--matrix-green-1);
 }
+
 #model:focus,
 #model:active {
   border-color: var(--matrix-red-1);
@@ -475,38 +414,37 @@ v1.5
  #results {
          width: 100%;
          height: 90%;
-         background-color: rgba(0, 0, 0, 0.2); 
+         background-color: rgba(0, 0, 0, 0.2);
+         overflow-y: scroll;
          color: #00FF00;
          font-family: 'Lucida Console', monospace;
          font-size: 13px;
          font-weight: bold;
-           
+         -ms-overflow-style: none;
+         scrollbar-width: none;     
           }
       </style>
    </head>
-    
-    
-   <body onsubmit="event.preventDefault();" onclick="event.preventDefault();">
-            <canvas id="matrixCanvas"></canvas>
+   <body>
       <div class="container">
          <div class="content-wrapper">
-       
+            <canvas id="matrixCanvas"></canvas>
             <div class="left-side">
                <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/logo1.png" alt="KV Logo">
                <h2 id="datetime" style="color: red;"></h2>
                <h1>Knowledge Vortex to your service</h1>
-               <h3>ask Operator a library related question</h3>
-               <form id="ask-form" enctype="multipart/form-data" >
-                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
-                   <div>
-                  <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">ask OpenAI </button>
-                  <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">ask library</button>  
+               <h3>Ask Operator a library related question</h3>
+               <form id="ask-form" action="/ask" method="POST">
+                  <input type="text" name="question" id="question" placeholder="How can I help?"required>
+                   <div style="display: inline-block;">
+                  <button type="buttonGPT" id="button-GPT" onclick="">Ask within OpenAI </button>
+                  <button type="buttonAI" id="button-AI" onclick="">Ask within library</button>
                    </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
                      <select name="theme" id="theme" onchange="saveTheme()">
-                        <option value="coherent_chameleon">coherent_chameleon</option>
-                        <option value="chameleondiscovery">ChameleonDiscovery</option>
+                        <option value="chameleon">Chameleon</option>
+                        <option value="chameleondiscovery">Chameleon Discovery</option>
                         <option value="innova">Innova</option>
                         <option value="powerline">Power Line</option>
                         <option value="compex">Compex</option>
@@ -523,7 +461,6 @@ v1.5
                         <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
                      </select>
                   </div>
-                    </form>
                   <h4 style="color: grey;"> example for ZygoMX: write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
                     <h1>Vortex keyword search</h1>
       <form id="search-form">
@@ -534,15 +471,16 @@ v1.5
          </div>
              
              
-     
          <div class="right-side">
+         <canvas id="matrixCanvasRight"></canvas>
+         <div class="right-side"></div>
          <div id="log-container"></div>
          </div>
       </div>
           
           
           
-<div class="container flex-container" style="container2">
+      <div class="container">
       <div class="left-down-side">
       <div class="list-container">
       <ul>
@@ -563,14 +501,9 @@ v1.5
           
       <div class="container">
       <div class="left-down-down-side">
-        <form id="save_pdf">
-            <h1>create New Document
-        <textarea style="out_text" name="text"></textarea><br>
-        <button style="button" id="button-download" onclick="save(event)">download</button>  
-
-          </form>
- 
-       </div>
+      <div class="list-container">
+      <ul>
+      </div> </div>
           
           
           
@@ -592,7 +525,26 @@ v1.5
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script>
        
-     
+      document.getElementById('ask-form').addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the form from submitting and refreshing the page
+      
+      // Collect the form data
+      const formData = new FormData(event.target);
+      
+      // Send the data to the server using AJAX
+      fetch('/ask', {
+      method: 'POST',
+      body: formData,
+      })
+      .then((response) => response.text())
+      .then((html) => {
+        // Replace the content of the page with the new HTML received from the server
+        document.documentElement.innerHTML = html;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+      });
         
       function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
@@ -616,66 +568,17 @@ v1.5
       loadLogFile();
              
               function saveTheme() {
-       const selectedModel = document.getElementById("theme").value;
-       localStorage.setItem("theme", selectedModel);
+       const selectedModel = document.getElementById("model").value;
+       localStorage.setItem("model", selectedModel);
       }  
        function saveModel() {
        const selectedModel = document.getElementById("model").value;
        localStorage.setItem("model", selectedModel);
       }  
        
-          
+                      
+             
        
-    async function ask_LIB(event) {
-         event.preventDefault();
-        const form = document.getElementById("ask-form");
-        const formData = new FormData(form);
-        const response =  fetch("/ask_lib", {
-            method: "POST",
-            body: formData,
-        });
-    } 
-       async function ask_GPT(event) {
-        event.preventDefault();   
-        const form = document.getElementById("ask-form");
-        const formData = new FormData(form);
-        const response =  fetch("/ask_gpt", {
-            method: "POST",
-            body: formData,
-        });     
-       }  
-       
-       
-       function save(event) {
-        event.preventDefault();   
-        fetch('/text_editor', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({ text: '' }),
-    })
-        .then((response) => {
-            if (response.ok) {
-                return response.blob();
-            }
-            throw new Error('Network response was not ok.');
-        })
-        .then((blob) => {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'download.pdf';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        })
-        .catch((error) => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
-}
-       
-
        
         function searchFiles() {
     const keyword = $('#keyword').val();
@@ -696,6 +599,7 @@ v1.5
 }
 function showPDF(url) {
     document.getElementById('pdf-embed').src = '/lurl.pdf';
+
     setTimeout(() => {
         document.getElementById('pdf-embed').src = url;
     }, 300);
@@ -734,5 +638,6 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
          }
          
          setInterval(draw, 33);
+
    </script>    
 </html>
