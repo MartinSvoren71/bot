@@ -5,7 +5,7 @@ import os
 import boto3
 from IPython.display import Markdown, display
 from main import api_kx
-api_key=api_kx
+
 
 folder_name = 's3/data/coherent_chameleon'
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
@@ -18,6 +18,11 @@ s3_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
+
+def initialize_ai(api_key):
+    os.environ[api_k] = api_kx
+#
+initialize_ai(api_k)
 
 def construct_index(directory_path, api_key, bucket_name):
     max_input_size = 4096
