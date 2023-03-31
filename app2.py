@@ -50,7 +50,10 @@ def bad_key():
 def index():
     if "logged_in" in session:
         contents = s3_client.list_objects(Bucket=BUCKET_NAME)
-        folders = list_folders(BUCKET_NAME)
+        folders = s3_client.list_objects_v2(Bucket='BUCKET-NAME', Delimiter = '/')
+
+        for prefix in response['CommonPrefixes']:
+        print(prefix['Prefix'][:-1])
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
