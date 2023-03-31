@@ -22,7 +22,7 @@ s3_client = boto3.client(
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
 #
-initialize_ai(api_k)
+initialize_ai(api_kx)
 
 def construct_index(directory_path, api_key, bucket_name):
     max_input_size = 4096
