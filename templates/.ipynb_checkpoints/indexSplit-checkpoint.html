@@ -140,7 +140,7 @@ v1.5
                 
     margin: 0 auto; /* Center the container horizontally */
   }
-    quill-edditor {
+          .quill-edditor {
     width: 100%; /* You can adjust the width as needed */
     font-family: 'Lucida Console', monospace;  
 
@@ -148,7 +148,7 @@ v1.5
          height: 70vh;
          background-color: rgba(255, 255, 255, 0.7);
         
-         color: red;
+         color: black;
          font-size: 12px;
          font-weight: bold;
                 
@@ -862,8 +862,8 @@ async function save_doc() {
     content: [
       {
         image: imageDataUrl,
-        width: canvas.width * 0.60,
-        height: canvas.height * 0.60s,
+        width: canvas.width * 0.75,
+        height: canvas.height * 0.75,
       },
     ],
     pageMargins: [40, 60, 40, 60],
