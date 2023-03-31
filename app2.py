@@ -49,8 +49,8 @@ def bad_key():
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        bucket_name = 'your-bucket-name'
-        folders = list_folders(bucket_name)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        folders = list_folders(BUCKET_NAME)
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
