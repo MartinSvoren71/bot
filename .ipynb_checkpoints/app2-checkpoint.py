@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 from threading import Thread
@@ -12,6 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
+from weasyprint import HTML
 
 folder_name = 's3/data/'
 app = Flask(__name__, static_folder='/')
@@ -174,6 +175,13 @@ def save():
     content = request.form.get('content')
     # Save the content to a database or process it as needed
     return 'Content received: ' + content
+
+
+@app.route('/generate_pdf', methods=['POST'])
+def generate_pdf_route():
+    content = request.form['content']
+    pdf = HTML(string=content).write_pdf()
+    return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
 
 t = Thread(target=initialize_ai)
