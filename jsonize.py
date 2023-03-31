@@ -25,7 +25,8 @@ def construct_index(directory_path, api_key, bucket_name):
     max_chunk_overlap = 20
     chunk_size_limit = 600
 
-    os.environ["OPENAI_API_KEY"] = api_key
+    os.environ["OPENAI_API_KEY"] = api_kx
+    openai.api_key = api_kx
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.5, model_name="text-curie-001", max_tokens=num_outputs))
     prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
 
