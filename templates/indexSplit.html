@@ -67,7 +67,7 @@ v1.5
 
          display: flex;
          width: 98vw;
-             height:98vh;
+     
                   padding:1%;
          height: auto;
          margin-left:1vw;
@@ -81,6 +81,20 @@ v1.5
             max-height: 80vh;
             min-height: 20vh;
             width: 98vw;
+
+         padding:1%;
+         margin-left:1vw;
+         margin-right:1vw;
+         justify-content: center;
+
+         }
+           #container3 {
+                          font-family: 'Lucida Console', monospace;  
+ display: flex;
+            max-height: 200vh;
+            min-height: 80vh;
+            width: 98vw;
+            
 
          padding:1%;
          margin-left:1vw;
@@ -165,6 +179,7 @@ v1.5
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
+      height= 80vh;
          }
          .right-down-down-side {
          top: auto;
@@ -175,6 +190,8 @@ v1.5
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
+                     height= 80vh;
+
        
          }
          body {
@@ -295,7 +312,7 @@ v1.5
     resize: vertical; /* Allow vertical resizing */
 }
           
-     out_text  {
+     .out_text  {
                        font-family: 'Lucida Console', monospace;  
 
     font-size: 1.5em;
@@ -311,7 +328,7 @@ v1.5
     text-align: left;
     padding: 10px;
     width: 100%; /* Adjust this to the desired width */
-    min-height: 5vh; /* Adjust this to the desired minimum height */
+    height: 90vh; /* Adjust this to the desired minimum height */
     resize: vertical; /* Allow vertical resizing */
 }     
           
@@ -593,7 +610,7 @@ v1.5
 </div></div>
           
           
-      <div class="container">
+<div class="container flex-container" style="container3">
       <div class="left-down-down-side">
            <div><h1>__create new document__</h1></div>
         <form id="save_pdf">
