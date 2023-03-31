@@ -518,7 +518,7 @@ v1.5
 }
           
  .large-image {
-  width: 80%; /* Adjust the width as desired */
+  width: 70%; /* Adjust the width as desired */
   max-width: 900px; /* Adjust the maximum width as desired */
   height: auto;
 }
@@ -873,6 +873,7 @@ async function save_doc() {
   // Get the current date and time
   const now = new Date();
   const dateString = now.toLocaleDateString();
+  const timeString = now.toLocaleDateString();
 
   // Define the PDF content using pdfmake
   const docDefinition = {
