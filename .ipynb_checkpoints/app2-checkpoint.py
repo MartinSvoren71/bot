@@ -170,14 +170,9 @@ def search_files():
     return jsonify({'rendered_template': rendered_template})
     
 
+
+
 @app.route('/save', methods=['POST'])
-def save():
-    content = request.form.get('content')
-    # Save the content to a database or process it as needed
-    return 'Content received: ' + content
-
-
-@app.route('/generate_pdf', methods=['POST'])
 def generate_pdf_route():
     content = request.form['content']
     pdf = HTML(string=content).write_pdf()
