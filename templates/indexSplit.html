@@ -5,17 +5,7 @@ v1.5
       <title>Knowledge Vortex Bot</title>
        <!-- Include Quill stylesheet -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
-<!-- Include Quill library -->
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<!-- Include jsPDF library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-
-<!-- Include dom-to-image library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-    
 <!-- Include Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
       <script>
@@ -650,8 +640,7 @@ v1.5
      <div id="quill-editor"></div>
     <input type="hidden" name="content" id="content">
 </div>
-<button id="download-pdf">Download PDF</button>
-
+      <button type="buttonSave" onclick="save_doc()">Save</button>
 
        </div>
           
@@ -673,7 +662,15 @@ v1.5
       <h3>Knowledge Vortex 2023</h3>
 
    </body>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
+<!-- Include Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<!-- Include jsPDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+ <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" crossorigin="anonymous">
+   
    <script>
        
      
@@ -819,18 +816,18 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
          
          setInterval(draw, 33);
        
-  // Initialize Quill editor
+/ Your existing Quill initialization code
   var quill = new Quill('#quill-editor', {
     theme: 'snow'
   });
 
-     // Add a click event listener to the download button
+  // Add a click event listener to the download button
   document.getElementById('download-pdf').addEventListener('click', function() {
     // Get the Quill editor content
     var quillContent = document.querySelector('.quill-container');
 
     // Convert the Quill content to an image
-    domtoimage.toPng(quillContent).then(function (dataUrl) {
+    domtoimage.toPng(quillContent, { cacheBust: true }).then(function (dataUrl) {
       var img = new Image();
       img.src = dataUrl;
       img.onload = function () {
@@ -857,7 +854,8 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
     }).catch(function (error) {
       console.error('Error generating PDF:', error);
     });
-  });   
+  });
+       
        
        
    </script>    
