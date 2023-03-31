@@ -12,7 +12,6 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
-from weasyprint import HTML
 
 folder_name = 's3/data/'
 app = Flask(__name__, static_folder='/')
