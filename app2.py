@@ -45,7 +45,7 @@ def sync_s3_to_local(s3_folder, local_folder):
             s3_client.download_file(BUCKET_NAME, s3_file_key, local_file_path)
 
 # Sync S3 and local folder on app start
-
+sync_s3_to_local(folder_name, folder_name) 
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -69,7 +69,7 @@ def bad_key():
 def index():
     if "logged_in" in session:
         local_folder = 's3/data/'
-        sync_s3_to_local(folder_name, folder_name)   
+          
         folders = [folder for folder in os.listdir(local_folder) if os.path.isdir(os.path.join(local_folder, folder))]
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
