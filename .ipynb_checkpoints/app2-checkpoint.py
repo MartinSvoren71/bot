@@ -41,12 +41,7 @@ def sync_s3_to_local(s3_folder, local_folder):
     bucket_name = 'knowledgevortex'
 
     # Create an S3 client with credentials and region
-    s3_client = boto3.client(
-        's3',
-        aws_access_key_id='YOUR_ACCESS_KEY',
-        aws_secret_access_key='YOUR_SECRET_KEY',
-        region_name='YOUR_REGION_NAME'
-    )
+   
 
     # Get the list of files in the S3 folder
     s3_files = []
