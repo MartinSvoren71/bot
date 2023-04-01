@@ -219,18 +219,16 @@ def list_folders_route():
     return folders
 
 @app.route('/list_files')
-def list_files():
-    folder = request.args.get('folder')
-    s3 = boto3.client('s3')
-
-    # Retrieve the list of files from the specified folder
+def list_files(folder_path):
     files = []
-    for obj in s3.list_objects_v2(Bucket=S3_BUCKET, Prefix=folder)['Contents']:
-        if obj['Key'] != folder:
-            url = s3.generate_presigned_url('get_object', Params={'Bucket': S3_BUCKET, 'Key': obj['Key']})
-            files.append({'name': os.path.basename(obj['Key']), 'url': url})
-
-    return jsonify(files)
+    for root, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            if not filename.startswith('.'):  # Ignore hidden files
+                file = {}
+                file["Key"] = os.path.join(root, filename)
+                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                files.append(file)
+    return files
 
 t = Thread(target=initialize_ai)
 t.start()
