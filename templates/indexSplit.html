@@ -906,7 +906,13 @@ async function load_folders() {
     option.textContent = folder;
     folderSelect.appendChild(option);
   });
+
+  folderSelect.addEventListener('change', function() {
+    const selectedFolder = folderSelect.value;
+    searchFiles(selectedFolder);
+  });
 }
+
 
 load_folders();
 

@@ -186,8 +186,8 @@ def generate_pdf_route():
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
-def list_folders():
-    folder_path = "Data/"
+def list_folders(folder):
+    folder_path = folder
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
