@@ -13,7 +13,7 @@ from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
 
-folders = []
+
 folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
@@ -130,7 +130,7 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-def search_pdf_files(keyword, file_paths):
+def search_pdf_files(keyword, file_paths, folders):
     results = {}
     encrypted_files = []  # List to store encrypted files
     for filepath in file_paths:
@@ -154,8 +154,9 @@ def search_pdf_files(keyword, file_paths):
             print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
 
+
 @app.route('/search_pdf_files', methods=['POST'])
-def search_files():
+def search_files(folders):
     search_results = {}
     encrypted_files = []
     #folder_name = 's3/data/coherent_chameleon/'
@@ -188,7 +189,7 @@ def generate_pdf_route():
 
 def list_folders():
     folder_path = "Data/"
-    
+    folders = []
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
             if not dirname.startswith('.'):  # Ignore hidden directories
