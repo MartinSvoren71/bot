@@ -8,23 +8,6 @@ from main import api_kx
 import datetime
 api_k = api_kx
 import json
-import boto3
-
-folder_name = 's3/'
-
-
-AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_DEFAULT_REGION = 'eu-north-1'
-BUCKET_NAME = 'knowledgevortex'
-s3_client = boto3.client(
-    's3',
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    region_name=AWS_DEFAULT_REGION
-)
-
-
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
@@ -46,7 +29,7 @@ def ask_ai(question, theme):
         themes = json.load(f)
 
     # Get the file name for the current theme
-    index_file = themes.get(theme, "indexChameleon.json")
+    index_file = themes.get(theme, "indexCH.json")
     
     os.environ["OPENAI_API_KEY"] = api_k
     index = GPTSimpleVectorIndex.load_from_disk(index_file)

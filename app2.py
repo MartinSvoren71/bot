@@ -103,6 +103,8 @@ def generate_presigned_url(bucket, key, expiration=3600):
 
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
+    key = "nnp"
+
     question = request.form['question']
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_GPT(question)  # Pass the theme value

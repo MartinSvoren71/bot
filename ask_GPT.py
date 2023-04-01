@@ -9,9 +9,9 @@ import datetime
 api_k = api_kx
 import json
 
-def initialize_GPT(api_k):
-    os.environ["OPENAI_API_KEY"] = api_k
-    openai.api_key = api_k
+def initialize_GPT(api_key):
+    os.environ["OPENAI_API_KEY"] = api_kx
+    openai.api_key = api_kx
 
 initialize_GPT(api_k)
 
@@ -44,4 +44,4 @@ def ask_GPT(question):
         f.write("======================================================================================\n")
         f.write(existing_data)
         
-   # return answer
+    #return answer
