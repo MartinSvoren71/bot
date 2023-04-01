@@ -3,12 +3,16 @@ import os
 
 app = Flask(__name__)
 
-def get_subfolders(path):
-    return [d for d in os.listdir(path) if os.path.isdir(os.path.join(path, d))]
+def get_subfolders_recursive(path):
+    subfolders = []
+    for root, dirs, _ in os.walk(path):
+        for d in dirs:
+            subfolders.append(os.path.relpath(os.path.join(root, d), path))
+    return subfolders
 
 @app.route('/')
 def index():
-    data_folders = get_subfolders('Data/')
+    data_folders = get_subfolders_recursive('Data/')
     return render_template('results2.html', folders=data_folders)
 
 @app.route('/get_folder_content', methods=['POST'])
