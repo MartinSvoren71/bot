@@ -44,8 +44,13 @@ def login():
     return render_template("login.html")
 @app.route("/bad_key")
 
+
+
 def bad_key():
     return render_template("badkey.html")
+
+
+
 
 def list_files_and_urls(folder_path):
     files = []
@@ -57,8 +62,11 @@ def list_files_and_urls(folder_path):
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
-@app.route("/indexSplit", methods=["GET", "POST"])
 
+
+
+
+@app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
         with open('themes.json', 'r') as f:
@@ -73,14 +81,6 @@ def index():
         files = list_files_and_urls(folder_path)
         folders = list_folders()
 
-
-        for root, dirnames, filenames in os.walk(folder_path):
-            for filename in filenames:
-                if not filename.startswith('.'):  # Ignore hidden files
-                    file = {}
-                    file["Key"] = os.path.join(root, filename)
-                    file["PresignedURL"] = url_for("static", filename=file["Key"])
-                    files.append(file)
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
@@ -90,6 +90,7 @@ def index():
         flash("Please log in first")
         return redirect(url_for("login"))
 
+    
     
     
 
@@ -113,6 +114,9 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
+
+
+
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
     key = "nnp"
@@ -124,6 +128,10 @@ def ask_GPT_route():
             #return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
+    
+    
+    
+    
     
 @app.route('/ask_lib', methods=['POST'])
 def ask_LIB_route():
@@ -143,6 +151,9 @@ def ask_LIB_route():
         return render_template('bad_key.html', question=question, theme=theme)
     
 
+    
+    
+    
 
 
 def search_pdf_files(keyword, folder_path):
@@ -174,6 +185,10 @@ def search_pdf_files(keyword, folder_path):
 
     return results, encrypted_files
 
+
+
+
+
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
@@ -201,11 +216,17 @@ def search_files():
 
 
 
+
+
 @app.route('/save', methods=['POST'])
 def generate_pdf_route():
     content = request.form['content']
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
+
+
+
+
 
 # return  data into selector in html
 def list_folders():
@@ -214,9 +235,7 @@ def list_folders():
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
             if not dirname.startswith('.'):  # Ignore hidden directories
-                folder = os.path.join(root, dirname)
-                folder = folder.replace("Data/", "", 1)  # Remove "Data/" from the beginning
-                folders.append(folder)
+                folders.append(os.path.join(root, dirname))
     return folders
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
@@ -228,23 +247,10 @@ def list_folders():
                 files.append(file)
     return files
 
-@app.route('/get_files/<path:folder_path>')
-def get_files(folder_path):
-    folder = os.path.join('Data', folder_path)
-    if not os.path.exists(folder):
-        return jsonify({'error': f"Folder '{folder}' not found"})
-    file_list = os.listdir(folder)
-    return jsonify({'files': file_list})
 
-@app.route('/data/<path:file_path>')
-def serve_file(file_path):
-    return send_from_directory('Data', file_path)
 
-@app.route('/get_updated_files')
-def get_updated_files():
-    folder_path = "Data/Coherent/Chameleon/"
-    files = list_files_and_urls(folder_path)
-    return jsonify(files)
+
+
 
 
 t = Thread(target=initialize_ai)
