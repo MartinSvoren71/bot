@@ -223,9 +223,9 @@ def get_files(folder_path):
     file_list = os.listdir(folder)
     return jsonify({'files': file_list})
 
-@app.route('/<path:file_path>')
+@app.route('/data/<path:file_path>')
 def serve_file(file_path):
-    return send_from_directory('Data', file_path)
+    return send_from_directory('/', file_path)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
