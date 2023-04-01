@@ -12,6 +12,7 @@ from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
 import boto3
+import shutil
 
 
 folder_name = 's3/data/'
@@ -29,7 +30,11 @@ s3_client = boto3.client(
 )
 
 def sync_s3_to_local(s3_folder, local_folder):
-    # Create the local folder if it doesn't exist
+    # Remove the local folder if it exists
+    if os.path.exists(local_folder):
+        shutil.rmtree(local_folder)
+
+    # Create the local folder
     os.makedirs(local_folder, exist_ok=True)
 
     # List S3 folder contents
@@ -53,7 +58,6 @@ def sync_s3_to_local(s3_folder, local_folder):
 
 # Sync S3 and local folder on app start
 sync_s3_to_local(folder_name, folder_name)
-
 
 
 @app.route("/", methods=["GET", "POST"])
