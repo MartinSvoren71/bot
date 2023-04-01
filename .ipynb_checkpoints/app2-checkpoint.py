@@ -180,7 +180,14 @@ def search_files():
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
     
-
+@app.route('/set_folder', methods=['POST'])
+def set_folder():
+    global folder_name
+    if request.method == 'POST':
+        folder = request.form['folder']
+        if folder:
+            folder_name = f's3/{folder}/'
+    return '', 204
 
 
 @app.route('/save', methods=['POST'])
