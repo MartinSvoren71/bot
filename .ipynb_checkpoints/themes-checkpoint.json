@@ -1,9 +1,0 @@
-{
-    "coherent_chameleon": "indexChameleon.json",
-    "labview": "indexlabview.json",
-    "python3": "indexPython3.json",
-    "skodasuperb": "indexSkodaSuperb.json",
-    "sonya7ii": "indexSonyA7ii.json",
-    "mazda6": "indexMazda6.json"
- 
-}
