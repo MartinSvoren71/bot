@@ -29,6 +29,9 @@ s3_client = boto3.client(
 )
 
 
+
+
+
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -47,6 +50,9 @@ def login():
 def bad_key():
     return render_template("badkey.html")
 
+
+
+
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
@@ -58,6 +64,7 @@ def index():
             {options}
         </select>
         '''
+        print(folders)
         folder_path = "{folders}"   # those are used for listing pdf files   folders
         files = []
         folders = list_folders_route()
@@ -101,6 +108,9 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
+
+
+
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
     question = request.form['question']
@@ -134,6 +144,9 @@ def ask_LIB_route():
             #return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
+    
+    
+    
     
 def search_pdf_files(keyword, file_paths):
     results = {}
@@ -184,12 +197,19 @@ def search_files():
     
 
 
+    
+    
+    
 
 @app.route('/save', methods=['POST'])
 def generate_pdf_route():
     content = request.form['content']
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
+
+
+
+
 
 # return  data into selector in html
 @app.route('/list_folders', methods=['POST'])
