@@ -595,7 +595,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select name="folder-select" id="folder-select" onchange="option_change()">
+    <select name="select-folder" id="folder-select" onchange="">
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
@@ -734,24 +734,6 @@ v1.5
             body: formData,
         });     
        }  
-       
-       async function option_change(event) {
-        // Get the selected value from the <select> element
-        var selectedValue = event.target.value;
-
-        // Send an AJAX request to your Python code
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/update_call', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.onreadystatechange = function() {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            // Handle the response from your Python code here
-            console.log(xhr.responseText);
-          }
-        };
-        xhr.send(JSON.stringify({'selected_value': selectedValue}));
-      }
-       
        
        
        function save(event) {
@@ -953,9 +935,7 @@ function getFiles() {
             }
         });
     }       
-        $(document).ready(function() {
-        updateFileList();
-    });
+       
        
    </script>    
 </html>

@@ -249,33 +249,9 @@ def list_folders():
 
 
 
-@app.route('/get_folder_content', methods=['POST'])
-def get_folder_content():
-    selected_folder = request.form['selected_folder']
-    folder_path = f'Data/{selected_folder}'
-    folder_content = get_files_recursive(folder_path)
-    return {'folder_content': folder_content}
 
-def get_subfolders_recursive(path):
-    subfolders = []
-    for root, dirs, _ in os.walk(path):
-        for d in dirs:
-            subfolders.append(os.path.relpath(os.path.join(root, d), path))
-    return subfolders
 
-def get_files_recursive(path):
-    all_files = []
-    for root, _, files in os.walk(path):
-        for f in files:
-            rel_path = os.path.relpath(os.path.join(root, f), path)
-            all_files.append(rel_path)
-    return all_files
 
-@app.route('/update_call', methods=['POST'])
-def files_udate_call():
-    data_folders = get_subfolders_recursive('Data/')
-    rendered_template = render_template('results2.html', folders=data_folders)
-    return jsonify({'rendered_template': rendered_template})
 
 t = Thread(target=initialize_ai)
 t.start()
