@@ -32,14 +32,14 @@ s3_client = boto3.client(
 
 
 
+
 def sync_s3_to_local(s3_folder, local_folder):
     # Remove the local folder if it exists
-    local_folder_path = Path(local_folder)
-    if local_folder_path.exists():
+    if os.path.exists(local_folder):
         shutil.rmtree(local_folder)
 
     # Create the local folder
-    local_folder_path.mkdir(parents=True, exist_ok=True)
+    os.makedirs(local_folder, exist_ok=True)
 
     # List S3 folder contents
     s3_objects = s3_client.list_objects_v2(Bucket=BUCKET_NAME, Prefix=s3_folder)
@@ -47,20 +47,21 @@ def sync_s3_to_local(s3_folder, local_folder):
     # Download files from S3 and create the folder structure
     for s3_object in s3_objects.get('Contents', []):
         s3_file_key = s3_object['Key']
-        local_file_path = local_folder_path / Path(s3_file_key).relative_to(s3_folder)
+        local_file_path = os.path.join(local_folder, os.path.relpath(s3_file_key, s3_folder))
 
         # Check if the object is a file and not a folder
-        if not local_file_path.name.endswith('/'):
+        if not local_file_path.endswith('/'):
             # Create the local directory if it doesn't exist
-            local_dir = local_file_path.parent
-            local_dir.mkdir(parents=True, exist_ok=True)
+            local_dir = os.path.dirname(local_file_path)
+            os.makedirs(local_dir, exist_ok=True)
 
             # Download the file if it doesn't exist locally
-            if not local_file_path.exists():
-                s3_client.download_file(BUCKET_NAME, s3_file_key, str(local_file_path))
+            if not os.path.exists(local_file_path):
+                s3_client.download_file(BUCKET_NAME, s3_file_key, local_file_path)
 
 # Sync S3 and local folder on app start
 sync_s3_to_local(folder_name, folder_name)
+
 
 
 
