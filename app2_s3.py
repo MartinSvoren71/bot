@@ -8,10 +8,10 @@ import os
 import re
 import json
 import subprocess
+import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
-import boto3
 
 
 folder_name = 's3/data/'
@@ -27,24 +27,6 @@ s3_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
-
-def sync_s3_to_local(s3_folder, local_folder):
-    # List S3 folder contents
-    s3_objects = s3_client.list_objects_v2(Bucket=BUCKET_NAME, Prefix=s3_folder)
-    
-    # List local folder contents
-    local_files = set(os.listdir(local_folder))
-
-    # Download missing files from S3
-    for s3_object in s3_objects.get('Contents', []):
-        s3_file_key = s3_object['Key']
-        file_name = os.path.basename(s3_file_key)
-        
-        if file_name not in local_files:
-            local_file_path = os.path.join(local_folder, file_name)
-            s3_client.download_file(BUCKET_NAME, s3_file_key, local_file_path)
-
-# Sync S3 and local folder on app start
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -65,12 +47,14 @@ def login():
 def bad_key():
     return render_template("badkey.html")
 
-
+@app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        local_folder = 's3/data/'
-        sync_s3_to_local(folder_name, folder_name)   
-        folders = [folder for folder in os.listdir(local_folder) if os.path.isdir(os.path.join(local_folder, folder))]
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME)
+        response = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name, Delimiter='/')
+
+        folders = [prefix['Prefix'][:-1] for prefix in response['CommonPrefixes']]
+
         # Load the themes from the themes.json file
         with open('themes.json', 'r') as f:
             themes = json.load(f)
@@ -82,9 +66,10 @@ def index():
             {options}
         </select>
         '''
-        
-        files = [file for file in os.listdir(local_folder) if os.path.isfile(os.path.join(local_folder, file))]
-        
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
+        files = contents['Contents']
+        for file in files:
+            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
         return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
@@ -98,14 +83,17 @@ def log_content():
     with open(file_path, 'r') as file:
         content = file.read()
     return content
-
-def generate_local_file_path(folder, filename):
+def generate_presigned_url(bucket, key, expiration=3600):
     try:
-        file_path = os.path.join(folder, filename)
-    except Exception as e:
+        response = s3_client.generate_presigned_url(
+            'get_object',
+            Params={'Bucket': bucket, 'Key': key},
+            ExpiresIn=expiration
+        )
+    except ClientError as e:
         print(e)
         return None
-    return file_path
+    return response
 
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
@@ -130,10 +118,10 @@ def ask_LIB_route():
     theme = request.form['theme']
     model = "text-davinci-003"
     key = "nnp"
-    local_folder = 's3/data/'
-
-    files = [os.path.join(local_folder, file) for file in os.listdir(local_folder)]
-
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
+    files = contents['Contents']
+    for file in files:
+        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(question, theme)  # Pass the theme value
         #return jsonify({"question": question, "response": response})
@@ -146,20 +134,21 @@ def search_pdf_files(keyword, file_paths):
     encrypted_files = []  # List to store encrypted files
     for filepath in file_paths:
         try:
-            with open(filepath, 'rb') as file_obj:
-                pdf_reader = PdfFileReader(file_obj)
-                if pdf_reader.isEncrypted:
-                    print(f"Skipping encrypted file: {filepath}")
-                    encrypted_files.append(filepath)  # Add the encrypted file to the list
-                    continue
-                for page_num in range(pdf_reader.getNumPages()):
-                    text = pdf_reader.getPage(page_num).extractText()
-                    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
-                    matches = pattern.findall(text)
-                    if matches:
-                        if filepath not in results:
-                            results[filepath] = []
-                        results[filepath].extend([(page_num, match) for match in matches])
+            file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
+            pdf_file = io.BytesIO(file_obj['Body'].read())
+            pdf_reader = PdfFileReader(pdf_file)
+            if pdf_reader.isEncrypted:
+                print(f"Skipping encrypted file: {filepath}")
+                encrypted_files.append(filepath)  # Add the encrypted file to the list
+                continue
+            for page_num in range(pdf_reader.getNumPages()):
+                text = pdf_reader.getPage(page_num).extractText()
+                pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+                matches = pattern.findall(text)
+                if matches:
+                    if filepath not in results:
+                        results[filepath] = []
+                    results[filepath].extend([(page_num, match) for match in matches])
         except Exception as e:
             print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
@@ -168,11 +157,12 @@ def search_pdf_files(keyword, file_paths):
 def search_files():
     search_results = {}
     encrypted_files = []
-    local_folder = 's3/data/'
+    #folder_name = 's3/data/coherent_chameleon/'
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        file_paths = [os.path.join(local_folder, file) for file in os.listdir(local_folder) if file.lower().endswith('.pdf')]
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
+        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
@@ -195,13 +185,12 @@ def generate_pdf_route():
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
-def list_folders(local_folder):
-    try:
-        folders = [folder for folder in os.listdir(local_folder) if os.path.isdir(os.path.join(local_folder, folder))]
-    except Exception as e:
-        print(e)
-        return []
+def list_folders(bucket_name):
+    s3 = boto3.client('s3')
+    response = s3.list_objects_v2(Bucket=bucket_name, Delimiter='/')
+    folders = [common_prefix['Prefix'] for common_prefix in response.get('CommonPrefixes', [])]
     return folders
+
 
 
 t = Thread(target=initialize_ai)
