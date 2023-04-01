@@ -58,7 +58,7 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/"   # those are used for listing pdf files 
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = []
         folders = list_folders()
 
@@ -214,11 +214,7 @@ def list_folders():
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
-
-
-
-
-
+/
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
