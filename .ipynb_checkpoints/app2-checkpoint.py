@@ -50,7 +50,6 @@ def bad_key():
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        folders = [prefix['Prefix'][:-1] for prefix in response['CommonPrefixes']]
         with open('themes.json', 'r') as f:
             themes = json.load(f)
         options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
