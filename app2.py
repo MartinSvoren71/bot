@@ -12,7 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
-
+folders = "Data/Coherent/"
 
 folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
@@ -27,9 +27,6 @@ s3_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
-
-
-
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -64,7 +61,6 @@ def index():
             {options}
         </select>
         '''
-        
         folder_path = "{folders}"   # those are used for listing pdf files   folders
         files = []
         folders = list_folders_route()
@@ -80,7 +76,7 @@ def index():
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
         return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
-        print(folders)
+
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
