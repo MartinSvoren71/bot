@@ -52,8 +52,7 @@ def bad_key():
 
 
 @app.route("/get_updated_files", methods=["GET", "POST"])
-def get_updated_files():
-    folder_path = request.args.get("folder_path", "Data/Coherent/Chameleon/")  # Default folder if not specified
+def list_files_and_urls(folder_path):
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
@@ -62,7 +61,8 @@ def get_updated_files():
                 file["Key"] = os.path.join(root, filename)
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
-    return jsonify(files)
+    return files
+
 
 
 
@@ -78,7 +78,7 @@ def index():
         </select>
         '''
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
-        files = get_updated_files()
+        files = list_files_and_urls(folder_path)
         folders = list_folders()
 
             #for dirname in dirnames:
