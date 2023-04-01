@@ -52,7 +52,7 @@ def bad_key():
 
 
 @app.route("/get_updated_files", methods=["GET", "POST"])
-def get_updated_files():
+def get_updated_files(folder_path):
     folder_path = request.args.get("folder_path", "Data/Coherent/Chameleon/")  # Default folder if not specified
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
