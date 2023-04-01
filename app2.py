@@ -58,7 +58,7 @@ def index():
             {options}
         </select>
         '''
-         folder_path = "Data/"
+        folder_path = "Data/"
         files = []
         folders = []
         for root, dirnames, filenames in os.walk(folder_path):
