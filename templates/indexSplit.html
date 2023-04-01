@@ -595,12 +595,12 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select id="folder-select" onchange="list_folders(event)">
-  <option value="">Choose a folder</option>
-  {% for folder in folders %}
-    <option value="{{ folder }}">{{ folder }}</option>
-  {% endfor %}
-</select>
+ <select id="folder-select">
+        <option value="">-- Select a folder --</option>
+        {% for folder in folders %}
+            <option value="{{ folder }}">{{ folder }}</option>
+        {% endfor %}
+    </select>
 
                   </div>
                     </form>
@@ -895,7 +895,7 @@ async function save_doc() {
   pdfDoc.download('document.pdf');
 }
 
-async function list_folders(event) {
+async function load_folders() {
   const response = await fetch('/list_folders');
   const folders = await response.json();
   const folderSelect = document.getElementById('folder-select');
@@ -906,17 +906,24 @@ async function list_folders(event) {
     option.textContent = folder;
     folderSelect.appendChild(option);
   });
-
-  folderSelect.addEventListener('change', function() {
-    const selectedFolder = folderSelect.value;
-    searchFiles(selectedFolder);
-  });
 }
-
 
 load_folders();
 
-
+ $('#folder-select').on('change', function() {
+            const selectedFolder = $(this).val();
+            if (selectedFolder) {
+                $.post('/get_files', { folder: selectedFolder }, function(data) {
+                    const fileList = $('#file-list');
+                    fileList.empty();
+                    data.files.forEach(function(file) {
+                        fileList.append(`<li>${file}</li>`);
+                    });
+                });
+            } else {
+                $('#file-list').empty();
+            }
+        });
 
        
        
