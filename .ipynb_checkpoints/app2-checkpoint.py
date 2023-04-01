@@ -59,9 +59,16 @@ def sync_s3_to_local(s3_folder, local_folder):
     # Sync the S3 folder with the local folder
     for file_path in s3_files:
         file_name = os.path.basename(file_path)
-        if os.path.isdir(os.path.join(s3_folder, file_path)):
+        # Create the subdirectory structure in the local folder
+        sub_dir = os.path.dirname(file_path).replace(s3_folder, "")
+        local_sub_dir = os.path.join(local_folder, sub_dir)
+        os.makedirs(local_sub_dir, exist_ok=True)
+        # Check if the local file path is a directory
+        if not os.path.isdir(local_sub_dir):
+            print("Error creating local directory:", local_sub_dir)
             continue
-        local_file_path = os.path.join(local_folder, file_name)
+        # Download the file to the local folder
+        local_file_path = os.path.join(local_folder, file_path.replace(s3_folder, ""))
         try:
             s3_client.download_file(bucket_name, file_path, local_file_path)
             print("Downloaded file:", local_file_path)
