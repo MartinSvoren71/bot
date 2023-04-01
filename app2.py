@@ -60,7 +60,9 @@ def index():
         '''
         folder_path = "Data/Coherent/Chameleon/"
         files = []
-        subfolders = []  # Initialize subfolders before generating options
+        folders = list_folders()
+        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
+
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
                 if not filename.startswith('.'):  # Ignore hidden files
@@ -70,10 +72,9 @@ def index():
                     files.append(file)
             for dirname in dirnames:
                 if not dirname.startswith('.'):  # Ignore hidden directories
-                    subfolders.append(os.path.join(root, dirname))  # Append to subfolders instead of folders
-        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in subfolders])
+                    folders.append(os.path.join(root, dirname))
+        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
-        return render_template("indexSplit.html", html=options, folders=folder_options, files=files, results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
