@@ -31,6 +31,7 @@ s3_client = boto3.client(
 )
 
 
+
 def sync_s3_to_local(s3_folder, local_folder):
     # Remove the local folder if it exists
     local_folder_path = Path(local_folder)
@@ -60,6 +61,7 @@ def sync_s3_to_local(s3_folder, local_folder):
 
 # Sync S3 and local folder on app start
 sync_s3_to_local(folder_name, folder_name)
+
 
 
 
