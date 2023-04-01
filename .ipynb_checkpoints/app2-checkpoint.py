@@ -130,46 +130,48 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-def search_pdf_files(keyword, folders):
+def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
-    for folder_path in folders:
-        for root, dirnames, filenames in os.walk(folder_path):
-            for filename in filenames:
-                if filename.lower().endswith('.pdf'):
-                    filepath = os.path.join(root, filename)
-                    try:
-                        pdf_file = open(filepath, 'rb')
-                        pdf_reader = PdfFileReader(pdf_file)
-                        if pdf_reader.isEncrypted:
-                            print(f"Skipping encrypted file: {filepath}")
-                            encrypted_files.append(filepath)  # Add the encrypted file to the list
-                            continue
-                        for page_num in range(pdf_reader.getNumPages()):
-                            text = pdf_reader.getPage(page_num).extractText()
-                            pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
-                            matches = pattern.findall(text)
-                            if matches:
-                                if filepath not in results:
-                                    results[filepath] = []
-                                results[filepath].extend([(page_num, match) for match in matches])
-                    except Exception as e:
-                        print(f"Error processing {filepath}: {str(e)}")
-                    finally:
-                        pdf_file.close()
-    return results, encrypted_files
-
+    for filepath in file_paths:
+        try:
+            for folder_path in folders:
+                for root, dirnames, filenames in os.walk(folder_path):
+                    for filename in filenames:
+                        if filename.lower().endswith('.pdf'):
+                            filepath = os.path.join(root, filename)
+                            try:
+                                pdf_file = open(filepath, 'rb')
+                                pdf_reader = PdfFileReader(pdf_file)
+                                if pdf_reader.isEncrypted:
+                                    print(f"Skipping encrypted file: {filepath}")
+                                    encrypted_files.append(filepath)  # Add the encrypted file to the list
+                                    continue
+                                for page_num in range(pdf_reader.getNumPages()):
+                                    text = pdf_reader.getPage(page_num).extractText()
+                                    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+                                    matches = pattern.findall(text)
+                                    if matches:
+                                        if filepath not in results:
+                                            results[filepath] = []
+                                        results[filepath].extend([(page_num, match) for match in matches])
+                            except Exception as e:
+                                print(f"Error processing {filepath}: {str(e)}")
+                            finally:
+                                pdf_file.close()
+        return results, encrypted_files
 
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
+    #folder_name = 's3/data/coherent_chameleon/'
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        folders = request.form.getlist('folders')
-        print(folders)  # Debug statement
-        search_results, encrypted_files = search_pdf_files(keyword, folders)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
+        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
+        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
             f.write(f"Search keyword: {keyword}\n")
