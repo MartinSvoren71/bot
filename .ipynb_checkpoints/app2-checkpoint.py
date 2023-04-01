@@ -69,7 +69,8 @@ def index():
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
-    
+  
+
     
 @app.route('/log-content')
 def log_content():
