@@ -595,7 +595,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select name="select-folder" id="folder-select" onchange="updateFileList(event)">
+    <select name="select-folder" id="folder-select" onchange="getFiles()">
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
@@ -770,7 +770,7 @@ v1.5
         function searchFiles() {
     const keyword = $('#keyword').val();
     $.ajax({
-        url: '/get_updated_files',
+        url: '/search_pdf_files',
         method: 'POST',
         data: {
             keyword: keyword,
