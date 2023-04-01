@@ -925,6 +925,7 @@ function getFiles() {
         }
     });
 }
+       
  function updateFileList(folder_path) {
         $.getJSON('/get_updated_files', { folder_path: folder_path }, function(data) {
             var files = data;
