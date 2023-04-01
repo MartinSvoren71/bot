@@ -58,9 +58,9 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
+        folder_path = "Data/Coherent/Chemeleon/"   # those are used for listing pdf files 
         files = []
-        folders = []
+        folders = list_folders()
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
@@ -103,9 +103,14 @@ def generate_presigned_url(bucket, key, expiration=3600):
 
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
-    key = "nnp"
-
     question = request.form['question']
+    theme = request.form['theme']
+    model = request.form['model']
+    key = "nnp"
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
+    files = contents['Contents']
+    for file in files:
+        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_GPT(question)  # Pass the theme value
         #return jsonify({"question": question, "response": response})
@@ -130,50 +135,41 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-
-
-
-def search_pdf_files(keyword, folder_path):
+def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
-
-    # Traverse the local file system
-    for root, _, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if filename.lower().endswith('.pdf'):
-                filepath = os.path.join(root, filename)
-                try:
-                    with open(filepath, 'rb') as f:
-                        pdf_reader = PdfFileReader(f)
-                        if pdf_reader.isEncrypted:
-                            print(f"Skipping encrypted file: {filepath}")
-                            encrypted_files.append(filepath)  # Add the encrypted file to the list
-                            continue
-                        for page_num in range(pdf_reader.getNumPages()):
-                            text = pdf_reader.getPage(page_num).extractText()
-                            pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
-                            matches = pattern.findall(text)
-                            if matches:
-                                if filepath not in results:
-                                    results[filepath] = []
-                                results[filepath].extend([(page_num, match) for match in matches])
-                except Exception as e:
-                    print(f"Error processing {filepath}: {str(e)}")
-
+    for filepath in file_paths:
+        try:
+            file_obj = s3_client.get_object(Bucket=BUCKET_NAME, Key=filepath)
+            pdf_file = io.BytesIO(file_obj['Body'].read())
+            pdf_reader = PdfFileReader(pdf_file)
+            if pdf_reader.isEncrypted:
+                print(f"Skipping encrypted file: {filepath}")
+                encrypted_files.append(filepath)  # Add the encrypted file to the list
+                continue
+            for page_num in range(pdf_reader.getNumPages()):
+                text = pdf_reader.getPage(page_num).extractText()
+                pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+                matches = pattern.findall(text)
+                if matches:
+                    if filepath not in results:
+                        results[filepath] = []
+                    results[filepath].extend([(page_num, match) for match in matches])
+        except Exception as e:
+            print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
 
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
-
-    # Set the folder path to search for PDF files
-    folder_path = 'Data/Coherent/Chameleon'
+    #folder_name = 's3/data/coherent_chameleon/'
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        search_results, encrypted_files = search_pdf_files(keyword, folder_path)
-        
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
+        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
+        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
             f.write(f"Search keyword: {keyword}\n")
@@ -183,9 +179,9 @@ def search_files():
                     f.write(f"  Page {page_num + 1}: {match}\n")
                 f.write(os.linesep)
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
-
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
+    
 
 
 
@@ -204,6 +200,9 @@ def list_folders():
             if not dirname.startswith('.'):  # Ignore hidden directories
                 folders.append(os.path.join(root, dirname))
     return folders
+
+
+
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
@@ -213,8 +212,6 @@ def list_folders():
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
-
-
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
