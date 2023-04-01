@@ -130,36 +130,35 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-def search_pdf_files(keyword, file_paths):
+def search_pdf_files(keyword, folders):
     results = {}
     encrypted_files = []  # List to store encrypted files
-    for filepath in file_paths:
-        try:
-            for folder_path in folders:
-                for root, dirnames, filenames in os.walk(folder_path):
-                    for filename in filenames:
-                        if filename.lower().endswith('.pdf'):
-                            filepath = os.path.join(root, filename)
-                            try:
-                                pdf_file = open(filepath, 'rb')
-                                pdf_reader = PdfFileReader(pdf_file)
-                                if pdf_reader.isEncrypted:
-                                    print(f"Skipping encrypted file: {filepath}")
-                                    encrypted_files.append(filepath)  # Add the encrypted file to the list
-                                    continue
-                                for page_num in range(pdf_reader.getNumPages()):
-                                    text = pdf_reader.getPage(page_num).extractText()
-                                    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
-                                    matches = pattern.findall(text)
-                                    if matches:
-                                        if filepath not in results:
-                                            results[filepath] = []
-                                        results[filepath].extend([(page_num, match) for match in matches])
-                            except Exception as e:
-                                print(f"Error processing {filepath}: {str(e)}")
-                            finally:
-                                pdf_file.close()
-        return results, encrypted_files
+    for folder_path in folders:
+        for root, dirnames, filenames in os.walk(folder_path):
+            for filename in filenames:
+                if filename.lower().endswith('.pdf'):
+                    filepath = os.path.join(root, filename)
+                    try:
+                        pdf_file = open(filepath, 'rb')
+                        pdf_reader = PdfFileReader(pdf_file)
+                        if pdf_reader.isEncrypted:
+                            print(f"Skipping encrypted file: {filepath}")
+                            encrypted_files.append(filepath)  # Add the encrypted file to the list
+                            continue
+                        for page_num in range(pdf_reader.getNumPages()):
+                            text = pdf_reader.getPage(page_num).extractText()
+                            pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+                            matches = pattern.findall(text)
+                            if matches:
+                                if filepath not in results:
+                                    results[filepath] = []
+                                results[filepath].extend([(page_num, match) for match in matches])
+                    except Exception as e:
+                        print(f"Error processing {filepath}: {str(e)}")
+                    finally:
+                        pdf_file.close()
+    return results, encrypted_files
+
 
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
