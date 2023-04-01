@@ -15,6 +15,7 @@ import boto3
 import shutil
 from pathlib import Path
 from botocore.exceptions import ClientError
+LOCAL_FOLDER_PATH = '/home/ec2-user/my_data'
 
 
 folder_name = 's3/'
@@ -39,8 +40,13 @@ def sync_s3_to_local(s3_folder, local_folder):
     # Set the S3 bucket and folder names
     bucket_name = 'knowledgevortex'
 
-    # Create an S3 client
-   
+    # Create an S3 client with credentials and region
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id='YOUR_ACCESS_KEY',
+        aws_secret_access_key='YOUR_SECRET_KEY',
+        region_name='YOUR_REGION_NAME'
+    )
 
     # Get the list of files in the S3 folder
     s3_files = []
@@ -66,7 +72,7 @@ def sync_s3_to_local(s3_folder, local_folder):
         except ClientError as e:
             print("Error downloading file:", local_file_path, e)
 
-sync_s3_to_local('s3/data/', '/s3/data/')
+sync_s3_to_local('s3/data/', LOCAL_FOLDER_PATH)
 
 
 
