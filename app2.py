@@ -13,7 +13,7 @@ from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
 
-
+folders = []
 folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
@@ -188,7 +188,7 @@ def generate_pdf_route():
 
 def list_folders():
     folder_path = "Data/"
-    folders = []
+    
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
             if not dirname.startswith('.'):  # Ignore hidden directories
