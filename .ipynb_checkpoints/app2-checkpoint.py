@@ -215,9 +215,10 @@ def list_folders():
                 files.append(file)
     return files
 
-@app.route('/<folder>')
+@app.route('/get_files/<folder>')
 def get_files(folder):
-    folder_path = {folder}
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    folder_path = os.path.join(base_dir, folder)
     if not os.path.exists(folder_path):
         return jsonify({'error': f"Folder '{folder}' not found"})
     file_list = os.listdir(folder_path)
