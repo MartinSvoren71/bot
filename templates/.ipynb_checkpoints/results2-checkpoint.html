@@ -1,12 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folder Content Viewer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 <body>
-    <h1>list of fiiles</h1>
-    
-    <div class="list-container">
-      <ul>
-      {% for file in files %}
-      <li><a href="#" onclick="showPDF('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
-      {% endfor %}
-      </ul>
-      </div>
+    <h1>Select a folder:</h1>
+    <select id="folder-selector">
+        {% for folder in folders %}
+        <option value="{{ folder }}">{{ folder }}</option>
+        {% endfor %}
+    </select>
+    <h2>Folder content:</h2>
+    <ul id="folder-content"></ul>
+
+    <script>
+        function updateFolderContent() {
+            let selectedFolder = $('#folder-selector').val();
+            $.post('/get_folder_content', {selected_folder: selectedFolder}, function(data) {
+                $('#folder-content').html('');
+                for (let item of data.folder_content) {
+                    $('#folder-content').append('<li>' + item + '</li>');
+                }
+            });
+        }
+
+        $('#folder-selector').on('change', updateFolderContent);
+        updateFolderContent();
+    </script>
 </body>
 </html>
