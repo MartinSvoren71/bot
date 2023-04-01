@@ -16,7 +16,7 @@ import shutil
 from pathlib import Path
 
 
-folder_name = 's3/data/'
+folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
@@ -34,11 +34,16 @@ s3_client = boto3.client(
 
 
 def sync_s3_to_local(s3_folder, local_folder):
-    # Remove the local folder if it exists
+    # Remove the local folder data if it exists
     if os.path.exists(local_folder):
-        shutil.rmtree(local_folder)
+        for filename in os.listdir(local_folder):
+            file_path = os.path.join(local_folder, filename)
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
 
-    # Create the local folder
+    # Create the local folder if it doesn't exist
     os.makedirs(local_folder, exist_ok=True)
 
     # List S3 folder contents
@@ -60,7 +65,10 @@ def sync_s3_to_local(s3_folder, local_folder):
                 s3_client.download_file(BUCKET_NAME, s3_file_key, local_file_path)
 
 # Sync S3 and local folder on app start
-sync_s3_to_local(folder_name, folder_name)
+local_folder_name = 's3/'
+s3_folder_name = 's3/'
+
+sync_s3_to_local(s3_folder_name, local_folder_name)
 
 
 
