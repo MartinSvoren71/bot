@@ -61,7 +61,6 @@ def index():
         folder_path = "Data/Coherent/Chameleon/"
         files = []
         folders = list_folders()
-        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
@@ -187,6 +186,15 @@ def generate_pdf_route():
     content = request.form['content']
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
+
+def list_folders():
+    folder_path = "Data/Coherent/Chameleon/"
+    folders = []
+    for root, dirnames, filenames in os.walk(folder_path):
+        for dirname in dirnames:
+            if not dirname.startswith('.'):  # Ignore hidden directories
+                folders.append(os.path.join(root, dirname))
+    return folders
 
 
 
