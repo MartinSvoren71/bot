@@ -203,7 +203,9 @@ def list_folders():
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
             if not dirname.startswith('.'):  # Ignore hidden directories
-                folders.append(os.path.join(root, dirname))
+                folder = os.path.join(root, dirname)
+                folder = folder.replace("Data/", "", 1)  # Remove "Data/" from the beginning
+                folders.append(folder)
     return folders
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
