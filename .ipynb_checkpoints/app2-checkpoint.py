@@ -60,19 +60,19 @@ def index():
         '''
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = []
-        #folders = list_folders()
+        folders = list_folders()
 
-       # for root, dirnames, filenames in os.walk(folder_path):
-         #   for filename in filenames:
-          #      if not filename.startswith('.'):  # Ignore hidden files
-          #          file = {}
-          #          file["Key"] = os.path.join(root, filename)
-           #         file["PresignedURL"] = url_for("static", filename=file["Key"])
-           #         files.append(file)
+        for root, dirnames, filenames in os.walk(folder_path):
+            for filename in filenames:
+                if not filename.startswith('.'):  # Ignore hidden files
+                    file = {}
+                    file["Key"] = os.path.join(root, filename)
+                    file["PresignedURL"] = url_for("static", filename=file["Key"])
+                    files.append(file)
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, files=files, results={})
+        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
         flash("Please log in first")
@@ -80,6 +80,7 @@ def index():
 
     
     
+
     
     
 @app.route('/log-content')
