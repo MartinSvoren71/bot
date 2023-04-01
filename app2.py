@@ -80,7 +80,7 @@ def index():
 
     
     
-    @app.route("/indexSplit", methods=["GET", "POST"])
+@app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
         # Load the themes from the themes.json file
