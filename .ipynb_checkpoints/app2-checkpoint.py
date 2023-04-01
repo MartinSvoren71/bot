@@ -28,9 +28,10 @@ s3_client = boto3.client(
     region_name=AWS_DEFAULT_REGION
 )
 
-@app.route('/files/<path:file_path>')
+@app.route('/serve_file/<path:file_path>')
 def serve_file(file_path):
-    return send_from_directory(directory='Data', filename=file_path, as_attachment=False)
+    return send_from_directory(app.static_folder, file_path)
+
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -70,7 +71,7 @@ def index():
                 if not filename.startswith('.'):  # Ignore hidden files
                     file = {}
                     file["Key"] = os.path.join(root, filename)
-                    file["PresignedURL"] = url_for("serve_file", file_path=file["Key"])
+                    file["PresignedURL"] = url_for("static", filename=file["Key"])
                     files.append(file)
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
