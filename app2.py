@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file, send_from_directory
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 from threading import Thread
@@ -27,10 +27,6 @@ s3_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
-
-@app.route('/serve_file/<path:file_path>')
-def serve_file(file_path):
-    return send_from_directory(app.static_folder, file_path)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -76,8 +72,7 @@ def index():
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={}, encrypted_files=[])
-
+        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
         flash("Please log in first")
@@ -218,9 +213,6 @@ def list_folders():
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
-
-
-
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
