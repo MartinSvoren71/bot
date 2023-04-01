@@ -217,9 +217,11 @@ def list_folders():
 
 @app.route('/files/<folder>')
 def get_files(folder):
-    file_list = os.listdir(f'Data/{folder}')
+    folder_path = f'Data/{folder}'
+    if not os.path.exists(folder_path):
+        return jsonify({'error': f"Folder '{folder}' not found"})
+    file_list = os.listdir(folder_path)
     return jsonify({'files': file_list})
-
 
 
 
