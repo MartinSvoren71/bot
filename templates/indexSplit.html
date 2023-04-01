@@ -925,7 +925,16 @@ function getFiles() {
         }
     });
 }
-       
+function updateFileList() {
+        $.getJSON('/get_updated_files', function(data) {
+            var files = data;
+            var file_list_element = $('#list-container');
+            file_list_element.empty();
+            for (var i = 0; i < files.length; i++) {
+                file_list_element.append('<li><a href="' + files[i].PresignedURL + '">' + files[i].Key + '</a></li>');
+            }
+        });
+    }       
        
        
    </script>    

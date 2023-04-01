@@ -240,6 +240,13 @@ def get_files(folder_path):
 def serve_file(file_path):
     return send_from_directory('Data', file_path)
 
+@app.route('/get_updated_files')
+def get_updated_files():
+    folder_path = "Data/Coherent/Chameleon/"
+    files = list_files_and_urls(folder_path)
+    return jsonify(files)
+
+
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
