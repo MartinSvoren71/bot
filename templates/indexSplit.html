@@ -912,7 +912,7 @@ load_folders();
 
 function getFiles() {
     var folder = $('#folder-select').val(); // Changed from $('#folders').val();
-    $.getJSON('/files/' + folder, function(data) {
+    $.getJSON(folder, function(data) {
         var files = data.files;
         $('#file-list').empty();
         for (var i = 0; i < files.length; i++) {
