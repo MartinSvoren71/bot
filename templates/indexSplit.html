@@ -595,7 +595,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select id="folder-select">
+    <select id="folder-select" onchange="getFiles()">
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
@@ -910,7 +910,16 @@ async function load_folders() {
 
 load_folders();
 
-
+function getFiles() {
+        var folder = $('#folders').val();
+        $.getJSON('/files/' + folder, function(data) {
+          var files = data.files;
+          $('#file-list').empty();
+          for (var i = 0; i < files.length; i++) {
+            $('#file-list').append('<li>' + files[i] + '</li>');
+          }
+        });
+      }
 
        
        

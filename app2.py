@@ -215,6 +215,14 @@ def list_folders():
                 files.append(file)
     return files
 
+@app.route('/files/<folder>')
+def get_files(folder):
+    file_list = os.listdir(f'Data/{folder}')
+    return jsonify({'files': file_list})
+
+
+
+
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
