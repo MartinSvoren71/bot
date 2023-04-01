@@ -14,7 +14,7 @@ import io
 from io import BytesIO
 
 
-folder_name = 's3/data/'
+folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
@@ -119,7 +119,7 @@ def ask_LIB_route():
     theme = request.form['theme']
     model = "text-davinci-003"
     key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folders))
     files = contents['Contents']
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
@@ -162,7 +162,7 @@ def search_files():
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folders)
         file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
         # Write search results to a text file
