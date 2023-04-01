@@ -76,7 +76,8 @@ def index():
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
+        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={}, encrypted_files=[])
+
 
     else:
         flash("Please log in first")
