@@ -29,6 +29,8 @@ s3_client = boto3.client(
 )
 
 def sync_s3_to_local(s3_folder, local_folder):
+    # Create the local folder if it doesn't exist
+    os.makedirs(local_folder, exist_ok=True)
     # List S3 folder contents
     s3_objects = s3_client.list_objects_v2(Bucket=BUCKET_NAME, Prefix=s3_folder)
     
