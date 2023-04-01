@@ -131,7 +131,7 @@ def ask_LIB_route():
         return render_template('bad_key.html', question=question, theme=theme)
     
 
-app = Flask(__name__)
+
 
 def search_pdf_files(keyword, folder_path):
     results = {}
