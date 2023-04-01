@@ -60,7 +60,7 @@ def index():
         '''
         folder_path = "Data/"
         data_dir = '/data'
-    folders = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
+        folders = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
