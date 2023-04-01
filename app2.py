@@ -168,6 +168,7 @@ def search_files():
     if request.method == 'POST':
         keyword = request.form['keyword']
         folders = request.form.getlist('folders')
+        print(folders)  # Debug statement
         search_results, encrypted_files = search_pdf_files(keyword, folders)
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
