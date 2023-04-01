@@ -910,14 +910,13 @@ async function load_folders() {
 
 load_folders();
 
-@app.route('/get_files/<folder>')
-       
-defget_files(folder):
-    folder_path = f"{folder}"
-    if not os.path.exists(folder_path):
-        return jsonify({'error': f"Folder '{folder}' not found"})
-    file_list = os.listdir(folder_path)
-    return jsonify({'files': file_list})
+function getFiles() {
+    var folder = $('#folder-select').val(); // Changed from $('#folders').val();
+    $.getJSON(folder, function(data) {
+        var files = data.files;
+        $('#file-list').empty();
+        for (var i = 0; i < files.length; i++) {
+            $('#file-list').append('<li>' + files[i] + '</li>');
         }
     });
     saveFolder();
