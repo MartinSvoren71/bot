@@ -58,15 +58,19 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/" 
+        folder_path = "Data/"
         files = []
-        for file_name in os.listdir(folder_path):
-            if os.path.isfile(os.path.join(folder_path, file_name)):
-                file = {}
-                file["Key"] = os.path.join(folder_name, file_name)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
-                files.append(file)
-        folders = [f.path for f in os.scandir(folder_path) if f.is_dir()]        
+        folders = []
+        for root, dirnames, filenames in os.walk(folder_path):
+            for filename in filenames:
+                if not filename.startswith('.'):  # Ignore hidden files
+                    file = {}
+                    file["Key"] = os.path.join(root, filename)
+                    file["PresignedURL"] = url_for("static", filename=file["Key"])
+                    files.append(file)
+            for dirname in dirnames:
+                if not dirname.startswith('.'):  # Ignore hidden directories
+                    folders.append(os.path.join(root, dirname))
         return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
