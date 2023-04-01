@@ -220,16 +220,13 @@ def list_folders_route():
     return folders
 
 @app.route('/list_files')
-def list_files_in_folder(folder_path):
-    files = []
-    for root, dirnames, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if not filename.startswith('.'):  # Ignore hidden files
-                file = {}
-                file["Key"] = os.path.join(root, filename)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
-                files.append(file)
-    return files
+def list_files():
+    folder_path = request.args.get('folder')
+    if folder_path:
+        files = list_files_in_folder(folder_path)
+        return jsonify(files)
+    else:
+        return "Please provide a folder path"
 
 t = Thread(target=initialize_ai)
 t.start()
