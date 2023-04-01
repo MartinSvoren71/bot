@@ -61,7 +61,7 @@ def index():
         folder_path = "Data/Coherent/Chameleon/"
         files = []
         folders = list_folders()
-        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
+folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in subfolders])
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
@@ -71,8 +71,8 @@ def index():
                     file["PresignedURL"] = url_for("static", filename=file["Key"])
                     files.append(file)
             for dirname in dirnames:
-                if not dirname.startswith('.'):  # Ignore hidden directories
-                    folders.append(os.path.join(root, dirname))
+        if not dirname.startswith('.'):  # Ignore hidden directories
+            subfolders.append(os.path.join(root, dirname))
         return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
