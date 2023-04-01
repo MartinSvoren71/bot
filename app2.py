@@ -61,7 +61,7 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "{folders}"   # those are used for listing pdf files   folders
+        folder_path = "Data/"  # define folder_path before calling list_files_in_folder()
         folders = list_folders_route()
         files = list_files_in_folder(folder_path)
 
