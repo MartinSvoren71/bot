@@ -71,8 +71,8 @@ folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for fold
                     file["PresignedURL"] = url_for("static", filename=file["Key"])
                     files.append(file)
             for dirname in dirnames:
-        if not dirname.startswith('.'):  # Ignore hidden directories
-            subfolders.append(os.path.join(root, dirname))
+                if not dirname.startswith('.'):  # Ignore hidden directories
+                    subfolders.append(os.path.join(root, dirname))
         return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
