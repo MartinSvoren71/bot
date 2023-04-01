@@ -61,7 +61,7 @@ def index():
         folder_path = "Data/"   # those are used for listing pdf files 
         files = []
         folders = list_folders()
-        index_files()
+        index_files();
         return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
