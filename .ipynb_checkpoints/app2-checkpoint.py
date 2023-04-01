@@ -14,7 +14,7 @@ import io
 from io import BytesIO
 
 
-folder_name = 's3/data/'
+folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
