@@ -59,19 +59,12 @@ def index():
         </select>
         '''
         folder_path = "Data/"
-        files = []
         folders = []
         for root, dirnames, filenames in os.walk(folder_path):
-            for filename in filenames:
-                if not filename.startswith('.'):  # Ignore hidden files
-                    file = {}
-                    file["Key"] = os.path.join(root, filename)
-                    file["PresignedURL"] = url_for("static", filename=file["Key"])
-                    files.append(file)
             for dirname in dirnames:
                 if not dirname.startswith('.'):  # Ignore hidden directories
                     folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
+        return render_template("indexSplit.html", html=html, folders=folders, files=[], results={})
 
     else:
         flash("Please log in first")
