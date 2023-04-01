@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file, send_from_directory
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 from threading import Thread
@@ -215,20 +215,20 @@ def list_folders():
                 files.append(file)
     return files
 
-@app.route('/<path:folder>')
-def get_files(folder):
-    # Define the base directory for your files, e.g., 'static' or 'Data'
-    base_dir = 'Data'
-
-    # Use safe_join to combine the base directory and the requested folder
-    folder_path = safe_join(base_dir, folder)
-
-    if not os.path.exists(folder_path):
+@app.route('/get_files/<path:folder_path>')
+def get_files(folder_path):
+    folder = os.path.join('Data', folder_path)
+    if not os.path.exists(folder):
         return jsonify({'error': f"Folder '{folder}' not found"})
-    
-    file_list = os.listdir(folder_path)
+    file_list = os.listdir(folder)
     return jsonify({'files': file_list})
 
+@app.route('/data/<path:file_path>')
+def serve_file(file_path):
+    return send_from_directory('Data', file_path)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
 
 
 

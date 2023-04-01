@@ -912,17 +912,14 @@ load_folders();
 
 function getFiles() {
     var folder = $('#folder-select').val();
-    $.getJSON('/' + folder, function(data) {
+    $.getJSON('/get_files/' + folder, function(data) {
         var files = data.files;
         $('#file-list').empty();
         for (var i = 0; i < files.length; i++) {
             $('#file-list').append('<li>' + files[i] + '</li>');
         }
     });
-    saveFolder();
 }
-
-
 
        
        
