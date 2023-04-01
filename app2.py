@@ -61,6 +61,20 @@ def index():
         folder_path = "Data/"   # those are used for listing pdf files 
         files = []
         folders = list_folders()
+        index_files()
+        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
+
+    else:
+        flash("Please log in first")
+        return redirect(url_for("login"))
+
+    
+
+def index_files():
+    if "logged_in" in session:
+        folder_path = "Data/"   # those are used for listing pdf files 
+        files = []
+        folders = list_folders()
 
 
         for root, dirnames, filenames in os.walk(folder_path):
@@ -73,13 +87,11 @@ def index():
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
+       # return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
-
-    
     
 
     
