@@ -198,7 +198,7 @@ def generate_pdf_route():
 
 # return  data into selector in html
 def list_folders():
-    folder_path = "Data/Data/"
+    folder_path = "/"
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
