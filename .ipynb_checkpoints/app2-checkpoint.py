@@ -60,7 +60,7 @@ def index():
         '''
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = []
-        folders = list_folders()
+        folders = []
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
@@ -103,6 +103,8 @@ def generate_presigned_url(bucket, key, expiration=3600):
 
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
+    key = "nnp"
+
     question = request.form['question']
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_GPT(question)  # Pass the theme value

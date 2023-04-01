@@ -60,7 +60,7 @@ def index():
         '''
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = []
-        folders = list_folders()
+        folders = []
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
