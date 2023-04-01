@@ -193,6 +193,7 @@ def generate_pdf_route():
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
 # return  data into selector in html
+@app.route('/list_folders', methods=['POST'])
 def list_folders():
     folder_path = "Data/"
     folders = []
