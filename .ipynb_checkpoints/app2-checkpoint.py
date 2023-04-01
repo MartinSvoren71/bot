@@ -58,7 +58,7 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/"
+        folder_path = "Data/Coherent/Chameleon/"
         files = []
         folders = list_folders()
         folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
