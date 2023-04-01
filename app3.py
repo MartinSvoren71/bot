@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    data_folders = os.listdir('Data/Coherent/')
+    data_folders = os.listdir('Data/')
     return render_template('results2.html', folders=data_folders)
 
 @app.route('/get_folder_content', methods=['POST'])
