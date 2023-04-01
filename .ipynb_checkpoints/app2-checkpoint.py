@@ -224,8 +224,6 @@ def list_files():
         files = []
         folders = list_folders_route()
 
-       
-    files = []
     for root, dirnames, filenames in os.walk(folders):
         for filename in filenames:
             if not filename.startswith('.'):  # Ignore hidden files
