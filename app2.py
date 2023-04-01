@@ -219,12 +219,9 @@ def list_folders_route():
     return folders
 
 @app.route('/list_files')
-def list_files():
-    folder_path = "{folders}"   # those are used for listing pdf files   folders
+def list_files_in_folder(folder_path):
     files = []
-    folders = list_folders_route()
-
-    for root, dirnames, filenames in os.walk(folders):
+    for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
             if not filename.startswith('.'):  # Ignore hidden files
                 file = {}
