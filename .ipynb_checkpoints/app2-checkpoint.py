@@ -59,7 +59,7 @@ def index():
         </select>
         '''
         folder_path = "Data/"
-        data_dir = '/data'
+        data_dir = 'Data/'
         folders = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
 
         for root, dirnames, filenames in os.walk(folder_path):
