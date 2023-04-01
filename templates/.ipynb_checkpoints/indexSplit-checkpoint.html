@@ -927,7 +927,32 @@ function loadFiles() {
         });
 }
 
-       
+  function updateFolders() {
+        // Fetch the updated folder data from the server
+        fetch("/get_folders")
+            .then(response => {
+                if (response.status === 401) {
+                    // Redirect to login if the user is not logged in
+                    window.location.href = "{{ url_for('login') }}";
+                } else {
+                    return response.json();
+                }
+            })
+            .then(folders => {
+                // Update the DOM with the new folder data
+                // Replace 'list-container' with the class of the <div> element containing the <ul> element
+                const listContainer = document.querySelector('.list-container ul');
+                listContainer.innerHTML = '';
+                folders.forEach(folder => {
+                    // Update this line to match how you display folders in your HTML template
+                    listContainer.innerHTML += `<li><a href="#" onclick="showPDF('${folder.PresignedURL}')">${folder.Key}</a></li>`;
+                });
+            })
+            .catch(error => console.error('Error fetching folders:', error));
+    }
+
+    // Call the updateFolders function every 5 seconds
+    setInterval(updateFolders, 5000);
        
        
    </script>    
