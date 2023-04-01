@@ -12,7 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
-
+from werkzeug.utils import safe_join
 
 folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
@@ -215,14 +215,20 @@ def list_folders():
                 files.append(file)
     return files
 
-@app.route('/get_files/<folder>')
+@app.route('/<path:folder>')
 def get_files(folder):
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    folder_path = os.path.join(base_dir, folder)
+    # Define the base directory for your files, e.g., 'static' or 'Data'
+    base_dir = 'Data'
+
+    # Use safe_join to combine the base directory and the requested folder
+    folder_path = safe_join(base_dir, folder)
+
     if not os.path.exists(folder_path):
         return jsonify({'error': f"Folder '{folder}' not found"})
+    
     file_list = os.listdir(folder_path)
     return jsonify({'files': file_list})
+
 
 
 
