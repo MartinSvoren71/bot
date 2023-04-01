@@ -51,6 +51,10 @@ def sync_s3_to_local(s3_folder, local_folder):
         print("Error listing S3 folder:", s3_folder, e)
         return
 
+    # Create the local folder if it does not exist
+    if not os.path.exists(local_folder):
+        os.makedirs(local_folder)
+
     # Sync the S3 folder with the local folder
     for file_path in s3_files:
         file_name = os.path.basename(file_path)
@@ -61,9 +65,6 @@ def sync_s3_to_local(s3_folder, local_folder):
         except ClientError as e:
             print("Error downloading file:", local_file_path, e)
 
-
-# Example usage: sync S3 folder 's3/data/' to local folder '/s3/data/'
-sync_s3_to_local('s3/data/', '/s3/data/')
 
 
 
