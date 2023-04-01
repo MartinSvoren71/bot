@@ -64,7 +64,7 @@ def index():
             {options}
         </select>
         '''
-        print(folders)
+        
         folder_path = "{folders}"   # those are used for listing pdf files   folders
         files = []
         folders = list_folders_route()
@@ -80,7 +80,7 @@ def index():
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
         return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
-
+        print(folders)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
