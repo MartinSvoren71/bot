@@ -14,7 +14,7 @@ import io
 from io import BytesIO
 
 
-folder_name = 's3/'
+folder_name = 's3/data/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
@@ -60,7 +60,9 @@ def index():
         '''
         folder_path = "Data/"
         files = []
-        folders = []
+        folders = list_folders()
+        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
+
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
                 if not filename.startswith('.'):  # Ignore hidden files
@@ -71,7 +73,8 @@ def index():
             for dirname in dirnames:
                 if not dirname.startswith('.'):  # Ignore hidden directories
                     folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
+            return render_template("indexSplit.html", html=html, folder_options=folder_options, files=files, results={})
+
 
     else:
         flash("Please log in first")
@@ -119,7 +122,7 @@ def ask_LIB_route():
     theme = request.form['theme']
     model = "text-davinci-003"
     key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folders))
+    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
     files = contents['Contents']
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
@@ -130,7 +133,7 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html', question=question, theme=theme)
     
-def search_pdf_files(keyword, file_paths, folders):
+def search_pdf_files(keyword, file_paths):
     results = {}
     encrypted_files = []  # List to store encrypted files
     for filepath in file_paths:
@@ -154,16 +157,15 @@ def search_pdf_files(keyword, file_paths, folders):
             print(f"Error processing {filepath}: {str(e)}")
     return results, encrypted_files
 
-
 @app.route('/search_pdf_files', methods=['POST'])
-def search_files(folders):
+def search_files():
     search_results = {}
     encrypted_files = []
     #folder_name = 's3/data/coherent_chameleon/'
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folders)
+        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
         file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
         search_results, encrypted_files = search_pdf_files(keyword, file_paths)
         # Write search results to a text file

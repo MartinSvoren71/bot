@@ -595,12 +595,9 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select id="folder-select">
-  <option value="">Choose a folder</option>
-  {% for folder in folders %}
-    <option value="{{ folder }}">{{ folder }}</option>
-  {% endfor %}
-</select>
+ <select id="folderSelect" onchange="changeFolder()">
+    {{ folder_options|safe }}
+  </select>
 
                   </div>
                     </form>
@@ -895,20 +892,16 @@ async function save_doc() {
   pdfDoc.download('document.pdf');
 }
 
-async function load_folders() {
-  const response = await fetch('/list_folders');
-  const folders = await response.json();
-  const folderSelect = document.getElementById('folder-select');
+ <script>
+    function changeFolder() {
+      var folderSelect = document.getElementById('folderSelect');
+      var folder = folderSelect.value;
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/set_folder', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send('folder=' + encodeURIComponent(folder));
+    }
 
-  folders.forEach((folder) => {
-    const option = document.createElement('option');
-    option.value = folder;
-    option.textContent = folder;
-    folderSelect.appendChild(option);
-  });
-}
-
-load_folders();
 
 
 
