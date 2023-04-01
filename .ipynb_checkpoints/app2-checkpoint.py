@@ -58,7 +58,7 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/"
+        folder_path = "Data/Coherent/Chemeleon/"   # those are used for listing pdf files 
         files = []
         folders = list_folders()
 
@@ -191,8 +191,9 @@ def generate_pdf_route():
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
+# return  data into selector in html
 def list_folders():
-    folder_path = "Data/aa/"
+    folder_path = "Data/"
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
