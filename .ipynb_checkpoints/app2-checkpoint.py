@@ -58,7 +58,7 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/Coherent/Chemeleon/"   # those are used for listing pdf files 
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = []
         folders = list_folders()
 
@@ -105,9 +105,7 @@ def generate_presigned_url(bucket, key, expiration=3600):
 def ask_GPT_route():
     question = request.form['question']
     theme = request.form['theme']
-    model = request.form['model']
     key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
     files = contents['Contents']
     for file in files:
         file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
@@ -200,9 +198,6 @@ def list_folders():
             if not dirname.startswith('.'):  # Ignore hidden directories
                 folders.append(os.path.join(root, dirname))
     return folders
-
-
-
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
