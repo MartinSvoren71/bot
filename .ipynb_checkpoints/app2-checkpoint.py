@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file, send_from_directory
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 from threading import Thread
@@ -28,6 +28,9 @@ s3_client = boto3.client(
     region_name=AWS_DEFAULT_REGION
 )
 
+@app.route('/files/<path:file_path>')
+def serve_file(file_path):
+    return send_from_directory(directory='Data', filename=file_path, as_attachment=False)
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -67,7 +70,7 @@ def index():
                 if not filename.startswith('.'):  # Ignore hidden files
                     file = {}
                     file["Key"] = os.path.join(root, filename)
-                    file["PresignedURL"] = url_for("static", filename=file["Key"])
+                    file["PresignedURL"] = url_for("serve_file", file_path=file["Key"])
                     files.append(file)
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
