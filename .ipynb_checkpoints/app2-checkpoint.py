@@ -15,8 +15,10 @@ import boto3
 import shutil
 from pathlib import Path
 
-
+local_folder_name = 's3/'
+s3_folder_name = 's3/'
 folder_name = 's3/'
+
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
@@ -65,8 +67,7 @@ def sync_s3_to_local(s3_folder, local_folder):
                 s3_client.download_file(BUCKET_NAME, s3_file_key, local_file_path)
 
 # Sync S3 and local folder on app start
-local_folder_name = 's3/'
-s3_folder_name = 's3/'
+
 
 sync_s3_to_local(s3_folder_name, local_folder_name)
 
