@@ -595,7 +595,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select id="folder-select" onchange="load_folders()">
+    <select id="folder-select" onchange="load_folders(event)">
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
