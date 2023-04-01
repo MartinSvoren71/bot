@@ -1,0 +1,12 @@
+<body>
+    <h1>list of fiiles</h1>
+    
+    <div class="list-container">
+      <ul>
+      {% for file in files %}
+      <li><a href="#" onclick="showPDF('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
+      {% endfor %}
+      </ul>
+      </div>
+</body>
+</html>
