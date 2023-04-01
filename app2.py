@@ -223,7 +223,7 @@ def get_files(folder_path):
     file_list = os.listdir(folder)
     return jsonify({'files': file_list})
 
-@app.route('/data/<path:file_path>')
+@app.route('/<path:file_path>')
 def serve_file(file_path):
     return send_from_directory('/', file_path)
 
