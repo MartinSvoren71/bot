@@ -58,6 +58,7 @@ def index():
             {options}
         </select>
         '''
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = []
         folders = []
 
