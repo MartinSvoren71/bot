@@ -198,7 +198,7 @@ def generate_pdf_route():
 
 # return  data into selector in html
 def list_folders():
-    folder_path = "Data/"
+    folder_path = "Data/Data/"
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
@@ -214,6 +214,18 @@ def list_folders():
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
+
+@app.route('/get_files/<path:folder_path>')
+def get_files(folder_path):
+    folder = os.path.join('Data', folder_path)
+    if not os.path.exists(folder):
+        return jsonify({'error': f"Folder '{folder}' not found"})
+    file_list = os.listdir(folder)
+    return jsonify({'files': file_list})
+
+@app.route('/data/<path:file_path>')
+def serve_file(file_path):
+    return send_from_directory('Data', file_path)
 
 t = Thread(target=initialize_ai)
 t.start()

@@ -711,7 +711,7 @@ v1.5
       }  
        function saveFolder() {
        const selectedModel = document.getElementById("folder-select").value;
-       localStorage.setItem("folcer-select", selectedModel);
+       localStorage.setItem("folder-select", selectedModel);
       }  
        
           
@@ -911,8 +911,13 @@ async function load_folders() {
 load_folders();
 
 function getFiles() {
-    var folder = $('#folder-select').val(); // Changed from $('#folders').val();
-    $.getJSON(folder, function(data) {
+    var folder = $('#folder-select').val();
+    $.getJSON('/get_files/' + folder, function(data) {
+        console.log(data); // Log the data received
+        if (data.error) {
+            console.error(data.error);
+            return;
+        }
         var files = data.files;
         $('#file-list').empty();
         for (var i = 0; i < files.length; i++) {
@@ -920,8 +925,6 @@ function getFiles() {
         }
     });
 }
-
-
        
        
        

@@ -595,7 +595,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select name="select-folder" id="folder-select" onchange="getFiles()">
+    <select id="folder-select" >
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
@@ -709,9 +709,9 @@ v1.5
        const selectedModel = document.getElementById("theme").value;
        localStorage.setItem("theme", selectedModel);
       }  
-       function saveFolder() {
-       const selectedModel = document.getElementById("folder-select").value;
-       localStorage.setItem("folcer-select", selectedModel);
+       function saveModel() {
+       const selectedModel = document.getElementById("model").value;
+       localStorage.setItem("model", selectedModel);
       }  
        
           
@@ -911,15 +911,17 @@ async function load_folders() {
 load_folders();
 
 function getFiles() {
-    var folder = $('#folder-select').val(); // Changed from $('#folders').val();
-    $.getJSON(folder, function(data) {
-        var files = data.files;
-        $('#file-list').empty();
-        for (var i = 0; i < files.length; i++) {
+        var folder = $('#folders').val();
+        $.getJSON('/files/' + folder, function(data) {
+          var files = data.files;
+          $('#file-list').empty();
+          for (var i = 0; i < files.length; i++) {
             $('#file-list').append('<li>' + files[i] + '</li>');
+          }
+        });
+      }
         }
     });
-}
 
 
        
