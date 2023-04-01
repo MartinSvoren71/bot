@@ -22,7 +22,8 @@
             $.post('/get_folder_content', {selected_folder: selectedFolder}, function(data) {
                 $('#folder-content').html('');
                 for (let item of data.folder_content) {
-                    $('#folder-content').append('<li>' + item + '</li>');
+                    let file_url = '/Data/' + selectedFolder + '/' + item;
+                    $('#folder-content').append('<li><a href="' + file_url + '" target="_blank">' + item + '</a></li>');
                 }
             });
         }
