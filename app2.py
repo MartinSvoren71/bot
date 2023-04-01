@@ -59,16 +59,9 @@ def index():
         </select>
         '''
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
-        files = []
+        files = get_folders()
         folders = list_folders()
 
-        for root, dirnames, filenames in os.walk(folder_path):
-            for filename in filenames:
-                if not filename.startswith('.'):  # Ignore hidden files
-                    file = {}
-                    file["Key"] = os.path.join(root, filename)
-                    file["PresignedURL"] = url_for("static", filename=file["Key"])
-                    files.append(file)
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
@@ -83,7 +76,7 @@ def index():
 def get_folders():
     folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
     files = []
-    folders = list_folders()
+    folders = []
 
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
