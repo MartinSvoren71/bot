@@ -14,6 +14,7 @@ from io import BytesIO
 import boto3
 import shutil
 from pathlib import Path
+from botocore.exceptions import ClientError
 
 
 folder_name = 's3/'
