@@ -58,17 +58,17 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files   folders
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = []
-        folders = list_folders()
+        #folders = list_folders()
 
-        for root, dirnames, filenames in os.walk(folder_path):
-            for filename in filenames:
-                if not filename.startswith('.'):  # Ignore hidden files
-                    file = {}
-                    file["Key"] = os.path.join(root, filename)
-                    file["PresignedURL"] = url_for("static", filename=file["Key"])
-                    files.append(file)
+       # for root, dirnames, filenames in os.walk(folder_path):
+         #   for filename in filenames:
+          #      if not filename.startswith('.'):  # Ignore hidden files
+          #          file = {}
+          #          file["Key"] = os.path.join(root, filename)
+           #         file["PresignedURL"] = url_for("static", filename=file["Key"])
+           #         files.append(file)
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
@@ -80,7 +80,6 @@ def index():
 
     
     
-
     
     
 @app.route('/log-content')
@@ -191,7 +190,7 @@ def generate_pdf_route():
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
-@app.route('/load_files', methods=['POST'])
+# return  data into selector in html
 def list_folders():
     folder_path = "Data/"
     folders = []
