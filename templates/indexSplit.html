@@ -595,7 +595,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select name="select-folder" id="folder-select" onchange="getFiles()">
+    <select name="select-folder" id="folder-select" onchange="updateFileList(event)">
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
@@ -925,7 +925,7 @@ function getFiles() {
         }
     });
 }
-function updateFileList() {
+function updateFileList(event) {
         $.getJSON('/get_updated_files', function(data) {
             var files = data;
             var file_list_element = $('#list-container');
