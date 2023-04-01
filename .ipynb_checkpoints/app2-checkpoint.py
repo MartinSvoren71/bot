@@ -63,7 +63,8 @@ def index():
         '''
         folder_path = "Data/"  # define folder_path before calling list_files_in_folder()
         folders = list_folders_route()
-        files = list_files_in_folder()
+        files = list_files_in_folder(folder_path=request.args.get('folder'))
+
 
 
         for root, dirnames, filenames in os.walk(folder_path):
@@ -220,8 +221,7 @@ def list_folders_route():
     return folders
 
 @app.route('/list_files')
-def list_files_in_folder():
-    folder_path = request.args.get('folder')
+def list_files_in_folder(folder_path="Data/"):  # define folder_path with a default value
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
