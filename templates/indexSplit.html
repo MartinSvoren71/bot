@@ -595,7 +595,8 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select id="folder-select" onchange="load_folders(event)">
+    <select id="folder-select" onchange="loadFiles()">
+
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
@@ -908,8 +909,23 @@ async function load_folders(event) {
   });
 }
 
+load_folders();
 
 
+function loadFiles() {
+    const folder = document.getElementById('folder-select').value;
+
+    fetch(`/list_files?folder=${folder}`)
+        .then(response => response.json())
+        .then(files => {
+            const listContainer = document.getElementById('list-container');
+            const listItems = files.map(file => `<li><a href="#" onclick="showPDF('${file.url}')">${file.name}</a></li>`).join('');
+            listContainer.innerHTML = `<ul>${listItems}</ul>`;
+        })
+        .catch(error => {
+            console.error('Error loading files:', error);
+        });
+}
 
        
        
