@@ -215,15 +215,13 @@ def list_folders():
                 files.append(file)
     return files
 
-@app.route('/<folder>')
+@app.route('/get_files/<folder>')
 def get_files(folder):
-    folder_path = {folder}
+    folder_path = f"{folder}"
     if not os.path.exists(folder_path):
         return jsonify({'error': f"Folder '{folder}' not found"})
     file_list = os.listdir(folder_path)
     return jsonify({'files': file_list})
-
-
 
 t = Thread(target=initialize_ai)
 t.start()
