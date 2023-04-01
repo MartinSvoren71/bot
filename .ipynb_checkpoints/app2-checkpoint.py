@@ -198,7 +198,7 @@ def list_folders():
         for dirname in dirnames:
             if not dirname.startswith('.'):  # Ignore hidden directories
                 folders.append(os.path.join(root, dirname))
-    return folders
+    #return folders
 
 
 
