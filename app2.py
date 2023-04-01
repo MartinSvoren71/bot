@@ -159,7 +159,7 @@ def search_pdf_files(keyword, file_paths):
                                 print(f"Error processing {filepath}: {str(e)}")
                             finally:
                                 pdf_file.close()
-        return results, encrypted_files
+    return results, encrypted_files
 
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
