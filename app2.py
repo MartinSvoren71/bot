@@ -59,7 +59,7 @@ def index():
         </select>
         '''
         folder_path = "Data/"
-        data_dir = '/Data'
+        data_dir = 'Data/'
         folders = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
         folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
 
@@ -200,7 +200,7 @@ def list_folders():
 @app.route('/get_files', methods=['POST'])
 def get_files():
     selected_folder = request.form['folder']
-    data_dir = '/Data'
+    data_dir = 'Data/'
     folder_path = os.path.join(data_dir, selected_folder)
     files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
     return {'files': files}
