@@ -200,9 +200,6 @@ def list_folders():
             if not dirname.startswith('.'):  # Ignore hidden directories
                 folders.append(os.path.join(root, dirname))
     return folders
-
-
-
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
@@ -212,6 +209,7 @@ def list_folders():
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
+
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
