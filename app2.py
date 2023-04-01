@@ -58,7 +58,6 @@ def index():
             {options}
         </select>
         '''
-        list_folders()
         folder_path = "{folders}"   # those are used for listing pdf files   folders
         files = []
         folders = list_folders()
@@ -194,7 +193,7 @@ def generate_pdf_route():
 
 # return  data into selector in html
 @app.route('/list_folders', methods=['POST'])
-def list_folders():
+def list_folders_route():
     folder_path = "Data/"
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
