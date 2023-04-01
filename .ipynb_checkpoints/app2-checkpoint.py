@@ -73,8 +73,7 @@ def index():
             for dirname in dirnames:
                 if not dirname.startswith('.'):  # Ignore hidden directories
                     folders.append(os.path.join(root, dirname))
-            return render_template("indexSplit.html", html=html, folder_options=folder_options, files=files, results={})
-
+        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
 
     else:
         flash("Please log in first")
@@ -180,14 +179,7 @@ def search_files():
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
     
-@app.route('/set_folder', methods=['POST'])
-def set_folder():
-    global folder_name
-    if request.method == 'POST':
-        folder = request.form['folder']
-        if folder:
-            folder_name = f's3/{folder}/'
-    return '', 204
+
 
 
 @app.route('/save', methods=['POST'])
