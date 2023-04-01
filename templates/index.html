@@ -48,7 +48,7 @@ input {
             <ul>
                 {% for page_num, match in matches %}
    <li>
-                <a href="#" onclick="showPDF('{{ url_for('serve_file', file_path=filepath[2:]) }}#page={{ page_num + 1 }}')">
+                <a href="#" onclick="showPDF('{{ predesigned_url }}{{ filepath[2:] }}#page={{ page_num + 1 }}')">
                     {{ filepath }} - page {{ page_num + 1 }}
                 </a>: {{ match }}
             </li>

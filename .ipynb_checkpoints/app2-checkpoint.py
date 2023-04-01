@@ -138,11 +138,10 @@ def ask_LIB_route():
 
 
 
-def search_pdf_files(keyword, folder_path):
+def search_pdf_files(keyword, folder_path, predesigned_url=None):
     results = {}
-    encrypted_files = []  # List to store encrypted files
+    encrypted_files = []
 
-    # Traverse the local file system
     for root, _, filenames in os.walk(folder_path):
         for filename in filenames:
             if filename.lower().endswith('.pdf'):
@@ -152,7 +151,7 @@ def search_pdf_files(keyword, folder_path):
                         pdf_reader = PdfFileReader(f)
                         if pdf_reader.isEncrypted:
                             print(f"Skipping encrypted file: {filepath}")
-                            encrypted_files.append(filepath)  # Add the encrypted file to the list
+                            encrypted_files.append(filepath)
                             continue
                         for page_num in range(pdf_reader.getNumPages()):
                             text = pdf_reader.getPage(page_num).extractText()
@@ -161,7 +160,7 @@ def search_pdf_files(keyword, folder_path):
                             if matches:
                                 if filepath not in results:
                                     results[filepath] = []
-                                results[filepath].extend([(page_num, match) for match in matches])
+                                results[filepath].extend([(page_num, match, predesigned_url) for match in matches])
                 except Exception as e:
                     print(f"Error processing {filepath}: {str(e)}")
 
@@ -177,7 +176,7 @@ def search_files():
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        search_results, encrypted_files = search_pdf_files(keyword, folder_path)
+        search_results, encrypted_files = search_pdf_files(keyword, folder_path, predesigned_url=url_for("static", filename=""))
         
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
