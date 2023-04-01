@@ -186,10 +186,13 @@ def generate_pdf_route():
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
-def list_folders(bucket_name):
-    s3 = boto3.client('s3')
-    response = s3.list_objects_v2(Bucket=bucket_name, Delimiter='/')
-    folders = [common_prefix['Prefix'] for common_prefix in response.get('CommonPrefixes', [])]
+def list_folders():
+    folder_path = "Data"
+    folders = []
+    for root, dirnames, filenames in os.walk(folder_path):
+        for dirname in dirnames:
+            if not dirname.startswith('.'):  # Ignore hidden directories
+                folders.append(os.path.join(root, dirname))
     return folders
 
 
