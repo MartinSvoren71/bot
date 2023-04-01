@@ -896,7 +896,6 @@ async function save_doc() {
   pdfDoc.download('document.pdf');
 }
 function showPDF(url) {
-    document.getElementById('pdf-embed').src = '/lurl.pdf';
     setTimeout(() => {
         document.getElementById('pdf-embed').src = url;
     }, 300);
