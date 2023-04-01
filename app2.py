@@ -58,7 +58,7 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/"   # those are used for listing pdf files 
+        folder_path = ""   # those are used for listing pdf files 
         files = []
         folders = list_folders()
 
@@ -217,7 +217,7 @@ def list_folders():
 
 @app.route('/files/<folder>')
 def get_files(folder):
-    folder_path = f'Data/{folder}'
+    folder_path = {folder}
     if not os.path.exists(folder_path):
         return jsonify({'error': f"Folder '{folder}' not found"})
     file_list = os.listdir(folder_path)
