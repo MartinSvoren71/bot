@@ -200,7 +200,8 @@ def list_folders_route():
         for dirname in dirnames:
             if not dirname.startswith('.'):  # Ignore hidden directories
                 folders.append(os.path.join(root, dirname))
-    return folders
+        return json.dumps(folders)
+
 
 
 
