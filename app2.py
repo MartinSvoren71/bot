@@ -192,7 +192,7 @@ def generate_pdf_route():
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
 def list_folders():
-    folder_path = "Data/Coherent/Chameleon/"
+    folder_path = "Data/"
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
