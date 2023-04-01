@@ -711,7 +711,7 @@ v1.5
       }  
        function saveFolder() {
        const selectedModel = document.getElementById("folder-select").value;
-       localStorage.setItem("folcer-select", selectedModel);
+       localStorage.setItem("folder-select", selectedModel);
       }  
        
           
@@ -916,10 +916,7 @@ function getFiles() {
         var files = data.files;
         $('#file-list').empty();
         for (var i = 0; i < files.length; i++) {
-            $('#file-list').append('<li>' + files[i] + '</li>');
-        }
-    });
-    saveFolder();
+            $('#file-list').append('<li>' + files[i] +                              
 }
 
 
