@@ -80,31 +80,7 @@ def index():
 
     
     
-@app.route("/indexSplit", methods=["GET", "POST"])
-def index():
-    if "logged_in" in session:
-        # Load the themes from the themes.json file
-        with open('themes.json', 'r') as f:
-            themes = json.load(f)
-        # Generate the <option> elements dynamically
-        options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
-        # Render the HTML with the dynamic <option> elements
-        html = f'''
-        <select name="theme" id="theme" onchange="saveTheme()">
-            {options}
-        </select>
-        '''
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
-        files = contents['Contents']
-        for file in files:
-            file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
-        return render_template("indexSplit.html", html=html, files=files, results={})
-    else:
-        flash("Please log in first")
-        return redirect(url_for("login"))
-    
-    
-    
+
     
     
 @app.route('/log-content')
