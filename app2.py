@@ -59,7 +59,7 @@ def sync_s3_to_local(s3_folder, local_folder):
             print("Error uploading file:", local_file_path, e)
 
 
-sync_s3_to_local(s3_folder_name, local_folder_path)
+sync_s3_to_local(s3_folder, local_folder)
 
 
 
