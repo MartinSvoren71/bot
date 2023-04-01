@@ -15,8 +15,7 @@ import boto3
 import shutil
 from pathlib import Path
 
-local_folder_name = 's3/'
-s3_folder_name = 's3/'
+
 folder_name = 's3/'
 
 app = Flask(__name__, static_folder='/')
@@ -36,37 +35,28 @@ s3_client = boto3.client(
 
 
 def sync_s3_to_local(s3_folder, local_folder):
-    # Remove the local folder data if it exists
-    if os.path.exists(local_folder):
-        for filename in os.listdir(local_folder):
-            file_path = os.path.join(local_folder, filename)
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)
+# Set the S3 bucket and folder names
+bucket_name = 'knowledgevortex'
+s3_folder_name = 's3/data/'
 
-    # Create the local folder if it doesn't exist
-    os.makedirs(local_folder, exist_ok=True)
+# Set the local folder path
+local_folder_path = '/s3/data/'
 
-    # List S3 folder contents
-    s3_objects = s3_client.list_objects_v2(Bucket=BUCKET_NAME, Prefix=s3_folder)
+# Create an S3 client
+s3_client = boto3.client('s3')
 
-    # Download files from S3 and create the folder structure
-    for s3_object in s3_objects.get('Contents', []):
-        s3_file_key = s3_object['Key']
-        local_file_path = os.path.join(local_folder, os.path.relpath(s3_file_key, s3_folder))
+# Get the list of files in the local folder
+local_files = os.listdir(local_folder_path)
 
-        # Check if the object is a file and not a folder
-        if not local_file_path.endswith('/'):
-            # Create the local directory if it doesn't exist
-            local_dir = os.path.dirname(local_file_path)
-            os.makedirs(local_dir, exist_ok=True)
-
-            # Download the file if it doesn't exist locally
-            if not os.path.exists(local_file_path):
-                s3_client.download_file(BUCKET_NAME, s3_file_key, local_file_path)
-
-# Sync S3 and local folder on app start
+# Sync the local folder with the S3 folder
+for file_name in local_files:
+    local_file_path = os.path.join(local_folder_path, file_name)
+    s3_file_path = s3_folder_name + file_name
+    try:
+        s3_client.upload_file(local_file_path, bucket_name, s3_file_path)
+        print("Uploaded file:", local_file_path)
+    except ClientError as e:
+        print("Error uploading file:", local_file_path, e)
 
 
 sync_s3_to_local(s3_folder_name, local_folder_name)
