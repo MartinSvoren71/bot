@@ -78,7 +78,7 @@ def index():
         </select>
         '''
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
-        files = list_files_and_urls()
+        files = get_updated_files()
         folders = list_folders()
 
             #for dirname in dirnames:
