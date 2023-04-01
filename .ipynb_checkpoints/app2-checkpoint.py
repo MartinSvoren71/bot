@@ -61,7 +61,7 @@ def index():
         folder_path = "Data/Coherent/Chameleon/"
         files = []
         folders = list_folders()
-folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in subfolders])
+        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in subfolders])
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
