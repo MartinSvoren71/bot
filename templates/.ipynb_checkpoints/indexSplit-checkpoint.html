@@ -635,7 +635,8 @@ v1.5
       <div class="list-container">
       <ul>
       {% for file in files %}
-      <li><a href="#" onclick="showPDF('{{ file.PresignedURL }}')">{{ file.Key }}</a></li>
+      <li><a href="{{ url_for('serve_file', file_path=filepath[2:]) }}#page={{ page_num + 1 }}" target="_blank">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}
+</li>
       {% endfor %}
       </ul>
       </div></div>
