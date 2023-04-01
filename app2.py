@@ -40,7 +40,7 @@ def sync_s3_to_local(s3_folder, local_folder):
     bucket_name = 'knowledgevortex'
 
     # Create an S3 client
-    s3_client = boto3.client('s3')
+   
 
     # Get the list of files in the S3 folder
     s3_files = []
