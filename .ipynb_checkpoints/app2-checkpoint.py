@@ -169,9 +169,8 @@ def search_files():
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=folder_name)
-        file_paths = [content['Key'] for content in contents['Contents'] if content['Key'].lower().endswith('.pdf')]
-        search_results, encrypted_files = search_pdf_files(keyword, file_paths)
+        folders = request.form.getlist('folders')
+        search_results, encrypted_files = search_pdf_files(keyword, folders)
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
             f.write(f"Search keyword: {keyword}\n")
