@@ -59,9 +59,8 @@ def index():
         </select>
         '''
         folder_path = "Data/"
-        data_dir = 'Data/'
-        folders = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
-        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
+        data_dir = '/data'
+    folders = [d for d in os.listdir(data_dir) if os.path.isdir(os.path.join(data_dir, d))]
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
