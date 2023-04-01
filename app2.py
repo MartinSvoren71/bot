@@ -60,14 +60,13 @@ def index():
         '''
         folder_path = "Data/"
      
-        folder_path = "Data/"
         folders = []
         for root, dirnames, filenames in os.walk(folder_path):
             for dirname in dirnames:
                 if not dirname.startswith('.'):  # Ignore hidden directories
                     folders.append(os.path.join(root, dirname))
-        folders_text = '<br>'.join(folders)
-        return render_template("indexSplit.html", html=html, folders=folders_text, results={})
+        print(folders)
+        return render_template("indexSplit.html", html=html, folders=folders, files=[], results={})
 
     else:
         flash("Please log in first")
