@@ -790,6 +790,7 @@ function showPDF(url) {
         document.getElementById('pdf-embed').src = url;
     }, 300);
 }
+
         const canvas = document.getElementById('matrixCanvas');
          const ctx = canvas.getContext('2d');
          canvas.width = window.innerWidth;
@@ -893,6 +894,12 @@ async function save_doc() {
 
   // Save and download the PDF
   pdfDoc.download('document.pdf');
+}
+function showPDF(url) {
+    document.getElementById('pdf-embed').src = '/lurl.pdf';
+    setTimeout(() => {
+        document.getElementById('pdf-embed').src = url;
+    }, 300);
 }
 
 async function load_folders() {
