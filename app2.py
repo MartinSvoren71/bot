@@ -62,8 +62,9 @@ def index():
         </select>
         '''
         folder_path = "{folders}"   # those are used for listing pdf files   folders
-        files = []
         folders = list_folders_route()
+        files = list_files_in_folder(folder_path)
+
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
