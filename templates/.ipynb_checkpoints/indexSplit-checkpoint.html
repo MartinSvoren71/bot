@@ -896,10 +896,9 @@ async function save_doc() {
   pdfDoc.download('document.pdf');
 }
 function showPDF(url) {
-    setTimeout(() => {
-        document.getElementById('pdf-embed').src = url;
-    }, 300);
+    document.getElementById('pdf-embed').src = url;
 }
+
 
 async function load_folders() {
   const response = await fetch('/list_folders');
