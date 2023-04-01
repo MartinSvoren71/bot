@@ -595,8 +595,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select id="folder-select" onchange="loadFiles()">
-
+    <select id="folder-select">
   <option value="">Choose a folder</option>
   {% for folder in folders %}
     <option value="{{ folder }}">{{ folder }}</option>
@@ -896,7 +895,7 @@ async function save_doc() {
   pdfDoc.download('document.pdf');
 }
 
-async function load_folders(event) {
+async function load_folders() {
   const response = await fetch('/list_folders');
   const folders = await response.json();
   const folderSelect = document.getElementById('folder-select');
@@ -912,47 +911,8 @@ async function load_folders(event) {
 load_folders();
 
 
-function loadFiles() {
-    const folder = document.getElementById('folder-select').value;
 
-    fetch(`/list_files?folder=${folder}`)
-        .then(response => response.json())
-        .then(files => {
-            const listContainer = document.getElementById('list-container');
-            const listItems = files.map(file => `<li><a href="#" onclick="showPDF('${file.url}')">${file.name}</a></li>`).join('');
-            listContainer.innerHTML = `<ul>${listItems}</ul>`;
-        })
-        .catch(error => {
-            console.error('Error loading files:', error);
-        });
-}
-
-  function updateFolders() {
-        // Fetch the updated folder data from the server
-        fetch("/get_folders")
-            .then(response => {
-                if (response.status === 401) {
-                    // Redirect to login if the user is not logged in
-                    window.location.href = "{{ url_for('login') }}";
-                } else {
-                    return response.json();
-                }
-            })
-            .then(folders => {
-                // Update the DOM with the new folder data
-                // Replace 'list-container' with the class of the <div> element containing the <ul> element
-                const listContainer = document.querySelector('.list-container ul');
-                listContainer.innerHTML = '';
-                folders.forEach(folder => {
-                    // Update this line to match how you display folders in your HTML template
-                    listContainer.innerHTML += `<li><a href="#" onclick="showPDF('${folder.PresignedURL}')">${folder.Key}</a></li>`;
-                });
-            })
-            .catch(error => console.error('Error fetching folders:', error));
-    }
-
-    // Call the updateFolders function every 5 seconds
-    setInterval(updateFolders, 5000);
+       
        
        
    </script>    
