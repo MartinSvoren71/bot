@@ -191,7 +191,7 @@ def generate_pdf_route():
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
-# return  data into selector in html
+@app.route('/load_files', methods=['POST'])
 def list_folders():
     folder_path = "Data/"
     folders = []
