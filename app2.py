@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file, send_from_directory
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file
 from ask_ai import initialize_ai, ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 from threading import Thread
@@ -12,7 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
-from werkzeug.utils import safe_join
+
 
 folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
@@ -203,9 +203,7 @@ def list_folders():
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
             if not dirname.startswith('.'):  # Ignore hidden directories
-                folder = os.path.join(root, dirname)
-                folder = folder.replace("Data/", "", 1)  # Remove "Data/" from the beginning
-                folders.append(folder)
+                folders.append(os.path.join(root, dirname))
     return folders
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
@@ -217,17 +215,8 @@ def list_folders():
                 files.append(file)
     return files
 
-@app.route('/get_files/<path:folder_path>')
-def get_files(folder_path):
-    folder = os.path.join('Data', folder_path)
-    if not os.path.exists(folder):
-        return jsonify({'error': f"Folder '{folder}' not found"})
-    file_list = os.listdir(folder)
-    return jsonify({'files': file_list})
 
-@app.route('/<path:file_path>')
-def serve_file(file_path):
-    return send_from_directory('/', file_path)
+
 
 
 t = Thread(target=initialize_ai)
