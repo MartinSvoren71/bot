@@ -12,7 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
-folders = "Data/Coherent/"
+
 
 folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
@@ -47,9 +47,6 @@ def login():
 def bad_key():
     return render_template("badkey.html")
 
-
-
-
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
@@ -61,11 +58,9 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/"  # define folder_path before calling list_files_in_folder()
-        folders = list_folders_route()
-        files = list_files_in_folder(folder_path=request.args.get('folder'))
-
-
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files   folders
+        files = []
+        folders = list_folders()
 
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
@@ -106,9 +101,6 @@ def generate_presigned_url(bucket, key, expiration=3600):
         return None
     return response
 
-
-
-
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
     question = request.form['question']
@@ -142,9 +134,6 @@ def ask_LIB_route():
             #return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html', question=question, theme=theme)
-    
-    
-    
     
 def search_pdf_files(keyword, file_paths):
     results = {}
@@ -195,9 +184,6 @@ def search_files():
     
 
 
-    
-    
-    
 
 @app.route('/save', methods=['POST'])
 def generate_pdf_route():
@@ -205,13 +191,8 @@ def generate_pdf_route():
     pdf = HTML(string=content).write_pdf()
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
-
-
-
-
 # return  data into selector in html
-@app.route('/list_folders', methods=['POST'])
-def list_folders_route():
+def list_folders():
     folder_path = "Data/"
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
@@ -220,8 +201,8 @@ def list_folders_route():
                 folders.append(os.path.join(root, dirname))
     return folders
 
-@app.route('/list_files')
-def list_files_in_folder(folder_path="Data/"):  # define folder_path with a default value
+
+
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
@@ -231,8 +212,6 @@ def list_files_in_folder(folder_path="Data/"):  # define folder_path with a defa
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
-
-
 t = Thread(target=initialize_ai)
 t.start()
 app.run(host='0.0.0.0', port=5000)
