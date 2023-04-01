@@ -215,7 +215,7 @@ def list_folders():
                 files.append(file)
     return files
 
-@app.route('/files/<folder>')
+@app.route('/<folder>')
 def get_files(folder):
     folder_path = {folder}
     if not os.path.exists(folder_path):
