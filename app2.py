@@ -58,7 +58,7 @@ def index():
             {options}
         </select>
         '''
-        folder_path = "Data/Coherent/Chameleon/"
+        folder_path = "Data/"
         files = []
         folders = list_folders()
 
