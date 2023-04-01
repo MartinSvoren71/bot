@@ -44,7 +44,8 @@ def sync_s3_to_local(s3_folder, local_folder):
         if not local_file_path.endswith('/'):
             # Create the local directory if it doesn't exist
             local_dir = os.path.dirname(local_file_path)
-            os.makedirs(local_dir, exist_ok=True)
+            if not os.path.exists(local_dir):
+                os.makedirs(local_dir, exist_ok=True)
 
             # Download the file if it doesn't exist locally
             if not os.path.exists(local_file_path):
@@ -52,6 +53,7 @@ def sync_s3_to_local(s3_folder, local_folder):
 
 # Sync S3 and local folder on app start
 sync_s3_to_local(folder_name, folder_name)
+
 
 
 @app.route("/", methods=["GET", "POST"])
