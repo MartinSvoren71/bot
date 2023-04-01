@@ -37,12 +37,12 @@ def sync_s3_to_local(s3_folder, local_folder):
     # List local folder contents
     local_files = set(os.listdir(local_folder))
 
-    # Download missing files from S3
+# Download missing files from S3
     for s3_object in s3_objects.get('Contents', []):
         s3_file_key = s3_object['Key']
         file_name = os.path.basename(s3_file_key)
         
-        if file_name not in local_files:
+        if file_name and file_name not in local_files:
             local_file_path = os.path.join(local_folder, file_name)
             s3_client.download_file(BUCKET_NAME, s3_file_key, local_file_path)
 
