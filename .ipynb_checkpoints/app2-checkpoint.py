@@ -36,30 +36,30 @@ s3_client = boto3.client(
 
 def sync_s3_to_local(s3_folder, local_folder):
 # Set the S3 bucket and folder names
-bucket_name = 'knowledgevortex'
-s3_folder_name = 's3/data/'
+    bucket_name = 'knowledgevortex'
+    s3_folder_name = 's3/data/'
 
 # Set the local folder path
-local_folder_path = '/s3/data/'
+    local_folder_path = '/s3/data/'
 
 # Create an S3 client
-s3_client = boto3.client('s3')
+    s3_client = boto3.client('s3')
 
 # Get the list of files in the local folder
-local_files = os.listdir(local_folder_path)
+    local_files = os.listdir(local_folder_path)
 
 # Sync the local folder with the S3 folder
-for file_name in local_files:
-    local_file_path = os.path.join(local_folder_path, file_name)
-    s3_file_path = s3_folder_name + file_name
-    try:
-        s3_client.upload_file(local_file_path, bucket_name, s3_file_path)
-        print("Uploaded file:", local_file_path)
-    except ClientError as e:
-        print("Error uploading file:", local_file_path, e)
+    for file_name in local_files:
+        local_file_path = os.path.join(local_folder_path, file_name)
+        s3_file_path = s3_folder_name + file_name
+        try:
+            s3_client.upload_file(local_file_path, bucket_name, s3_file_path)
+            print("Uploaded file:", local_file_path)
+        except ClientError as e:
+            print("Error uploading file:", local_file_path, e)
 
 
-sync_s3_to_local(s3_folder_name, local_folder_name)
+sync_s3_to_local(s3_folder_name, local_folder_path)
 
 
 
