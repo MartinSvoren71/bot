@@ -770,7 +770,7 @@ v1.5
         function searchFiles() {
     const keyword = $('#keyword').val();
     $.ajax({
-        url: '/search_pdf_files',
+        url: '/get_updated_files',
         method: 'POST',
         data: {
             keyword: keyword,
