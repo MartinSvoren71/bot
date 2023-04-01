@@ -71,7 +71,8 @@ def index():
             for dirname in dirnames:
                 if not dirname.startswith('.'):  # Ignore hidden directories
                     subfolders.append(os.path.join(root, dirname))  # Append to subfolders instead of folders
-        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
+        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in subfolders])
+
         return render_template("indexSplit.html", html=options, folders=folder_options, files=files, results={})
     else:
         flash("Please log in first")
