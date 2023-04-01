@@ -192,13 +192,7 @@ def generate_pdf_route():
     return send_file(BytesIO(pdf), attachment_filename='document.pdf', mimetype='application/pdf')
 
 def list_folders():
-    folder_path = "Data/"
-    folders = []
-    for root, dirnames, filenames in os.walk(folder_path):
-        for dirname in dirnames:
-            if not dirname.startswith('.'):  # Ignore hidden directories
-                folders.append(os.path.join(root, dirname))
-    #return folders
+   
 
 
 
