@@ -60,9 +60,7 @@ def index():
         '''
         folder_path = "Data/"
         files = []
-        folders = list_folders()
-        folder_options = ''.join([f'<option value="{folder}">{folder}</option>' for folder in folders])
-
+        folders = []
         for root, dirnames, filenames in os.walk(folder_path):
             for filename in filenames:
                 if not filename.startswith('.'):  # Ignore hidden files
