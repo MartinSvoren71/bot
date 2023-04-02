@@ -552,7 +552,7 @@ v1.5
                <br><br>
                <h1>__vortex keyword search__</h1>
                <form id="search-form">
-                  <input type="text" id="search-keyword" name="keyword" placeholder="Enter keyword">
+<input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
                   <h4 style="color: grey;"> example : password</h4>
                   <button type="button" onclick="searchFiles()">Search</button>
                </form>
@@ -686,7 +686,7 @@ v1.5
       
        
 function searchFiles() {
-    let keyword = $('#search-keyword').val();
+    let keyword = $('#keyword').val();
     let selectedFolder = $('#folder-selector').val();
     console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
     $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
