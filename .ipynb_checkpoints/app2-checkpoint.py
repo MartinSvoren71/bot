@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify, send_file
-from ask_ai import initialize_ai, ask_ai
+from ask_ai import  ask_ai
 from ask_GPT import initialize_GPT, ask_GPT
 from threading import Thread
 from main import api_kx
@@ -291,6 +291,24 @@ def get_folder_content():
     current_folder = selected_folder
     return {'folder_content': folder_content}
 
+
+
+
+
+@app.route('/console', methods=['POST'])
+def console():
+    # Capture console output
+    captured_output = io.StringIO()
+    sys.stdout = captured_output
+
+    # Your app code here, replace with your own logic
+    print("This is a sample output from the app")
+
+    # Reset stdout
+    sys.stdout = sys.__stdout__
+
+    console_output = captured_output.getvalue()
+    return console_output
 
 
 
