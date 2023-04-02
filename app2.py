@@ -195,8 +195,10 @@ def search_files():
     search_results = {}
     encrypted_files = []
 
+    # Get the selected_folder from the POST request
+    selected_folder = request.form['selected_folder']
+
     # Set the folder path to search for PDF files
-    selected_folder = ''
     folder_path = f'Data/{selected_folder}'
 
     if request.method == 'POST':
