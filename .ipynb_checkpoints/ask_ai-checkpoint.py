@@ -39,7 +39,7 @@ def ask_ai(question, current_folder):
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n")
-        f.write(f"Theme: {theme}\n")
+        f.write(f"Folder: {folder_path}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
         f.write("======================================================================================\n")
