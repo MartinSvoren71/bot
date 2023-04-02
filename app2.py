@@ -195,7 +195,7 @@ def search_pdf_files(keyword, folder_path):
 def search_files():
     print(request.form)  # Add this line to print the received request data
 
-    search_results = {}  # This line is not needed anymore
+    search_results = {}
     encrypted_files = []
 
     # Set the folder path to search for PDF files
@@ -203,9 +203,9 @@ def search_files():
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        folder_path = request.form['folder_path']  # Get the folder path sent from the client-side
+        folder_path = 'Data/' + request.form['folder_path']  # Add 'Data/' prefix to the folder_path
 
-        search_results, encrypted_files = search_pdf_files(keyword, folder_path)  # Assign the returned search_results here
+        search_results, encrypted_files = search_pdf_files(keyword, folder_path)
         
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
@@ -219,8 +219,6 @@ def search_files():
 
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
-
-# ...
 
 
 
