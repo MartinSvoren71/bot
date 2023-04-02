@@ -8,13 +8,12 @@ import datetime
 api_k = api_kx
 import json
 
-def initialize_ai(api_key):
-    os.environ[api_k] = api_kx
 
 
 
 def ask_ai(question, current_folder):
     # Preselected folder and index.json file
+    os.environ["OPENAI_API_KEY"] = api_kx
     folder_path = f'Data/{current_folder}'
     index_file = f"{folder_path}/index.json"
     data_directory = folder_path
