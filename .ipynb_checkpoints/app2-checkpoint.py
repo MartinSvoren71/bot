@@ -152,37 +152,43 @@ def ask_LIB_route():
         return render_template('bad_key.html', question=question, theme=theme)
     
 
-    
-    
-    
 
+def process_pdf_file(filepath, keyword, pattern):
+    result = []
+    try:
+        with open(filepath, 'rb') as f:
+            pdf_reader = PdfFileReader(f)
+            if pdf_reader.isEncrypted:
+                return filepath, None, True
+            for page_num in range(pdf_reader.getNumPages()):
+                text = pdf_reader.getPage(page_num).extractText()
+                matches = pattern.findall(text)
+                if matches:
+                    result.extend([(page_num, match) for match in matches])
+    except Exception as e:
+        print(f"Error processing {filepath}: {str(e)}")
+        return filepath, None, False
+    return filepath, result, False
 
 def search_pdf_files(keyword, folder_path):
     results = {}
-    encrypted_files = []  # List to store encrypted files
+    encrypted_files = []
+    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
 
-    # Traverse the local file system
-    for root, _, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if filename.lower().endswith('.pdf'):
-                filepath = os.path.join(root, filename)
-                try:
-                    with open(filepath, 'rb') as f:
-                        pdf_reader = PdfFileReader(f)
-                        if pdf_reader.isEncrypted:
-                            print(f"Skipping encrypted file: {filepath}")
-                            encrypted_files.append(filepath)  # Add the encrypted file to the list
-                            continue
-                        for page_num in range(pdf_reader.getNumPages()):
-                            text = pdf_reader.getPage(page_num).extractText()
-                            pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
-                            matches = pattern.findall(text)
-                            if matches:
-                                if filepath not in results:
-                                    results[filepath] = []
-                                results[filepath].extend([(page_num, match) for match in matches])
-                except Exception as e:
-                    print(f"Error processing {filepath}: {str(e)}")
+    pdf_files = [os.path.join(root, filename)
+                 for root, _, filenames in os.walk(folder_path)
+                 for filename in filenames
+                 if filename.lower().endswith('.pdf')]
+
+    with ThreadPoolExecutor() as executor:
+        future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
+
+        for future in future_results:
+            filepath, matches, is_encrypted = future.result()
+            if is_encrypted:
+                encrypted_files.append(filepath)
+            elif matches:
+                results[filepath] = matches
 
     return results, encrypted_files
 
