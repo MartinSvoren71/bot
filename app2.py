@@ -12,7 +12,7 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
-
+current_folder = 'Data/'
 
 folder_name = 's3/'
 app = Flask(__name__, static_folder='/')
@@ -197,7 +197,7 @@ def search_files():
 
     # Set the folder path to search for PDF files
     select_folder = ''
-    folder_path = 'Data/Coherent/Chameleon'
+    folder_path = 'Data/Coherent/'+ current_folder
 
     if request.method == 'POST':
         keyword = request.form['keyword']
@@ -276,7 +276,7 @@ def get_folder_content():
     folder_path = f'Data/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
-
+    current_folder = selected_folder
     return {'folder_content': folder_content}
 
 
