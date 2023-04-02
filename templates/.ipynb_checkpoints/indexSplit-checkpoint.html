@@ -688,10 +688,12 @@ v1.5
 function searchFiles() {
     let keyword = $('#search-keyword').val();
     let selectedFolder = $('#folder-selector').val();
+    console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
     $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
         $('#search-results').html(data.rendered_template);
     });
 }
+
 
 
        
