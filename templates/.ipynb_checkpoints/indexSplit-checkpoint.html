@@ -685,30 +685,26 @@ v1.5
        
       
        
-        function searchFiles() {
-      const keyword = $('#keyword').val();
-      $.ajax({
+function searchFiles() {
+    let keyword = $('#keyword').val();
+    let selectedFolder = $('#folder-selector').val();
+    $.ajax({
         url: '/search_pdf_files',
         method: 'POST',
         data: {
             keyword: keyword,
+            folder_path: selectedFolder,
         },
-        success: function(data) {
+        success: function (data) {
             // Render the search results
             $('.results').html(data.rendered_template);
         },
-        error: function(err) {
+        error: function (err) {
             console.log(err);
         }
-      });
-            function searchFiles() {
-    let keyword = $('#search-keyword').val();
-    let selectedFolder = $('#folder-selector').val();
-    $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
-        $('#search-results').html(data.rendered_template);
     });
 }
-      }
+
        
        
       function showPDF(url) {
