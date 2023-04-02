@@ -64,16 +64,17 @@ v1.5
          --matrix-amber-1:   #997334;
          --matrix-amber-2:   #ffdd9d;
          font-family: 'Lucida Console', monospace;  
+             max-width: 95vw;
+         
          }       
          .container {
          color: #00FF00;
          font-family: 'Lucida Console', monospace;  
          display: flex;
          width: 98vw;
-         padding:1%;
          height: auto;
-         margin-left:1vw;
-         margin-right:1vw;
+         
+        
          justify-content: center;
         
          }
@@ -81,21 +82,16 @@ v1.5
          font-family: 'Lucida Console', monospace;  
          max-height: 80vh;
          min-height: 20vh;
-         width: 98vw;
-         padding:1%;
-         margin-left:1vw;
-         margin-right:1vw;
+             
+       
          justify-content: center;
          }
          #container3 {
          font-family: 'Lucida Console', monospace;  
          display: flex;
          height: 120vh;
-         width: 98vw;
          align-items: center;
-         padding:1%;
-         margin-left:1vw;
-         margin-right:1vw;
+    
          justify-content: center;
          align-items: center;
          display: flex;
@@ -116,7 +112,7 @@ v1.5
          background-color: rgba(255, 255, 255, 0.9);
          font-size: 1.3em;
          font-weight: bold;
-         margin: 0 auto; /* Center the container horizontally */
+         margin: 0 ; /* Center the container horizontally */
          }
          .content-wrapper {
          font-family: 'Lucida Console', monospace;  
@@ -207,12 +203,30 @@ v1.5
          background-color: black;
          font-size: 14px;
          font-weight: bold;
-         overflow: scroll;
+    
          justify-content: center;
          align-items: center;
+           overflow-x: hidden; /* Add this line */
+            overflow-y: scroll;    
          }
+            body::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background-color: #333;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 6px;
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
          canvas {
-         width: 100vw;
+         width: 98vw;
          z-index: -1;
          opacity: 0.35;
          position: fixed;
@@ -221,6 +235,7 @@ v1.5
          padding-top: 0px;
          color: var(--matrix-green-1);
          filter: drop-shadow(0 0 0.95rem var(--matrix-red-pill));
+             
          }
          img {
          width: 13vw;
@@ -293,7 +308,7 @@ v1.5
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          }
          form {
-         margin: 2% auto;
+         margin: 2% ;
          display: flex;
          flex-direction: column;
          justify-content: center;
@@ -301,7 +316,6 @@ v1.5
          }
          label {
          font-size: 1.5em;
-         margin-right: 20px;
          }
          textarea {
          font-family: 'Lucida Console', monospace;  
@@ -313,7 +327,7 @@ v1.5
          color: red;
          justify-content: center;
          align-items: center;
-         margin: 4% auto;
+         margin: 4% ;
          filter: drop-shadow(0 0 0.35rem green);
          text-align: left;
          padding: 5px;
@@ -432,7 +446,7 @@ v1.5
          height: 800px;
          }
          .file-list-container {
-         padding: 0x;
+         padding: 0;
          margin-top: 15px;
          width: auto;
          }
@@ -445,7 +459,6 @@ v1.5
          max-height: 70vh;
          font-family: 'Lucida Console', monospace;  
          text-align: left;
-         padding: 5px;
          width: 100vw; /* Adjust this to the desired width */
          max-height: 60vh; /* Adjust this to the desired minimum height */
          resize: vertical; /* Allow vertical resizing */
