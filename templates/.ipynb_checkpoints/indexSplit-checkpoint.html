@@ -936,7 +936,21 @@ function getFiles() {
                 file_list_element.append('<li><a href="#" onclick="showPDF(\'' + files[i].PresignedURL + '\')">' + files[i].Key + '</a></li>');
             }
         });
-    }       
+    }  
+       
+        function updateFolderContent() {
+            let selectedFolder = $('#folder-selector').val();
+            $.post('/get_folder_content', {selected_folder: selectedFolder}, function(data) {
+                $('#folder-content').html('');
+                for (let item of data.folder_content) {
+                    let file_url = '/Data/' + selectedFolder + '/' + item;
+                    $('#folder-content').append('<li><a href="#' + file_url + '" target=file.PresignedURL>' + item + '</a></li>');
+                }
+            });
+        }
+
+        $('#folder-selector').on('change', updateFolderContent);
+        updateFolderContent();
        
        
    </script>    
