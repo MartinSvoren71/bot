@@ -302,7 +302,7 @@ def console():
     sys.stdout = captured_output
 
     # Your app code here, replace with your own logic
-    print("This is a sample output from the app")
+    print(captured_output)
 
     # Reset stdout
     sys.stdout = sys.__stdout__

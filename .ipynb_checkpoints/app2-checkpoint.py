@@ -13,6 +13,9 @@ from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
 from concurrent.futures import ThreadPoolExecutor
+import logging
+import sys
+
 
 current_folder = 'Data/'
 
@@ -287,6 +290,27 @@ def get_folder_content():
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
     return {'folder_content': folder_content}
+
+
+
+
+
+@app.route('/console', methods=['POST'])
+def console():
+    # Capture console output
+    captured_output = io.StringIO()
+    sys.stdout = captured_output
+
+    # Your app code here, replace with your own logic
+    print(captured_output)
+
+    # Reset stdout
+    sys.stdout = sys.__stdout__
+
+    console_output = captured_output.getvalue()
+    return console_output
+
+
 
 
 
