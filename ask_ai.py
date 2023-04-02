@@ -7,13 +7,11 @@ from main import api_kx
 import datetime
 api_k = api_kx
 import json
-
-
-
-
+def initialize_ai(api_key):
+    os.environ[api_k] = api_kx
+initialize_ai(api_k)
 def ask_ai(question, current_folder):
     # Preselected folder and index.json file
-    os.environ["OPENAI_API_KEY"] = api_kx
     folder_path = f'Data/{current_folder}'
     index_file = f"{folder_path}/index.json"
     data_directory = folder_path
@@ -45,27 +43,19 @@ def ask_ai(question, current_folder):
         f.write(existing_data)
         
     # return response.response
-
     
-def construct_index(folder_path):
+def construct_index(directory_path):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
     max_input_size = 4096
-    num_outputs = 4000
+    num_outputs = 2000
     max_chunk_overlap = 20
     chunk_size_limit = 600
-
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.5, model_name="text-curie-001", max_tokens=num_outputs))
     prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
-
-    documents = SimpleDirectoryReader(folder_path).load_data()
-
+    documents = SimpleDirectoryReader(directory_path).load_data()
     index = GPTSimpleVectorIndex(
         documents, llm_predictor=llm_predictor, prompt_helper=prompt_helper
     )
-
     index.save_to_disk('index.json')
-
     return index
-
-
