@@ -47,7 +47,7 @@ def ask_ai(question, current_folder):
     # return response.response
 
     
-def construct_index(directory_path):
+def construct_index(folder_path):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
     max_input_size = 4096
