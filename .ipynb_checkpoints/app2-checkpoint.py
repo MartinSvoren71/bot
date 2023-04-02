@@ -77,6 +77,7 @@ def index():
             {options}
         </select>
         '''
+        data_folders = get_subfolders_recursive('Data/')
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
@@ -84,7 +85,7 @@ def index():
             #for dirname in dirnames:
                 #if not dirname.startswith('.'):  # Ignore hidden directories
                    # folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, folders=folders, files=files, results={})
+        return render_template("indexSplit.html", html=html, folders=data_folders, files=files, results={})
 
     else:
         flash("Please log in first")
@@ -249,7 +250,30 @@ def list_folders():
 
 
 
+def get_subfolders_recursive(path):
+    subfolders = []
+    for root, dirs, _ in os.walk(path):
+        for d in dirs:
+            subfolders.append(os.path.relpath(os.path.join(root, d), path))
+    return subfolders
 
+def get_files_recursive(path):
+    all_files = []
+    for root, _, files in os.walk(path):
+        for f in files:
+            rel_path = os.path.relpath(os.path.join(root, f), path)
+            all_files.append(rel_path)
+    return all_files
+
+
+
+
+@app.route('/get_folder_content', methods=['POST'])
+def get_folder_content():
+    selected_folder = request.form['selected_folder']
+    folder_path = f'Data/{selected_folder}'
+    folder_content = get_files_recursive(folder_path)
+    return {'folder_content': folder_content}
 
 
 

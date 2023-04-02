@@ -23,7 +23,7 @@
                 $('#folder-content').html('');
                 for (let item of data.folder_content) {
                     let file_url = '/Data/' + selectedFolder + '/' + item;
-                    $('#folder-content').append('<li><a href="' + file_url + '" target="_blank">' + item + '</a></li>');
+                    $('#folder-content').append('<li><a href="#' + file_url + '" target=file.PresignedURL>' + item + '</a></li>');
                 }
             });
         }
