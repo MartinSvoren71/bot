@@ -40,11 +40,7 @@ def ask_ai(question, current_folder):
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Folder: {folder_path}\n")
         f.write(f"Question: {question}\n")
-        f.write(f"Answer: {response.response}\n")
-
-    # You may want to return the response or response.response, depending on your use case
-    return response
-
+        f.write(f"Answer: {response.response}\n")               
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.1                                 \n")
         f.write("======================================================================================\n")
