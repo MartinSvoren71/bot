@@ -194,12 +194,14 @@ def search_pdf_files(keyword, folder_path):
 def search_files():
     search_results = {}
     encrypted_files = []
-    folder_pathX = "Coherent"
 
     # Set the folder path to search for PDF files
-    folder_path = 'Data/' + folder_pathX + '/'
+
+
     if request.method == 'POST':
         keyword = request.form['keyword']
+        selected_folder = request.form['selected_folder']
+        folder_path = f'Data/{selected_folder}/'
         search_results, encrypted_files = search_pdf_files(keyword, folder_path)
         
         # Write search results to a text file
