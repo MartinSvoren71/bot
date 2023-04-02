@@ -686,24 +686,13 @@ v1.5
       
        
 function searchFiles() {
-    let keyword = $('#keyword').val();
+    let keyword = $('#search-keyword').val();
     let selectedFolder = $('#folder-selector').val();
-    $.ajax({
-        url: '/search_pdf_files',
-        method: 'POST',
-        data: {
-            keyword: keyword,
-            folder_path: selectedFolder,
-        },
-        success: function (data) {
-            // Render the search results
-            $('.results').html(data.rendered_template);
-        },
-        error: function (err) {
-            console.log(err);
-        }
+    $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
+        $('#search-results').html(data.rendered_template);
     });
 }
+
 
        
        

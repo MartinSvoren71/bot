@@ -183,6 +183,7 @@ def search_pdf_files(keyword, folder_path):
                                 results[filepath].extend([(page_num, match) for match in matches])
                 except Exception as e:
                     print(f"Error processing {filepath}: {str(e)}")
+    print("Search results:", search_results)
 
     return results, encrypted_files
 
