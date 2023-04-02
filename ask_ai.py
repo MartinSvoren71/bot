@@ -69,3 +69,5 @@ def construct_index(directory_path):
     index.save_to_disk('index.json')
 
     return index
+
+
