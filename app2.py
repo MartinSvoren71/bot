@@ -274,7 +274,7 @@ def get_files_recursive(path):
 
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
-    selected_folder = request.form['selected_folder']
+    selected_folder = request.form['folder_path']
     folder_path = f'Data/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     return {'folder_content': folder_content}
