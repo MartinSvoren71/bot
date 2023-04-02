@@ -197,6 +197,7 @@ def search_files():
     
     # Set the folder path to search for PDF files
     select_folder = ''
+    get_folder_content();
     folder_path = current_folder
     print(f"Selected path for search: {folder_path}")  # Print the selected folder in the terminal
 
