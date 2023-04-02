@@ -570,6 +570,8 @@ v1.5
                   </div>
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
+                <button id="getConsoleOutput">Get Console Output</button>
+    <pre id="consoleOutput"></pre>
                <h4 style="color: grey;"> example for OpenAI : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
                <h1>__vortex keyword search__</h1>
                <form id="search-form">
@@ -900,6 +902,14 @@ v1.5
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
        
+       
+     $(document).ready(function() {
+            $("#getConsoleOutput").click(function() {
+                $.post("/console", function(data) {
+                    $("#consoleOutput").text(data);
+                });
+            });
+        });   
        
    </script>    
 </html>
