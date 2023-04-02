@@ -21,7 +21,8 @@ def ask_ai(question, current_folder):
     data_directory = folder_path
     if not os.path.exists(index_file):
         print(f"Constructing index from data in {data_directory}...")
-        construct_index(data_directory)
+        index = construct_index(data_directory)  # Save the returned index in a variable
+        index.save_to_disk(index_file)  # Save the index to the index_file
         print("Index constructed and saved to disk.")
         
     index_file = f"{folder_path}/index.json"
@@ -40,6 +41,10 @@ def ask_ai(question, current_folder):
         f.write(f"Folder: {folder_path}\n")
         f.write(f"Question: {question}\n")
         f.write(f"Answer: {response.response}\n")
+
+    # You may want to return the response or response.response, depending on your use case
+    return response
+
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.1                                 \n")
         f.write("======================================================================================\n")
