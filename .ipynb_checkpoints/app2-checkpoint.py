@@ -196,8 +196,8 @@ def search_files():
     encrypted_files = []
 
     # Set the folder path to search for PDF files
-    select_folder = request.form['selected_folder']
-    folder_path = f'Data/{selected_folder}'
+    select_folder = ''
+    folder_path = 'Data/Coherent/Chameleon'select_folder']
 
     if request.method == 'POST':
         keyword = request.form['keyword']
