@@ -201,6 +201,7 @@ def search_files():
     if request.method == 'POST':
         keyword = request.form['keyword']
         folder_path = request.form['folder_path']  # Get the folder path sent from the client-side
+
         search_results, encrypted_files = search_pdf_files(keyword, folder_path)
         
         # Write search results to a text file

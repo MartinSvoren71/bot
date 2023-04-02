@@ -701,7 +701,16 @@ v1.5
             console.log(err);
         }
       });
+            function searchFiles() {
+    let keyword = $('#search-keyword').val();
+    let selectedFolder = $('#folder-selector').val();
+    $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
+        $('#search-results').html(data.rendered_template);
+    });
+}
       }
+       
+       
       function showPDF(url) {
       document.getElementById('pdf-embed').src = '/lurl.pdf';
       setTimeout(() => {
