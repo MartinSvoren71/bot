@@ -685,8 +685,8 @@ v1.5
        
       
        
-function searchFiles() {
-    searchFiles_1();
+function searchFiles_1() {
+  
     let keyword = $('#keyword').val();
     let selectedFolder = $('#folder-selector').val();
     console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
@@ -695,7 +695,8 @@ function searchFiles() {
     });
 }
 
-      function searchFiles_1() {
+      function searchFiles() {
+            searchFiles_1();
     const keyword = $('#keyword').val();
     $.ajax({
         url: '/search_pdf_files',
