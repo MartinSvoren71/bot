@@ -151,7 +151,6 @@ v1.5
          }
          .left-down-side {
          top: 100vh;
-
          left:0;
          flex: 1;
          justify-content: center;
@@ -171,7 +170,6 @@ v1.5
          flex-direction: column;
          overflow-y: auto;
          max-height: 70vh;
-
          }
          .left-down-down-side {
          top: auto;
@@ -276,10 +274,10 @@ v1.5
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          }
          .folder-content{
-          flex-direction: column;
+         flex-direction: column;
          overflow-y: auto;
          max-height: 70vh;   
-          }
+         }
          p {
          max-width: 100%;
          font-size: 0.8em;
@@ -437,28 +435,26 @@ v1.5
          .list-container {
          color: green;
          margin-bottom: 3%;
-            max-height: 70vh;
-             font-family: 'Lucida Console', monospace;  
+         max-height: 70vh;
+         font-family: 'Lucida Console', monospace;  
          text-align: left;
          padding: 5px;
          width: 100vw; /* Adjust this to the desired width */
          max-height: 60vh; /* Adjust this to the desired minimum height */
          resize: vertical; /* Allow vertical resizing */
-             max-width: 48vw;
-             flex-direction: column;
+         max-width: 48vw;
+         flex-direction: column;
          overflow-y: scroll;
          }
-          .list-container::-webkit-scrollbar {
-    width: 0.5em; /* Set the width of the scrollbar */
-}
-
-.list-container::-webkit-scrollbar-track {
-    background-color: transparent; /* Set the background color of the track to transparent */
-}
-
-.list-container::-webkit-scrollbar-thumb {
-    background-color: transparent; /* Set the background color of the thumb to transparent */
-}
+         .list-container::-webkit-scrollbar {
+         width: 0.5em; /* Set the width of the scrollbar */
+         }
+         .list-container::-webkit-scrollbar-track {
+         background-color: transparent; /* Set the background color of the track to transparent */
+         }
+         .list-container::-webkit-scrollbar-thumb {
+         background-color: transparent; /* Set the background color of the thumb to transparent */
+         }
          a {
          color: red;
          text-decoration: none;
@@ -569,7 +565,7 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-                     <select name="folder-selector" id="folder-selector" onchange="">
+                     <select name="folder-selector" id="theme" onchange="">
                         {% for folder in folders %}
                         <option value="{{ folder }}">{{ folder }}</option>
                         {% endfor %}
@@ -578,9 +574,9 @@ v1.5
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
                <h4 style="color: grey;"> example for OpenAI : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
-                <h1>__vortex keyword search__</h1>
+               <h1>__vortex keyword search__</h1>
                <form id="search-form">
-<input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
+                  <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
                   <h4 style="color: grey;"> example : password</h4>
                   <button type="button" onclick="searchFiles()">Search</button>
                </form>
@@ -630,10 +626,10 @@ v1.5
    </body>
    <script>
       function openPdf(presignedUrl) {
-    console.log('Presigned URL:', presignedUrl);
-    let pdfEmbed = document.getElementById('pdf-embed');
-    pdfEmbed.setAttribute('src', presignedUrl);
-}
+      console.log('Presigned URL:', presignedUrl);
+      let pdfEmbed = document.getElementById('pdf-embed');
+      pdfEmbed.setAttribute('src', presignedUrl);
+      }
       
       
       function loadLogFile() {
@@ -713,19 +709,19 @@ v1.5
        
       
        
-function searchFiles() {
-    searchFiles_1();
-    let keyword = $('#keyword').val();
-    let selectedFolder = $('#folder-selector').val();
-    console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
-    $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
+      function searchFiles() {
+      searchFiles_1();
+      let keyword = $('#keyword').val();
+      let selectedFolder = $('#folder-selector').val();
+      console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
+      $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
         $('#search-results').html(data.rendered_template);
-    });
-}
-
+      });
+      }
+      
       function searchFiles_1() {
-    const keyword = $('#keyword').val();
-    $.ajax({
+      const keyword = $('#keyword').val();
+      $.ajax({
         url: '/search_pdf_files',
         method: 'POST',
         data: {
@@ -738,8 +734,8 @@ function searchFiles() {
         error: function(err) {
             console.log(err);
         }
-    });
-}
+      });
+      }
        
        
       function showPDF(url) {
@@ -908,7 +904,7 @@ function searchFiles() {
       }
       
        $('#folder-selector').on('change', updateFolderContent);
-    updateFolderContent();
+      updateFolderContent();
        
        
    </script>    
