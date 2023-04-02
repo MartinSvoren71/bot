@@ -24,7 +24,6 @@ initialize_ai(api_k)
 
 def ask_ai(question, current_folder):
     # Preselected folder and index.json file
-    current_folder = theme
     folder_path = f'Data/{current_folder}'
     index_file = f"{folder_path}/index.json"
     
