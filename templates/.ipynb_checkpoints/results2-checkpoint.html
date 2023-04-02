@@ -13,13 +13,16 @@
         <option value="{{ folder }}">{{ folder }}</option>
         {% endfor %}
     </select>
+    <h2>Enter a keyword to search:</h2>
+    <input type="text" id="keyword" placeholder="Search keyword">
     <h2>Folder content:</h2>
     <ul id="folder-content"></ul>
 
     <script>
         function updateFolderContent() {
             let selectedFolder = $('#folder-selector').val();
-            $.post('/get_folder_content', {selected_folder: selectedFolder}, function(data) {
+            let keyword = $('#keyword').val();
+            $.post('/get_folder_content', {selected_folder: selectedFolder, keyword: keyword}, function(data) {
                 $('#folder-content').html('');
                 for (let item of data.folder_content) {
                     let file_url = '/Data/' + selectedFolder + '/' + item;
@@ -28,7 +31,7 @@
             });
         }
 
-        $('#folder-selector').on('change', updateFolderContent);
+        $('#folder-selector, #keyword').on('change keyup', updateFolderContent);
         updateFolderContent();
     </script>
 </body>

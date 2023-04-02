@@ -18,6 +18,16 @@ def get_files_recursive(path):
             all_files.append(rel_path)
     return all_files
 
+def search_keyword_in_files(keyword, files, base_path):
+    results = []
+    for file in files:
+        file_path = os.path.join(base_path, file)
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            if keyword.lower() in content.lower():
+                results.append(file)
+    return results
+
 @app.route('/')
 def index():
     data_folders = get_subfolders_recursive('Data/')
@@ -26,9 +36,10 @@ def index():
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
     selected_folder = request.form['selected_folder']
+    keyword = request.form['keyword']
     folder_path = f'Data/{selected_folder}'
-    folder_content = get_files_recursive(folder_path)
-    return {'folder_content': folder_content}
+    all_files = get_files_recursive(folder_path)
+    matched_files = search_keyword_in_files(keyword, all_files, folder_path)
+    return {'folder_content': matched_files}
 
 app.run(host='0.0.0.0', port=5000)
-
