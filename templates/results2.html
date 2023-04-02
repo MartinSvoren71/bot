@@ -15,6 +15,7 @@
     </select>
     <h2>Enter a keyword to search:</h2>
     <input type="text" id="keyword" placeholder="Search keyword">
+    <button id="search-btn">Search</button>
     <h2>Folder content:</h2>
     <ul id="folder-content"></ul>
 
@@ -31,8 +32,8 @@
             });
         }
 
-        $('#folder-selector, #keyword').on('change keyup', updateFolderContent);
-        updateFolderContent();
+        $('#folder-selector, #keyword').on('change', updateFolderContent);
+        $('#search-btn').on('click', updateFolderContent);
     </script>
 </body>
 </html>

@@ -22,11 +22,15 @@ def search_keyword_in_files(keyword, files, base_path):
     results = []
     for file in files:
         file_path = os.path.join(base_path, file)
-        with open(file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            if keyword.lower() in content.lower():
-                results.append(file)
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+        except UnicodeDecodeError:
+            continue
+        if keyword.lower() in content.lower():
+            results.append(file)
     return results
+
 
 @app.route('/')
 def index():
