@@ -157,7 +157,7 @@ def ask_LIB_route():
     
 
 
-def search_pdf_files(keyword, folder_path):
+def search_pdf_files(keyword, folder_path, selected_folder):
     results = {}
     encrypted_files = []  # List to store encrypted files
 
@@ -191,7 +191,7 @@ def search_pdf_files(keyword, folder_path):
 
 
 @app.route('/search_pdf_files', methods=['POST'])
-def search_files(selected_folder):
+def search_files():
     search_results = {}
     encrypted_files = []
 
