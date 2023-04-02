@@ -78,7 +78,6 @@ def index():
         </select>
         '''
         data_folders = get_subfolders_recursive('Data/')
-        return render_template('results2.html', folders=data_folders)
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
