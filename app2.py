@@ -275,6 +275,8 @@ def get_folder_content():
     selected_folder = request.form['selected_folder']
     folder_path = f'Data/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
+    print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
+
     return {'folder_content': folder_content}
 
 
