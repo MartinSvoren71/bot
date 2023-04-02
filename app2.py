@@ -197,7 +197,7 @@ def search_files():
 
     # Set the folder path to search for PDF files
     select_folder = ''
-    folder_path = 'Data/Coherent/Chameleon'select_folder']
+    folder_path = 'Data/Coherent/Chameleon'
 
     if request.method == 'POST':
         keyword = request.form['keyword']
