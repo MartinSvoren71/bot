@@ -199,6 +199,7 @@ def search_files():
     select_folder = ''
     folder_path = f'Data/{selected_folder}'
     print(f"Selected path for search: {folder_path}")  # Print the selected folder in the terminal
+    print(f"Selected folder for search: {current_folder}")  # Print the selected folder in the terminal
     
     if request.method == 'POST':
         keyword = request.form['keyword']
