@@ -570,9 +570,9 @@ v1.5
                   </div>
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
-                <button id="getConsoleOutput">Get Console Output</button>
-    <pre id="consoleOutput"></pre>
                <h4 style="color: grey;"> example for OpenAI : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
+                    <pre id="console-output" style="white-space: pre-wrap;"></pre>
+
                <h1>__vortex keyword search__</h1>
                <form id="search-form">
                   <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
@@ -902,14 +902,14 @@ v1.5
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
        
-       
-     $(document).ready(function() {
-            $("#getConsoleOutput").click(function() {
-                $.post("/console", function(data) {
-                    $("#consoleOutput").text(data);
-                });
-            });
-        });   
+        async function fetchLogs() {
+            const response = await fetch('/logs');
+            const data = await response.json();
+            const logs = data.logs;
+            document.getElementById('console-output').innerText = logs;
+        }
+
+        setInterval(fetchLogs, 1000);  // Fetch logs every 1 second   
        
    </script>    
 </html>

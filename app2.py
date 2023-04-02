@@ -16,6 +16,9 @@ from concurrent.futures import ThreadPoolExecutor
 import logging
 import sys
 
+log_file = "app.log"
+logging.basicConfig(filename=log_file, level=logging.INFO)
+logger = logging.getLogger()
 
 current_folder = 'Data/'
 
@@ -32,6 +35,13 @@ s3_client = boto3.client(
     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
     region_name=AWS_DEFAULT_REGION
 )
+
+
+@app.route('/logs')
+def fetch_logs():
+    with open(log_file, 'r') as f:
+        log_content = f.read()
+    return jsonify({'logs': log_content})
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -291,24 +301,6 @@ def get_folder_content():
     current_folder = selected_folder
     return {'folder_content': folder_content}
 
-
-
-
-
-@app.route('/console', methods=['POST'])
-def console():
-    # Capture console output
-    captured_output = io.StringIO()
-    sys.stdout = captured_output
-
-    # Your app code here, replace with your own logic
-    print(captured_output)
-
-    # Reset stdout
-    sys.stdout = sys.__stdout__
-
-    console_output = captured_output.getvalue()
-    return console_output
 
 
 
