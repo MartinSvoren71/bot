@@ -191,16 +191,16 @@ def search_pdf_files(keyword, folder_path):
 
 
 @app.route('/search_pdf_files', methods=['POST'])
-def search_files(get_folder_content):
+def search_files():
     search_results = {}
     encrypted_files = []
     
     # Set the folder path to search for PDF files
     select_folder = ''
-    get_folder_content()
     folder_path = current_folder
     print(f"Selected path for search: {folder_path}")  # Print the selected folder in the terminal
-
+    print(f"Selected folder for search: {current_folder}")  # Print the selected folder in the terminal
+    
     if request.method == 'POST':
         keyword = request.form['keyword']
         
