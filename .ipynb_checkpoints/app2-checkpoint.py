@@ -197,7 +197,7 @@ def search_files():
     
     # Set the folder path to search for PDF files
     select_folder = ''
-    folder_path = 'Data/'+ current_folder + '/'
+    folder_path = current_folder
     print(f"Selected path for search: {folder_path}")  # Print the selected folder in the terminal
 
     if request.method == 'POST':
