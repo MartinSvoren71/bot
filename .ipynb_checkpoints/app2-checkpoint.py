@@ -196,7 +196,7 @@ def search_files():
     encrypted_files = []
 
     # Set the folder path to search for PDF files
-    folder_path = 'Data/' + request.form['folder_path']  # Add 'Data/' prefix to the folder_path
+    folder_path = 'Data/' + folder_path + '/'
     if request.method == 'POST':
         keyword = request.form['keyword']
         search_results, encrypted_files = search_pdf_files(keyword, folder_path)
