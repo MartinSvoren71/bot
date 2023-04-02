@@ -78,6 +78,7 @@ def index():
         </select>
         '''
         data_folders = get_subfolders_recursive('Data/')
+        return render_template('results2.html', folders=data_folders)
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
@@ -157,10 +158,8 @@ def ask_LIB_route():
     
 
 
-# ...
-
 def search_pdf_files(keyword, folder_path):
-    search_results = {}  # Define search_results here
+    results = {}
     encrypted_files = []  # List to store encrypted files
 
     # Traverse the local file system
@@ -180,21 +179,20 @@ def search_pdf_files(keyword, folder_path):
                             pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
                             matches = pattern.findall(text)
                             if matches:
-                                if filepath not in search_results:
-                                    search_results[filepath] = []
-                                search_results[filepath].extend([(page_num, match) for match in matches])
+                                if filepath not in results:
+                                    results[filepath] = []
+                                results[filepath].extend([(page_num, match) for match in matches])
                 except Exception as e:
                     print(f"Error processing {filepath}: {str(e)}")
-    print("Search results:", search_results)
 
-    return search_results, encrypted_files
+    return results, encrypted_files
 
-# ...
+
+
+
 
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
-    print(request.form)  # Add this line to print the received request data
-
     search_results = {}
     encrypted_files = []
 
@@ -203,8 +201,6 @@ def search_files():
 
     if request.method == 'POST':
         keyword = request.form['keyword']
-        folder_path = 'Data/' + request.form['folder_path']  # Add 'Data/' prefix to the folder_path
-
         search_results, encrypted_files = search_pdf_files(keyword, folder_path)
         
         # Write search results to a text file
