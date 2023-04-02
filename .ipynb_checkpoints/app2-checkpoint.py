@@ -12,6 +12,8 @@ import boto3
 from PyPDF4 import PdfFileReader, PdfFileWriter
 import io 
 from io import BytesIO
+from concurrent.futures import ThreadPoolExecutor
+
 current_folder = 'Data/'
 
 folder_name = 's3/'
