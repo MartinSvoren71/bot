@@ -157,7 +157,7 @@ def ask_LIB_route():
     
 
 
-def search_pdf_files(keyword, folder_path, selected_folder):
+def search_pdf_files(keyword, folder_path):
     results = {}
     encrypted_files = []  # List to store encrypted files
 
