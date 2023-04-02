@@ -195,10 +195,8 @@ def search_files():
     search_results = {}
     encrypted_files = []
 
-    # Get the selected_folder from the POST request
-    selected_folder = request.form['selected_folder']
-
     # Set the folder path to search for PDF files
+    selected_folder = request.form['folder_path']
     folder_path = f'Data/{selected_folder}'
 
     if request.method == 'POST':
@@ -274,7 +272,7 @@ def get_files_recursive(path):
 
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
-    selected_folder = request.form['folder_path']
+    selected_folder = request.form['selected_folder']
     folder_path = f'Data/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     return {'folder_content': folder_content}
