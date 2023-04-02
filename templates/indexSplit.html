@@ -686,6 +686,7 @@ v1.5
       
        
 function searchFiles() {
+    searchFiles_1();
     let keyword = $('#keyword').val();
     let selectedFolder = $('#folder-selector').val();
     console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
@@ -694,7 +695,23 @@ function searchFiles() {
     });
 }
 
-
+      function searchFiles_1() {
+    const keyword = $('#keyword').val();
+    $.ajax({
+        url: '/search_pdf_files',
+        method: 'POST',
+        data: {
+            keyword: keyword,
+        },
+        success: function(data) {
+            // Render the search results
+            $('.results').html(data.rendered_template);
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+}
        
        
       function showPDF(url) {
