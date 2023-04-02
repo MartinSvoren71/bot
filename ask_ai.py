@@ -12,7 +12,6 @@ def initialize_ai(api_key):
     os.environ[api_k] = api_kx
 
 
-initialize_ai(api_k)
 
 def ask_ai(question, current_folder):
     # Preselected folder and index.json file
