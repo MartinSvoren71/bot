@@ -448,6 +448,17 @@ v1.5
              flex-direction: column;
          overflow-y: scroll;
          }
+          .list-container::-webkit-scrollbar {
+    width: 0.5em; /* Set the width of the scrollbar */
+}
+
+.list-container::-webkit-scrollbar-track {
+    background-color: transparent; /* Set the background color of the track to transparent */
+}
+
+.list-container::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Set the background color of the thumb to transparent */
+}
          a {
          color: red;
          text-decoration: none;
