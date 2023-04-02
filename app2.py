@@ -130,7 +130,7 @@ def ask_GPT_route():
         #return jsonify({"question": question, "response": response})
             #return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
     else:
-        return render_template('bad_key.html', question=question, theme=theme)
+        return render_template('bad_key.html')
     
     
     
@@ -139,7 +139,6 @@ def ask_GPT_route():
 @app.route('/ask_lib', methods=['POST'])
 def ask_LIB_route():
     question = request.form['question']
-    theme = request.form['theme']
     model = "text-davinci-003"
     key = "nnp"
     contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
@@ -151,7 +150,7 @@ def ask_LIB_route():
         #return jsonify({"question": question, "response": response})
             #return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
-        return render_template('bad_key.html', question=question, theme=theme)
+        return render_template('bad_key.html')
     
 
 
