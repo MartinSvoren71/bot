@@ -53,7 +53,7 @@ def construct_index(directory_path):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
     max_input_size = 4096
-    num_outputs = 2000
+    num_outputs = 4000
     max_chunk_overlap = 20
     chunk_size_limit = 600
 
