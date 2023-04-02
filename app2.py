@@ -278,7 +278,7 @@ def get_folder_content():
     folder_path = f'Data/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
-    current_folder = selected_folder
+    global current_folder = selected_folder
     return {'folder_content': folder_content}
 
 
