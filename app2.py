@@ -194,10 +194,11 @@ def search_pdf_files(keyword, folder_path):
 def search_files():
     search_results = {}
     encrypted_files = []
-
+    
     # Set the folder path to search for PDF files
     select_folder = ''
-    folder_path = 'Data'+ current_folder + '/'
+    folder_path = 'Data/'+ current_folder + '/'
+    print(f"Selected path for search: {folder_path}")  # Print the selected folder in the terminal
 
     if request.method == 'POST':
         keyword = request.form['keyword']
