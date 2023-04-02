@@ -552,7 +552,7 @@ v1.5
                <br><br>
                <h1>__vortex keyword search__</h1>
                <form id="search-form">
-                  <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
+                  <input type="text" id="search-keyword" name="keyword" placeholder="Enter keyword">
                   <h4 style="color: grey;"> example : password</h4>
                   <button type="button" onclick="searchFiles()">Search</button>
                </form>
@@ -693,7 +693,6 @@ function searchFiles() {
         $('#search-results').html(data.rendered_template);
     });
 }
-
 
 
        
