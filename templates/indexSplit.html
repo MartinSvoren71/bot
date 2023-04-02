@@ -2,19 +2,17 @@ v1.5
 <!DOCTYPE html>
 <html lang="en">
    <head>
-         <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Knowledge Vortex Bot</title>
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
-
-
+      <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+      <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
       <script>
          window.onload = function() {
              const savedTheme = localStorage.getItem("theme");
@@ -50,100 +48,78 @@ v1.5
           }
           });
       </script>
- 
       <title>Ask AI</title>
       <style>
-          
-          
-          :root {
-  --matrix-white-1:                  #ffffff;
-
-  --matrix-red-1:                  #ff000c;
-  --matrix-red-2:                  #6b0c08;  
-  --matrix-green-1:                #2d6e43;
-  --matrix-green-2:                #295844;
-  --matrix-green-3:                #295844;
-  --matrix-green-5:                #0e1c0d;
-  --matrix-blue-pill:                #0fc1c7;
-  --matrix-red-pill:                #ff000c;        
-  --matrix-green-6:                #0e1c0d;  
-              --matrix-amber-1:   #997334;
-              --matrix-amber-2:   #ffdd9d;
-              font-family: 'Lucida Console', monospace;  
-          }       
-      
-         
+         :root {
+         --matrix-white-1:                  #ffffff;
+         --matrix-red-1:                  #ff000c;
+         --matrix-red-2:                  #6b0c08;  
+         --matrix-green-1:                #2d6e43;
+         --matrix-green-2:                #295844;
+         --matrix-green-3:                #295844;
+         --matrix-green-5:                #0e1c0d;
+         --matrix-blue-pill:                #0fc1c7;
+         --matrix-red-pill:                #ff000c;        
+         --matrix-green-6:                #0e1c0d;  
+         --matrix-amber-1:   #997334;
+         --matrix-amber-2:   #ffdd9d;
+         font-family: 'Lucida Console', monospace;  
+         }       
          .container {
-               color: #00FF00;
-                     font-family: 'Lucida Console', monospace;  
-
+         color: #00FF00;
+         font-family: 'Lucida Console', monospace;  
          display: flex;
          width: 98vw;
-     
-                  padding:1%;
+         padding:1%;
          height: auto;
          margin-left:1vw;
          margin-right:1vw;
          justify-content: center;
-
          }
-        #container2 {
-                          font-family: 'Lucida Console', monospace;  
-
-            max-height: 80vh;
-            min-height: 20vh;
-            width: 98vw;
-
+         #container2 {
+         font-family: 'Lucida Console', monospace;  
+         max-height: 80vh;
+         min-height: 20vh;
+         width: 98vw;
          padding:1%;
          margin-left:1vw;
          margin-right:1vw;
          justify-content: center;
-
          }
-           #container3 {
-                          font-family: 'Lucida Console', monospace;  
- display: flex;
-            max-height: 200vh;
-            min-height: 80vh;
-            width: 98vw;
+         #container3 {
+         font-family: 'Lucida Console', monospace;  
+         display: flex;
+         max-height: 200vh;
+         min-height: 80vh;
+         width: 98vw;
          align-items: center;
-
          padding:1%;
          margin-left:1vw;
          margin-right:1vw;
          justify-content: center;
-  align-items: center;
-                display: flex;
+         align-items: center;
+         display: flex;
          }
-          
-     .flex-container {
-                       font-family: 'Lucida Console', monospace;  
-
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-container > div {
-  flex: 1;
-}
-          
-    .quill-container {
-    width: 100%; /* You can adjust the width as needed */
-    font-family: 'Lucida Console', monospace;  
-
+         .flex-container {
+         font-family: 'Lucida Console', monospace;  
+         display: flex;
+         flex-direction: row;
+         }
+         .flex-container > div {
+         flex: 1;
+         }
+         .quill-container {
+         width: 100%; /* You can adjust the width as needed */
+         font-family: 'Lucida Console', monospace;  
          width: 100%;
          height: 70vh;
          background-color: rgba(100, 100, 100, 0.5);
-        
          font-size: 12px;
          font-weight: bold;
-                
-    margin: 0 auto; /* Center the container horizontally */
-  }
-
+         margin: 0 auto; /* Center the container horizontally */
+         }
          .content-wrapper {
-      font-family: 'Lucida Console', monospace;  
-
+         font-family: 'Lucida Console', monospace;  
          flex: 1;
          position: top;
          display: flex;
@@ -151,18 +127,17 @@ v1.5
          align-items: center;
          justify-content: up;
          }
-        .right-side {
+         .right-side {
          top: 0;
          right: 0;
          flex: 1;
-             max-height: 100vh;
+         max-height: 100vh;
          display: fixed;
          justify-content: center;
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
          }
-            
          }
          .left-side {
          top: 0;
@@ -177,30 +152,25 @@ v1.5
          top: 100vh;
          left:0;
          flex: 1;
-         
          justify-content: center;
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-      
-
          }
          .right-down-side {
          top: auto;
          right:0;
          flex: 1;
-                      color: #00FF00;
-
+         color: #00FF00;
          justify-content: center;
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-  flex-direction: column;
-  overflow-y: auto;
+         flex-direction: column;
+         overflow-y: auto;
          }
          .left-down-down-side {
          top: auto;
-
          left:0;
          flex: 1;
          display: fixed;
@@ -208,7 +178,7 @@ v1.5
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-      height= 80vh;
+         height= 80vh;
          }
          .right-down-down-side {
          top: auto;
@@ -219,13 +189,11 @@ v1.5
          align-items: center;
          max-width: 50%;
          border: 0.1px solid red;
-                     height= 80vh;
-
-       
+         height= 80vh;
          }
          body {
-                           font-family: 'Lucida Console', monospace;  
-    color: black;
+         font-family: 'Lucida Console', monospace;  
+         color: black;
          margin: 0;
          background-color: black;
          font-size: 14px;
@@ -233,7 +201,6 @@ v1.5
          overflow: scroll;
          justify-content: center;
          align-items: center;
-        
          }
          canvas {
          width: 100vw;
@@ -244,7 +211,7 @@ v1.5
          left: 0%;
          padding-top: 0px;
          color: var(--matrix-green-1);
-             filter: drop-shadow(0 0 0.95rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.95rem var(--matrix-red-pill));
          }
          img {
          width: 13vw;
@@ -263,8 +230,7 @@ v1.5
          filter: drop-shadow(0 0 0.75rem green);   
          }
          #log-container {
-                           font-family: 'Lucida Console', monospace;  
-
+         font-family: 'Lucida Console', monospace;  
          width: 100%;
          height: 90vh;
          background-color: rgba(0, 0, 0, 0.2);
@@ -273,8 +239,6 @@ v1.5
          font-size: 14px;
          font-weight: bold;
          white-space: pre-wrap;
-       
-
          }
          #select-container-2{
          margin-top:2%;
@@ -287,36 +251,33 @@ v1.5
          max-width: 100%;
          font-size: 1.5em;
          text-align: center;
-                                     filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
          }
          h2 {
          max-width: 100%;
          font-size: 1.2em;
          text-align: center;
-                                     filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
          }
          h3 {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
-                                     filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
          }
          h4 {
          max-width: 100%;
          font-size: 0.8em;
          text-align: center;
-                                      filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
-
+         filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          }
-          
-           }
+         }
          p {
          max-width: 100%;
          font-size: 0.8em;
          text-align: center;
-             color: black;
+         color: black;
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
-
          }
          form {
          margin: 2% auto;
@@ -324,85 +285,77 @@ v1.5
          flex-direction: column;
          justify-content: center;
          align-items: center;
-             
          }
          label {
          font-size: 1.5em;
          margin-right: 20px;
          }
-   textarea {
-   font-family: 'Lucida Console', monospace;  
-    font-size: 1.5em;
-    margin: 0px;
-    border: none;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: red;
-    justify-content: center;
-    align-items: center;
-    margin: 4% auto;
-    filter: drop-shadow(0 0 0.35rem green);
-    text-align: left;
-    padding: 5px;
-    width: 100%; /* Adjust this to the desired width */
-    min-height: 20vh; /* Adjust this to the desired minimum height */
-    resize: vertical; /* Allow vertical resizing */
-}
-          
-     .out_text  {
-                       font-family: 'Lucida Console', monospace;  
-
-    font-size: 1.5em;
-    margin: 0px;
-    border: none;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: red;
-    justify-content: center;
-    align-items: center;
-    margin: 4% auto;
-    filter: drop-shadow(0 0 0.35rem green);
-    text-align: left;
-    padding: 10px;
-    width: 100%; /* Adjust this to the desired width */
-    height: 90vh; /* Adjust this to the desired minimum height */
-    resize: vertical; /* Allow vertical resizing */
-}     
-          
-           input[type="text"] {
-                             font-family: 'Lucida Console', monospace;  
-
-        font-size: 1.5em;
-    margin: 0px;
-    border: none;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: red;
-    justify-content: center;
-    align-items: center;
-    margin: 1% ;
-    filter: drop-shadow(0 0 0.35rem green);
-    text-align: left;
-    padding: 10px;
-    width: 100%; /* Adjust this to the desired width */
-          
+         textarea {
+         font-family: 'Lucida Console', monospace;  
+         font-size: 1.5em;
+         margin: 0px;
+         border: none;
+         outline: none;
+         background-color: rgba(0, 0, 0, 0.5);
+         color: red;
+         justify-content: center;
+         align-items: center;
+         margin: 4% auto;
+         filter: drop-shadow(0 0 0.35rem green);
+         text-align: left;
+         padding: 5px;
+         width: 100%; /* Adjust this to the desired width */
+         min-height: 20vh; /* Adjust this to the desired minimum height */
+         resize: vertical; /* Allow vertical resizing */
+         }
+         .out_text  {
+         font-family: 'Lucida Console', monospace;  
+         font-size: 1.5em;
+         margin: 0px;
+         border: none;
+         outline: none;
+         background-color: rgba(0, 0, 0, 0.5);
+         color: red;
+         justify-content: center;
+         align-items: center;
+         margin: 4% auto;
+         filter: drop-shadow(0 0 0.35rem green);
+         text-align: left;
+         padding: 10px;
+         width: 100%; /* Adjust this to the desired width */
+         height: 90vh; /* Adjust this to the desired minimum height */
+         resize: vertical; /* Allow vertical resizing */
+         }     
+         input[type="text"] {
+         font-family: 'Lucida Console', monospace;  
+         font-size: 1.5em;
+         margin: 0px;
+         border: none;
+         outline: none;
+         background-color: rgba(0, 0, 0, 0.5);
+         color: red;
+         justify-content: center;
+         align-items: center;
+         margin: 1% ;
+         filter: drop-shadow(0 0 0.35rem green);
+         text-align: left;
+         padding: 10px;
+         width: 100%; /* Adjust this to the desired width */
          }
          .button-wrapper {
          display: flex;
          justify-content: center;
          width: 100%;
          }
-          
-          out_text{
-          width: 100%;
+         out_text{
+         width: 100%;
          height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
          color: #00FF00;
-     
          font-size: 14px;
          font-weight: bold;
          white-space: pre-wrap;
-          }
+         }
          button {
          font-size: 1.5em;
          padding: 10px;
@@ -411,11 +364,11 @@ v1.5
          border: none;
          outline: none;
          background-color: var(--matrix-green-1);
-                                 filter: drop-shadow(0 0 0.35rem var(--matrix-amber-2));
+         filter: drop-shadow(0 0 0.35rem var(--matrix-amber-2));
          color: black;
          cursor: pointer;
          }
-       buttonGPT {
+         buttonGPT {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
@@ -425,9 +378,9 @@ v1.5
          background-color: var(--matrix-red-pill);
          color: black;
          cursor: pointer;
-                    filter: drop-shadow(0 0 0.35rem red);
+         filter: drop-shadow(0 0 0.35rem red);
          }
-        buttonAI {
+         buttonAI {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
@@ -437,19 +390,19 @@ v1.5
          background-color: var(--matrix-blue-pill);
          color: black;
          cursor: pointer;
-                     filter: drop-shadow(0 0 0.35rem red);
+         filter: drop-shadow(0 0 0.35rem red);
          }
          button:hover {
          background-color: var(--matrix-amber-1);
-                                  filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
+         filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
          }
-           #button-AI:hover {
+         #button-AI:hover {
          background-color: var(--matrix-blue-pill);
-                        filter: drop-shadow(0 0 0.85rem var(--matrix-blue-pill));
+         filter: drop-shadow(0 0 0.85rem var(--matrix-blue-pill));
          }
-           #button-GPT:hover {
+         #button-GPT:hover {
          background-color: var(--matrix-red-pill);
-                        filter: drop-shadow(0 0 0.85rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.85rem var(--matrix-red-pill));
          }
          .input-key {
          font-size: 1.5em;
@@ -481,11 +434,11 @@ v1.5
          color: red;
          text-decoration: none;
          }
-      .question {
-          margin: 1% auto;
+         .question {
+         margin: 1% auto;
          filter: drop-shadow(0 0 0.75rem green);
-          height: 5vh;
-          } 
+         height: 5vh;
+         } 
          a:hover {
          color: #aaa;
          }
@@ -493,93 +446,85 @@ v1.5
          width: 50vw;
          overflow: hiden;
          }
-   #theme {
-  padding: 1%;
-  border-radius: 4px;
-  border: 1px solid var(--matrix-red-1);
-  outline: none;
-  background-color: var(--matrix-green-1);
+         #theme {
+         padding: 1%;
+         border-radius: 4px;
+         border: 1px solid var(--matrix-red-1);
+         outline: none;
+         background-color: var(--matrix-green-1);
          color: black;
-  cursor: pointer;
+         cursor: pointer;
          font-size: 1.2em;
-
-}
-#theme option {
-  font-size: 1.5em;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: none;
-  outline: none;
-  background-color: var(--matrix-green-1);;
+         }
+         #theme option {
+         font-size: 1.5em;
+         padding: 8px 12px;
+         border-radius: 4px;
+         border: none;
+         outline: none;
+         background-color: var(--matrix-green-1);;
          color: black;
-
-  cursor: pointer;
-    
-}
-#theme option:hover {
-  background-color: var(--matrix-green-1);
-}
-#theme:focus,
-#theme:active {
-  border-color: var(--matrix-red-1);
-}
-  #model {
-  padding: 1%;
-  border-radius: 4px;
-  border: 1px solid var(--matrix-red-1);
-  outline: none;
-  background-color: var(--matrix-green-1);
-  cursor: pointer;
+         cursor: pointer;
+         }
+         #theme option:hover {
+         background-color: var(--matrix-green-1);
+         }
+         #theme:focus,
+         #theme:active {
+         border-color: var(--matrix-red-1);
+         }
+         #model {
+         padding: 1%;
+         border-radius: 4px;
+         border: 1px solid var(--matrix-red-1);
+         outline: none;
+         background-color: var(--matrix-green-1);
+         cursor: pointer;
          color: black;
-               font-size: 1.2em;
-
-}
-#model option {
-  font-size: 1.5555em;
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: none;
-  outline: none;
-  background-color: var(--matrix-green-1);;
+         font-size: 1.2em;
+         }
+         #model option {
+         font-size: 1.5555em;
+         padding: 8px 12px;
+         border-radius: 4px;
+         border: none;
+         outline: none;
+         background-color: var(--matrix-green-1);;
          color: black;
-  cursor: pointer;
-}
-#model option:hover {
-  background-color: var(--matrix-green-1);
-}
-#model:focus,
-#model:active {
-  border-color: var(--matrix-red-1);
-}
- #results {
+         cursor: pointer;
+         }
+         #model option:hover {
+         background-color: var(--matrix-green-1);
+         }
+         #model:focus,
+         #model:active {
+         border-color: var(--matrix-red-1);
+         }
+         #results {
          width: 100%;
          height: 90%;
          background-color: rgba(0, 0, 0, 0.2); 
          color: #00FF00;
          font-family: 'Lucida Console', monospace;
-                 max-height: 80vh;  
-          }
-  
-   
+         max-height: 80vh;  
+         }
       </style>
    </head>
-    
-    
    <body onsubmit="event.preventDefault();" onclick="event.preventDefault();">
-     <canvas id="matrixCanvas"></canvas>
+      <canvas id="matrixCanvas"></canvas>
       <div class="container">
-         <div class="content-wrapper"> 
+         <div class="content-wrapper">
             <div class="left-side">
-            <h1>__Knowledge Vortex to your service__</h1>
+               <h1>__Knowledge Vortex to your service__</h1>
                <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/logo1.png" alt="KV Logo">
                <h2 id="datetime" style="color: red;"></h2>
                <h3>ask Operator a library related question</h3>
                <form id="ask-form" enctype="multipart/form-data" >
-                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
-                   <div>
-                  <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">ask OpenAI </button>
-                  <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">ask library</button>  
-                   </div>
+                  <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
+                  <div>
+                     <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">ask OpenAI </button>
+                     <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">ask library</button>  
+                  </div>
                   <h2 for="theme">library for:</h2>
                   <div class="select-container">
                      <select name="theme" id="theme" onchange="saveTheme()">
@@ -595,94 +540,70 @@ v1.5
                      </select>
                   </div>
                   <div class="select-container-2" id="select-container-2">
-    <select name="folder-selector" id="folder-selector" onchange="">
-  {% for folder in folders %}
-    <option value="{{ folder }}">{{ folder }}</option>
-  {% endfor %}
-</select>
-
+                     <select name="folder-selector" id="folder-selector" onchange="">
+                        {% for folder in folders %}
+                        <option value="{{ folder }}">{{ folder }}</option>
+                        {% endfor %}
+                     </select>
                   </div>
-                    </form>
-                  <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
-                 <h4 style="color: grey;"> example for OpenAI : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
-                <br><br>
-                    <h1>__vortex keyword search__</h1>
-      <form id="search-form">
-      <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
-    <h4 style="color: grey;"> example : password</h4>
-
-      <button type="button" onclick="searchFiles()">Search</button>
-      </form>      
+               </form>
+               <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
+               <h4 style="color: grey;"> example for OpenAI : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
+               <br><br>
+               <h1>__vortex keyword search__</h1>
+               <form id="search-form">
+                  <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
+                  <h4 style="color: grey;"> example : password</h4>
+                  <button type="button" onclick="searchFiles()">Search</button>
+               </form>
             </div>
          </div>
-             
-             
-     
          <div class="right-side">
-                  <div><h1>__vortex pdf preview__</h1></div>
-
-         <div id="log-container"></div>
+            <div>
+               <h1>__vortex pdf preview__</h1>
+            </div>
+            <div id="log-container"></div>
          </div>
       </div>
-          
-          
-          
-<div class="container flex-container" style="container2">
-      <div class="left-down-side">
-      <h1>__vortex file bucket__</h1>
-
-      <div class="list-container">
-    <h2>Folder content:</h2>
-    <ul id="folder-content"></ul>
-      </div></div>
-          
-          
-          
-      <div class="right-down-side">
+      <div class="container flex-container" style="container2">
+         <div class="left-down-side">
+            <h1>__vortex file bucket__</h1>
+            <div class="list-container">
+               <h2>Folder content:</h2>
+               <ul id="folder-content"></ul>
+            </div>
+         </div>
+         <div class="right-down-side">
             <h1>__vortex search resoults__</h1>
-      <div class="results" id="results">
-      </div>  
-</div></div>
-          
-          
-<div class="container flex-container" style="container3">
-      <div class="left-down-down-side">
-           <h1>__create new document__</h1>
-       
-<div class="quill-container">
-  <div id="quill-editor"></div>
-  <input type="hidden" name="content" id="content">
-</div>
-<button type="button" onclick="save_doc()">Save</button>
-
-       </div>
-          
-          
-          
-      <div class="right-down-down-side">
-     <h1>__vortex pdf preview__</h1>
+            <div class="results" id="results">
+            </div>
+         </div>
+      </div>
+      <div class="container flex-container" style="container3">
+         <div class="left-down-down-side">
+            <h1>__create new document__</h1>
+            <div class="quill-container">
+               <div id="quill-editor"></div>
+               <input type="hidden" name="content" id="content">
+            </div>
+            <button type="button" onclick="save_doc()">Save</button>
+         </div>
+         <div class="right-down-down-side">
+            <h1>__vortex pdf preview__</h1>
             <div class="pdf-viewer">
-    <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="90%">
-</div>
+               <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="90%">
+            </div>
+         </div>
       </div>
-      </div>
-          
-          
-          
       <div class="footer_image">
          <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/p6.png" alt="KV Logo">
       </div>
       <h3>Knowledge Vortex 2023</h3>
-
    </body>
-
    <script>
-       
-     
-        
       function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
-      document.getElementById('pdf-container').innerHTML = `<iframe src="${presignedUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
+      document.getElementById('pdf-embed').innerHTML = `<iframe src="${presignedUrl}" style="width:100%; height:100%;" frameborder="0"></iframe>`;
       }
       
       
@@ -712,7 +633,7 @@ v1.5
        
           
        
-    async function ask_LIB(event) {
+      async function ask_LIB(event) {
          event.preventDefault();
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
@@ -720,7 +641,7 @@ v1.5
             method: "POST",
             body: formData,
         });
-    } 
+      } 
        async function ask_GPT(event) {
         event.preventDefault();   
         const form = document.getElementById("ask-form");
@@ -740,7 +661,7 @@ v1.5
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams({ text: '' }),
-    })
+      })
         .then((response) => {
             if (response.ok) {
                 return response.blob();
@@ -759,13 +680,13 @@ v1.5
         .catch((error) => {
             console.error('There has been a problem with your fetch operation:', error);
         });
-}
+      }
        
-
+      
        
         function searchFiles() {
-    const keyword = $('#keyword').val();
-    $.ajax({
+      const keyword = $('#keyword').val();
+      $.ajax({
         url: '/search_pdf_files',
         method: 'POST',
         data: {
@@ -778,20 +699,20 @@ v1.5
         error: function(err) {
             console.log(err);
         }
-    });
-}
-function showPDF(url) {
-    document.getElementById('pdf-embed').src = '/lurl.pdf';
-    setTimeout(() => {
+      });
+      }
+      function showPDF(url) {
+      document.getElementById('pdf-embed').src = '/lurl.pdf';
+      setTimeout(() => {
         document.getElementById('pdf-embed').src = url;
-    }, 300);
-}
+      }, 300);
+      }
         const canvas = document.getElementById('matrixCanvas');
          const ctx = canvas.getContext('2d');
          canvas.width = window.innerWidth;
          canvas.height = window.innerHeight;
          
-const characters = '゠ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶヷヸヹヺ・ーヽヾゝゞー１２３４５６７８９０';
+      const characters = '゠ァアィイゥウェエォオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂッツヅテデトドナニヌネノハバパヒビピフブプヘベペホボポマミムメモャヤュユョヨラリルレロヮワヰヱヲンヴヵヶヷヸヹヺ・ーヽヾゝゞー１２３４５６７８９０';
          
          const fontSize = 12;
          const columns = canvas.width / fontSize;
@@ -821,94 +742,94 @@ const characters = '゠ァアィイゥウェエォオカガキギクグケゲコ
          
          setInterval(draw, 33);
        
-// Initialize Quill editor
-var quill = new Quill('#quill-editor', {
-  theme: 'snow'
-});
-
-async function save_doc() {
-  // Get content from Quill editor
-  const content = quill.root.innerHTML;
-
-  // Create a temporary container for rendering
-  const container = document.createElement('div');
-  container.innerHTML = content;
-  container.style.width = '8.5in';
-  container.style.height = '11in';
-  container.style.overflow = 'hidden';
-  container.style.position = 'absolute';
-  container.style.left = '-9999px';
-  container.style.top = '-9999px';
-  document.body.appendChild(container);
-
-  // Render the content as an image using html2canvas
-  const canvas = await html2canvas(container, { scale: 0.8 });
-
-  // Remove the temporary container
-  document.body.removeChild(container);
-
-  // Convert the canvas to a data URL
-  const imageDataUrl = canvas.toDataURL('image/png');
-
-  // Get the current date and time
-  const now = new Date();
-  const dateString = now.toLocaleDateString();
-  const timeString = now.toLocaleTimeString();
-
-  // Define the PDF content using pdfmake
-  const docDefinition = {
-    header: {
+      // Initialize Quill editor
+      var quill = new Quill('#quill-editor', {
+      theme: 'snow'
+      });
+      
+      async function save_doc() {
+      // Get content from Quill editor
+      const content = quill.root.innerHTML;
+      
+      // Create a temporary container for rendering
+      const container = document.createElement('div');
+      container.innerHTML = content;
+      container.style.width = '8.5in';
+      container.style.height = '11in';
+      container.style.overflow = 'hidden';
+      container.style.position = 'absolute';
+      container.style.left = '-9999px';
+      container.style.top = '-9999px';
+      document.body.appendChild(container);
+      
+      // Render the content as an image using html2canvas
+      const canvas = await html2canvas(container, { scale: 0.8 });
+      
+      // Remove the temporary container
+      document.body.removeChild(container);
+      
+      // Convert the canvas to a data URL
+      const imageDataUrl = canvas.toDataURL('image/png');
+      
+      // Get the current date and time
+      const now = new Date();
+      const dateString = now.toLocaleDateString();
+      const timeString = now.toLocaleTimeString();
+      
+      // Define the PDF content using pdfmake
+      const docDefinition = {
+      header: {
       text: `generated by KV ${dateString} ${timeString}`,
       margin: [20, 20, 20, 0],
       style: 'header',
-    },
-    content: [
+      },
+      content: [
       {
         image: imageDataUrl,
         width: canvas.width * 0.85,
         height: canvas.height * 0.85,
       },
       {
-    
+      
       },
         {
-     
-    },
-    ],
-    pageMargins: [40, 60, 40, 60],
-    styles: {
+      
+      },
+      ],
+      pageMargins: [40, 60, 40, 60],
+      styles: {
       header: {
         fontSize: 14,
         bold: true,
       },
-    },
-  };
-
-  // Create a new pdfmake instance
-  const pdfDoc = pdfMake.createPdf(docDefinition);
-
-  // Save and download the PDF
-  pdfDoc.download('document.pdf');
-}
-
-async function load_folders() {
-  const response = await fetch('/list_folders');
-  const folders = await response.json();
-  const folderSelect = document.getElementById('folder-select');
-
-  folders.forEach((folder) => {
-    const option = document.createElement('option');
-    option.value = folder;
-    option.textContent = folder;
-    folderSelect.appendChild(option);
-  });
-}
-
-load_folders();
-
-function getFiles() {
-    var folder = $('#folder-select').val();
-    $.getJSON('/get_files/' + folder, function(data) {
+      },
+      };
+      
+      // Create a new pdfmake instance
+      const pdfDoc = pdfMake.createPdf(docDefinition);
+      
+      // Save and download the PDF
+      pdfDoc.download('document.pdf');
+      }
+      
+      async function load_folders() {
+      const response = await fetch('/list_folders');
+      const folders = await response.json();
+      const folderSelect = document.getElementById('folder-select');
+      
+      folders.forEach((folder) => {
+      const option = document.createElement('option');
+      option.value = folder;
+      option.textContent = folder;
+      folderSelect.appendChild(option);
+      });
+      }
+      
+      load_folders();
+      
+      function getFiles() {
+      var folder = $('#folder-select').val();
+      $.getJSON('/get_files/' + folder, function(data) {
         console.log(data); // Log the data received
         if (data.error) {
             console.error(data.error);
@@ -919,9 +840,9 @@ function getFiles() {
         for (var i = 0; i < files.length; i++) {
             $('#file-list').append('<li>' + files[i] + '</li>');
         }
-    });
-}
- function updateFileList() {
+      });
+      }
+      function updateFileList() {
         $.getJSON('/get_updated_files', function(data) {
             var files = data;
             var file_list_element = $('.list-container ul');
@@ -930,7 +851,7 @@ function getFiles() {
                 file_list_element.append('<li><a href="#" onclick="showPDF(\'' + files[i].PresignedURL + '\')">' + files[i].Key + '</a></li>');
             }
         });
-    }  
+      }  
        
        function updateFolderContent() {
         let selectedFolder = $('#folder-selector').val();
@@ -942,8 +863,8 @@ function getFiles() {
                 $('#folder-content').append('<li><a href="#" onclick="openPdf(\'' + file_url + '\')">' + item + '</a></li>');
             }
         });
-    }
-
+      }
+      
         $('#folder-selector').on('change', updateFolderContent);
         updateFolderContent();
        
