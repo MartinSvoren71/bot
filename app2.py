@@ -33,26 +33,6 @@ s3_client = boto3.client(
     region_name=AWS_DEFAULT_REGION
 )
 
-# Create a log file and configure logging
-log_file = "app.log"
-if not os.path.exists(log_file):
-    with open(log_file, 'w'):
-        pass
-
-logging.basicConfig(filename=log_file, level=logging.INFO)
-logger = logging.getLogger()
-
-# Add a sample log message
-logger.info("Sample log message: Flask application started.")
-
-
-@app.route('/logs')
-def fetch_logs():
-    with open(log_file, 'r') as f:
-        log_content = f.read()
-    return jsonify({'logs': log_content})
-
-
 
 @app.route("/", methods=["GET", "POST"])
 def login():
