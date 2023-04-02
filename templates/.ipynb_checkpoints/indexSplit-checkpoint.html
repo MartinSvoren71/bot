@@ -15,9 +15,9 @@ v1.5
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
       <script>
          window.onload = function() {
-             const savedTheme = localStorage.getItem("theme");
-             if (savedTheme) {
-                 document.getElementById("theme").value = savedTheme;
+             const saveFolder = localStorage.getItem("folder-selector");
+             if (saveFolder) {
+                 document.getElementById("folder-selector").value = saveFolder;
              }
          };
                  
@@ -470,33 +470,7 @@ v1.5
          width: 50vw;
          overflow: hiden;
          }
-         #theme {
-         padding: 1%;
-         border-radius: 4px;
-         border: 1px solid var(--matrix-red-1);
-         outline: none;
-         background-color: var(--matrix-green-1);
-         color: black;
-         cursor: pointer;
-         font-size: 1.2em;
-         }
-         #theme option {
-         font-size: 1.3em;
-         padding: 8px 12px;
-         border-radius: 4px;
-         border: none;
-         outline: none;
-         background-color: var(--matrix-green-1);;
-         color: black;
-         cursor: pointer;
-         }
-         #theme option:hover {
-         background-color: var(--matrix-green-1);
-         }
-         #theme:focus,
-         #theme:active {
-         border-color: var(--matrix-red-1);
-         }
+         
           #folder-selector {
          padding: 1%;
          border-radius: 4px;
@@ -582,7 +556,7 @@ v1.5
                      <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">ask OpenAI </button>
                      <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">ask library</button>  
                   </div>
-                  <h2 for="theme">library for:</h2>
+                  <h2 >library for:</h2>
              
                   <div class="select-container-2" id="select-container-2">
                      <select name="folder-selector" id="folder-selector" onchange="">
@@ -667,10 +641,7 @@ v1.5
       
       loadLogFile();
              
-              function saveTheme() {
-       const selectedModel = document.getElementById("theme").value;
-       localStorage.setItem("theme", selectedModel);
-      }  
+    
        function saveFolder() {
        const selectedModel = document.getElementById("folder-select").value;
        localStorage.setItem("folder-select", selectedModel);
