@@ -191,7 +191,7 @@ def search_pdf_files(keyword, folder_path):
 
 
 @app.route('/search_pdf_files', methods=['POST'])
-def search_files():
+def search_files(selected_folder):
     search_results = {}
     encrypted_files = []
 
