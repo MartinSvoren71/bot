@@ -295,6 +295,24 @@ def get_folder_content():
 
 
 
+@app.route('/console', methods=['POST'])
+def console():
+    # Capture console output
+    captured_output = io.StringIO()
+    sys.stdout = captured_output
+
+    # Your app code here, replace with your own logic
+    print("This is a sample output from the app")
+
+    # Reset stdout
+    sys.stdout = sys.__stdout__
+
+    console_output = captured_output.getvalue()
+    return console_output
+
+
+
+
 
 t = Thread(target=initialize_ai)
 t.start()
