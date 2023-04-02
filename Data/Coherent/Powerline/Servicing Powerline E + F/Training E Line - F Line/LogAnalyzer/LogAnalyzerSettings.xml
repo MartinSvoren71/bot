@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ObjectStore version="0.0" xmlns="x-schema:objectStore-schema.xml">
+  <string name="BehaviorXmlInputPath">C:\Rofin\VisualLaserMarker\LogAnalyzer</string>
+  <boolean name="AssociateLogFiles">0</boolean>
+  <boolean name="LiveListenStart">0</boolean>
+  <string name="LoggingDirectory">C:\Rofin\rcu\bin</string>
+  <integer name="LiveListenMode">1</integer>
+  <string name="UpdateDelay">1000</string>
+  <string name="FileContains">rcu.log</string>
+  <string name="FileExclude">.exe</string>
+  <integer name="NumMax">20</integer>
+  <integer name="SelectedFilter">0</integer>
+  <string name="InputLoggingDirectories">C:\Rofin\rcu\bin;</string>
+</ObjectStore>

@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<ArrayOfLogBehavior xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LogBehavior xsi:type="DefaultLogBehavior">
+    <Grade>0</Grade>
+    <!--C# date format: http://msdn.microsoft.com/en-us/library/8kb3ddd4.aspx-->
+    <DateFormat>yyyy-MM-dd HH:mm:ss,fff</DateFormat>
+    <!--use: <date>,<level>,<info>,<info2>,<exinfo> as named groups in regex, this will identify the log line parts
+    
+        date = the date, which should be in the date format stated in the <DateFormat> tag.
+		date group:			(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})  ->  08/01/2015 14:00:03,166
+        level = the log level.
+        info = the detailed info usually represented inside the log line
+        info2 = another detailed info usually represented inside the log line. If <ParserRegexReplaceInfo2CData> filled with content info2 gets "translated"
+        exinfo = the extended information (one or more lines), can e.g. contain info and info2
+		ignore expression: 	^((?!something).)*$
+    -->
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^(?<info>.*)$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexOptionsString>Multiline Compiled</ParserRegexOptionsString>
+    <BehaviorName>Default</BehaviorName>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>RCU all</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>yyyy-MM-dd HH:mm:ss.fff</DateFormat>
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^(?<date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.\d{1,3})\t(?<level>INFO|DEBUG|ERROR|FATAL|WARN)(?<exinfo>.*).*$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>RCU Axes all</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>yyyy-MM-dd HH:mm:ss.fff</DateFormat>
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^(?<date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.\d{1,3})\t(?<level>INFO|DEBUG|ERROR|FATAL|WARN)(?<exinfo>.*Axes.*).*$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>RCU Axes Positions</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>yyyy-MM-dd HH:mm:ss.fff</DateFormat>
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^(?<date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.\d{1,3})\t(?<level>INFO|DEBUG|ERROR|FATAL|WARN)(?<exinfo>.*(Axis|Axes|GalvoControl).*((?<info>(position.*=\s\d{1,8}.\d{1,5}|STATE.*\(STATE.*\)))|(?<info2>(StartReference|StartMovement,\sposition=\d{1,8}.\d{1,5})).*).*)$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>RCU Axes Simatic</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>yyyy-MM-dd HH:mm:ss.fff</DateFormat>
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^(?<date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.\d{1,3})\t(?<level>INFO|DEBUG|ERROR|FATAL|WARN)(?<exinfo>.*(Axis|Axes|GalvoControl).*((?<info>(positon.*=\s\d{1,8}|MoveTo.*pos:\s\d{1,8}|STATE.*\(STATE.*\)))|(?<info2>(GenericCommandSend|SendPlcEvent|ConfigureAxis|StartReference|StartMovement,\spos =\d{1,8}.\d{1,5})).*).*)$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>ProgramControl all</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>yyyy-MM-dd HH:mm:ss.fff</DateFormat>
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^(?<date>\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}.\d{1,3})\t(?<level>INFO|DEBUG|ERROR|FATAL|WARN)(?<exinfo>.*ProgramControl.*).*$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>Mico Communication Translation</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>dd'/'MM'/'yyyy HH:mm:ss,fff</DateFormat>
+    <!--  ^(?<level>INFO|DEBUG|ERROR|FATAL|WARN)\t(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})\s\s(?<exinfo>.*).*$
+    -->
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^.*(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})\s\s(?<exinfo>.*\r\n(?<info>.*)(?<info2>)).*$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexReplaceInfo2CData>
+      <![CDATA[
+      find = %;replace = Process end
+      find = F0K0M0P0;replace = QPSet change successfully
+      find = B0;replace = Shutter closed
+      find = B1;replace = Shutter opened
+      find = \$;replace = Process start
+	  find = -0;replace = Beam OFF
+      find = \+0;replace = Beam ON
+      ]]>
+    </ParserRegexReplaceInfo2CData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>Mico Communication Problem</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>dd'/'MM'/'yyyy HH:mm:ss,fff</DateFormat>
+    <!--ParserRegexPatternCData>
+      <![CDATA[      ^.*(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})\s\s(?<exinfo>.*\r\n(?<info>(second|third))(?<info2>)).*$
+      ]]>
+    </ParserRegexPatternCData-->
+    <!--ParserRegexPatternCData>
+      <![CDATA[   ^.*(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})\s\s(?<exinfo>.*\r\n(?<info>^((?!(B0\r|B1\r|F0|%\r|-0|\+0\r|\+0\r|\$\r|P0\r|P00100\r|P00345\r|X:|R0\r|R000\r|L0|L1\r|S1\r|S2\r|S3\r|S4\r|S5\r|S6\r|Final|responding|\?\r)).)*$)(?<info2>)).*$
+      ]]>
+    </ParserRegexPatternCData-->
+    <ParserRegexPatternCData>
+      <![CDATA[   ^.*(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})\s\s(?<exinfo>.*\r\n(?<info>^((?!(B0\r|B1\r|F0|%\r|-0|\+0\r|\+0\r|\+\r|-\r|\$\r|P0\r|P00100\r|P00345\r|L0\d{3}|L1\r|S1\r|S2\r|S3\r|S4\r|S5\r|S6\r|Final|responding|R0\r|R000\r|P775|X:0\d{7}\r|Second|X60\r|^\?\r)).)*$)(?<info2>)).*$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexReplaceInfo2CData>
+      <![CDATA[
+      find = %;replace = Process end
+      find = F0K0M0P0;replace = QPSet change successfully
+      find = B0;replace = Shutter closed
+      find = B1;replace = Shutter opened
+      find = \$;replace = Process start
+	  find = -0;replace = Beam OFF
+      find = \+0;replace = Beam ON
+      ]]>
+    </ParserRegexReplaceInfo2CData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>Mico Communication Filtered</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>dd'/'MM'/'yyyy HH:mm:ss,fff</DateFormat>
+    <ParserRegexPatternCData>
+	<!--
+	ignore expression: 	^((?!something).)*$
+	date group:			(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})  ->  08/01/2015 14:00:03,166
+	-->
+      <![CDATA[
+      ^.*(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})\s\s(?<exinfo>.*\r\n(?<info>^((?!(B0|F0|%|-0)).)*$)(?<info2>)).*$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+  <LogBehavior>
+    <BehaviorName>Mico Communication Double command</BehaviorName>
+    <Grade>0</Grade>
+    <DateFormat>dd'/'MM'/'yyyy HH:mm:ss,fff</DateFormat>
+    <ParserRegexPatternCData>
+      <![CDATA[
+      ^.*(?<exinfo>(?<date>\d{2}/\d{2}/\d{4}\s\d{2}:\d{2}:\d{2},\d{1,3})\s\s.*\r\n(?<info>%.*).*\r\n.*\r\n%-0).*$
+      ]]>
+    </ParserRegexPatternCData>
+    <ParserRegexReplaceInfo2CData>
+      <![CDATA[
+      find = %;replace = Unknown command
+      find = F0K0M0P0;replace = QPSet change
+      find = B0;replace = Shutter opened
+      find = B1;replace = Shutter closed
+      ]]>
+    </ParserRegexReplaceInfo2CData>
+    <ParserRegexOptionsString>IgnoreCase Compiled MultiLine</ParserRegexOptionsString>
+  </LogBehavior>
+</ArrayOfLogBehavior>
