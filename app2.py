@@ -15,11 +15,13 @@ from io import BytesIO
 from concurrent.futures import ThreadPoolExecutor
 import logging
 import sys
+
+
 current_folder = 'Data/'
 
 
 
-@app.route("/", methods=["GET", "POST"])   # main login page
+@app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         password = request.form["key"]
@@ -35,12 +37,12 @@ def login():
 @app.route("/bad_key")
 
 
-#bad key function 
+
 def bad_key():
     return render_template("badkey.html")
 
 
-#list files from data folers
+
 @app.route("/get_updated_files", methods=["GET", "POST"])
 def list_files_and_urls(folder_path):
     files = []
@@ -55,18 +57,10 @@ def list_files_and_urls(folder_path):
 
 
 
-#after login page, main interface
+
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        with open('themes.json', 'r') as f:
-            themes = json.load(f)
-        options = ''.join([f'<option value="{theme}">{theme_name}</option>' for theme, theme_name in themes.items()])
-        html = f'''
-        <select name="theme" id="theme" onchange="saveTheme()">
-            {options}
-        </select>
-        '''
         data_folders = get_subfolders_recursive('Data/')
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
@@ -86,6 +80,15 @@ def index():
     
 
     
+    
+@app.route('/log-content')
+def log_content():
+    file_path = os.path.join(os.getcwd(), 'log.txt')
+    with open(file_path, 'r') as file:
+        content = file.read()
+    return content
+
+
 
 
 
@@ -135,9 +138,6 @@ def process_pdf_file(filepath, keyword, pattern):
         print(f"Error processing {filepath}: {str(e)}")
         return filepath, None, False
     return filepath, result, False
-
-
-
 
 def search_pdf_files(keyword, folder_path):
     results = {}
@@ -255,7 +255,6 @@ def get_folder_content():
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
     return {'folder_content': folder_content}
-
 
 
 
