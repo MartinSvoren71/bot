@@ -55,7 +55,9 @@ def construct_index(directory_path):
     prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
     documents = SimpleDirectoryReader(directory_path).load_data()
     index = GPTSimpleVectorIndex(
-    documents, prompt_helper=prompt_helper
-)
+        documents, llm_predictor=llm_predictor, prompt_helper=prompt_helper
+    )
     index.save_to_disk('index.json')
     return index
+
+
