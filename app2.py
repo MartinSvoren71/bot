@@ -15,26 +15,11 @@ from io import BytesIO
 from concurrent.futures import ThreadPoolExecutor
 import logging
 import sys
-
-
 current_folder = 'Data/'
 
-folder_name = 's3/'
-app = Flask(__name__, static_folder='/')
-app.secret_key = "xxx007"
-AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_DEFAULT_REGION = 'eu-north-1'
-BUCKET_NAME = 'knowledgevortex'
-s3_client = boto3.client(
-    's3',
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    region_name=AWS_DEFAULT_REGION
-)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])   # main login page
 def login():
     if request.method == "POST":
         password = request.form["key"]
@@ -50,12 +35,12 @@ def login():
 @app.route("/bad_key")
 
 
-
+#bad key function 
 def bad_key():
     return render_template("badkey.html")
 
 
-
+#list files from data folers
 @app.route("/get_updated_files", methods=["GET", "POST"])
 def list_files_and_urls(folder_path):
     files = []
@@ -70,7 +55,7 @@ def list_files_and_urls(folder_path):
 
 
 
-
+#after login page, main interface
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
@@ -101,25 +86,6 @@ def index():
     
 
     
-    
-@app.route('/log-content')
-def log_content():
-    file_path = os.path.join(os.getcwd(), 'log.txt')
-    with open(file_path, 'r') as file:
-        content = file.read()
-    return content
-def generate_presigned_url(bucket, key, expiration=3600):
-    try:
-        response = s3_client.generate_presigned_url(
-            'get_object',
-            Params={'Bucket': bucket, 'Key': key},
-            ExpiresIn=expiration
-        )
-    except ClientError as e:
-        print(e)
-        return None
-    return response
-
 
 
 
