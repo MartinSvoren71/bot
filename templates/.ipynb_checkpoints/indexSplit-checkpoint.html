@@ -597,16 +597,12 @@ v1.5
                   <h2 >library for:</h2>
              
                   <div class="select-container-2" id="select-container-2">
-  <select name="main-folder-selector" id="main-folder-selector" onchange="updateSubFolderSelector()">
-    {% for folder in main_folders %}
-    <option value="{{ folder }}">{{ folder }}</option>
-    {% endfor %}
-  </select>
-  <select name="sub-folder-selector" id="sub-folder-selector" onchange="updateFolderContent()" disabled>
-    <option value="">Select a main folder first</option>
-  </select>
-</div>
-                   
+                     <select name="folder-selector" id="folder-selector" onchange="">
+                        {% for folder in folders %}
+                        <option value="{{ folder }}">{{ folder }}</option>
+                        {% endfor %}
+                     </select>
+                  </div>
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
                <h4 style="color: grey;"> example for OpenAI : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
@@ -926,21 +922,21 @@ v1.5
         });
       }  
        
-       function updateSubFolderSelector() {
-  let selectedMainFolder = $('#main-folder-selector').val();
-  let subFolders = {{ subfolders|tojson }};
-  let subFolderOptions = '';
-  for (let subFolder of subFolders) {
-    if (subFolder.startsWith(selectedMainFolder)) {
-      let subFolderName = subFolder.replace(selectedMainFolder + '/', '');
-      subFolderOptions += '<option value="' + subFolder + '">' + subFolderName + '</option>';
-    }
-  }
-  $('#sub-folder-selector').html(subFolderOptions);
-  $('#sub-folder-selector').prop('disabled', false);
-}
+       function updateFolderContent() {
+        let selectedFolder = $('#folder-selector').val();
+        $.post('/get_folder_content', {selected_folder: selectedFolder}, function(data) {
+            $('#folder-content').html('');
+            for (let item of data.folder_content) {
+                let file_url = '/Data/' + selectedFolder + '/' + item;
+                // Modify this line to call openPdf function with the Presigned URL
+                $('#folder-content').append('<li><a href="#" onclick="openPdf(\'' + file_url + '\')">' + item + '</a></li>');
+            }
+        });
+      }
       
-$('#main-folder-selector').on('change', updateFolderContent);
-updateFolderContent();
+       $('#folder-selector').on('change', updateFolderContent);
+      updateFolderContent();
+       
+
    </script>    
 </html>

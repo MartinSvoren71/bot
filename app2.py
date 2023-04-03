@@ -82,14 +82,15 @@ def index():
             {options}
         </select>
         '''
-        data_path = 'Data/'
-        main_folders, subfolders = get_main_and_subfolders(data_path)
-        selected_main_folder = request.form.get('main-folder', main_folders[0])
-        selected_subfolder = request.form.get('sub-folder', subfolders[0])
-        folder_path = os.path.join(data_path, selected_main_folder, selected_subfolder)
+        data_folders = get_subfolders_recursive('Data/')
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
-        return render_template("indexSplit.html", html=html, main_folders=main_folders, subfolders=subfolders, selected_main_folder=selected_main_folder, selected_subfolder=selected_subfolder, files=files, results={})
+        folders = list_folders()
 
+            #for dirname in dirnames:
+                #if not dirname.startswith('.'):  # Ignore hidden directories
+                   # folders.append(os.path.join(root, dirname))
+        return render_template("indexSplit.html", html=html, folders=data_folders, files=files, results={})
 
     else:
         flash("Please log in first")
@@ -262,16 +263,12 @@ def list_folders():
 
 
 
-def get_main_and_subfolders(path):
-    main_folders = []
+def get_subfolders_recursive(path):
     subfolders = []
     for root, dirs, _ in os.walk(path):
-        if root == path:
-            main_folders = [os.path.relpath(os.path.join(root, d), path) for d in dirs]
-        else:
-            for d in dirs:
-                subfolders.append(os.path.relpath(os.path.join(root, d), path))
-    return main_folders, subfolders
+        for d in dirs:
+            subfolders.append(os.path.relpath(os.path.join(root, d), path))
+    return subfolders
 
 def get_files_recursive(path):
     all_files = []
@@ -287,12 +284,11 @@ def get_files_recursive(path):
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
     global current_folder
-    selected_main_folder = request.form['main-folder']
-    selected_subfolder = request.form['sub-folder']
-    folder_path = f'Data/{selected_main_folder}/{selected_subfolder}'
+    selected_folder = request.form['selected_folder']
+    folder_path = f'Data/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
-    print(f"Selected folder: {selected_main_folder}/{selected_subfolder}")  # Print the selected folder in the terminal
-    current_folder = selected_subfolder
+    print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
+    current_folder = selected_folder
     return {'folder_content': folder_content}
 
 
