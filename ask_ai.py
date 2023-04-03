@@ -46,6 +46,7 @@ def ask_ai(question, current_folder):
         f.write("=======================================================================================\n")
         f.write(existing_data)
         
+                
     # return response.response
     
 def construct_index(directory_path):
