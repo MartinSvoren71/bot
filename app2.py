@@ -22,7 +22,7 @@ app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 
 
-
+#main landign page - login 
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -39,12 +39,12 @@ def login():
 @app.route("/bad_key")
 
 
-
+#when bed klogin key provided
 def bad_key():
     return render_template("badkey.html")
 
 
-
+#list files from Data into web app
 @app.route("/get_updated_files", methods=["GET", "POST"])
 def list_files_and_urls(folder_path):
     files = []
@@ -57,9 +57,7 @@ def list_files_and_urls(folder_path):
                 files.append(file)
     return files
 
-
-
-
+# main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
@@ -67,22 +65,12 @@ def index():
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
-
-            #for dirname in dirnames:
-                #if not dirname.startswith('.'):  # Ignore hidden directories
-                   # folders.append(os.path.join(root, dirname))
         return render_template("indexSplit.html", folders=data_folders, files=files, results={})
-
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
 
-    
-    
-    
-
-    
-    
+# provide log.txt with open ai results of queries 
 @app.route('/log-content')
 def log_content():
     file_path = os.path.join(os.getcwd(), 'log.txt')
@@ -93,7 +81,7 @@ def log_content():
 
 
 
-
+# runn ask openai GPT / button trigger   
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
     key = "nnp"
@@ -109,7 +97,7 @@ def ask_GPT_route():
     
     
     
-    
+# run ask llama index on top of custom data / button trigger   
 @app.route('/ask_lib', methods=['POST'])
 def ask_LIB_route():
     question = request.form['question']
@@ -117,13 +105,10 @@ def ask_LIB_route():
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(question, current_folder)  # Pass the theme value
-        #return jsonify({"question": question, "response": response})
-            #return render_template('indexSplit.html', question=question, theme=theme, response=response, key=key, files=files)
     else:
         return render_template('bad_key.html')
-    
 
-
+# part_1 process search on pdf files     
 def process_pdf_file(filepath, keyword, pattern):
     result = []
     try:
@@ -141,6 +126,7 @@ def process_pdf_file(filepath, keyword, pattern):
         return filepath, None, False
     return filepath, result, False
 
+# part_2 process search on pdf files     
 def search_pdf_files(keyword, folder_path):
     results = {}
     encrypted_files = []
@@ -166,7 +152,7 @@ def search_pdf_files(keyword, folder_path):
 
 
 
-
+# part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
@@ -198,7 +184,7 @@ def search_files():
 
 
 
-
+# save and generate PDF document
 @app.route('/save', methods=['POST'])
 def generate_pdf_route():
     content = request.form['content']
@@ -229,7 +215,7 @@ def list_folders():
     return files
 
 
-
+# function for splitting path and generating subfolder path
 def get_subfolders_recursive(path):
     subfolders = []
     for root, dirs, _ in os.walk(path):
@@ -260,5 +246,5 @@ def get_folder_content():
 
 
 
-
+#runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
