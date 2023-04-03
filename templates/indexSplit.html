@@ -666,7 +666,20 @@ v1.5
       }
       
       
-     
+      function loadLogFile() {
+      const logContainer = document.getElementById('log-container');
+      
+      fetch('/log-content')
+      .then(response => response.text())
+      .then(data => {
+      logContainer.innerHTML = data;
+      })
+      .catch(error => {
+      console.error('Error fetching log.txt:', error);
+      });
+      }
+      
+      loadLogFile();
              
     
        function saveFolder() {
