@@ -885,6 +885,7 @@ v1.5
      async function load_folders() {
   const response = await fetch('/list_folders');
   const folders = await response.json();
+         console.log(folders);
   const folderSelect = document.getElementById('folder-select');
 
   folders
