@@ -38,7 +38,7 @@ def ask_GPT(question):
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write(f"Question: {question}\n")
-        f.write(f"Answer: {answer}\n")  # Replace response.answer with answer
+        f.write(f"Operator: {answer}\n")  # Replace response.answer with answer
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.1                                 \n")
         f.write("======================================================================================\n")
