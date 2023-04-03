@@ -144,10 +144,6 @@ def ask_LIB_route():
     question = request.form['question']
     model = "text-davinci-003"
     key = "nnp"
-    contents = s3_client.list_objects(Bucket=BUCKET_NAME, Prefix=(folder_name))
-    files = contents['Contents']
-    for file in files:
-        file['PresignedURL'] = generate_presigned_url(BUCKET_NAME, file['Key'])
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(question, current_folder)  # Pass the theme value
         #return jsonify({"question": question, "response": response})
@@ -173,6 +169,9 @@ def process_pdf_file(filepath, keyword, pattern):
         print(f"Error processing {filepath}: {str(e)}")
         return filepath, None, False
     return filepath, result, False
+
+
+
 
 def search_pdf_files(keyword, folder_path):
     results = {}
@@ -290,26 +289,6 @@ def get_folder_content():
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
     return {'folder_content': folder_content}
-
-
-
-
-
-@app.route('/console', methods=['POST'])
-def console():
-    # Capture console output
-    captured_output = io.StringIO()
-    sys.stdout = captured_output
-
-    # Your app code here, replace with your own logic
-    print("This is a sample output from the app")
-
-    # Reset stdout
-    sys.stdout = sys.__stdout__
-
-    console_output = captured_output.getvalue()
-    return console_output
-
 
 
 
