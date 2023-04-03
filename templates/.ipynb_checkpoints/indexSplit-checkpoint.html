@@ -890,7 +890,7 @@ v1.5
   folders
     .filter((folder) => {
       const slashCount = folder.split('/').length - 1;
-      return slashCount === 2 || slashCount === 3;
+      return slashCount >= 1;
     })
     .forEach((folder) => {
       const option = document.createElement('option');
