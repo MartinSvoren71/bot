@@ -882,27 +882,20 @@ v1.5
       pdfDoc.download('document.pdf');
       }
       
-     async function load_folders() {
-  const response = await fetch('/list_folders');
-  const folders = await response.json();
-         console.log(folders);
-  const folderSelect = document.getElementById('folder-select');
-
-  folders
-    .filter((folder) => {
-      const slashCount = folder.split('/').length - 1;
-      return slashCount >= 1;
-    })
-    .forEach((folder) => {
+      async function load_folders() {
+      const response = await fetch('/list_folders');
+      const folders = await response.json();
+      const folderSelect = document.getElementById('folder-select');
+      
+      folders.forEach((folder) => {
       const option = document.createElement('option');
       option.value = folder;
       option.textContent = folder;
       folderSelect.appendChild(option);
-    });
-}
-
-load_folders();
-
+      });
+      }
+      
+      load_folders();
       
       function getFiles() {
       var folder = $('#folder-select').val();
