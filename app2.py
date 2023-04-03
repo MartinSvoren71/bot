@@ -82,15 +82,12 @@ def index():
             {options}
         </select>
         '''
-        data_folders = get_subfolders_recursive('Data/')
-        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
+        data_path = 'Data/'
+        main_folders, subfolders = get_main_and_subfolders(data_path)
+        folder_path = os.path.join(data_path, 'Coherent', 'Chameleon')   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
-        folders = list_folders()
+        return render_template("indexSplit.html", html=html, main_folders=main_folders, subfolders=subfolders, files=files, results={})
 
-            #for dirname in dirnames:
-                #if not dirname.startswith('.'):  # Ignore hidden directories
-                   # folders.append(os.path.join(root, dirname))
-        return render_template("indexSplit.html", html=html, folders=data_folders, files=files, results={})
 
     else:
         flash("Please log in first")
@@ -263,12 +260,16 @@ def list_folders():
 
 
 
-def get_subfolders_recursive(path):
+def get_main_and_subfolders(path):
+    main_folders = []
     subfolders = []
     for root, dirs, _ in os.walk(path):
-        for d in dirs:
-            subfolders.append(os.path.relpath(os.path.join(root, d), path))
-    return subfolders
+        if root == path:
+            main_folders = [os.path.relpath(os.path.join(root, d), path) for d in dirs]
+        else:
+            for d in dirs:
+                subfolders.append(os.path.relpath(os.path.join(root, d), path))
+    return main_folders, subfolders
 
 def get_files_recursive(path):
     all_files = []
