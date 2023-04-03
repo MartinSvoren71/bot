@@ -36,18 +36,13 @@ def ask_GPT(question):
     
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
-        f.write("====\n")
-        f.write("============\n")
-        f.write("======================\n")
-        f.write("=================================\n")
-        f.write("========================================\n")
+        f.write(f"\n")
         f.write(f"Time: {datetime.datetime.now()}\n")
-        f.write("\n")
+        f.write(f"\n")
         f.write(f"Question: {question}\n")
-        f.write("\n")
-        f.write("\n")        
-        f.write(f"Operator writes: {answer}\n")  # Replace response.answer with answer
-        f.write("\n")
+        f.write(f"\n")
+        f.write(f"Operator: {answer}\n")  # Replace response.answer with answer
+        f.write(f"\n")
         f.write("====================================\n")
         f.write("  GPT    Knowlege Vortex v1.5    \n")
         f.write("============================\n")
