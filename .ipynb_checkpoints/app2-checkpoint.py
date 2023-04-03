@@ -18,6 +18,8 @@ import sys
 
 
 current_folder = 'Data/'
+app = Flask(__name__, static_folder='/')
+app.secret_key = "xxx007"
 
 
 
