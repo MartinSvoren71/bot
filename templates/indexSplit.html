@@ -33,7 +33,8 @@ v1.5
                       document.getElementById('datetime').innerHTML = time + ' on ' + date;
                   }
                   setInterval(updateTime, 1000); 
-             const form = document.getElementById('submit-button');
+             
+          const form = document.getElementById('submit-button');
           form.addEventListener('submit', (event) => {
           event.preventDefault(); // prevent default form submission
           // handle form submission here
@@ -597,11 +598,8 @@ v1.5
                   <h2 >library for:</h2>
              
                   <div class="select-container-2" id="select-container-2">
-                     <select name="folder-selector" id="folder-selector" onchange="">
-                        {% for folder in folders %}
-                        <option value="{{ folder }}">{{ folder }}</option>
-                        {% endfor %}
-                     </select>
+                    <select name="first-folder-selector" id="first-folder-selector"></select>
+<select name="rest-path-selector" id="rest-path-selector"></select>
                   </div>
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
@@ -937,6 +935,54 @@ v1.5
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
        
+// Assuming you have an array of full paths like ['/first-folder/rest-of-the-path/', '/second-folder/another-path/']
+const fullPathList = ['/first-folder/rest-of-the-path/', '/second-folder/another-path/'];
 
+// Create separate lists for first-level folders and their corresponding subfolders
+const firstLevelFolders = [];
+const subfolderMap = {};
+
+for (let fullPath of fullPathList) {
+    const parts = fullPath.split('/').filter(part => part !== '');
+    if (parts.length > 1) {
+        const firstFolder = parts[0];
+        const restPath = parts.slice(1).join('/');
+
+        if (!firstLevelFolders.includes(firstFolder)) {
+            firstLevelFolders.push(firstFolder);
+            subfolderMap[firstFolder] = [];
+        }
+        subfolderMap[firstFolder].push(restPath);
+    }
+}
+
+function updateFirstFolderSelector() {
+    // Clear the first folder selector
+    $('#first-folder-selector').html('');
+
+    // Populate the first folder selector with first-level folder options
+    for (let folder of firstLevelFolders) {
+        $('#first-folder-selector').append('<option value="' + folder + '">' + folder + '</option>');
+    }
+}
+
+function updateRestPathSelector() {
+    let selectedFirstFolder = $('#first-folder-selector').val();
+
+    // Clear the rest path selector
+    $('#rest-path-selector').html('');
+
+    // Populate the rest path selector with subfolder options
+    for (let subfolder of subfolderMap[selectedFirstFolder]) {
+        $('#rest-path-selector').append('<option value="' + subfolder + '">' + subfolder + '</option>');
+    }
+}
+
+// Set up event listeners for both selectors
+$('#first-folder-selector').on('change', updateRestPathSelector);
+
+// Initialize both selectors
+updateFirstFolderSelector();
+updateRestPathSelector();
    </script>    
 </html>
