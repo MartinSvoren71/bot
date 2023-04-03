@@ -40,7 +40,7 @@ def ask_GPT(question):
         f.write(f"Question: {question}\n")
         f.write(f"Operator: {answer}\n")  # Replace response.answer with answer
         f.write("======================================================================================\n")
-        f.write("                         Knowlege Vortex v1.1                                 \n")
+        f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("======================================================================================\n")
         f.write(existing_data)
         
