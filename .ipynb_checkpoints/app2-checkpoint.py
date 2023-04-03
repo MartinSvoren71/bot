@@ -84,9 +84,11 @@ def index():
         '''
         data_path = 'Data/'
         main_folders, subfolders = get_main_and_subfolders(data_path)
-        folder_path = os.path.join(data_path, 'Coherent', 'Chameleon')   # those are used for listing pdf files 
+        selected_main_folder = request.form.get('main-folder', main_folders[0])
+        selected_subfolder = request.form.get('sub-folder', subfolders[0])
+        folder_path = os.path.join(data_path, selected_main_folder, selected_subfolder)
         files = list_files_and_urls(folder_path)
-        return render_template("indexSplit.html", html=html, main_folders=main_folders, subfolders=subfolders, files=files, results={})
+        return render_template("indexSplit.html", html=html, main_folders=main_folders, subfolders=subfolders, selected_main_folder=selected_main_folder, selected_subfolder=selected_subfolder, files=files, results={})
 
 
     else:
@@ -285,11 +287,12 @@ def get_files_recursive(path):
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
     global current_folder
-    selected_folder = request.form['selected_folder']
-    folder_path = f'Data/{selected_folder}'
+    selected_main_folder = request.form['main-folder']
+    selected_subfolder = request.form['sub-folder']
+    folder_path = f'Data/{selected_main_folder}/{selected_subfolder}'
     folder_content = get_files_recursive(folder_path)
-    print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
-    current_folder = selected_folder
+    print(f"Selected folder: {selected_main_folder}/{selected_subfolder}")  # Print the selected folder in the terminal
+    current_folder = selected_subfolder
     return {'folder_content': folder_content}
 
 
