@@ -36,11 +36,11 @@ def ask_GPT(question):
     
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
-        f.write("====\n"
-        f.write("============\n"
-        f.write("======================\n"
-        f.write("=================================\n"
-        f.write("========================================\n"
+        f.write("====\n")
+        f.write("============\n")
+        f.write("======================\n")
+        f.write("=================================\n")
+        f.write("========================================\n")
         f.write(f"Time: {datetime.datetime.now()}\n")
         f.write("\n")
         f.write(f"Question: {question}\n")
