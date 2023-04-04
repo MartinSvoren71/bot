@@ -40,15 +40,21 @@ def file_manager(subpath=None):
 
 
 @app.route('/upload/', methods=['POST'])
-def upload():
+@app.route('/upload/<path:subpath>', methods=['POST'])
+def upload(subpath=None):
     if request.method == 'POST':
         file = request.files['file']
         if file:
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+            if subpath:
+                save_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
+            else:
+                save_path = app.config['UPLOAD_FOLDER']
+
+            file.save(os.path.join(save_path, file.filename))
             flash('File uploaded successfully.')
-            return redirect(url_for('file_manager'))
+            return redirect(url_for('file_manager', subpath=subpath))
     flash('Error uploading file.')
-    return redirect(url_for('file_manager'))
+    return redirect(url_for('file_manager', subpath=subpath))
 
 @app.route('/delete/<path:filename>')
 def delete(filename):
