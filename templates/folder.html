@@ -5,6 +5,19 @@
 </head>
 <body>
     <h1>File Manager</h1>
+    <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+        <select name="folder">
+            {% for folder in folders %}
+                <option value="{{ folder }}" {% if folder == selected_folder %}selected{% endif %}>{{ folder }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="new_folder" placeholder="Enter new folder name">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+        <button type="submit" name="create_folder" value="create_folder">Create Folder</button>
+    </form>
+    <br>
+    <h2>Selected Folder: {{ selected_folder }}</h2>
     <table>
         {% for file in files %}
         <tr>
@@ -13,17 +26,15 @@
         </tr>
         {% endfor %}
     </table>
-    <br>
-    <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-        <select name="folder">
-            {% for folder in folders %}
-                <option value="{{ folder }}">{{ folder }}</option>
-            {% endfor %}
-        </select>
-        <input type="text" name="new_folder" placeholder="Enter new folder name">
-        <input type="file" name="file">
-        <button type="submit">Upload</button>
-        <button type="submit" name="create_folder" value="create_folder">Create Folder</button>
-    </form>
+    {% if results %}
+        {% for filepath, matches in results.items() %}
+            <h3>Matches in {{ filepath }}:</h3>
+            <ul>
+                {% for match in matches %}
+                    <li>{{ match }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

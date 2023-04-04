@@ -8,6 +8,8 @@ app.config['SECRET_KEY'] = 'mysecretkey'
 @app.route('/')
 def index():
     folders = [f for f in os.listdir("Data/") if os.path.isdir(os.path.join("Data/", f))]
+    selected_folder = request.args.get('folder', folders[0])
+    files = os.listdir(os.path.join("Data/", selected_folder))
     results = {}  # Define a dictionary called 'results'
     search_term = request.args.get('search_term', '')
     if search_term:
@@ -22,7 +24,7 @@ def index():
                             if folder_path not in results:
                                 results[folder_path] = []
                             results[folder_path].append(file_path)
-    return render_template('folder.html', folders=folders, results=results)  # Pass 'results' to the template context
+    return render_template('folder.html', folders=folders, selected_folder=selected_folder, files=files, results=results)  # Pass 'results' to the template context
 
 
 @app.route('/upload', methods=['POST'])
@@ -33,9 +35,10 @@ def upload_file():
         os.mkdir(os.path.join("Data/", folder, new_folder))
     file = request.files['file']
     filename = file.filename
-    file.save(os.path.join("Data/", folder, filename))
+    file.save(os.path.join("Data/", folder, new_folder, filename))  # add new_folder to file path
     flash('File uploaded successfully!')
     return redirect(url_for('index'))
+
 
 @app.route('/delete/<filename>')
 def delete_file(filename):
