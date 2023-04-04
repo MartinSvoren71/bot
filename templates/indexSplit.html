@@ -604,7 +604,7 @@ v1.5
                         {% endfor %}
                      </select>
                        <table>
-        {% for file in files %}
+        {% for folder in folders %}
         <tr>
             <td>{{ folder }}</td>
             <td><a href="{{ url_for('delete_file', filename=folder) }}">Delete</a></td>
