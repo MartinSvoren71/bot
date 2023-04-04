@@ -95,38 +95,28 @@
     <input type="file" name="files" multiple required> <!-- Add the "multiple" attribute -->
     <button type="submit">Upload</button>
 </form>
-   <ul>
-    {% if subpath.count('/') >= 2 %}
-      {% for folder in folders %}
-      <li>
-        <a href="{{ url_for('file_manager', subpath=os.path.join(subpath or '', folder)) }}">{{ folder }}/</a>
-        <a href="{{ url_for('delete_folder', folder_path=os.path.join(subpath or '', folder)) }}">-- Delete</a>
-      </li>
-      {% endfor %}
-      {% for file in files %}
-      <li>
-        <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
-        <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
-      </li>
-      {% endfor %}
-    {% else %}
-      {% for folder in folders %}
-      <li>
-        <a href="{{ url_for('file_manager', '/'+ subpath=(subpaths or '')  + folder) }}">{{ folder }}/</a>
-        <a href="{{ url_for('delete_folder', '/'+ folder_path=(subpath or '')  + folder) }}">-- Delete</a>
-      </li>
-      {% endfor %}
-      {% for file in files %}
-      <li>
-        <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
-        <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
-      </li>
-      {% endfor %}
-    {% endif %}
-  </ul>
-  {% if subpath %}
+<ul>
+    {% for folder in folders %}
+        <li>
+            {% if subpath.count('/') < 2 %}
+                <a href="{{ url_for('file_manager', subpath=(subpath or '') + folder) }}">{{ folder }}/</a>
+            {% else %}
+                <a href="{{ url_for('file_manager', subpath='/' + (subpath or '') + folder) }}">{{ folder }}/</a>
+            {% endif %}
+            <a href="{{ url_for('delete_folder', folder_path=(subpath or '') + folder) }}">-- Delete</a>
+        </li>
+    {% endfor %}
+    {% for file in files %}
+        <li>
+            <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
+            <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
+        </li>
+    {% endfor %}
+</ul>
+{% if subpath %}
     <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
-  {% endif %}
+{% endif %}
+</div>
 <script>
          const canvas = document.getElementById('matrixCanvas');
          const ctx = canvas.getContext('2d');
