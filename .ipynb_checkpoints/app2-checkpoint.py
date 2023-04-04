@@ -20,6 +20,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import shutil
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
+app = Flask(__name__)
+
 app.config['UPLOAD_FOLDER'] = 'Data/'
 
 
