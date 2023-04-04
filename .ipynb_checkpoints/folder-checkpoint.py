@@ -7,7 +7,7 @@ app.config['SECRET_KEY'] = 'mysecretkey'
 def index():
     files = os.listdir()
     return render_template('folder.html', files=files)
-@app.route('Data/', methods=['POST'])
+@app.route('/Data', methods=['POST'])
 def upload_file():
     file = request.files['file']
     filename = file.filename
