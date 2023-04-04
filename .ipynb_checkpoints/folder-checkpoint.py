@@ -1,49 +1,32 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for
+from werkzeug.utils import secure_filename
 import os
-import shutil
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'mysecretkey'
+app.config['UPLOAD_FOLDER'] = 'uploads/'
 
 @app.route('/')
 def index():
-    folders = [f for f in os.listdir("Data/") if os.path.isdir(os.path.join("Data/", f))]
-    selected_folder = request.args.get('folder', folders[0])
-    files = os.listdir(os.path.join("Data/", selected_folder))
-    results = {}  # Define a dictionary called 'results'
-    search_term = request.args.get('search_term', '')
-    if search_term:
-        for folder in folders:
-            folder_path = os.path.join("Data/", folder)
-            for root, dirs, files in os.walk(folder_path):
-                for file in files:
-                    file_path = os.path.join(root, file)
-                    with open(file_path, 'r') as f:
-                        content = f.read()
-                        if search_term in content:
-                            if folder_path not in results:
-                                results[folder_path] = []
-                            results[folder_path].append(file_path)
-    return render_template('folder.html', folders=folders, selected_folder=selected_folder, files=files, results=results)  # Pass 'results' to the template context
+    files = os.listdir(app.config['UPLOAD_FOLDER'])
+    return render_template('index.html', files=files)
 
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect(url_for('index'))
+    return render_template('upload.html')
 
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    folder = request.form['folder']
-    new_folder = request.form['new_folder']
-    if new_folder:
-        os.mkdir(os.path.join("Data/", folder, new_folder))
-    file = request.files['file']
-    filename = file.filename
-    file.save(os.path.join("Data/", folder, new_folder, filename))  # add new_folder to file path
-    flash('File uploaded successfully!')
+@app.route('/delete/<filename>', methods=['POST'])
+def delete(filename):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if os.path.exists(file_path):
+        os.remove(file_path)
     return redirect(url_for('index'))
 
-
-@app.route('/delete/<filename>')
-def delete_file(filename):
-    os.remove(os.path.join("Data/", filename))
-    flash('File deleted successfully!')
-    return redirect(url_for('index'))
-
-app.run(host='0.0.0.0', port=5000)
+if __name__ == '__main__':
+    if not os.path.exists(app.config['UPLOAD_FOLDER']):
+        os.makedirs(app.config['UPLOAD_FOLDER'])
+    app.run(debug=True)
