@@ -112,7 +112,7 @@
 {% if subpath %}
     <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
 {% endif %}
-</div> 
+</div>
 <script>
          const canvas = document.getElementById('matrixCanvas');
          const ctx = canvas.getContext('2d');
