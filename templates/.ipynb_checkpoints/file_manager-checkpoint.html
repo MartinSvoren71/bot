@@ -111,7 +111,7 @@
         {% endfor %}
     </ul>
     {% if subpath %}
-<a href="{{ url_for('file_manager', subpath='/' + '/'.join(subpath.split('/')[:-1])) }}">Back</a>
+<a href="{{ url_for('file_manager', subpath='/'.join(os.path.split(subpath)[:-1])) + '/' }}">Back</a>
     {% endif %}
     </div>
 <script>
