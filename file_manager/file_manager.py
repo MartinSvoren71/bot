@@ -1,3 +1,13 @@
+import os
+from flask import Flask, render_template, request, redirect, url_for, flash
+import shutil
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'Data/'
+app.secret_key = 'your_secret_key'
+
 @app.route('/filemanager/')
 @app.route('/filemanager/<path:subpath>')
 def file_manager(subpath=None):
@@ -90,8 +100,6 @@ def create_folder(subpath=None):
         return redirect(url_for("login"))
 
 
-
-
 @app.route('/delete_folder/<path:folder_path>')
 def delete_folder(folder_path):
     if "logged_in" in session:
@@ -106,6 +114,7 @@ def delete_folder(folder_path):
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
+
 
 
 app.run(host='0.0.0.0', port=5000)
