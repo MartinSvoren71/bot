@@ -45,7 +45,7 @@ def login():
             session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("filemanager"))
+            return redirect(url_for("file_manager"))
         else:
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
@@ -271,6 +271,10 @@ def delete_file(filename):
     os.remove(filename)
     flash('File deleted successfully!')
     return redirect(url_for('index'))
+
+
+
+
 
 
 @app.route('/filemanager/')
