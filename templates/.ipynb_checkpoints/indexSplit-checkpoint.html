@@ -603,6 +603,19 @@ v1.5
                         <option value="{{ folder }}">{{ folder }}</option>
                         {% endfor %}
                      </select>
+                       <table>
+        {% for file in files %}
+        <tr>
+            <td>{{ folder }}</td>
+            <td><a href="{{ url_for('delete_file', filename=file) }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
                   </div>
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
@@ -630,20 +643,6 @@ v1.5
             <div class="list-container">
                <h2>Folder content:</h2>
                <ul id="folder-content"></ul>
-                   <h1>File Manager</h1>
-    <table>
-        {% for file in files %}
-        <tr>
-            <td>{{ folder-content }}</td>
-            <td><a href="{{ url_for('delete_file', filename=file) }}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">Upload</button>
-    </form>
             </div>
          </div>
          <div class="right-down-side">
