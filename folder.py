@@ -22,7 +22,7 @@ def index():
                             if folder_path not in results:
                                 results[folder_path] = []
                             results[folder_path].append(file_path)
-    return render_template('index.html', folders=folders, results=results)  # Pass 'results' to the template context
+    return render_template('folder.html', folders=folders, results=results)  # Pass 'results' to the template context
 
 
 @app.route('/upload', methods=['POST'])
