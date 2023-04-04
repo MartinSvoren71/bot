@@ -95,26 +95,38 @@
     <input type="file" name="files" multiple required> <!-- Add the "multiple" attribute -->
     <button type="submit">Upload</button>
 </form>
-    <ul>
-       {% for folder in folders %}
-    <li>
-        <a href="{{ url_for('file_manager', subpath=(subpaths or '')  + folder) }}">{{ folder }}/</a>
-        <a href="{{ url_for('delete_folder', folder_path=(subpath or '')  + folder) }}">-- Delete</a>
-    </li>
-{% endfor %}
-       {% for file in files %}
-    <li>
+   <ul>
+    {% if subpath.count('/') >= 2 %}
+      {% for folder in folders %}
+      <li>
+        <a href="{{ url_for('file_manager', subpath=os.path.join(subpath or '', folder)) }}">{{ folder }}/</a>
+        <a href="{{ url_for('delete_folder', folder_path=os.path.join(subpath or '', folder)) }}">-- Delete</a>
+      </li>
+      {% endfor %}
+      {% for file in files %}
+      <li>
         <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
-        <a href="{{ url_for('file_manager', subpath=os.path.join(subpaths or '', file)) }}">{{ file }}</a>
         <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
-    </li>
-{% endfor %}
-
-    </ul>
-    {% if subpath %}
-        <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
+      </li>
+      {% endfor %}
+    {% else %}
+      {% for folder in folders %}
+      <li>
+        <a href="{{ url_for('file_manager', '/'+ subpath=(subpaths or '')  + folder) }}">{{ folder }}/</a>
+        <a href="{{ url_for('delete_folder', '/'+ folder_path=(subpath or '')  + folder) }}">-- Delete</a>
+      </li>
+      {% endfor %}
+      {% for file in files %}
+      <li>
+        <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
+        <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
+      </li>
+      {% endfor %}
     {% endif %}
-    </div>
+  </ul>
+  {% if subpath %}
+    <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
+  {% endif %}
 <script>
          const canvas = document.getElementById('matrixCanvas');
          const ctx = canvas.getContext('2d');
