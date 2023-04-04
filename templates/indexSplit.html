@@ -598,26 +598,15 @@ v1.5
                   <h2 >library for:</h2>
              
                   <div class="select-container-2" id="select-container-2">
-                     <select name="folder-selector" id="folder-selector" onchange="">
-                        {% for folder in folders %}
-                        <option value="{{ folder }}">{{ folder }}</option>
-                        {% endfor %}
-                     </select>
-                       <table>
-        {% for folder in folders %}
-        <tr>
-            <td>{{ folder }}</td>
-            <td><a href="{{ url_for('delete_file', filename=folder) }}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">Upload</button>
-    </form>
-    
-                  </div>
+   <select name="folder-selector" id="folder-selector" onchange="">
+      {% for folder in folders %}
+      <option value="{{ folder }}">
+         {{ folder }}
+         <a href="#" onclick="deleteFolder('{{ folder }}')">Delete</a>
+      </option>
+      {% endfor %}
+   </select>
+</div>
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
                <h4 style="color: grey;"> example for OpenAI : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
