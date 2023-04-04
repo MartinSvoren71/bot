@@ -105,8 +105,8 @@
         {% endfor %}
         {% for file in files %}
             <li>
-                <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + '/' + file }}">{{ file }}</a>
-                <a href="{{ url_for('delete', filename=(subpath or '') + '/' + file) }}">-- Delete</a>
+                <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
+                <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
             </li>
         {% endfor %}
     </ul>
