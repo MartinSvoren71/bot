@@ -20,16 +20,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import shutil
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
-app = Flask(__name__)
-
-app.config['UPLOAD_FOLDER'] = 'Data/'
-
-
-current_folder = 'Data/'
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 app.secret_key2 = "xxx707"
-
+app.config['UPLOAD_FOLDER'] = 'Data/'
+current_folder = 'Data/'
 
 #main landign page - login 
 @app.route("/", methods=["GET", "POST"])
