@@ -1,18 +1,12 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 app.secret_key = 'your_secret_key'
 
 @app.route('/')
-def index():
-    return render_template('index.html')
-
-# ...
-
-@app.route('/file_manager/')
-@app.route('/file_manager/<path:subpath>')
+@app.route('/<path:subpath>')
 def file_manager(subpath=None):
     if subpath:
         dir_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
@@ -35,9 +29,6 @@ def file_manager(subpath=None):
             folders.append(item)
 
     return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
-
-# ...
-
 
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload/<path:subpath>', methods=['POST'])
