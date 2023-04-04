@@ -66,10 +66,7 @@ def delete(filename):
         flash('File not found.')
     return redirect(url_for('file_manager'))
 
-<form action="{{ url_for('create_folder', subpath=subpath) }}" method="POST">
-    <input type="text" name="folder_name" placeholder="New folder name" required>
-    <button type="submit">Create Folder</button>
-</form>
+
 @app.route('/create_folder/', methods=['POST'])
 @app.route('/create_folder/<path:subpath>', methods=['POST'])
 def create_folder(subpath=None):
@@ -88,16 +85,6 @@ def create_folder(subpath=None):
 
     return redirect(url_for('file_manager', subpath=subpath))
 
-@app.route('/delete_folder/<path:folder_path>')
-def delete_folder(folder_path):
-    folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_path)
-    if os.path.exists(folder_path) and os.path.isdir(folder_path):
-        shutil.rmtree(folder_path)
-        flash('Folder deleted successfully.')
-    else:
-        flash('Folder not found or not a directory.')
-
-    return redirect(url_for('file_manager'))
 
 
 
