@@ -8,7 +8,22 @@ app.config['SECRET_KEY'] = 'mysecretkey'
 @app.route('/')
 def index():
     folders = [f for f in os.listdir("Data/") if os.path.isdir(os.path.join("Data/", f))]
-    return render_template('index.html', folders=folders)
+    results = {}  # Define a dictionary called 'results'
+    search_term = request.args.get('search_term', '')
+    if search_term:
+        for folder in folders:
+            folder_path = os.path.join("Data/", folder)
+            for root, dirs, files in os.walk(folder_path):
+                for file in files:
+                    file_path = os.path.join(root, file)
+                    with open(file_path, 'r') as f:
+                        content = f.read()
+                        if search_term in content:
+                            if folder_path not in results:
+                                results[folder_path] = []
+                            results[folder_path].append(file_path)
+    return render_template('index.html', folders=folders, results=results)  # Pass 'results' to the template context
+
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
