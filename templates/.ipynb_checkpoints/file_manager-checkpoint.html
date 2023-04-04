@@ -96,19 +96,20 @@
     <button type="submit">Upload</button>
 </form>
     <ul>
-        {% for folder in folders %}
-            <li>
-                <a href="{{ url_for('file_manager', subpath=(subpath or '')  + folder) }}">{{ folder }}/</a>
-                <a href="{{ url_for('delete_folder', folder_path=(subpath  or '')  + folder) }}">-- Delete</a>
+       {% for folder in folders %}
+    <li>
+        <a href="{{ url_for('file_manager', subpath=(subpaths or '') + '/' + folder) }}">{{ folder }}/</a>
+        <a href="{{ url_for('delete_folder', folder_path=(subpath or '') + '/' + folder) }}">-- Delete</a>
+    </li>
+{% endfor %}
+       {% for file in files %}
+    <li>
+        <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
+        <a href="{{ url_for('file_manager', subpath=os.path.join(subpaths or '', file)) }}">{{ file }}</a>
+        <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
+    </li>
+{% endfor %}
 
-            </li>
-        {% endfor %}
-        {% for file in files %}
-            <li>
-                <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + file }}">{{ file }}</a>
-                <a href="{{ url_for('delete', filename=(subpath or '') + file) }}">-- Delete</a>
-            </li>
-        {% endfor %}
     </ul>
     {% if subpath %}
         <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
