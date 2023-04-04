@@ -1,33 +1,22 @@
-from flask import Flask, render_template, request, redirect, url_for
-from werkzeug.utils import secure_filename
+from flask import Flask, render_template, request, send_from_directory, flash, redirect, url_for
 import os
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['UPLOAD_FOLDER'] = 'Data'
+app.secret_key = 'your_secret_key'
 
 @app.route('/')
 def index():
-    files = os.listdir(app.config['UPLOAD_FOLDER'])
-    return render_template('index.html', files=files)
+    folders = os.listdir(app.config['UPLOAD_FOLDER'])
+    return render_template('index.html', folders=folders)
 
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST':
-        file = request.files['file']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('index'))
-    return render_template('upload.html')
-
-@app.route('/delete/<filename>', methods=['POST'])
-def delete(filename):
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    if os.path.exists(file_path):
-        os.remove(file_path)
-    return redirect(url_for('index'))
+@app.route('/files', methods=['POST'])
+def list_files():
+    selected_folder = request.form.get('selected_folder')
+    if selected_folder:
+        file_list = os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], selected_folder))
+        return {'files': file_list, 'selected_folder': selected_folder}
+    return {'error': 'No folder selected'}
 
 app.run(host='0.0.0.0', port=5000)
 
-    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-        os.makedirs(app.config['UPLOAD_FOLDER'])
-    app.run(debug=True)
