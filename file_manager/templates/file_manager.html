@@ -12,13 +12,22 @@
         <button type="submit">Upload</button>
     </form>
     <ul>
+        {% for folder in folders %}
+            <li>
+                <a href="{{ url_for('file_manager', subpath=(subpath or '') + '/' + folder) }}">{{ folder }}/</a>
+            </li>
+        {% endfor %}
         {% for file in files %}
             <li>
-                <a href="{{ url_for('file_manager') }}/../uploads/{{ file }}">{{ file }}</a>
-                <a href="{{ url_for('delete', filename=file) }}">Delete</a>
+                <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + '/' + file }}">{{ file }}</a>
+                <a href="{{ url_for('delete', filename=(subpath or '') + '/' + file) }}">Delete</a>
             </li>
         {% endfor %}
     </ul>
-    <a href="{{ url_for('index') }}">Back to Home</a>
+    {% if subpath %}
+        <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Home</a>
+
 </body>
 </html>
