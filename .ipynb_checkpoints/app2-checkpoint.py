@@ -259,8 +259,7 @@ def get_folder_content():
 
 @app.route('/filemanager/')
 @app.route('/filemanager/<path:subpath>')
-def file_manager(subpath=''):
-   
+def file_manager(subpath=None):
     if subpath:
         subpath = subpath.strip('/')  # remove trailing slashes
         dir_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
@@ -273,8 +272,8 @@ def file_manager(subpath=''):
         return redirect(url_for('file_manager'))
 
     items = os.listdir(dir_path)
-    subpaths = subpath.split('/')  # split subpath into list of folder names
-    files, folders = list_files_and_folders(os.path.join(app.config['UPLOAD_FOLDER'], *subpaths))
+    files = []
+    folders = []
 
     for item in items:
         item_path = os.path.join(dir_path, item)
@@ -283,7 +282,7 @@ def file_manager(subpath=''):
         elif os.path.isdir(item_path):
             folders.append(item)
 
-    return render_template('filemanager.html', files=files, folders=folders, subpath=subpath)
+    return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
 
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload/<path:subpath>', methods=['POST'])
@@ -345,6 +344,8 @@ def delete_folder(folder_path):
         flash('Folder not found or not a directory.')
 
     return redirect(url_for('file_manager'))
+
+
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
