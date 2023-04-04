@@ -57,4 +57,34 @@ def delete(filename):
         flash('File not found.')
     return redirect(url_for('file_manager'))
 
+@app.route('/create_folder/', methods=['POST'])
+@app.route('/create_folder/<path:subpath>', methods=['POST'])
+def create_folder(subpath=None):
+    folder_name = request.form['folder_name']
+    if subpath:
+        parent_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
+    else:
+        parent_path = app.config['UPLOAD_FOLDER']
+    
+    new_folder_path = os.path.join(parent_path, folder_name)
+    if not os.path.exists(new_folder_path):
+        os.makedirs(new_folder_path)
+        flash('Folder created successfully.')
+    else:
+        flash('Folder already exists.')
+
+    return redirect(url_for('file_manager', subpath=subpath))
+
+@app.route('/delete_folder/<path:folder_path>')
+def delete_folder(folder_path):
+    folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_path)
+    if os.path.exists(folder_path) and os.path.isdir(folder_path):
+        shutil.rmtree(folder_path)
+        flash('Folder deleted successfully.')
+    else:
+        flash('Folder not found or not a directory.')
+
+    return redirect(url_for('file_manager'))
+
+
 app.run(host='0.0.0.0', port=5000)

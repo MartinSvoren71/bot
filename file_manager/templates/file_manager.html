@@ -87,6 +87,10 @@
           <canvas id="matrixCanvas"></canvas>
 <div class="content">
     <h1>File Manager</h1>
+    <form action="{{ url_for('create_folder', subpath=subpath) }}" method="POST">
+    <input type="text" name="folder_name" placeholder="New folder name" required>
+    <button type="submit">Create Folder</button>
+</form>
     <form action="{{ url_for('upload', subpath=subpath) }}" method="POST" enctype="multipart/form-data">
         <input type="file" name="file" required>
         <button type="submit">Upload</button>
@@ -95,6 +99,8 @@
         {% for folder in folders %}
             <li>
                 <a href="{{ url_for('file_manager', subpath=(subpath or '') + '/' + folder) }}">{{ folder }}/</a>
+                <a href="{{ url_for('delete_folder', folder_path=(subpath or '') + '/' + folder) }}">-- Delete</a>
+
             </li>
         {% endfor %}
         {% for file in files %}
