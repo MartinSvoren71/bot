@@ -607,7 +607,7 @@ v1.5
         {% for file in files %}
         <tr>
             <td>{{ folder }}</td>
-            <td><a href="{{ url_for('delete_file', filename=file) }}">Delete</a></td>
+            <td><a href="{{ url_for('delete_file', filename=folder) }}">Delete</a></td>
         </tr>
         {% endfor %}
     </table>
@@ -616,6 +616,7 @@ v1.5
         <input type="file" name="file">
         <button type="submit">Upload</button>
     </form>
+      <script>
                   </div>
                </form>
                <h4 style="color: grey;"> example for Library ZygoMX : write script for measurement profile of metal surface using 1x zoom and 10x objective</h4>
