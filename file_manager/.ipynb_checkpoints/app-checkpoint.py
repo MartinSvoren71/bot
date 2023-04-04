@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = './Data'
+app.config['UPLOAD_FOLDER'] = './uploads'
 app.secret_key = 'your_secret_key'
 
 @app.route('/')
