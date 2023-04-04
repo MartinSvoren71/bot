@@ -98,8 +98,8 @@
     <ul>
         {% for folder in folders %}
             <li>
-                <a href="{{ url_for('file_manager', subpath=(subpath or '') + '/' + folder) }}">{{ folder }}/</a>
-                <a href="{{ url_for('delete_folder', folder_path=(subpath or '') + '/' + folder) }}">-- Delete</a>
+                <a href="{{ url_for('file_manager', subpath=(subpath or '')  + folder) }}">{{ folder }}/</a>
+                <a href="{{ url_for('delete_folder', folder_path=(subpath or '')  + folder) }}">-- Delete</a>
 
             </li>
         {% endfor %}
