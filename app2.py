@@ -16,6 +16,7 @@ from concurrent.futures import ThreadPoolExecutor
 import logging
 import sys
 import os
+from flask import Flask, render_template, request, redirect, url_for, flash
 import shutil
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
@@ -257,7 +258,7 @@ def get_folder_content():
 
 
 @app.route('/filemanager/')
-@app.route('/filemanager/<path:subpath>/')
+@app.route('/filemanager/<path:subpath>')
 def file_manager(subpath=None):
     if subpath:
         subpath = subpath.strip('/')  # remove trailing slashes
@@ -284,7 +285,7 @@ def file_manager(subpath=None):
     return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
 
 @app.route('/upload/', methods=['POST'])
-@app.route('/upload/<path:subpath>/', methods=['POST'])
+@app.route('/upload/<path:subpath>', methods=['POST'])
 def upload(subpath=None):
     if request.method == 'POST':
         files = request.files.getlist('files')
