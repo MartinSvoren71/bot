@@ -261,11 +261,11 @@ def get_folder_content():
 @app.route('/filemanager/<path:subpath>')
 def file_manager(subpath=None):
     if subpath:
-    subpath = subpath.strip('/')  # remove trailing slashes
-    dir_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
-else:
-    dir_path = app.config['UPLOAD_FOLDER']
-    subpath = ''
+        subpath = subpath.strip('/')  # remove trailing slashes
+        dir_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
+    else:
+        dir_path = app.config['UPLOAD_FOLDER']
+        subpath = ''
 
     if not os.path.exists(dir_path):
         flash('Directory not found.')
