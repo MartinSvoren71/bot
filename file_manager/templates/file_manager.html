@@ -95,23 +95,22 @@
     <input type="file" name="files" multiple required> <!-- Add the "multiple" attribute -->
     <button type="submit">Upload</button>
 </form>
-{% set clean_subpath = subpath.rstrip('/') %}
-<ul>
-{% for folder in folders %}
-    <li>
-        <a href="{{ url_for('file_manager', subpath=clean_subpath + '/' + folder) }}">{{ folder }}/</a>
-        <a href="{{ url_for('delete_folder', folder_path=clean_subpath + '/' + folder) }}">-- Delete</a>
-    </li>
-{% endfor %}
-{% for file in files %}
-    <li>
-        <a href="{{ url_for('file_manager') }}/../{{ clean_subpath + '/' + file }}">{{ file }}</a>
-        <a href="{{ url_for('delete', filename=clean_subpath + '/' + file) }}">-- Delete</a>
-    </li>
-{% endfor %}
+    <ul>
+    {% for folder in folders %}
+        <li>
+            <a href="{{ url_for('file_manager', subpath=subpath + '/' + folder) }}">{{ folder }}/</a>
+            <a href="{{ url_for('delete_folder', folder_path=(subpath or '') + '/' + folder) }}">-- Delete</a>
+        </li>
+    {% endfor %}
+    {% for file in files %}
+        <li>
+            <a href="{{ url_for('file_manager') }}/../{{ (subpath or '') + '/' + file }}">{{ file }}</a>
+            <a href="{{ url_for('delete', filename=(subpath or '') + '/' + file) }}">-- Delete</a>
+        </li>
+    {% endfor %}
 </ul>
 {% if subpath %}
-    <a href="{{ url_for('file_manager', subpath='/'.join(clean_subpath.split('/')[:-1])) }}">Back</a>
+    <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
 {% endif %}
 </div>
 <script>
