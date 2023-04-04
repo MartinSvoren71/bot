@@ -634,7 +634,7 @@ v1.5
     <table>
         {% for file in files %}
         <tr>
-            <td>{{ file }}</td>
+            <td>{{ folder-content }}</td>
             <td><a href="{{ url_for('delete_file', filename=file) }}">Delete</a></td>
         </tr>
         {% endfor %}
