@@ -1,6 +1,8 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import shutil
+from werkzeug.datastructures import FileStorage
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
@@ -35,17 +37,22 @@ def file_manager(subpath=None):
 @app.route('/upload/<path:subpath>', methods=['POST'])
 def upload(subpath=None):
     if request.method == 'POST':
-        file = request.files['file']
-        if file:
+        files = request.files.getlist('files')
+        if files:
             if subpath:
                 save_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
             else:
                 save_path = app.config['UPLOAD_FOLDER']
 
-            file.save(os.path.join(save_path, file.filename))
-            flash('File uploaded successfully.')
+            for file in files:
+                if isinstance(file, FileStorage):
+                    file_path = os.path.join(save_path, secure_filename(file.filename))
+                    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                    file.save(file_path)
+
+            flash('Files uploaded successfully.')
             return redirect(url_for('file_manager', subpath=subpath))
-    flash('Error uploading file.')
+    flash('Error uploading files.')
     return redirect(url_for('file_manager', subpath=subpath))
 
 @app.route('/delete/<path:filename>')
