@@ -1,43 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Manager</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#folder_select").change(function() {
-                var selected_folder = $(this).val();
-                $.ajax({
-                    type: "POST",
-                    url: "/files",
-                    data: {selected_folder: selected_folder},
-                    success: function(data) {
-                        if (data.error) {
-                            alert(data.error);
-                            return;
-                        }
-                        var files_html = "";
-                        data.files.forEach(function(file) {
-                            files_html += "<li>" + file + "</li>";
-                        });
-                        $("#file_list").html(files_html);
-                    }
-                });
-            });
-        });
-    </script>
 </head>
 <body>
-    <h1>Select a folder</h1>
-    <select id="folder_select">
-        <option value="">-- Select a folder --</option>
-        {% for folder in folders %}
-            <option value="{{ folder }}">{{ folder }}</option>
+    <h1>File Manager</h1>
+    <table>
+        {% for file in files %}
+        <tr>
+            <td>{{ file }}</td>
+            <td><a href="{{ url_for('delete_file', filename=file) }}">Delete</a></td>
+        </tr>
         {% endfor %}
-    </select>
-    <h2>Files in the selected folder</h2>
-    <ul id="file_list"></ul>
+    </table>
+    <br>
+    <form action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
 </body>
 </html>
