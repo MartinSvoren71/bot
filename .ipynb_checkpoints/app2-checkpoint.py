@@ -244,7 +244,19 @@ def get_folder_content():
     current_folder = selected_folder
     return {'folder_content': folder_content}
 
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    file = request.files['file']
+    filename = file.filename
+    file.save(filename)
+    flash('File uploaded successfully!')
+    return redirect(url_for('index'))
 
+@app.route('/delete/<filename>')
+def delete_file(filename):
+    os.remove(filename)
+    flash('File deleted successfully!')
+    return redirect(url_for('index'))
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
