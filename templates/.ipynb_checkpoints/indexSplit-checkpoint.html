@@ -1044,7 +1044,16 @@ img {
 }
 
 setCanvasOpacity();
-     
+       
+   const quillContainer = document.querySelector('.quill-container');
+
+quillContainer.addEventListener('input', function() {
+  if (quillContainer.textContent.length > 0) {
+    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+  } else {
+    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.85)';
+  }
+});  
 
    </script>    
 </html>
