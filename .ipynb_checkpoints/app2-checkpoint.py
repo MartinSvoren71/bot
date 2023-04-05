@@ -258,6 +258,7 @@ def get_folder_content():
 
 
 @app.route('/filemanager/')
+@app.route('/filemanager/<path:subpath>')
 def file_manager(subpath=None):
     if subpath:
         subpath = subpath.strip('/')  # remove trailing slashes
@@ -282,33 +283,6 @@ def file_manager(subpath=None):
             folders.append(item)
 
     return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
-
-@app.route('/filemanager/<path:subpath>')
-def file_manager_sub(subpath=None):
-    if subpath:
-        subpath = subpath.strip('/')  # remove trailing slashes
-        dir_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
-    else:
-        dir_path = app.config['UPLOAD_FOLDER']
-        subpath = ''
-
-    if not os.path.exists(dir_path):
-        flash('Directory not found.')
-        return redirect(url_for('file_manager_sub'))
-
-    items = os.listdir(dir_path)
-    files = []
-    folders = []
-
-    for item in items:
-        item_path = os.path.join(dir_path, item)
-        if os.path.isfile(item_path):
-            files.append(item)
-        elif os.path.isdir(item_path):
-            folders.append(item)
-
-    return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
-
 
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload/<path:subpath>', methods=['POST'])
