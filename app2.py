@@ -20,6 +20,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import shutil
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
+from flask import send_from_directory
+
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 app.secret_key2 = "xxx707"
@@ -345,9 +347,6 @@ def delete_folder(folder_path):
 
     return redirect(url_for('file_manager'))
 
-from flask import send_from_directory
-
-from flask import send_from_directory
 
 @app.route('/Data/<path:file_path>')
 def serve_file(file_path):
