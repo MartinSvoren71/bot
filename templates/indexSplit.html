@@ -561,7 +561,8 @@ img {
          padding: 1%;
          border-radius: 4px;
          outline: none;
-         background-color: var(--matrix-green-1);
+          background-image: linear-gradient(to bottom, var(--matrix-green-3), var(--matrix-green-4);
+
          color: var(--matrix-black-1));
          cursor: pointer;
          font-size: 1.2em;
@@ -656,8 +657,8 @@ img {
                <form id="ask-form" enctype="multipart/form-data" >
                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
                   <div>
-                     <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">ask OpenAI </button>
-                     <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">ask library</button>  
+                     <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">ASK OpenAI </button>
+                     <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">ASK LIB</button>  
                   </div>
                   <h2 >library for:</h2>
              
