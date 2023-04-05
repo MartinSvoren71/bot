@@ -347,9 +347,12 @@ def delete_folder(folder_path):
 
 from flask import send_from_directory
 
-@app.route('/Data/<path:file_path>')
+from flask import send_from_directory
+
+@app.route('/files/<path:file_path>')
 def serve_file(file_path):
-    return send_from_directory('Data/', file_path)
+    return send_from_directory('', file_path)
+
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
