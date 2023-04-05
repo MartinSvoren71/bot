@@ -20,10 +20,16 @@
       </script>
       <style>
          body {
-         background-color: black;
-         font-family: 'Lucida Console', monospace;
-         font-size: 16px;
-         color: #00FF00;
+            background-color: black;
+        font-family: 'Lucida Console', monospace;
+        font-size: 16px;
+        color: #00FF00;
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
          }
          canvas {
          position: fixed;
@@ -87,10 +93,18 @@
          margin-bottom: 50px;
          filter: drop-shadow(0 0 0.75rem green);
          }
+            .content {
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.8));
+
+        padding: 20px;
+        width: 50%;
+        position: relative;
+    }
       </style>
    </head>
    <body>
       <canvas id="matrixCanvas"></canvas>
+       <div class="content">
       <form action="/" method="post">
          <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/logo1.png" alt="KV Logo">
          <h1>Welcome to Knowledge Vortex</h1>
@@ -99,6 +113,7 @@
          <br><br>
          <button type="submit">Enter</button>
       </form>
+           </div>
       <script>
          const canvas = document.getElementById('matrixCanvas');
          const ctx = canvas.getContext('2d');
@@ -156,3 +171,4 @@ setCanvasOpacity();
       </script>
    </body>
 </html>
+
