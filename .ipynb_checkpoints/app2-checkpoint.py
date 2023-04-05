@@ -284,7 +284,7 @@ def file_manager(subpath=None):
     return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
 
 @app.route('/filemanager/<path:subpath>')
-def file_manager(subpath=None):
+def file_manager_sub(subpath=None):
     if subpath:
         subpath = subpath.strip('/')  # remove trailing slashes
         dir_path = os.path.join(app.config['UPLOAD_FOLDER'], subpath)
