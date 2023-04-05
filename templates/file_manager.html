@@ -175,7 +175,7 @@
     
    function setCanvasOpacity() {
     let opacity = 0; // Start with an opacity of 0
-    const increaseTime = 20000; // 8 seconds in milliseconds
+    const increaseTime = 25000; // 8 seconds in milliseconds
     const targetOpacity = 0.45; // Change this to your desired opacity
 
     const increaseOpacity = () => {
@@ -187,7 +187,7 @@
         }
     };
 
-    setTimeout(increaseOpacity, 2000); // Set a delay before starting to increase the opacity
+    setTimeout(increaseOpacity, 0); // Set a delay before starting to increase the opacity
 }
 
 setCanvasOpacity();
