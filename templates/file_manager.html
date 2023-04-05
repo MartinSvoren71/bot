@@ -171,7 +171,24 @@
             link.setAttribute("href", newHref);
         }
     });
+function setCanvasOpacity() {
+    let opacity = 1;
+    const decreaseTime = 8000; // 8 seconds in milliseconds
+    const targetOpacity = 0.3;
 
+    const decreaseOpacity = () => {
+        opacity -= 0.01;
+        canvas.style.opacity = opacity;
+
+        if (opacity > targetOpacity) {
+            setTimeout(decreaseOpacity, decreaseTime / 100);
+        }
+    };
+
+    decreaseOpacity();
+}
+
+setCanvasOpacity();
       </script>
 </body>
 </html>
