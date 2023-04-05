@@ -258,7 +258,6 @@ def get_folder_content():
 
 
 @app.route('/filemanager/')
-@app.route('/filemanager/<path:subpath>')
 def file_manager(subpath=None):
     if subpath:
         subpath = subpath.strip('/')  # remove trailing slashes
