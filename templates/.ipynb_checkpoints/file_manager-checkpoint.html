@@ -73,16 +73,28 @@
          font-size: 1.2em;
          text-align: center;
          }
-         img {
-         width: 100%;
-         height: auto;
-         max-width: 140px;
-         display: block;
-         margin: 0 auto; /* Updated margin property */
-         margin-bottom: 4vh;
-         margin-top: 4vh;
-         filter: drop-shadow(0 0 0.85rem red);
-         }
+           @keyframes pulse {
+        0% {
+            filter: drop-shadow(0 0 0.5rem red);
+        }
+        50% {
+            filter: drop-shadow(0 0 1.2rem red);
+        }
+        100% {
+            filter: drop-shadow(0 0 0.5rem red);
+        }
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        max-width: 220px;
+        display: block;
+        margin: 0 auto; /* Updated margin property */
+        margin-bottom: 50px;
+        filter: drop-shadow(0 0 0.85rem red);
+        animation: pulse 2s infinite; /* Apply the pulse animation */
+    }
            input[type="text"] {
         background-color: black;
         color: red;
