@@ -85,28 +85,53 @@
          text-align: center;
          }
         
-          @keyframes pulse {
-        0% {
-            filter: drop-shadow(0 0 0.5rem red);
-        }
-        50% {
-            filter: drop-shadow(0 0 1.2rem red);
-        }
-        100% {
-            filter: drop-shadow(0 0 0.5rem red);
-        }
+ @keyframes pulse {
+    0% {
+        filter: drop-shadow(0 0 0.5rem red);
+        transform: translate(0px, 0px);
     }
+    12% {
+        filter: drop-shadow(0 0 0.8rem orange);
+        transform: translate(0px, 0px);
+    }
+    23% {
+        filter: drop-shadow(0 0 1.2rem blue);
+        transform: translate(0px,0px);
+    }
+     35% {
+        filter: drop-shadow(0 0 0.8rem white);
+        transform: translate(0px, 1px);
+    }
+    41% {
+        filter: drop-shadow(0 0 0.5rem green);
+        transform: translate(0px, 0px);
+    }
+    49% {
+        filter: drop-shadow(0 0 0.8rem orange);
+        transform: translate(0px, 0px);
+    }
+    66% {
+        filter: drop-shadow(0 0 0.5rem red);
+        transform: translate(0px, 0px);
+    }
+    100% {
+        filter: drop-shadow(0 0 0.5rem red);
+        transform: translate(0px, 0px);
+    }
+}
 
-    img {
-        width: 100%;
-        height: auto;
-        max-width: 220px;
-        display: block;
-        margin: 0 auto; /* Updated margin property */
-        margin-bottom: 50px;
-        filter: drop-shadow(0 0 0.85rem red);
-        animation: pulse 2s infinite; /* Apply the pulse animation */
-    }
+img {
+    width: 100%;
+    height: auto;
+    max-width: 220px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    filter: drop-shadow(0 0 0.85rem red);
+    animation: pulse 0.01s infinite; /* Apply the pulse animation, and make it faster (1.5s) */
+}
+
+
             .content {
             background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.3));
 
