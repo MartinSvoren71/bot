@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Knowledge vortex bad key</title>
-  <style>
        <style>
          body {
          background-color: black;
@@ -28,7 +27,6 @@
          margin-top: 5%;
          }
       
-
     .terminal {
       padding: 20px;
     }
@@ -48,7 +46,8 @@
   </style>
 </head>
 <body>
-    
+          <canvas id="matrixCanvas"></canvas>
+
     <br><br>
     <br><br>
   <div class="terminal">
@@ -67,10 +66,7 @@
       }
     }
 
-    setTimeout(() => {
-      typeMessage(0);
-    }, 1000);
-      
+
       
          const canvas = document.getElementById('matrixCanvas');
          const ctx = canvas.getContext('2d');
