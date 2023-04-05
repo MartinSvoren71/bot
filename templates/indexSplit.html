@@ -210,7 +210,7 @@ v1.5
          color: var(--matrix-black-1);
          margin: 0;
          background-color: var(--matrix-black-1);
-         font-size: 1.0em;
+         font-size: 0.9em;
          font-weight: bold;
         margin: 3%;
              
@@ -307,7 +307,7 @@ img {
          
          overflow-y: scroll;
          var(--matrix-green-1);
-         font-size: 1.0em;
+         font-size: 0.9em;
          font-weight: bold;
          white-space: pre-wrap;
              color: var(--matrix-green-1);   
@@ -383,7 +383,7 @@ img {
          }
          textarea {
          font-family: 'Lucida Console', monospace;  
-         font-size: 1.2em;
+         font-size: 1.1em;
          margin: 0px;
          border: none;
          outline: none;
@@ -401,7 +401,7 @@ img {
          }
          .out_text  {
          font-family: 'Lucida Console', monospace;  
-         font-size: 1.2em;
+         font-size: 1.1em;
          margin: 0px;
          border: none;
          outline: none;
@@ -419,7 +419,7 @@ img {
          }     
          input[type="text"] {
          font-family: 'Lucida Console', monospace;  
-         font-size: 1.2em;
+         font-size: 1.1em;
          margin: 0px;
          border: none;
          outline: none;
@@ -443,7 +443,7 @@ img {
          height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
          color: var(--matrix-green-1);
-         font-size: 1.2em;
+         font-size: 1.1em;
          font-weight: bold;
          white-space: pre-wrap;
          }
@@ -578,22 +578,24 @@ img {
 
          color: var(--matrix-black-1));
          cursor: pointer;
-         font-size: 1.2em;
+         font-size: 1.0em;
          filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
 
          }
          #folder-selector option {
-         font-size: 1.2em;
+         font-size: 1.1em;
          padding: 8px 12px;
          border-radius: 4px;
          border: none;
          outline: none;
-         background-color: var(--matrix-green-1);;
+         background-color: var(--matrix-anber-1);;
          color: var(--matrix-black-1));
          cursor: pointer;
          }
          #folder-selector option:hover {
          background-color: var(--matrix-green-1);
+         background-color: var(--matrix-green-3);
+
          }
          #folder-selector:focus,
          #folder-selector:active {
@@ -664,17 +666,17 @@ img {
       <div class="container">
          <div class="content-wrapper">
             <div class="left-side">
-               <h1>__Knowledge Vortex to your service__</h1>
+               <h1>__Knowledge Vortex__</h1>
                <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/logo1.png" alt="KV Logo">
                <h2 id="datetime" style="color: red;"></h2>
-               <h3>ask Operator a library related question</h3>
+               <h3>ask operator: </h3>
                <form id="ask-form" enctype="multipart/form-data" >
                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
                   <div>
-                     <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">ASK OpenAI </button>
-                     <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">ASK Library</button>  
+                     <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">request on public data </button>
+                     <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">request on my data</button>  
                   </div>
-                  <h2 >library for:</h2>
+                  <h2 >library:</h2>
              
                   <div class="select-container-2" id="select-container-2">
                      <select name="folder-selector" id="folder-selector" onchange="">
@@ -694,7 +696,7 @@ img {
          </div>
          <div class="right-side">
             <div>
-               <h1>__vortex pdf preview__</h1>
+               <h1>__vortex operator chat__</h1>
             </div>
             <div id="log-container"></div>
          </div>
