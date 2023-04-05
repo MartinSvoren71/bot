@@ -137,7 +137,8 @@
          
          const drops = [];
          for (let i = 0; i < columns; i++) {
-         	drops[i] = 1;
+    drops[i] = Math.floor(Math.random() * (canvas.height / fontSize));
+}
          }
          
          function draw() {
