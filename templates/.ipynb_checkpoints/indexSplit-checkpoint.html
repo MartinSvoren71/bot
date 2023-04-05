@@ -459,6 +459,18 @@ img {
          cursor: pointer;
          filter: drop-shadow(0 0 0.15rem red);
          }
+           #button {
+         font-size: 1.1em;
+         padding: 10px;
+         border-radius: 3px;
+         margin-top: 3px;
+         border: none;
+         outline: none;
+         background-color: var(--matrix-amber-1);
+         color: var(--matrix-black-1);
+         cursor: pointer;
+         filter: drop-shadow(0 0 0.15rem red);
+         }
          
          #button-GPT {
          font-size: 1.3em;
@@ -492,12 +504,12 @@ img {
          filter: drop-shadow(0 0 0.55rem var(--matrix-amber-1));
          }
          #button-AI:hover {
-         background-color: var(--matrix-blue-pill);
-         filter: drop-shadow(0 0 0.55rem var(--matrix-blue-pill));
+         background-color: red;
+         filter: drop-shadow(0 0 0.55rem cyan);
          }
          #button-GPT:hover {
-         background-color: var(--matrix-red-pill);
-         filter: drop-shadow(0 0 0.55rem var(--matrix-red-pill));
+         background-color: cyan;
+         filter: drop-shadow(0 0 0.55rem red);
          }
          .input-key {
          font-size: 1.2em;
@@ -722,7 +734,7 @@ img {
                <div id="quill-editor"></div>
                <input type="hidden" name="content" id="content">
             </div>
-            <button type="button" onclick="save_doc()">Save</button>
+            <button id="button" type="button" onclick="save_doc()">Save</button>
          </div>
          <div class="right-down-down-side">
             <h1>__vortex pdf preview__</h1>
