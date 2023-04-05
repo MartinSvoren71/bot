@@ -171,26 +171,28 @@
             link.setAttribute("href", newHref);
         }
     });
- const canvas = document.getElementById('matrixCanvas');
 
-    function setCanvasOpacity() {
-        let opacity = 1;
-        const decreaseTime = 8000; // 8 seconds in milliseconds
-        const targetOpacity = 0.3;
+    
+   function setCanvasOpacity() {
+    let opacity = 0; // Start with an opacity of 0
+    const increaseTime = 8000; // 8 seconds in milliseconds
+    const targetOpacity = 0.45; // Change this to your desired opacity
 
-        const decreaseOpacity = () => {
-            opacity -= 0.01;
-            canvas.style.opacity = opacity;
+    const increaseOpacity = () => {
+        opacity += 0.01;
+        canvas.style.opacity = opacity;
 
-            if (opacity > targetOpacity) {
-                setTimeout(decreaseOpacity, decreaseTime / 100);
-            }
-        };
+        if (opacity < targetOpacity) {
+            setTimeout(increaseOpacity, increaseTime / 100);
+        }
+    };
 
-        decreaseOpacity();
-    }
+    setTimeout(increaseOpacity, 5000); // Set a delay before starting to increase the opacity
+}
 
-    setCanvasOpacity();
+setCanvasOpacity();
+ 
+    
       </script>
 </body>
 </html>
