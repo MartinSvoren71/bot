@@ -444,19 +444,20 @@ img {
          font-weight: bold;
          white-space: pre-wrap;
          }
-         button {
+          #button-search {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
-         margin-top: 2%px;
+         margin-top: 15px;
          border: none;
          outline: none;
-         background-color: var(--matrix-green-1);
-         filter: drop-shadow(0 0 0.35rem var(--matrix-amber-2));
+         background-color: var(--matrix-amber-1);
          color: var(--matrix-black-1);
          cursor: pointer;
+         filter: drop-shadow(0 0 0.15rem red);
          }
-         buttonGPT {
+         
+         #button-GPT {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
@@ -466,9 +467,12 @@ img {
          background-color: var(--matrix-red-pill);
          color: var(--matrix-black-1);
          cursor: pointer;
-         filter: drop-shadow(0 0 0.35rem red);
+         filter: drop-shadow(0 0 0.15rem red);
          }
-         buttonAI {
+             ask-form {
+        
+         }
+         #button-AI {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
@@ -476,21 +480,21 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-blue-pill);
-         color: var(--matrix-green-1);
+          color: var(--matrix-black-1);
          cursor: pointer;
-         filter: drop-shadow(0 0 0.35rem red);
+         filter: drop-shadow(0 0 0.15rem cyan);
          }
-         button:hover {
+         #button-search:hover {
          background-color: var(--matrix-amber-1);
-         filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
+         filter: drop-shadow(0 0 0.55rem var(--matrix-amber-1));
          }
          #button-AI:hover {
          background-color: var(--matrix-blue-pill);
-         filter: drop-shadow(0 0 0.85rem var(--matrix-blue-pill));
+         filter: drop-shadow(0 0 0.55rem var(--matrix-blue-pill));
          }
          #button-GPT:hover {
          background-color: var(--matrix-red-pill);
-         filter: drop-shadow(0 0 0.85rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.55rem var(--matrix-red-pill));
          }
          .input-key {
          font-size: 1.5em;
@@ -673,7 +677,7 @@ img {
                <form id="search-form">
                   <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
                   <h4 style="color: grey;"> example : password</h4>
-                  <button type="button" onclick="searchFiles()">Search</button>
+                  <button id="button-search" type="button" onclick="searchFiles()">Search</button>
                </form>
             </div>
          </div>
