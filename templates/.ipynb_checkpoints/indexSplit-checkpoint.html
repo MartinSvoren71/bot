@@ -64,12 +64,14 @@ v1.5
          --matrix-green-6:                #0e1c0d;  
          --matrix-amber-1:   #997334;
          --matrix-amber-2:   #ffdd9d;
+        --matrix-black-1:   black;     
+         --matrix-gray-1:    #1f1f1f;
          font-family: 'Lucida Console', monospace;  
              max-width: 95vw;
          
          }       
          .container {
-         color: #00FF00;
+         color: var(--matrix-black-1);
          font-family: 'Lucida Console', monospace;  
          display: flex;
          width: 98vw;
@@ -161,7 +163,7 @@ v1.5
          top: auto;
          right:0;
          flex: 1;
-         color: #00FF00;
+         color: var(--matrix-green-1);
          justify-content: center;
          align-items: center;
          max-width: 50%;
@@ -199,7 +201,7 @@ v1.5
          }
          body {
          font-family: 'Lucida Console', monospace;  
-         color: black;
+         color: var(--matrix-black-1);
          margin: 0;
          background-color: black;
          font-size: 14px;
@@ -297,7 +299,7 @@ img {
          height: 95vh;
          background-color: rgba(0, 0, 0, 0.2);
          overflow-y: scroll;
-         color: #00FF00;
+         var(--matrix-green-1);
          font-size: 14px;
          font-weight: bold;
          white-space: pre-wrap;
@@ -314,24 +316,32 @@ img {
          font-size: 1.5em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+                      color: var(--matrix-green-1);
+
          }
          h2 {
          max-width: 100%;
          font-size: 1.2em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+                   color: var(--matrix-green-1);
+
          }
          h3 {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+                      color: var(--matrix-green-1);
+
          }
          h4 {
          max-width: 100%;
          font-size: 0.8em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
+                      color: var(--matrix-green-1);
+
          }
          .folder-content{
          flex-direction: column;
@@ -342,7 +352,8 @@ img {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
-         color: black;
+                  color: var(--matrix-green-1);
+
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          }
          form {
@@ -362,7 +373,7 @@ img {
          border: none;
          outline: none;
          background-color: rgba(0, 0, 0, 0.5);
-         color: red;
+         color: var(--matrix-red-pill);
          justify-content: center;
          align-items: center;
          margin: 4% ;
@@ -380,7 +391,7 @@ img {
          border: none;
          outline: none;
          background-color: rgba(0, 0, 0, 0.5);
-         color: red;
+         color: var(--matrix-red-pill);
          justify-content: center;
          align-items: center;
          margin: 4% auto;
@@ -398,7 +409,7 @@ img {
          border: none;
          outline: none;
          background-color: rgba(0, 0, 0, 0.5);
-         color: red;
+         color: var(--matrix-red-pill);
          justify-content: center;
          align-items: center;
          margin: 1% ;
@@ -416,7 +427,7 @@ img {
          width: 100%;
          height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
-         color: #00FF00;
+         color: var(--matrix-green-1);
          font-size: 14px;
          font-weight: bold;
          white-space: pre-wrap;
@@ -430,7 +441,7 @@ img {
          outline: none;
          background-color: var(--matrix-green-1);
          filter: drop-shadow(0 0 0.35rem var(--matrix-amber-2));
-         color: black;
+         color: var(--matrix-black-1);
          cursor: pointer;
          }
          buttonGPT {
@@ -441,7 +452,7 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-red-pill);
-         color: black;
+         color: var(--matrix-black-1);
          cursor: pointer;
          filter: drop-shadow(0 0 0.35rem red);
          }
@@ -453,7 +464,7 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-blue-pill);
-         color: black;
+         color: var(--matrix-green-1);
          cursor: pointer;
          filter: drop-shadow(0 0 0.35rem red);
          }
@@ -475,8 +486,8 @@ img {
          border-radius: 10px;
          border: none;
          outline: none;
-         background-color: #1f1f1f;
-         color: red;
+         background-color: var(--matrix-gray-1);    
+         color: var(--matrix-red-pill));
          }
          document {
          padding: 0px;
@@ -492,7 +503,7 @@ img {
          display: flex;
          }
          .list-container {
-         color: green;
+         color: var(--matrix-green-1));
          margin-bottom: 3%;
          max-height: 70vh;
          font-family: 'Lucida Console', monospace;  
@@ -514,7 +525,7 @@ img {
          background-color: transparent; /* Set the background color of the thumb to transparent */
          }
          a {
-         color: red;
+         color: var(--matrix-red-pill));
          text-decoration: none;
          }
          .question {
@@ -535,7 +546,7 @@ img {
          border-radius: 4px;
          outline: none;
          background-color: var(--matrix-green-1);
-         color: black;
+         color: var(--matrix-black-1));
          cursor: pointer;
          font-size: 1.2em;
                        filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
@@ -548,7 +559,7 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-green-1);;
-         color: black;
+         color: var(--matrix-black-1));
          cursor: pointer;
          }
          #folder-selector option:hover {
@@ -571,7 +582,7 @@ img {
          outline: none;
          background-color: var(--matrix-green-1);
          cursor: pointer;
-         color: black;
+         color: var(--matrix-black-1));
          font-size: 1.2em;
          }
          #model option {
@@ -581,7 +592,7 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-green-1);;
-         color: black;
+         color: var(--matrix-black-1));
          cursor: pointer;
          }
          #model option:hover {
@@ -595,7 +606,7 @@ img {
          width: 100%;
          height: 90%;
          background-color: rgba(0, 0, 0, 0.2); 
-         color: #00FF00;
+         color: var(--matrix-green-1));
          font-family: 'Lucida Console', monospace;
          max-height: 80vh;  
          }
