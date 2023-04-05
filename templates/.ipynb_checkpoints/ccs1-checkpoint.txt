@@ -1,29 +1,34 @@
-<style>
+ </script>
+      <title>Ask AI</title>
+      <style>
          :root {
          --matrix-white-1:                  #ffffff;
          --matrix-red-1:                  #ff000c;
          --matrix-red-2:                  #6b0c08;  
-         --matrix-green-1:                #2d6e43;
-         --matrix-green-2:                #295844;
-         --matrix-green-3:                #295844;
-         --matrix-green-5:                #0e1c0d;
+         --matrix-green-1:                #9fb943;
+         --matrix-green-2:                #607e37;
+         --matrix-green-3:                #5a8662;
+         --matrix-green-4:                #3b673f;
          --matrix-blue-pill:                #0fc1c7;
          --matrix-red-pill:                #ff000c;        
          --matrix-green-6:                #0e1c0d;  
          --matrix-amber-1:   #997334;
          --matrix-amber-2:   #ffdd9d;
+        --matrix-black-1:   #1e201b;     
+                     --matrix-black-2:   black;     
+
+         --matrix-gray-1:    #1f1f1f;
          font-family: 'Lucida Console', monospace;  
-             max-width: 95vw;
+             max-width: 99vw;
+             width: 99vw;
          
          }       
-         .container {
-         color: #00FF00;
+         #container {
+         color: var(--matrix-black-1);
          font-family: 'Lucida Console', monospace;  
          display: flex;
-         width: 98vw;
+  
          height: auto;
-         
-        
          justify-content: center;
         
          }
@@ -62,6 +67,7 @@
          font-size: 1.3em;
          font-weight: bold;
          margin: 0 ; /* Center the container horizontally */
+                color: var(--matrix-black-2);
          }
          .content-wrapper {
          font-family: 'Lucida Console', monospace;  
@@ -71,6 +77,8 @@
          flex-direction: column;
          align-items: center;
          justify-content: up;
+             width: 49.5vw;
+                      max-width: 49.5vw;
          }
          .right-side {
          top: 0;
@@ -80,12 +88,13 @@
          display: fixed;
          justify-content: center;
          align-items: center;
-         max-width: 50%;
+         
+
          border: 0.1px solid red;
         background-color: rgba(0, 0, 0, 0.6);
         padding:1vh;
          }
-         }
+         
          .left-side {
          top: 0;
          left:0;
@@ -93,7 +102,6 @@
          display: fixed;
          justify-content: center;
          align-items: center;
-         max-width: 50%;
          }
          .left-down-side {
          top: 100vh;
@@ -104,12 +112,13 @@
          max-width: 50%;
          border: 0.1px solid red;
              background-color: rgba(0, 0, 0, 0.6);
+                color: var(--matrix-red-pill);
          }
          .right-down-side {
          top: auto;
          right:0;
          flex: 1;
-         color: #00FF00;
+         color: var(--matrix-green-1);
          justify-content: center;
          align-items: center;
          max-width: 50%;
@@ -118,6 +127,7 @@
          overflow-y: auto;
          max-height: 70vh;
              background-color: rgba(0, 0, 0, 0.6);
+             
          }
          .left-down-down-side {
          top: auto;
@@ -131,6 +141,7 @@
          height: 120vh;
                       font-size: 1.3em;
              background-color: rgba(0, 0, 0, 0.6);
+             color: var(--matrix-black-1);
 
          }
          .right-down-down-side {
@@ -147,9 +158,9 @@
          }
          body {
          font-family: 'Lucida Console', monospace;  
-         color: black;
+         color: var(--matrix-black-1);
          margin: 0;
-         background-color: black;
+         background-color: var(--matrix-black-1);
          font-size: 14px;
          font-weight: bold;
     
@@ -182,8 +193,6 @@
          top: 0%;
          left: 0%;
          padding-top: 0px;
-         color: var(--matrix-green-1);
-         filter: drop-shadow(0 0 0.95rem var(--matrix-red-pill));
              
          }
  @keyframes pulse {
@@ -241,14 +250,16 @@ img {
          }
          #log-container {
          font-family: 'Lucida Console', monospace;  
-         width: 100%;
+         width: 49.5vw;
+             max-width: 49.5vw;
          height: 95vh;
          background-color: rgba(0, 0, 0, 0.2);
          overflow-y: scroll;
-         color: #00FF00;
+         var(--matrix-green-1);
          font-size: 14px;
          font-weight: bold;
          white-space: pre-wrap;
+             color: var(--matrix-green-1);   
          }
          #select-container-2{
          margin-top:2%;
@@ -262,24 +273,39 @@ img {
          font-size: 1.5em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+                      color: var(--matrix-green-1);
+
          }
          h2 {
          max-width: 100%;
          font-size: 1.2em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+                   color: var(--matrix-green-1);
+
          }
          h3 {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+                      color: var(--matrix-green-1);
+
          }
          h4 {
          max-width: 100%;
          font-size: 0.8em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
+                      color: var(--matrix-green-1);
+
+         }
+             a {
+         max-width: 100%;
+         font-size: 0.8em;
+         text-align: center;
+                      color: var(--matrix-blue-pill);
+
          }
          .folder-content{
          flex-direction: column;
@@ -290,11 +316,12 @@ img {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
-         color: black;
+                  color: var(--matrix-black-1);
+
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          }
          form {
-         margin: 2% ;
+         margin: 0 ;
          display: flex;
          flex-direction: column;
          justify-content: center;
@@ -310,10 +337,10 @@ img {
          border: none;
          outline: none;
          background-color: rgba(0, 0, 0, 0.5);
-         color: red;
+         color: var(--matrix-red-pill);
          justify-content: center;
          align-items: center;
-         margin: 4% ;
+         margin: 2% ;
          filter: drop-shadow(0 0 0.35rem green);
          text-align: left;
          padding: 5px;
@@ -328,7 +355,7 @@ img {
          border: none;
          outline: none;
          background-color: rgba(0, 0, 0, 0.5);
-         color: red;
+         color: var(--matrix-red-pill);
          justify-content: center;
          align-items: center;
          margin: 4% auto;
@@ -346,7 +373,7 @@ img {
          border: none;
          outline: none;
          background-color: rgba(0, 0, 0, 0.5);
-         color: red;
+         color: var(--matrix-red-pill);
          justify-content: center;
          align-items: center;
          margin: 1% ;
@@ -364,24 +391,25 @@ img {
          width: 100%;
          height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
-         color: #00FF00;
+         color: var(--matrix-green-1);
          font-size: 14px;
          font-weight: bold;
          white-space: pre-wrap;
          }
-         button {
+          #button-search {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
-         margin-top: 2%px;
+         margin-top: 15px;
          border: none;
          outline: none;
-         background-color: var(--matrix-green-1);
-         filter: drop-shadow(0 0 0.35rem var(--matrix-amber-2));
-         color: black;
+         background-color: var(--matrix-amber-1);
+         color: var(--matrix-black-1);
          cursor: pointer;
+         filter: drop-shadow(0 0 0.15rem red);
          }
-         buttonGPT {
+         
+         #button-GPT {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
@@ -389,11 +417,14 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-red-pill);
-         color: black;
+         color: var(--matrix-black-1);
          cursor: pointer;
-         filter: drop-shadow(0 0 0.35rem red);
+         filter: drop-shadow(0 0 0.15rem red);
          }
-         buttonAI {
+             ask-form {
+        
+         }
+         #button-AI {
          font-size: 1.5em;
          padding: 10px;
          border-radius: 8px;
@@ -401,21 +432,21 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-blue-pill);
-         color: black;
+          color: var(--matrix-black-1);
          cursor: pointer;
-         filter: drop-shadow(0 0 0.35rem red);
+         filter: drop-shadow(0 0 0.15rem cyan);
          }
-         button:hover {
+         #button-search:hover {
          background-color: var(--matrix-amber-1);
-         filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
+         filter: drop-shadow(0 0 0.55rem var(--matrix-amber-1));
          }
          #button-AI:hover {
          background-color: var(--matrix-blue-pill);
-         filter: drop-shadow(0 0 0.85rem var(--matrix-blue-pill));
+         filter: drop-shadow(0 0 0.55rem var(--matrix-blue-pill));
          }
          #button-GPT:hover {
          background-color: var(--matrix-red-pill);
-         filter: drop-shadow(0 0 0.85rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.55rem var(--matrix-red-pill));
          }
          .input-key {
          font-size: 1.5em;
@@ -423,8 +454,8 @@ img {
          border-radius: 10px;
          border: none;
          outline: none;
-         background-color: #1f1f1f;
-         color: red;
+         background-color: var(--matrix-gray-1);    
+         color: var(--matrix-red-pill));
          }
          document {
          padding: 0px;
@@ -440,7 +471,7 @@ img {
          display: flex;
          }
          .list-container {
-         color: green;
+         color: var(--matrix-green-1));
          margin-bottom: 3%;
          max-height: 70vh;
          font-family: 'Lucida Console', monospace;  
@@ -462,7 +493,7 @@ img {
          background-color: transparent; /* Set the background color of the thumb to transparent */
          }
          a {
-         color: red;
+         color: var(--matrix-red-pill));
          text-decoration: none;
          }
          .question {
@@ -482,8 +513,9 @@ img {
          padding: 1%;
          border-radius: 4px;
          outline: none;
-         background-color: var(--matrix-green-1);
-         color: black;
+         background-color: var(--matrix-green-4);
+
+         color: var(--matrix-black-1));
          cursor: pointer;
          font-size: 1.2em;
                        filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
@@ -496,7 +528,7 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-green-1);;
-         color: black;
+         color: var(--matrix-black-1));
          cursor: pointer;
          }
          #folder-selector option:hover {
@@ -519,7 +551,7 @@ img {
          outline: none;
          background-color: var(--matrix-green-1);
          cursor: pointer;
-         color: black;
+         color: var(--matrix-black-1));
          font-size: 1.2em;
          }
          #model option {
@@ -529,7 +561,7 @@ img {
          border: none;
          outline: none;
          background-color: var(--matrix-green-1);;
-         color: black;
+         color: var(--matrix-black-1));
          cursor: pointer;
          }
          #model option:hover {
@@ -543,7 +575,7 @@ img {
          width: 100%;
          height: 90%;
          background-color: rgba(0, 0, 0, 0.2); 
-         color: #00FF00;
+         color: var(--matrix-green-1));
          font-family: 'Lucida Console', monospace;
          max-height: 80vh;  
          }
