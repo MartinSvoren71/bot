@@ -229,7 +229,7 @@ v1.5
          canvas {
          width: 98vw;
          z-index: -1;
-         opacity: 0.35;
+         opacity: 0;
          position: fixed;
          top: 0%;
          left: 0%;
@@ -937,7 +937,25 @@ v1.5
       
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
-       
+      function setCanvasOpacity() {
+    let opacity = 0; // Start with an opacity of 0
+    const increaseTime = 25000; // 8 seconds in milliseconds
+    const targetOpacity = 0.45; // Change this to your desired opacity
+
+    const increaseOpacity = () => {
+        opacity += 0.01;
+        canvas.style.opacity = opacity;
+
+        if (opacity < targetOpacity) {
+            setTimeout(increaseOpacity, increaseTime / 100);
+        }
+    };
+
+    setTimeout(increaseOpacity, 0); // Set a delay before starting to increase the opacity
+}
+
+setCanvasOpacity();
+     
 
    </script>    
 </html>
