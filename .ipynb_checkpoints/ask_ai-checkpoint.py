@@ -31,6 +31,7 @@ def ask_ai(question, current_folder):
     os.environ["OPENAI_API_KEY"] = api_k
     index = GPTSimpleVectorIndex.load_from_disk(index_file)  #####
     response = index.query(question)  #
+    print(response)
     log_file = os.path.join(os.getcwd(), 'log.txt')
 
     
