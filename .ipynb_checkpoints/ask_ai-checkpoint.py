@@ -21,15 +21,16 @@ def ask_ai(question, current_folder):
     index_file = f"{folder_path}/index.json"
     data_directory = folder_path
 
-    if not os.path.exists(index_file):
-        print(f"Constructing index from data in {data_directory}...")
-        index = construct_index(data_directory)  # Save the returned index in a variable
-        index.save_to_disk(index_file)  # Save the index to the index_file
-        print("Index constructed and saved to disk.")
+  #  if not os.path.exists(index_file):
+       # print(f"Constructing index from data in {data_directory}...")
+       # index = construct_index(data_directory)  # Save the returned index in a variable
+       # index.save_to_disk(index_file)  # Save the index to the index_file
+       # print("Index constructed and saved to disk.")
 
     index_file = f"{folder_path}/index.json"
     os.environ["OPENAI_API_KEY"] = api_k
-    index = GPTSimpleVectorIndex.load_from_disk(index_file)  #####
+    documents = SimpleDirectoryReader(folder_path).load_data()
+    index = GPTSimpleVectorIndex.from_documents(documents)
     response = index.query(question)  #
     print(response)
     log_file = os.path.join(os.getcwd(), 'log.txt')
