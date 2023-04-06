@@ -99,7 +99,7 @@ def ask_GPT_route():
 
     question = request.form['question']
     if key == "nnp":  # Check if the key is "xxx007"
-        response = ask_GPT(question)  # Pass the theme value
+        response = ask_GPT(question) 
         #return jsonify({"question": question, "response": response})
             #return render_template('indexSplit.html', question=question, response=response, key=key, files=files)
     else:
@@ -115,7 +115,7 @@ def ask_LIB_route():
     model = "text-davinci-003"
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
-        response = ask_ai(question, current_folder)  # Pass the theme value
+        response = ask_ai(question, current_folder) 
     else:
         return render_template('bad_key.html')
 

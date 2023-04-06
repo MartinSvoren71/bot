@@ -8,10 +8,10 @@ import datetime
 import json
 api_k=api_kx
 from llama_index import GPTTreeIndex, SimpleDirectoryReader
+
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
-
-
+    
 initialize_ai(api_k)
 
 
@@ -29,10 +29,11 @@ def ask_ai(question, current_folder):
 
     index_file = f"{folder_path}/index.json"
     os.environ["OPENAI_API_KEY"] = api_k
-    index = GPTSimpleVectorIndex.load_from_disk(index_file) # Load the index with the new version
-    response = index.query(question, response_mode="compact")
+    documents = SimpleDirectoryReader('folder_path').load_data() ###
+    index = GPTSimpleVectorIndex.from_documents(documents)  #####
+    response = index.query(question)  #
     log_file = os.path.join(os.getcwd(), 'log.txt')
-
+    
     # Read the existing data in the log file
     with open(log_file, "r") as f:
         existing_data = f.read()
