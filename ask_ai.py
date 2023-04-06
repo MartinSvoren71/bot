@@ -29,7 +29,7 @@ def ask_ai(question, current_folder):
 
     index_file = f"{folder_path}/index.json"
     os.environ["OPENAI_API_KEY"] = api_k
-    index = GPTSimpleVectorIndex.load_from_disk(index_file, llama_version='0.5.1') # Load the index with the new version
+    index = GPTSimpleVectorIndex.load_from_disk(index_file) # Load the index with the new version
     response = index.query(question, response_mode="compact")
     log_file = os.path.join(os.getcwd(), 'log.txt')
 
