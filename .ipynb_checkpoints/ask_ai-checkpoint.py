@@ -55,7 +55,7 @@ def ask_ai(question, current_folder):
     # return response.response
 
 
-def construct_index(directory_path):
+def construct_index(current_folder):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
     
@@ -73,7 +73,7 @@ def construct_index(directory_path):
 
     service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
 
-    index = GPTSimpleVectorIndex.from_documents(directory_path, service_context=service_context)   
+    index = GPTSimpleVectorIndex.from_documents(current_folder, service_context=service_context)   
     
     index.save_to_disk('index.json') # Save the index with the new version
     return index
