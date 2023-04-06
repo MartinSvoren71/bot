@@ -6,7 +6,7 @@ from langchain import OpenAI
 from main import api_kx
 import datetime
 import json
-
+api_k=api_kx
 
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
