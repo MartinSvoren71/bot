@@ -73,8 +73,9 @@ def construct_index(current_folder):
 
     service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
 
-    index = GPTSimpleVectorIndex.from_documents(current_folder, service_context=service_context)   
-    
+    index = GPTSimpleVectorIndex.from_documents(
+    documents, service_context=service_context
+)
     index.save_to_disk('index.json') # Save the index with the new version
     return index
 
