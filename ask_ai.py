@@ -7,8 +7,8 @@ from main import api_kx
 import datetime
 import json
 api_k=api_kx
-from llama_index import GPTTreeIndex, SimpleDirectoryReader
-
+from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext
+from langchain import OpenAI
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
     
@@ -31,7 +31,7 @@ def ask_ai(question, current_folder):
     os.environ["OPENAI_API_KEY"] = api_k
     documents = SimpleDirectoryReader(folder_path).load_data()
     #index = GPTSimpleVectorIndex.from_documents(documents)
-    index = GPTSimpleVectorIndex.load_from_disk('Data/Andor/Cameras/iStar/index.json')
+    index = GPTSimpleVectorIndex.load_from_disk(folder_path)
     response = index.query(question)  #
     print(response)
     log_file = os.path.join(os.getcwd(), 'log.txt')
@@ -58,22 +58,30 @@ def ask_ai(question, current_folder):
 def construct_index(directory_path):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
-    max_input_size = 4096
-    num_outputs = 2000
-    max_chunk_overlap = 20
-    chunk_size_limit = 600
-    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0.5, model_name="text-curie-001", max_tokens=num_outputs))
-    prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
     
-    documents = SimpleDirectoryReader(directory_path).load_data()
-    index = GPTTreeIndex.from_documents(documents)
+     # define LLM
+    llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003"))
 
+# define prompt helper
+# set maximum input size
+    max_input_size = 4096
+# set number of output tokens
+    num_output = 256
+# set maximum chunk overlap
+    max_chunk_overlap = 20
+    prompt_helper = PromptHelper(max_input_size, num_output, max_chunk_overlap)
+
+    service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
+
+    index = GPTSimpleVectorIndex.from_documents(folder_path, service_context=service_context)   
+    
     index.save_to_disk('index.json') # Save the index with the new version
     return index
 
 
 
 
+    
 
 
 
