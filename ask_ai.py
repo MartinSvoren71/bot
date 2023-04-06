@@ -31,7 +31,7 @@ def ask_ai(question, current_folder):
     os.environ["OPENAI_API_KEY"] = api_k
     documents = SimpleDirectoryReader(folder_path).load_data()
     #index = GPTSimpleVectorIndex.from_documents(documents)
-    index = GPTSimpleVectorIndex.load_from_disk('Data/Andor/iStar/index.json')
+    index = GPTSimpleVectorIndex.load_from_disk('Data/Andor/Cameras/iStar/index.json')
     response = index.query(question)  #
     print(response)
     log_file = os.path.join(os.getcwd(), 'log.txt')
