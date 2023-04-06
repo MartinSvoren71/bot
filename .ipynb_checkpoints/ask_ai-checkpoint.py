@@ -5,46 +5,52 @@ from llama_index import SimpleDirectoryReader, GPTListIndex, readers, GPTSimpleV
 from langchain import OpenAI
 from main import api_kx
 import datetime
-api_k = api_kx
 import json
+
+
 def initialize_ai(api_key):
     os.environ[api_k] = api_kx
+
+
 initialize_ai(api_k)
+
+
 def ask_ai(question, current_folder):
     # Preselected folder and index.json file
     folder_path = f'Data/{current_folder}'
     index_file = f"{folder_path}/index.json"
     data_directory = folder_path
+
     if not os.path.exists(index_file):
         print(f"Constructing index from data in {data_directory}...")
         index = construct_index(data_directory)  # Save the returned index in a variable
         index.save_to_disk(index_file)  # Save the index to the index_file
         print("Index constructed and saved to disk.")
-        
+
     index_file = f"{folder_path}/index.json"
     os.environ["OPENAI_API_KEY"] = api_k
-    index = GPTSimpleVectorIndex.load_from_disk(index_file)
+    index = GPTSimpleVectorIndex.load_from_disk(index_file, llama_version='0.5.1') # Load the index with the new version
     response = index.query(question, response_mode="compact")
     log_file = os.path.join(os.getcwd(), 'log.txt')
-    
+
     # Read the existing data in the log file
     with open(log_file, "r") as f:
         existing_data = f.read()
-    
+
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n\n")
         f.write(f"Folder: {folder_path}\n\n")
         f.write(f"Question: {question}\n\n")
-        f.write(f"Operator: {response.response}\n\n")               
+        f.write(f"Operator: {response.response}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
         f.write(existing_data)
-        
-                
+
     # return response.response
-    
+
+
 def construct_index(directory_path):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
@@ -56,9 +62,7 @@ def construct_index(directory_path):
     prompt_helper = PromptHelper(max_input_size, num_outputs, max_chunk_overlap, chunk_size_limit=chunk_size_limit)
     documents = SimpleDirectoryReader(directory_path).load_data()
     index = GPTSimpleVectorIndex(
-        documents, llm_predictor=llm_predictor, prompt_helper=prompt_helper
+        documents, llm_predictor=llm_predictor, prompt_helper=prompt_helper, llama_version='0.5.1' # Set the llama_version parameter
     )
     index.save_to_disk('index.json')
     return index
-
-
