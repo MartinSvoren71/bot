@@ -591,11 +591,15 @@ img {
          a:hover {
          color: #aaa;
          }
-         .list-container, .pdf-container {
+         .list-container {
          width: 50vw;
          overflow: hiden;
          }
-         
+         .pdf-container{
+          width: 50vw;
+         overflow: hiden;
+             opacity: 0.8;
+          }
           #folder-selector {
          padding: 1%;
          border-radius: 4px;
@@ -1100,7 +1104,7 @@ setCanvasOpacity();
 
 quillContainer.addEventListener('input', function() {
   if (quillContainer.textContent.length > 0) {
-    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
   } else {
     quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0)';
   }
