@@ -699,7 +699,7 @@ img {
                   <div>
                      <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">request on public data </button>
                      <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">request on my data</button>  
-                      <div id="loader" style="display:none;"></div>
+                   
                   </div>
                   <h2 >library:</h2>
              
@@ -796,7 +796,7 @@ img {
           
        
       async function ask_LIB(event) {
-                    wait();
+                  //  wait();
 
          event.preventDefault();
         const form = document.getElementById("ask-form");
@@ -807,7 +807,7 @@ img {
         });
       } 
        async function ask_GPT(event) {
-                     wait();
+                    // wait();
 
         event.preventDefault();   
         const form = document.getElementById("ask-form");
@@ -858,6 +858,7 @@ img {
       console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
       $.post('/search_pdf_files', { keyword: keyword, folder_path: selectedFolder }, function (data) {
         $('#search-results').html(data.rendered_template);
+        loader.style.display = "none";
       });
       }
       
@@ -1081,7 +1082,7 @@ function wait() {
     
     // Perform the operation here
     
-    //loader.style.display = "none";
+   
 }
    </script>    
 </html>
