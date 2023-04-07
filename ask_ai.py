@@ -58,6 +58,8 @@ def construct_index(current_folder):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
     folder_path = f'Data/{current_folder}'
+    index_file = f"{folder_path}/index.json"
+
      # define LLM
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003"))
 
@@ -72,9 +74,7 @@ def construct_index(current_folder):
 
     service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
 
-    index = GPTSimpleVectorIndex.from_documents(
-    folder_path, service_context=service_context
-)
+    index = GPTSimpleVectorIndex.from_documents(folder_path)
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
 
