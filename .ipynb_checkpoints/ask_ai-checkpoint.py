@@ -72,7 +72,7 @@ def construct_index(current_folder):
 
 # define prompt helper
 # set maximum input size
-    max_input_size = 4096
+    max_input_size = 5096
 # set number of output tokens
     num_output = 500
 # set maximum chunk overlap
