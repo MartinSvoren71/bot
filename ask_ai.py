@@ -38,8 +38,8 @@ def ask_ai(question, current_folder):
    # response.source_nodes
     # formatted sources
    # response.get_formatted_sources()
-    print(response)
-    print(response.source_nodes)
+    #print(response)
+    #print(response.source_nodes)
     #print(response.get_formated_sources)
     log_file = os.path.join(os.getcwd(), 'log.txt')
     
@@ -53,7 +53,7 @@ def ask_ai(question, current_folder):
         f.write(f"Folder: {folder_path}\n\n")
         f.write(f"Question: {question}\n\n")
         f.write(f"Operator: {response.response}\n\n")
-        f.write(f"Details: {response.source_nodes}\n\n")
+       # f.write(f"Details: {response.source_nodes}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
