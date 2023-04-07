@@ -57,7 +57,7 @@ def ask_ai(question, current_folder):
 def construct_index(current_folder):
     os.environ["OPENAI_API_KEY"] = api_kx
     openai.api_key = api_kx
-    
+    folder_path = f'Data/{current_folder}'
      # define LLM
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003"))
 
