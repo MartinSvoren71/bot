@@ -33,9 +33,6 @@ def ask_ai(question, current_folder):
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, mode="default")  #
     log_file = os.path.join(os.getcwd(), 'log.txt')
-    
-    token_usage = index.llm_predictor.last_token_usage
-    print(token_usage)
     # Read the existing data in the log file
     with open(log_file, "r") as f:
         existing_data = f.read()
