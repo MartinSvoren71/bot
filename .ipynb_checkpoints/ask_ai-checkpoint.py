@@ -49,7 +49,7 @@ def ask_ai(question, current_folder):
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
         f.write(existing_data)
-    return response.response
+   # return response.response
 
 
 def construct_index(current_folder):
