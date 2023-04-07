@@ -670,6 +670,19 @@ img {
   results::-webkit-scrollbar-thumb:hover {
     background-color: #555;
   } 
+          #loader {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
       </style>
    </head>
    <body onsubmit="event.preventDefault();" onclick="event.preventDefault();">
@@ -686,6 +699,7 @@ img {
                   <div>
                      <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">request on public data </button>
                      <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">request on my data</button>  
+                      <div id="loader" style="display:none;"></div>
                   </div>
                   <h2 >library:</h2>
              
@@ -702,6 +716,7 @@ img {
                <form id="search-form">
                   <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
                   <button id="button-search" type="button" onclick="searchFiles()">Search</button>
+                   <div id="loader" style="display:none;"></div>
                </form>
             </div>
          </div>
@@ -781,6 +796,8 @@ img {
           
        
       async function ask_LIB(event) {
+                    wait();
+
          event.preventDefault();
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
@@ -790,6 +807,8 @@ img {
         });
       } 
        async function ask_GPT(event) {
+                     wait();
+
         event.preventDefault();   
         const form = document.getElementById("ask-form");
         const formData = new FormData(form);
@@ -833,6 +852,7 @@ img {
        
       function searchFiles() {
       searchFiles_1();
+          wait();
       let keyword = $('#keyword').val();
       let selectedFolder = $('#folder-selector').val();
       console.log("Sending data:", { keyword: keyword, folder_path: selectedFolder }); // Add this line
@@ -1055,6 +1075,13 @@ quillContainer.addEventListener('input', function() {
     quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
   }
 });  
-
+function wait() {
+    var loader = document.getElementById("loader");
+    loader.style.display = "block";
+    
+    // Perform the operation here
+    
+    //loader.style.display = "none";
+}
    </script>    
 </html>
