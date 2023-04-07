@@ -35,7 +35,12 @@ def ask_ai(question, current_folder):
     print(response)
     log_file = os.path.join(os.getcwd(), 'log.txt')
     response = index.query(question, mode="embedding")  #
+   # response.source_nodes
+    # formatted sources
+   # response.get_formatted_sources()
     print(response)
+    print(response.source_nodes)
+    print(response.get_formated_sources)
     log_file = os.path.join(os.getcwd(), 'log.txt')
     
     # Read the existing data in the log file
