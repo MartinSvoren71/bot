@@ -710,9 +710,10 @@ img {
                <h3>ask operator: </h3>
                <form id="ask-form" enctype="multipart/form-data" >
                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
+                                          <div id="loader2" style="display:none;width:20px;height:20px;"></div>
+
                   <div>
                      <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">request on public data </button>
-                       <div id="loader2" style="display:none;width:20px;height:20px;"></div>
                      <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">request on my data</button>  
                    
                   </div>
