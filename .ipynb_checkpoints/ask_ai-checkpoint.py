@@ -82,7 +82,4 @@ def construct_index(current_folder):
 
 
 
-    
-
-
-
+   
