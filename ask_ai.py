@@ -29,7 +29,7 @@ def ask_ai(question, current_folder):
 
     index_file = f"{folder_path}/index.json"
     os.environ["OPENAI_API_KEY"] = api_k
-    documents = SimpleDirectoryReader(folder_path).load_data()
+    documents = SimpleDirectoryReader(folder_path).load_data('index.json')
     #index = GPTSimpleVectorIndex.from_documents(documents)
     index = GPTSimpleVectorIndex.load_from_disk(folder_path)
     response = index.query(question)  #
@@ -82,4 +82,4 @@ def construct_index(current_folder):
 
 
 
-   
+  
