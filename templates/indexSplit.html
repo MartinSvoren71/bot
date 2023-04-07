@@ -163,6 +163,8 @@ v1.5
          align-items: center;
              
          }
+
+          
          .left-down-side {
          top: 100vh;
          left:0;
@@ -180,7 +182,7 @@ v1.5
  overflow-x: hidden; /* Add this line */
          }
           
-                     .left-down-side::-webkit-scrollbar {
+.left-down-side::-webkit-scrollbar {
     width: 6px;
   }
 
@@ -395,6 +397,22 @@ img {
          white-space: pre-wrap;
              color: var(--matrix-green-1);   
          }
+           #log-container::-webkit-scrollbar {
+    width: 6px;
+  }
+
+#log-container::-webkit-scrollbar-track {
+    background-color: #333;
+  }
+
+#log-container::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 3px;
+  }
+
+#log-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
          #select-container-2{
          margin-top:2%;
          margin-bottom:0%;
