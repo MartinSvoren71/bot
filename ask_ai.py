@@ -31,17 +31,7 @@ def ask_ai(question, current_folder):
     #documents = SimpleDirectoryReader(folder_path).load_data('index.json')
     #index = GPTSimpleVectorIndex.from_documents(documents)
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
-    response = index.query(question, mode="tree_summarize")  #
-
-    print(response)
-   # log_file = os.path.join(os.getcwd(), 'log.txt')
-    #response = index.query(question, mode="embedding")  #
-   # response.source_nodes
-    # formatted sources
-   # response.get_formatted_sources()
-    #print(response)
-    #print(response.source_nodes)
-    #print(response.get_formated_sources)
+    response = index.query(question, mode="default")  #
     log_file = os.path.join(os.getcwd(), 'log.txt')
     
     token_usage = index.llm_predictor.last_token_usage
@@ -73,18 +63,11 @@ def construct_index(current_folder):
 
      # define LLM
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003"))
-
-# define prompt helper
-# set maximum input size
     max_input_size = 4096
-# set number of output tokens
     num_output = 256
-# set maximum chunk overlap
     max_chunk_overlap = 20
     prompt_helper = PromptHelper(max_input_size, num_output, max_chunk_overlap)
-
     service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
-    
     documents = SimpleDirectoryReader(folder_path).load_data()
     index = GPTSimpleVectorIndex.from_documents(documents)
     #index.save_to_disk('index.json') # Save the index with the new version
