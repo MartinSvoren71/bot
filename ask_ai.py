@@ -43,6 +43,8 @@ def ask_ai(question, current_folder):
     #print(response.get_formated_sources)
     log_file = os.path.join(os.getcwd(), 'log.txt')
     
+    token_usage = index.llm_predictor.last_token_usage
+    print(token_usage)
     # Read the existing data in the log file
     with open(log_file, "r") as f:
         existing_data = f.read()
@@ -50,6 +52,7 @@ def ask_ai(question, current_folder):
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
         f.write(f"Time: {datetime.datetime.now()}\n\n")
+        #f.write(f"Togen usage: {token_usage}\n\n")
         f.write(f"Folder: {folder_path}\n\n")
         f.write(f"Question: {question}\n\n")
         f.write(f"Operator: {response.response}\n\n")
