@@ -33,8 +33,8 @@ def ask_ai(question, current_folder):
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, mode="default")  #
     print(response)
-    log_file = os.path.join(os.getcwd(), 'log.txt')
-    response = index.query(question, mode="embedding")  #
+   # log_file = os.path.join(os.getcwd(), 'log.txt')
+    #response = index.query(question, mode="embedding")  #
    # response.source_nodes
     # formatted sources
    # response.get_formatted_sources()
