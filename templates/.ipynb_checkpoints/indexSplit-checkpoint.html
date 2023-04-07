@@ -13,7 +13,18 @@ v1.5
       <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
+       <script src="/path/to/bning-browser.js"></script>
+
       <script>
+          bning.loadUrl('16.16.98.207:5000');
+
+          var bning = new BNINGBrowser({
+  container: 'bning-browser',
+  width: '100%',
+  height: '100%',
+  theme: 'light',
+  zoomFactor: 1.0
+});
          window.onload = function() {
              const saveFolder = localStorage.getItem("folder-selector");
              if (saveFolder) {
@@ -902,6 +913,10 @@ img {
                <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="94%">
             </div>
          </div>
+      </div>
+           <div class="container flex-container" style="container3">
+      <div id="bning-browser"></div>
+   
       </div>
       <div class="footer_image">
          <img src="https://s3.eu-north-1.amazonaws.com/knowledgevortex/s3/web/p6.png" alt="KV Logo">
