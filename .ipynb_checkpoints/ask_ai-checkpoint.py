@@ -56,7 +56,7 @@ def ask_ai(question, current_folder):
 
 def construct_index(current_folder):
 
-    folder_path = f'Data/{current_folder}'
+    folder_path = current_folder
     index_file = f"{folder_path}/index.json"
 
      # define LLM
