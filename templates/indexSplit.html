@@ -24,6 +24,7 @@ v1.5
           setInterval(function() {
             // Code to refresh the log container
             loadLogFile();
+               loader2.style.display = "none";
           }, 5000);
                   
           function updateTime() {
@@ -678,9 +679,19 @@ img {
     border-radius: 50%;
     width: 80px;
     height: 80px;
-    animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
               
 }
+           #loader2 {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+              
+}
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -701,6 +712,7 @@ img {
                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
                   <div>
                      <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">request on public data </button>
+                       <div id="loader2" style="display:none;width:20px;height:20px;"></div>
                      <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">request on my data</button>  
                    
                   </div>
@@ -718,8 +730,9 @@ img {
                <h1>__vortex keyword search__</h1>
                <form id="search-form">
                   <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
+                  <div id="loader" style="display:none;width:20px;height:20px;"></div>
+
                   <button id="button-search" type="button" onclick="searchFiles()">Search</button>
-                   <div id="loader" style="display:none;width:20px;height:20px;"></div>
                </form>
             </div>
          </div>
@@ -1081,11 +1094,11 @@ quillContainer.addEventListener('input', function() {
 });  
 function wait() {
     var loader = document.getElementById("loader");
-    loader.style.display = "block";
-    
-    // Perform the operation here
-    
-   
+    loader.style.display = "block"; 
+}
+       function wait2() {
+    var loader = document.getElementById("loader2");
+    loader.style.display = "block"; 
 }
    </script>    
 </html>
