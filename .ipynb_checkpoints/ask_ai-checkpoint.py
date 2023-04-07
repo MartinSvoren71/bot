@@ -55,8 +55,7 @@ def ask_ai(question, current_folder):
 
 
 def construct_index(current_folder):
-    os.environ["OPENAI_API_KEY"] = api_kx
-    openai.api_key = api_kx
+
     folder_path = f'Data/{current_folder}'
     index_file = f"{folder_path}/index.json"
 
@@ -73,8 +72,9 @@ def construct_index(current_folder):
     prompt_helper = PromptHelper(max_input_size, num_output, max_chunk_overlap)
 
     service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
-
-    index = GPTSimpleVectorIndex.from_documents(folder_path)
+    
+    documents = SimpleDirectoryReader(folder_path).load_data('index.json')
+    index = GPTSimpleVectorIndex.from_documents(documents)
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
 
