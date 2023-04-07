@@ -690,7 +690,7 @@ img {
                   <h2 >library:</h2>
              
                   <div class="select-container-2" id="select-container-2">
-                     <select name="folder-selector" id="folder-selector" onchange="">
+                     <select name="folder-selector" id="folder-selector" onchange="saveFolderx()">
                         {% for folder in folders %}
                         <option value="{{ folder }}">{{ folder }}</option>
                         {% endfor %}
@@ -773,9 +773,9 @@ img {
       loadLogFile();
              
     
-       function saveFolder() {
-       const selectedModel = document.getElementById("folder-select").value;
-       localStorage.setItem("folder-select", selectedModel);
+       function saveFolderx() {
+       const saveFolder = document.getElementById("folder-select").value;
+       localStorage.setItem("folder-select", saveFolder);
       }  
        
           
