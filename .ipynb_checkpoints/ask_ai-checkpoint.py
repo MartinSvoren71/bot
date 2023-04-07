@@ -21,17 +21,16 @@ def ask_ai(question, current_folder):
     index_file = f"{folder_path}/index.json"
     data_directory = folder_path
 
- #   if not os.path.exists(index_file):
-      #  print(f"Constructing index from data in {data_directory}...")
-     #   index = construct_index(data_directory)  # Save the returned index in a variable
-     #   index.save_to_disk(index_file)  # Save the index to the index_file
-     #   print("Index constructed and saved to disk.")
+    if not os.path.exists(index_file):
+        print(f"Constructing index from data in {data_directory}...")
+        index = construct_index(data_directory)  # Save the returned index in a variable
+        print("Index constructed and saved to disk.")
 
     index_file = f"{folder_path}/index.json"
     os.environ["OPENAI_API_KEY"] = api_k
-    documents = SimpleDirectoryReader(folder_path).load_data('index.json')
-    index = GPTSimpleVectorIndex.from_documents(documents)
-   # index = GPTSimpleVectorIndex.load_from_disk(folder_path)
+    #documents = SimpleDirectoryReader(folder_path).load_data('index.json')
+    #index = GPTSimpleVectorIndex.from_documents(documents)
+    index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question)  #
     print(response)
     log_file = os.path.join(os.getcwd(), 'log.txt')
@@ -74,9 +73,11 @@ def construct_index(current_folder):
     service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
 
     index = GPTSimpleVectorIndex.from_documents(
-    documents, service_context=service_context
+    folder_path, service_context=service_context
 )
-    index.save_to_disk('index.json') # Save the index with the new version
+    #index.save_to_disk('index.json') # Save the index with the new version
+    index.save_to_disk(index_file)  # Save the index to the index_file
+
     return index
 
 
