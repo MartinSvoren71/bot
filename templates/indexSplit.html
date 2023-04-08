@@ -88,21 +88,27 @@ v1.5
              width: 100vw;
          
          }     
-          .header-panel {
-        height: 6vh;
-        background-color: black;
-        opacity: 0.8;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-              margin-top: 0px;
-      }
+
       
       /* Style for the title text */
       .title {
         color: white;
         font-size: 2rem;
         text-align: center;
+                  height: 10vh;
+        background-color: black;
+        opacity: 0.6;
+        display: fixed;
+        justify-content: center;
+        align-items: center;
+margin-top: 0px;
+display: flex;
+justify-content: center;
+align-items: center;
+  position: flex;
+  top: 0;
+  left: 0;
+  right: 0;
       }
          #container {
          color: var(--matrix-black-1);
@@ -337,6 +343,7 @@ v1.5
          font-family: 'Lucida Console', monospace;  
          color: var(--matrix-black-1);
          margin: 0;
+             padding:0;
          background-color: var(--matrix-black-1);
          font-size: 0.9em;
          font-weight: bold;
@@ -850,15 +857,17 @@ img {
     100% { transform: rotate(360deg); }
 }
       </style>
-          
-      <div class="header-panel">
-      <h1 class="title">Knowledge-Vortex</h1>
-    </div>
+        <h1 class="title">Knowledge-Vortex</h1>  
+    
    </head>
    <body onsubmit="event.preventDefault();" onclick="event.preventDefault();">
    
        <canvas id="matrixCanvas"></canvas>
+        
+      
+ 
       <div class="container">
+          
          <div class="content-wrapper">
             <div class="left-side">
                <h1>__Knowledge Vortex__</h1>
@@ -1232,7 +1241,7 @@ img {
       function setCanvasOpacity() {
     let opacity = 0; // Start with an opacity of 0
     const increaseTime = 5000; // 8 seconds in milliseconds
-    const targetOpacity = 0.65; // Change this to your desired opacity
+    const targetOpacity = 0.45; // Change this to your desired opacity
 
     const increaseOpacity = () => {
         opacity += 0.01;
