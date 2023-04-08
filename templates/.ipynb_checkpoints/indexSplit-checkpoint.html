@@ -87,7 +87,22 @@ v1.5
              max-width: 99vw;
              width: 99vw;
          
-         }       
+         }     
+          .header-panel {
+        height: 6vh;
+        background-color: black;
+        opacity: 0.8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      /* Style for the title text */
+      .title {
+        color: white;
+        font-size: 2rem;
+        text-align: center;
+      }
          #container {
          color: var(--matrix-black-1);
          font-family: 'Lucida Console', monospace;  
@@ -324,7 +339,8 @@ v1.5
          background-color: var(--matrix-black-1);
          font-size: 0.9em;
          font-weight: bold;
-        margin: 3%;
+        margin:left: 3%;
+             margin:right: 3%;
              
          justify-content: center;
          align-items: center;
@@ -836,6 +852,9 @@ img {
    </head>
    <body onsubmit="event.preventDefault();" onclick="event.preventDefault();">
       <canvas id="matrixCanvas"></canvas>
+      <div class="header-panel">
+      <h1 class="title">Knowledge-Vortex</h1>
+    </div>
       <div class="container">
          <div class="content-wrapper">
             <div class="left-side">
