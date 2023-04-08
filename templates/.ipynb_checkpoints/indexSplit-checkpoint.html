@@ -16,15 +16,7 @@ v1.5
        <script src="/path/to/bning-browser.js"></script>
 
       <script>
-          bning.loadUrl('16.16.98.207:5000');
 
-          var bning = new BNINGBrowser({
-  container: 'bning-browser',
-  width: '100%',
-  height: '100%',
-  theme: 'light',
-  zoomFactor: 1.0
-});
          window.onload = function() {
              const saveFolder = localStorage.getItem("folder-selector");
              if (saveFolder) {
