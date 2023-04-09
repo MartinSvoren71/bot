@@ -27,7 +27,7 @@ v1.5
           setInterval(function() {
             // Code to refresh the log container
             loadLogFile();
-               loader2.style.display = "none";
+              
           }, 5000);
                   
           function updateTime() {
@@ -1261,9 +1261,12 @@ function wait() {
     var loader = document.getElementById("loader");
     loader.style.display = "block"; 
 }
-       function wait2() {
-    var loader = document.getElementById("loader2");
-    loader.style.display = "block"; 
+function wait2() {
+  var loader = document.getElementById("loader2");
+  loader.style.display = "block";
+  setTimeout(function() {
+     loader2.style.display = "none";
+  }, 8000); // 8000 milliseconds = 8 seconds
 }
    </script>    
 </html>
