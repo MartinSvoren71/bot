@@ -22,7 +22,7 @@ from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 from concurrent.futures import ThreadPoolExecutor
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader, PdfWriter
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad 
 
