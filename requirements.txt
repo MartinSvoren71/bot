@@ -14,3 +14,4 @@ sudo systemctl enable app2.service;
 sudo systemctl restart app2.service;
 sudo systemctl status app2.service;
 sudo yum install httpd-tools;
+pip install PyCryptodome;

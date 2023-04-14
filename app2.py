@@ -5,6 +5,8 @@ from threading import Thread
 from main import api_kx
 from datetime import timedelta
 import os
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
 import re
 import json
 import subprocess
@@ -138,27 +140,46 @@ def process_pdf_file(filepath, keyword, pattern):
     return filepath, result, False
 
 # part_2 process search on pdf files     
-def search_pdf_files(keyword, folder_path):
-    results = {}
-    encrypted_files = []
-    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+def process_pdf_file(filepath, keyword, pattern):
+    matches = []
+    is_encrypted = False
 
-    pdf_files = [os.path.join(root, filename)
-                 for root, _, filenames in os.walk(folder_path)
-                 for filename in filenames
-                 if filename.lower().endswith('.pdf')]
+    try:
+        with open(filepath, 'rb') as file:
+            pdf_reader = PdfFileReader(file)
 
-    with ThreadPoolExecutor() as executor:
-        future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
+            if pdf_reader.isEncrypted:
+                is_encrypted = True
+                try:
+                    pdf_reader.decrypt('')
+                    decrypted_pdf = PdfFileWriter()
 
-        for future in future_results:
-            filepath, matches, is_encrypted = future.result()
+                    for page_num in range(pdf_reader.getNumPages()):
+                        decrypted_pdf.addPage(pdf_reader.getPage(page_num))
+
+                    # Save the decrypted PDF to a temporary file
+                    temp_filepath = filepath + '_decrypted.pdf'
+                    with open(temp_filepath, 'wb') as decrypted_file:
+                        decrypted_pdf.write(decrypted_file)
+
+                except NotImplementedError:
+                    return filepath, matches, True
+
+                pdf_reader = PdfFileReader(temp_filepath)
+
+            for page_num in range(pdf_reader.getNumPages()):
+                content = pdf_reader.getPage(page_num).extractText()
+                for match in pattern.finditer(content):
+                    matches.append((page_num, match.start()))
+
             if is_encrypted:
-                encrypted_files.append(filepath)
-            elif matches:
-                results[filepath] = matches
+                os.remove(temp_filepath)
 
-    return results, encrypted_files
+    except Exception as e:
+        print(f"Error processing file {filepath}: {e}")
+        return filepath, matches, is_encrypted
+
+    return filepath, matches, is_encrypted
 
 
 
