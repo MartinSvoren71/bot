@@ -23,6 +23,7 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 from concurrent.futures import ThreadPoolExecutor
 from pdfminer.high_level import extract_text
+import warnings
 
 
 app = Flask(__name__, static_folder='/')
