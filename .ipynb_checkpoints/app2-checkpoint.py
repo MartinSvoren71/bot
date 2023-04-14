@@ -5,8 +5,6 @@ from threading import Thread
 from main import api_kx
 from datetime import timedelta
 import os
-from Crypto.Cipher import AES
-from Crypto.Util.Padding import unpad
 import re
 import json
 import subprocess
@@ -23,6 +21,10 @@ import shutil
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
+from concurrent.futures import ThreadPoolExecutor
+from PyPDF2 import PdfFileReader, PdfFileWriter
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad 
 
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
@@ -121,35 +123,13 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html')
 
-# part_1 process search on pdf files     
+# part_1 process search on pdf files
 def process_pdf_file(filepath, keyword, pattern):
     result = []
     try:
         with open(filepath, 'rb') as f:
             pdf_reader = PdfFileReader(f)
             if pdf_reader.isEncrypted:
-                return filepath, None, True
-            for page_num in range(pdf_reader.getNumPages()):
-                text = pdf_reader.getPage(page_num).extractText()
-                matches = pattern.findall(text)
-                if matches:
-                    result.extend([(page_num, match) for match in matches])
-    except Exception as e:
-        print(f"Error processing {filepath}: {str(e)}")
-        return filepath, None, False
-    return filepath, result, False
-
-# part_2 process search on pdf files     
-def process_pdf_file(filepath, keyword, pattern):
-    matches = []
-    is_encrypted = False
-
-    try:
-        with open(filepath, 'rb') as file:
-            pdf_reader = PdfFileReader(file)
-
-            if pdf_reader.isEncrypted:
-                is_encrypted = True
                 try:
                     pdf_reader.decrypt('')
                     decrypted_pdf = PdfFileWriter()
@@ -163,43 +143,63 @@ def process_pdf_file(filepath, keyword, pattern):
                         decrypted_pdf.write(decrypted_file)
 
                 except NotImplementedError:
-                    return filepath, matches, True
+                    return filepath, None, True
 
                 pdf_reader = PdfFileReader(temp_filepath)
 
             for page_num in range(pdf_reader.getNumPages()):
-                content = pdf_reader.getPage(page_num).extractText()
-                for match in pattern.finditer(content):
-                    matches.append((page_num, match.start()))
+                text = pdf_reader.getPage(page_num).extractText()
+                matches = pattern.findall(text)
+                if matches:
+                    result.extend([(page_num, match) for match in matches])
 
-            if is_encrypted:
+            if pdf_reader.isEncrypted:
                 os.remove(temp_filepath)
 
     except Exception as e:
-        print(f"Error processing file {filepath}: {e}")
-        return filepath, matches, is_encrypted
+        print(f"Error processing {filepath}: {str(e)}")
+        return filepath, None, False
+    return filepath, result, False
 
-    return filepath, matches, is_encrypted
+# part_2 process search on pdf files
+def search_pdf_files(keyword, folder_path):
+    results = {}
+    encrypted_files = []
+    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
 
+    pdf_files = [os.path.join(root, filename)
+                 for root, _, filenames in os.walk(folder_path)
+                 for filename in filenames
+                 if filename.lower().endswith('.pdf')]
 
+    with ThreadPoolExecutor() as executor:
+        future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
 
+        for future in future_results:
+            filepath, matches, is_encrypted = future.result()
+            if is_encrypted:
+                encrypted_files.append(filepath)
+            elif matches:
+                results[filepath] = matches
 
-# part_3 process search on pdf files     + caller from web app
+    return results, encrypted_files
+
+# part_3 process search on pdf files + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
-    
+
     # Set the folder path to search for PDF files
     select_folder = ''
     folder_path = f'Data/{current_folder}'
     print(f"Selected folder for search: {current_folder}")  # Print the selected folder in the terminal
-    
+
     if request.method == 'POST':
         keyword = request.form['keyword']
-        
+
         search_results, encrypted_files = search_pdf_files(keyword, folder_path)
-        
+
         # Write search results to a text file
         with open('search_results.txt', 'a') as f:  # Change mode to 'a' to append to the file
             f.write(f"Search keyword: {keyword}\n")
@@ -210,10 +210,7 @@ def search_files():
                 f.write(os.linesep)
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
 
-    rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
-    return jsonify({'rendered_template': rendered_template})
-
-
+    rendered_template = render_template('results.html
 
 
 # save and generate PDF document
