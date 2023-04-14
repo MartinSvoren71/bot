@@ -22,8 +22,8 @@ from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
 from concurrent.futures import ThreadPoolExecutor
-from pdfminer.high_level import extract_text
 import warnings
+from pdfminer.high_level import extract_text
 
 
 app = Flask(__name__, static_folder='/')
@@ -131,7 +131,7 @@ def process_pdf_file(filepath, keyword, pattern):
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            text = extract_text(filepath, password='', codec='utf-8', check_extractable=False)
+            text = extract_text(filepath, password='', codec='utf-8')
             pages = text.split('\f')
 
         for page_num, page_text in enumerate(pages):
