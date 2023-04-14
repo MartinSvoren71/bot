@@ -7,6 +7,7 @@ pip install llama-index;
 pip install Flask boto3;
 pip install PyPDF4;
 pip install pypdf2==2.12.0;
+pip install pdfminer.six;
 cd bot;
 sudo cp -p  app2.service.txt /etc/systemd/system/app2.service;
 sudo systemctl daemon-reload;

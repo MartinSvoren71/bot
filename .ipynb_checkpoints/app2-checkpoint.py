@@ -21,9 +21,8 @@ import shutil
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
-from Crypto.Cipher import AES
-from Crypto.Util.Padding import unpad
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from concurrent.futures import ThreadPoolExecutor
+from pdfminer.high_level import extract_text
 
 
 app = Flask(__name__, static_folder='/')
@@ -123,44 +122,23 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html')
 
-# part_1 process search on pdf files     
+# part_1 process search on pdf files
 def process_pdf_file(filepath, keyword, pattern):
     matches = []
     is_encrypted = False
 
     try:
-        with open(filepath, 'rb') as file:
-            pdf_reader = PdfFileReader(file)
+        text = extract_text(filepath, password='', codec='utf-8')
+        pages = text.split('\f')
 
-            if pdf_reader.isEncrypted:
-                is_encrypted = True
-                try:
-                    pdf_reader.decrypt('')
-                    decrypted_pdf = PdfFileWriter()
-
-                    for page_num in range(pdf_reader.getNumPages()):
-                        decrypted_pdf.addPage(pdf_reader.getPage(page_num))
-
-                    # Save the decrypted PDF to a temporary file
-                    temp_filepath = filepath + '_decrypted.pdf'
-                    with open(temp_filepath, 'wb') as decrypted_file:
-                        decrypted_pdf.write(decrypted_file)
-
-                except NotImplementedError:
-                    return filepath, matches, True
-
-                pdf_reader = PdfFileReader(temp_filepath)
-
-            for page_num in range(pdf_reader.getNumPages()):
-                content = pdf_reader.getPage(page_num).extractText()
-                for match in pattern.finditer(content):
-                    matches.append((page_num, match.start()))
-
-            if is_encrypted:
-                os.remove(temp_filepath)
+        for page_num, page_text in enumerate(pages):
+            for match in pattern.finditer(page_text):
+                matches.append((page_num, match.start()))
 
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
+        if 'file has not been decrypted' in str(e):
+            is_encrypted = True
         return filepath, matches, is_encrypted
 
     return filepath, matches, is_encrypted
