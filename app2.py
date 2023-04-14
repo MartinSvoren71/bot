@@ -21,6 +21,10 @@ import shutil
 from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 from flask import send_from_directory
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import unpad
+from PyPDF2 import PdfFileReader, PdfFileWriter
+
 
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
@@ -121,21 +125,45 @@ def ask_LIB_route():
 
 # part_1 process search on pdf files     
 def process_pdf_file(filepath, keyword, pattern):
-    result = []
+    matches = []
+    is_encrypted = False
+
     try:
-        with open(filepath, 'rb') as f:
-            pdf_reader = PdfFileReader(f)
+        with open(filepath, 'rb') as file:
+            pdf_reader = PdfFileReader(file)
+
             if pdf_reader.isEncrypted:
-                return filepath, None, True
+                is_encrypted = True
+                try:
+                    pdf_reader.decrypt('')
+                    decrypted_pdf = PdfFileWriter()
+
+                    for page_num in range(pdf_reader.getNumPages()):
+                        decrypted_pdf.addPage(pdf_reader.getPage(page_num))
+
+                    # Save the decrypted PDF to a temporary file
+                    temp_filepath = filepath + '_decrypted.pdf'
+                    with open(temp_filepath, 'wb') as decrypted_file:
+                        decrypted_pdf.write(decrypted_file)
+
+                except NotImplementedError:
+                    return filepath, matches, True
+
+                pdf_reader = PdfFileReader(temp_filepath)
+
             for page_num in range(pdf_reader.getNumPages()):
-                text = pdf_reader.getPage(page_num).extractText()
-                matches = pattern.findall(text)
-                if matches:
-                    result.extend([(page_num, match) for match in matches])
+                content = pdf_reader.getPage(page_num).extractText()
+                for match in pattern.finditer(content):
+                    matches.append((page_num, match.start()))
+
+            if is_encrypted:
+                os.remove(temp_filepath)
+
     except Exception as e:
-        print(f"Error processing {filepath}: {str(e)}")
-        return filepath, None, False
-    return filepath, result, False
+        print(f"Error processing file {filepath}: {e}")
+        return filepath, matches, is_encrypted
+
+    return filepath, matches, is_encrypted
 
 # part_2 process search on pdf files     
 def search_pdf_files(keyword, folder_path):
