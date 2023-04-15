@@ -1045,6 +1045,9 @@ img {
 
                   <button id="button-search" type="button" onclick="searchFiles()">Search</button>
                </form>
+                    <div id="slider-wrapper">
+        <input type="range" id="opacity-slider" min="0" max="100" value="100">
+    </div>
             </div>
          </div>
                  <div class=" middle-side">
@@ -1439,7 +1442,18 @@ function wait2() {
      loader2.style.display = "none";
   }, 8000); // 8000 milliseconds = 8 seconds
 }
+document.addEventListener("DOMContentLoaded", function () {
+  const slider = document.getElementById("opacity-slider");
+  const containers = document.querySelectorAll(".container4");
 
+  slider.addEventListener("input", function () {
+    const opacityValue = slider.value / 100;
+
+    containers.forEach((container) => {
+      container.style.opacity = opacityValue;
+    });
+  });
+});
 
 </script>
 
