@@ -8,21 +8,49 @@
 		-webkit-touch-callout: none;
 		-webkit-text-size-adjust: none;
 		-webkit-user-select: none;
-        background: none;
 	}
-	
+	h1 {
+		background:#eee;
+		color:#333;
+		height:110px;
+		display:block;
+		font-size: 24px;
+		padding:20px;
+		margin-top:0px !important;
+		text-align:center;
+
+	}
 	</style>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/draw_js_kv/jquery.drawr.combined.js"></script>
+	<script type="text/javascript" src="js/jquery.drawr.combined.js"></script>
 
 </head>
 <body>
-<div id="drawr-container" style="width:700px;height:700px;border:2px dotted gray;margin:0px auto;">
+
+	<h1>JQuery dRawr Example</h1>
+
+ <div style="margin-left:20px; text-align:center;"><b>dRawr Example 1 with Transparent Board</b></div> 
+ 
+<div id="drawr-container" style="margin:20px auto;width:350px;height:350px;border:2px dotted gray;">
 	<canvas class="demo-canvas"></canvas>
+</div>
+
+
+<div style="margin-left:20px; text-align:center;"><b>dRawr Example 2 with Whiteboard</b></div>
+
+<div id="drawr-container2" style="width:350px;height:300px;border:2px dotted gray;margin:20px auto;">
+	<canvas class="demo-canvas"></canvas>
+</div>
+
+
+<hr/>
+
+This project is maintained by Lieuwe Prins
+
 </div>
 
 
@@ -30,8 +58,8 @@
 
 	$("#drawr-container .demo-canvas").drawr({
 		"enable_tranparency" : true,
-	    "canvas_width" : 700px,
-	    "canvas_height" : 700px
+	    "canvas_width" : 800,
+	    "canvas_height" : 800
 	});
 	$("#drawr-container2 .demo-canvas").drawr({ "enable_tranparency" : false });
 	$("#drawr-container3 .demo-canvas").drawr({ "enable_tranparency" : false });
