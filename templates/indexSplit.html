@@ -162,7 +162,7 @@ align-items: center;
          width: 100%; /* You can adjust the width as needed */
          font-family: 'Lucida Console', monospace;  
          height: 112.5vh;
-         background-color: rgba(255, 255, 255, 0);
+         background-color: rgba(255, 255, 255, 100);
          font-size: 1.3em;
          font-weight: bold;
              border: none;
@@ -1476,15 +1476,9 @@ img {
 
 setCanvasOpacity();
        
-   const quillContainer = document.querySelector('.quill-container');
+  const quillContainer = document.querySelector('.quill-container');
 
-quillContainer.addEventListener('input', function() {
-  if (quillContainer.textContent.length > 0) {
-    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-  } else {
-    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0)';
-  }
-});  
+ 
 function wait() {
     var loader = document.getElementById("loader");
     loader.style.display = "block"; 
