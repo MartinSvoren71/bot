@@ -1120,7 +1120,7 @@ img {
        }  
        
        
-      function save(event) {
+    async function save(event) {
   event.preventDefault();
 
   // Extract the HTML content from the Quill editor
@@ -1130,16 +1130,22 @@ img {
   const contentDiv = document.createElement('div');
   contentDiv.innerHTML = content;
 
-  // Convert the content div to a PDF using html2pdf.js
-  const pdfOptions = {
-    margin: 1,
-    filename: 'download.pdf',
-    image: { type: 'jpeg', quality: 1 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-  };
+  // Render the content div using html2canvas with an increased scale factor
+  const scale = 3; // Increase the scale factor to improve resolution
+  const canvas = await html2canvas(contentDiv, { scale });
 
-  html2pdf().set(pdfOptions).from(contentDiv).save();
+  // Create a new jsPDF instance
+  const pdf = new jsPDF('p', 'mm', 'a4');
+
+  // Add the rendered canvas to the PDF
+  const imgData = canvas.toDataURL('image/png');
+  const imgProps = pdf.getImageProperties(imgData);
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+  // Download the PDF
+  pdf.save('download.pdf');
 }
 
        
