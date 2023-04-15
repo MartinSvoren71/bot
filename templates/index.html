@@ -26,34 +26,16 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="js/jquery.drawr.combined.js"></script>
+	<script type="text/javascript" src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/draw_js_kv/jquery.drawr.combined.js"></script>
 
 </head>
 <body>
-
-	<h1>JQuery dRawr Example</h1>
-
- <div style="margin-left:20px; text-align:center;"><b>dRawr Example 1 with Transparent Board</b></div> 
- 
-<div id="drawr-container" style="margin:20px auto;width:350px;height:350px;border:2px dotted gray;">
+<div id="drawr-container2" style="width:700px;height:700px;border:2px dotted gray;margin:20px auto;">
 	<canvas class="demo-canvas"></canvas>
 </div>
 
 
-<div style="margin-left:20px; text-align:center;"><b>dRawr Example 2 with Whiteboard</b></div>
-
-<div id="drawr-container2" style="width:350px;height:300px;border:2px dotted gray;margin:20px auto;">
-	<canvas class="demo-canvas"></canvas>
-</div>
-
-
-<hr/>
-
-This project is maintained by Lieuwe Prins
-
-</div>
-
-
+<script type="text/javascript">
 
 	$("#drawr-container .demo-canvas").drawr({
 		"enable_tranparency" : true,
