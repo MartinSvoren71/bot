@@ -1012,12 +1012,18 @@ img {
          #slider-wrapper {
             margin-top: 20px;
             padding: 10px; /* Add padding to the slider container */
+               display: fixed;
+        justify-content: center;
+        align-items: center;
         }
         input[type=range] {
             -webkit-appearance: none; /* Remove default appearance for WebKit browsers */
             width: 30%;
             background: transparent; /* Remove default background */
             opacity: 0.5;
+             display: fixed;
+        justify-content: center;
+        align-items: center;
         }
 
         input[type=range]::-webkit-slider-thumb {
@@ -1104,9 +1110,7 @@ img {
 
                   <button id="button-search" type="button" onclick="searchFiles()">Search</button>
                </form>
-                    <div id="slider-wrapper">
-        <input type="range" id="opacity-slider" min="0" max="100" value="30">
-    </div>
+         
             </div>
          </div>
                  <div class=" middle-side">
@@ -1176,6 +1180,12 @@ img {
      </div>
        <div class="footer">
       <h3>Knowledge Vortex 2023</h3>
+           <div>
+                      <div id="slider-wrapper">
+        <input type="range" id="opacity-slider" min="0" max="100" value="30">
+    </div>
+                   </div>
+
              </div>
    </body>
    <script>
