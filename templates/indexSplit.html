@@ -14,7 +14,11 @@ v1.5
       <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
        <script src="/path/to/bning-browser.js"></script>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/draw_js_kv/jquery.drawr.combined.js"></script>
       <script>
 
          window.onload = function() {
@@ -122,6 +126,17 @@ align-items: center;
          justify-content: center;
          }
          #container3 {
+         font-family: 'Lucida Console', monospace;  
+         display: flex;
+         height: 100vh;
+         align-items: center;
+             margin-bottom:1vh
+
+         justify-content: center;
+         align-items: center;
+         display: flex;
+         }
+           #container4 {
          font-family: 'Lucida Console', monospace;  
          display: flex;
          height: 100vh;
@@ -333,6 +348,23 @@ align-items: center;
   .right-down-down-side::-webkit-scrollbar-thumb:hover {
     background-color: #555;
   }
+          
+             .bottom {
+
+             padding:5px;
+         flex: 1;
+         justify-content: center;
+         align-items: center;
+         max-width: 80%;
+             height:80vh;
+        background: radial-gradient(circle, rgba(200, 200, 200, 1) 0%, rgba(255, 255, 255, 1) 100%);
+                color: var(--matrix-red-pill);
+                 border-right: 1px solid #19192e;
+                       border-bottom: 1px solid #19192e;
+             flex-direction: column;
+         overflow-y: auto;
+ overflow-x: hidden; /* Add this line */
+         }
           
          body {
          font-family: 'Lucida Console', monospace;  
@@ -964,9 +996,15 @@ img {
             </div>
          </div>
       </div>
-           <div class="container flex-container" style="container3">
-      <div id="bning-browser"></div>
-   
+         
+      </div>
+       
+        <div class="container flex-container" style="container4">
+            <div class="bottom">
+<div id="drawr-container2" style="width:350px;height:300px;border:2px dotted gray;margin:20px auto;">
+	<canvas class="demo-canvas"></canvas>
+</div>
+      </div>
       </div>
      
       <h3>Knowledge Vortex 2023</h3>
@@ -1295,4 +1333,46 @@ function wait2() {
   }, 8000); // 8000 milliseconds = 8 seconds
 }
    </script>    
+    <script type="text/javascript">
+
+	$("#drawr-container .demo-canvas").drawr({
+		"enable_tranparency" : true,
+	    "canvas_width" : 800,
+	    "canvas_height" : 800
+	});
+	$("#drawr-container2 .demo-canvas").drawr({ "enable_tranparency" : false });
+	$("#drawr-container3 .demo-canvas").drawr({ "enable_tranparency" : false });
+
+	$(".demo-canvas").drawr("start");
+	
+	//add custom save button.
+	var buttoncollection = $("#drawr-container3 .demo-canvas").drawr("button", {
+		"icon":"mdi mdi-folder-open mdi-24px"
+	}).on("touchstart mousedown",function(){
+		//alert("demo of a custom button with your own functionality!");
+		$("#file-picker").click();
+	});
+	var buttoncollection = $("#drawr-container3 .demo-canvas").drawr("button", {
+		"icon":"mdi mdi-content-save mdi-24px"
+	}).on("touchstart mousedown",function(){
+		var imagedata = $("#drawr-container3 .demo-canvas").drawr("export","image/jpeg");
+		var element = document.createElement('a');
+		element.setAttribute('href', imagedata);// 'data:text/plain;charset=utf-8,' + encodeURIComponent("sillytext"));
+		element.setAttribute('download', "test.jpg");
+		element.style.display = 'none';
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element);
+	});
+	$("#file-picker")[0].onchange = function(){
+		var file = $("#file-picker")[0].files[0];
+		if (!file.type.startsWith('image/')){ return }
+		var reader = new FileReader();
+		reader.onload = function(e) { 
+			$("#drawr-container3 .demo-canvas").drawr("load",e.target.result);
+		};
+		reader.readAsDataURL(file);
+	};
+
+</script>
 </html>
