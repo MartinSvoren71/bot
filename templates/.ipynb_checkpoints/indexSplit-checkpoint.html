@@ -357,12 +357,8 @@ align-items: center;
          align-items: center;
          max-width: 80%;
              height:80vh;
-        background: radial-gradient(circle, rgba(200, 200, 200, 1) 0%, rgba(255, 255, 255, 1) 100%);
-                color: var(--matrix-red-pill);
-                 border-right: 1px solid #19192e;
-                       border-bottom: 1px solid #19192e;
-             flex-direction: column;
-         overflow-y: auto;
+        
+         overflow-y: hidden;
  overflow-x: hidden; /* Add this line */
          }
           
@@ -1001,6 +997,15 @@ img {
        
         <div class="container flex-container" style="container4">
             <div class="bottom">
+ <div style="margin-left:20px; text-align:center;"><b>dRawr Example 1 with Transparent Board</b></div> 
+ 
+<div id="drawr-container" style="margin:20px auto;width:350px;height:350px;border:2px dotted gray;">
+	<canvas class="demo-canvas"></canvas>
+</div>
+
+
+<div style="margin-left:20px; text-align:center;"><b>dRawr Example 2 with Whiteboard</b></div>
+
 <div id="drawr-container2" style="width:350px;height:300px;border:2px dotted gray;margin:20px auto;">
 	<canvas class="demo-canvas"></canvas>
 </div>
@@ -1332,8 +1337,6 @@ function wait2() {
      loader2.style.display = "none";
   }, 8000); // 8000 milliseconds = 8 seconds
 }
-   </script>    
-    <script type="text/javascript">
 
 	$("#drawr-container .demo-canvas").drawr({
 		"enable_tranparency" : true,
