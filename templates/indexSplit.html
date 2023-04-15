@@ -242,7 +242,7 @@ width: 48%;
          justify-content: center;
          align-items: center;
                  max-width: 48%;
-                        opacity:0.4;
+                   
         
 width: 48%;
          max-width: 80%;
@@ -286,7 +286,7 @@ width: 48%;
          flex-direction: column;
          overflow-y: auto;
          height:80vh;
-             opacity: 0.4;
+         
         background: radial-gradient(circle, rgba(12, 29, 29, 0.35) 0%, rgba(8, 23, 23, 0.5) 100%);
                        border-bottom: 1px solid #19192e;
 
@@ -564,7 +564,7 @@ img {
          font-family: 'Lucida Console', monospace;  
          width: 96%;
              max-width: 96%;
-         height: 95vh;
+         height: 95%;
          overflow-x: hidden;
           flex-direction: column;
          overflow-y: auto;
@@ -1117,9 +1117,10 @@ img {
          </div>
       </div>
       <div class="container flex-container" style="container2">
+            <h1>__vortex file bucket__</h1>
          <div class="left-down-side">
              <div>
-            <h1>__vortex file bucket__</h1>
+          
             <div class="list-container">
                </div>
                <ul id="folder-content"></ul>
@@ -1495,7 +1496,7 @@ function wait2() {
 }
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.getElementById("opacity-slider");
-  const containers = document.querySelectorAll(".right-down-down-down-side, .left-down-down-down-side, .right-down-down-side, .left-down-down-side, .right-down-side, .left-down-side, .quill-container");
+  const containers = document.querySelectorAll(".right-down-down-down-side, .left-down-down-down-side, .right-down-down-side, .left-down-down-side, .quill-container");
 
   slider.addEventListener("input", function () {
     const opacityValue = slider.value / 100;
