@@ -975,9 +975,9 @@ v1.5
                   <h4>__opacity__</h4>
                </div>
                <div style="display: flex; justify-content: center; align-items: center;">
-                  <button >LIGHT</button>
+                  <button id="light_theme" >LIGHT</button>
                   <input type="range" id="opacity-slider" min="0" max="100" value="30">
-                  <button>DARK</button>
+                  <button id="dark_theme">DARK</button>
                </div>
                <h3>ask operator: </h3>
                <form id="ask-form" enctype="multipart/form-data" >
@@ -1398,6 +1398,11 @@ v1.5
       });
       });
       });
-      
+       
+document.getElementById("light_theme").addEventListener("click", function() {
+  document.documentElement.style.setProperty('--matrix-white-1', '#ff0550');
+  document.querySelector('canavas').style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--matrix-white-1');
+});    
+       
    </script>
 </html>
