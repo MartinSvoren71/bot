@@ -158,7 +158,7 @@ v1.5
          border: none;
          margin: 0 ; /* Center the container horizontally */
          color: var(--matrix-black-2);
-         opacity:0.4;
+         opacity:1;
          }
          .ql-container.ql-snow {
          border: none;
@@ -308,7 +308,7 @@ v1.5
          justify-content: center;
          align-items: center;
          max-width: 48%;
-         opacity:0.4;
+         opacity:1;
          width: 48%;
          height: 120vh;
          padding 3%;
@@ -336,7 +336,7 @@ v1.5
          display: fixed;
          justify-content: left;
          align-items: center;
-         opacity:0.4;
+         opacity:1;
          max-width: 48%;
          width: 48%;
          max-height: 80vh;
@@ -362,7 +362,7 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
-         opacity: 0.0;
+         opacity: 1;
          max-width: 4%;
          width: 4%;
          max-height: 80vh;
@@ -381,7 +381,7 @@ v1.5
                       background: var(--title-grad);
 
          max-width: 48%;
-         opacity:0.4;
+         opacity:1;
          width: 48%;
          max-height: 80vh;
          height: 80vh;
@@ -976,7 +976,7 @@ v1.5
                </div>
                <div style="display: flex; justify-content: center; align-items: center;">
                   <button id="light_theme" >LIGHT</button>
-                  <input type="range" id="opacity-slider" min="0" max="100" value="30">
+                  <input type="range" id="opacity-slider" min="0" max="100" value="100">
                   <button id="dark_theme">DARK</button>
                </div>
                <h3>ask operator: </h3>
@@ -1405,11 +1405,6 @@ ctx.fillStyle = gradient;
       });
       });
       });
-       
-document.getElementById("light_theme").addEventListener("click", function() {
-  document.documentElement.style.setProperty('--matrix-white-1', '#ff0550');
-  document.querySelector('canavas').style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--matrix-white-1');
-});    
-       
+ 
    </script>
 </html>
