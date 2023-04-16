@@ -1408,14 +1408,12 @@ ctx.fillStyle = gradient;
        
 async function dark(event) {
   event.preventDefault();
-  const response = await fetch("/indexSplit");
-  location.reload(); // Refresh the page after the response is received
+  const response = await fetch("/dark");
 }
 
 async function light(event) {
   event.preventDefault();
-  const response = await fetch("/indexSplit_light");
-  location.reload(); // Refresh the page after the response is received
+  const response = await fetch("/light");
 }
    </script>
 </html>

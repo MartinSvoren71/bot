@@ -76,23 +76,27 @@ def list_files_and_urls(folder_path):
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        theme_sel = "light"
-        theme=theme_sel;
+        theme = session.get("theme", "dark") # Get the theme from the session, defaulting to "dark"
         data_folders = get_subfolders_recursive('Data/')
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
-        if theme == "light" :
-            return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
-        else :
-            return render_template("indexSplit.html", folders=data_folders, files=files, results={})
+        return render_template("indexSplit.html" if theme == "dark" else "indexSplit_light.html",
+                               folders=data_folders, files=files, results={}, theme=theme)
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
-    
 
-  
-  
+    
+@app.route("/light", methods=["GET", "POST"])
+def theme_l():
+    session["theme"] = "light"
+    return index()
+
+@app.route("/dark", methods=["GET", "POST"])  
+def theme_d():  
+    session["theme"] = "dark"
+    return index()
 
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
