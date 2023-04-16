@@ -56,25 +56,25 @@ v1.5
       <title>Ask AI</title>
       <style>
          :root {
-         --matrix-white-1:                #0a2b3a;
-         --matrix-red-1:                  #bab6b7;
-         --matrix-red-2:                  #bab6b7;  
-         --matrix-green-1:                #0b2733;
-         --matrix-green-2:                #0b2733;
-         --matrix-green-3:                #0b2733;
-         --matrix-green-4:                #0b2733;
-         --matrix-blue-pill:                #0b2733;
-         --matrix-red-pill:                #0b2733;        
-         --matrix-green-6:                #0b2733;  
-         --matrix-amber-1:                 #0b2733;
-         --matrix-amber-2:                 #0b2733;
-         --matrix-black-1:                  #f0eee2;      
-         --matrix-black-2:                   #0b2733;    
-         --text-1:                       #0b2733;
-         --text-2:                          #0b2733
-         --gray-2:                        #0b2733;    
-         --matrix-gray-1:                 #0b2733;
-         --title-grad:     radial-gradient(circle, rgba(151, 157, 145, 0.4) 0%, rgba(244, 241, 232, 0.4) 100%);
+         --matrix-white-1:                #ffffff;
+         --matrix-red-1:                  #ff000c;
+         --matrix-red-2:                  #6b0c08;  
+         --matrix-green-1:                #ffffff;
+         --matrix-green-2:                #2d9cca;
+         --matrix-green-3:                #5a8662;
+         --matrix-green-4:                #2d9cca;
+         --matrix-blue-pill:                #a9abb8;
+         --matrix-red-pill:                #a9abb8;        
+         --matrix-green-6:                #0e1c0d;  
+         --matrix-amber-1:                 #a9abb8;
+         --matrix-amber-2:                 #ffdd9d;
+         --matrix-black-1:                  #081717;      
+         --matrix-black-2:                   black;    
+         --text-1:                       #1cafec;
+         --text-2:                          #474866
+         --gray-2:                        #29658a;    
+         --matrix-gray-1:                 #1f1f1f;
+         --title-grad:     radial-gradient(circle, rgba(12, 29, 29, 0.35) 0%, rgba(8, 23, 23, 0.5) 100%);
              
              
              
@@ -227,7 +227,8 @@ v1.5
          height:80vh;
          background: var(--title-grad);
          color: var(--matrix-red-pill);
-       
+         border-right: 1px solid #19192e;
+         border-bottom: 1px solid #19192e;
          flex-direction: column;
          overflow-y: auto;
          overflow-x: hidden; /* Add this line */
@@ -260,7 +261,7 @@ v1.5
          overflow-y: auto;
          height:80vh;
          background: var(--title-grad);
-     
+         border-bottom: 1px solid #19192e;
          }
          .right-down-side::-webkit-scrollbar {
          width: 6px;
@@ -288,7 +289,7 @@ v1.5
          padding 3%;
          background: var(--title-grad);
          color: var(--matrix-black-1);
-     
+         border-right: 1px solid #19192e;
          }
          .left-down-down-side::-webkit-scrollbar {
          width: 6px;
@@ -410,7 +411,7 @@ v1.5
          }       
          body {
          font-family: 'Lucida Console', monospace;  
-         background: linear-gradient(to bottom, #fdfae8, #2f3c5c);
+         color: var(--matrix-black-1);
          margin: 0;
          padding:0;
          background-color: var(--matrix-black-1);
@@ -963,6 +964,7 @@ v1.5
       <h1 class="title">Knowledge-Vortex</h1>
    </head>
    <body onsubmit="event.preventDefault();" onclick="event.preventDefault();">
+      <canvas id="matrixCanvas"></canvas>
       <div class="container">
          <div class="content-wrapper">
             <div class="left-side">
@@ -1352,9 +1354,9 @@ v1.5
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
       function setCanvasOpacity() {
-      let opacity = 0.45; // Start with an opacity of 0
+      let opacity = 0; // Start with an opacity of 0
       const increaseTime = 5000; // 8 seconds in milliseconds
-      const targetOpacity = 0.0; // Change this to your desired opacity
+      const targetOpacity = 0.45; // Change this to your desired opacity
       
       const increaseOpacity = () => {
         opacity += 0.01;
