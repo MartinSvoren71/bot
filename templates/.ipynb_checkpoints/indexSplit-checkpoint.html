@@ -979,9 +979,9 @@ v1.5
                   <h4>__opacity__</h4>
                </div>
                <div style="display: flex; justify-content: center; align-items: center;">
-                  <button id="light_theme" >LIGHT</button>
+                  <button onclick="light(event)" id="light_theme" >LIGHT</button>
                   <input type="range" id="opacity-slider" min="0" max="100" value="70">
-                  <button id="dark_theme">DARK</button>
+                  <button onclick="dark(event)" id="dark_theme">DARK</button>
                </div>
                <h3>ask operator: </h3>
                <form id="ask-form" enctype="multipart/form-data" >
@@ -1403,24 +1403,20 @@ v1.5
       });
       });
        
-   async function ask_LIB(event) {
-                  //  wait();
+   async function dark(event) {
+                 
          event.preventDefault();
-        const form = document.getElementById("dark_theme");
-        const formData = new FormData(form);
+       
         const response =  fetch("/indexSplit", {
-            method: "POST",
-            body: formData,
+           
         });
       } 
-       async function ask_LIB(event) {
-                  //  wait();
+       async function light(event) {
+                 
          event.preventDefault();
-        const form = document.getElementById("light_theme");
-        const formData = new FormData(form);
-        const response =  fetch("/index+split_light", {
-            method: "POST",
-            body: formData,
+      
+        const response =  fetch("/indexSplit_light", {
+          
         });
       } 
        
