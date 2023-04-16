@@ -84,9 +84,10 @@ def index():
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
+    
     # main web app wehn righ key is provided
 @app.route("/indexSplit_light", methods=["GET", "POST"])
-def index():
+def index_l():
     if "logged_in" in session:
         data_folders = get_subfolders_recursive('Data/')
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 

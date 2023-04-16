@@ -84,6 +84,19 @@ def index():
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
+    
+    # main web app wehn righ key is provided
+@app.route("/indexSplit_light", methods=["GET", "POST"])
+def index_l():
+    if "logged_in" in session:
+        data_folders = get_subfolders_recursive('Data/')
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
+        files = list_files_and_urls(folder_path)
+        folders = list_folders()
+        return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
+    else:
+        flash("Please log in first")
+        return redirect(url_for("login"))
 
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
