@@ -1404,14 +1404,25 @@ v1.5
       });
        
 async function dark(event) {
-  event.preventDefault();
-  const response = await fetch("/dark");
-}
+    event.preventDefault();
+        const form = document.getElementById("ask-form");
+        const formData = new FormData(form);
+        const response =  fetch("/dark", {
+            method: "POST",
+            body: formData,
+        });
+      } 
 
 async function light(event) {
-  event.preventDefault();
-  const response = await fetch("/light");
-}
+                  //  wait();
+         event.preventDefault();
+        const form = document.getElementById("ask-form");
+        const formData = new FormData(form);
+        const response =  fetch("/light", {
+            method: "POST",
+            body: formData,
+        });
+      } 
        
    </script>
 </html>
