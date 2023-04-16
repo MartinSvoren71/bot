@@ -1209,7 +1209,11 @@ v1.5
          }
          
          function draw() {
-         	ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+         	const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+gradient.addColorStop(0, 'rgba(93, 104, 136, 0.35)');
+gradient.addColorStop(1, 'rgba(46, 61, 94, 0.35)');
+
+ctx.fillStyle = gradient;
          	ctx.fillRect(0, 0, canvas.width, canvas.height);
          
          	ctx.fillStyle = '#f3cd0a';
