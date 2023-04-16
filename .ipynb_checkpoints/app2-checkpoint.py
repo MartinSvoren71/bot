@@ -90,15 +90,19 @@ def index():
         flash("Please log in first")
         return redirect(url_for("login"))
     
-@app.route("/light", methods=["POST"])
-def theme_l():
-    theme_sel = "light"
-    index()
-
-@app.route("/dark", methods=["POST"])  
-def theme_d():  
-    theme_sel = "dark"
-    index()
+@app.route("/theme", methods=["POST"])
+def set_theme():
+    theme = request.form.get("theme")
+    if theme == "light":
+        # set the variable to the "light" theme
+        theme_var = "light"
+    elif theme == "dark":
+        # set the variable to the "dark" theme
+        theme_var = "dark"
+    else:
+        # handle invalid theme value
+        theme_var = "light"
+    return index()
 
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
