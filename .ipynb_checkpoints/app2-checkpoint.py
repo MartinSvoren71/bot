@@ -83,7 +83,7 @@ def index():
         folders = list_folders()
         if theme == dark :
             return render_template("indexSplit.html", folders=data_folders, files=files, results={})
-        elif theme == ligh :
+        else :
             return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
     else:
         flash("Please log in first")
