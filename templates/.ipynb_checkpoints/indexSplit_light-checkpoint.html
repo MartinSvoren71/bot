@@ -1409,13 +1409,13 @@ ctx.fillStyle = gradient;
 async function dark(event) {
   event.preventDefault();
   const response = await fetch("/indexSplit");
-  const html = await response.text();
+  location.reload(); // Refresh the page after the response is received
 }
 
 async function light(event) {
   event.preventDefault();
   const response = await fetch("/indexSplit_light");
-  const html = await response.text();
+  location.reload(); // Refresh the page after the response is received
 }
    </script>
 </html>
