@@ -89,6 +89,15 @@
          font-size: 1.2em;
          text-align: center;
          }
+          button {
+  background-color: #ccc;
+  color: #333;
+}
+
+button.dark {
+  background-color: #666;
+  color: #f0f0f0;
+}
         
  @keyframes pulse {
     0% {
@@ -155,6 +164,7 @@ img {
          <h2>provide your key</h2>
          <input type="password" id="key" name="key" required>
          <br><br>
+
          <button type="submit">Enter</button>
       </form>
            </div>
@@ -211,7 +221,14 @@ img {
 }
 
 setCanvasOpacity();
- 
+          
+ const button = document.getElementById('theme-selector');
+const body = document.body;
+
+button.addEventListener('click', function() {
+  body.classList.toggle('dark');
+  button.classList.toggle('dark');
+});
       </script>
    </body>
 </html>

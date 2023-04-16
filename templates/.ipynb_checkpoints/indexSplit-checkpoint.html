@@ -1403,7 +1403,26 @@ v1.5
       });
       });
        
-   
+   async function ask_LIB(event) {
+                  //  wait();
+         event.preventDefault();
+        const form = document.getElementById("dark_theme");
+        const formData = new FormData(form);
+        const response =  fetch("/indexSplit", {
+            method: "POST",
+            body: formData,
+        });
+      } 
+       async function ask_LIB(event) {
+                  //  wait();
+         event.preventDefault();
+        const form = document.getElementById("light_theme");
+        const formData = new FormData(form);
+        const response =  fetch("/index+split_light", {
+            method: "POST",
+            body: formData,
+        });
+      } 
        
    </script>
 </html>
