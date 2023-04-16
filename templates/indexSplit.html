@@ -69,11 +69,11 @@ v1.5
          --matrix-amber-1:                 #0b2733;
          --matrix-amber-2:                 #0b2733;
          --matrix-black-1:                  #bab6b7;      
-         --matrix-black-2:                   #bab6b7;    
-         --text-1:                       #bab6b7;
-         --text-2:                          #bab6b7
-         --gray-2:                        #bab6b7;    
-         --matrix-gray-1:                 #bab6b7;
+         --matrix-black-2:                   #0b2733;    
+         --text-1:                       #0b2733;
+         --text-2:                          #0b2733
+         --gray-2:                        #0b2733;    
+         --matrix-gray-1:                 #0b2733;
          --title-grad:     radial-gradient(circle, rgba(100, 100, 100, 0.35) 0%, rgba(255, 255, 255, 0.5) 100%);
              
              
@@ -1353,9 +1353,9 @@ v1.5
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
       function setCanvasOpacity() {
-      let opacity = 0; // Start with an opacity of 0
+      let opacity = 0.45; // Start with an opacity of 0
       const increaseTime = 5000; // 8 seconds in milliseconds
-      const targetOpacity = 0.45; // Change this to your desired opacity
+      const targetOpacity = 0.0; // Change this to your desired opacity
       
       const increaseOpacity = () => {
         opacity += 0.01;
