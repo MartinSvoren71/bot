@@ -90,15 +90,15 @@ def index():
         flash("Please log in first")
         return redirect(url_for("login"))
     
-@app.route("/light", methods=["GET", "POST"])
+@app.route("/light", methods=["POST"])
 def theme_l():
-    session["theme"] = "light"
-    return index()
+    theme_sel = "light"
+    index()
 
-@app.route("/dark", methods=["GET", "POST"])  
+@app.route("/dark", methods=["POST"])  
 def theme_d():  
-    session["theme"] = "dark"
-    return index()
+    theme_sel = "dark"
+    index()
 
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
