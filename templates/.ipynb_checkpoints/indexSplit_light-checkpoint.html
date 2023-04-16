@@ -975,12 +975,10 @@ v1.5
                   <h4>__opacity__</h4>
                </div>
                <div style="display: flex; justify-content: center; align-items: center;">
-                   <form method="POST" action="/theme">
-		<button type="submit" name="theme" value="light">Light</button>
-                          <input type="range" id="opacity-slider" min="0" max="100" value="70">
-		<button type="submit" name="theme" value="dark">Dark</button>
-	</form>
-             </div>
+                  <button id="light_theme" >LIGHT</button>
+                  <input type="range" id="opacity-slider" min="0" max="100" value="100">
+                  <button id="dark_theme">DARK</button>
+               </div>
                <h3>ask operator: </h3>
                <form id="ask-form" enctype="multipart/form-data" >
                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
