@@ -59,22 +59,22 @@ v1.5
          --matrix-white-1:                #ffffff;
          --matrix-red-1:                  #ff000c;
          --matrix-red-2:                  #6b0c08;  
-         --matrix-green-1:                #ffffff;
-         --matrix-green-2:                #2d9cca;
-         --matrix-green-3:                #5a8662;
+         --matrix-green-1:                #000000;
+         --matrix-green-2:                #000000;
+         --matrix-green-3:                #ababab;
          --matrix-green-4:                #2d9cca;
-         --matrix-blue-pill:                #a9abb8;
-         --matrix-red-pill:                #a9abb8;        
+         --matrix-blue-pill:                #57aebb;
+         --matrix-red-pill:                #c13939;        
          --matrix-green-6:                #0e1c0d;  
-         --matrix-amber-1:                 #a9abb8;
-         --matrix-amber-2:                 #ffdd9d;
-         --matrix-black-1:                  #081717;      
+         --matrix-amber-1:                 #1a4a5a;
+         --matrix-amber-2:                 #a37828;
+         --matrix-black-1:                  #ffffff;      
          --matrix-black-2:                   black;    
          --text-1:                       #1cafec;
-         --text-2:                          #474866
+         --text-2:                          #474866;
          --gray-2:                        #29658a;    
          --matrix-gray-1:                 #1f1f1f;
-         --title-grad:     radial-gradient(circle, rgba(12, 29, 29, 0.35) 0%, rgba(8, 23, 23, 0.5) 100%);
+         --title-grad:     white;
              
              
              
@@ -84,7 +84,7 @@ v1.5
          }     
          /* Style for the title text */
          .title {
-         color: white;
+         color: var(--matrix-black-2);
          font-size: 2rem;
          text-align: center;
          height: 6vh;
@@ -101,7 +101,7 @@ v1.5
          top: 0;
          left: 0;
          right: 0;
-         filter: drop-shadow(0 0 0.25rem black);
+         filter: drop-shadow(0 0 0.25rem white);
          }
          #container {
          color: var(--matrix-black-1);
@@ -158,7 +158,7 @@ v1.5
          border: none;
          margin: 0 ; /* Center the container horizontally */
          color: var(--matrix-black-2);
-         opacity:0.4;
+         opacity:1;
          }
          .ql-container.ql-snow {
          border: none;
@@ -175,8 +175,7 @@ v1.5
          flex-direction: column;
          align-items: center;
          justify-content: up;
-         width: 46%;
-         max-width: 46%;
+   
          }
          .right-side {
          top: 0;
@@ -186,10 +185,10 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
-         max-width: 48%;
-         width: 48v%;
+         max-width: 48.0%;
+         width: 48.0%;
          background: var(--title-grad);
-         padding:1vh;
+         padding 3%;
          }
          .right-side::-webkit-scrollbar {
          width: 6px;
@@ -211,13 +210,13 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
-         max-width: 48%;
-         width: 48%;
+         max-width: 50%;
+         width: 50%;
          }
          .left-down-side {
          top: 100vh;
          left:0;
-         padding:5px;
+         padding 3%;
          flex: 1;
          justify-content: center;
          align-items: center;
@@ -227,8 +226,7 @@ v1.5
          height:80vh;
          background: var(--title-grad);
          color: var(--matrix-red-pill);
-         border-right: 1px solid #19192e;
-         border-bottom: 1px solid #19192e;
+     
          flex-direction: column;
          overflow-y: auto;
          overflow-x: hidden; /* Add this line */
@@ -249,7 +247,7 @@ v1.5
          .right-down-side {
          top: auto;
          right:0;
-         padding:10px;
+         padding 3%;
          max-width: 48%;
          width: 48%;
          flex: 1;
@@ -261,7 +259,6 @@ v1.5
          overflow-y: auto;
          height:80vh;
          background: var(--title-grad);
-         border-bottom: 1px solid #19192e;
          }
          .right-down-side::-webkit-scrollbar {
          width: 6px;
@@ -289,7 +286,6 @@ v1.5
          padding 3%;
          background: var(--title-grad);
          color: var(--matrix-black-1);
-         border-right: 1px solid #19192e;
          }
          .left-down-down-side::-webkit-scrollbar {
          width: 6px;
@@ -312,7 +308,7 @@ v1.5
          justify-content: center;
          align-items: center;
          max-width: 48%;
-         opacity:0.4;
+         opacity:1;
          width: 48%;
          height: 120vh;
          padding 3%;
@@ -335,10 +331,12 @@ v1.5
          top: auto;
          left:0;
          flex: 1;
+                      background: var(--title-grad);
+
          display: fixed;
          justify-content: left;
          align-items: center;
-         opacity:0.4;
+         opacity:1;
          max-width: 48%;
          width: 48%;
          max-height: 80vh;
@@ -364,7 +362,7 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
-         opacity: 0.0;
+         opacity: 1;
          max-width: 4%;
          width: 4%;
          max-height: 80vh;
@@ -380,8 +378,10 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
+                      background: var(--title-grad);
+
          max-width: 48%;
-         opacity:0.4;
+         opacity:1;
          width: 48%;
          max-height: 80vh;
          height: 80vh;
@@ -773,7 +773,7 @@ v1.5
          font-size: 1.em;
          margin: 3px;
          padding: 3px;
-         color: #5a8662;
+         color: #003170;
          }
          ul {
          margin: 3px;
@@ -787,15 +787,15 @@ v1.5
          }
          #question {
          margin: 1% auto;
-         filter: drop-shadow(0 0 0.75rem white);
-         color: var(--matrix-green-1);
+         filter: drop-shadow(0 0 0.95rem white);
+         color: var(--matrix-white-1);
          width:100%;
          height: 5vh;
          } 
          #keyword {
          margin: 1% auto;
-         filter: drop-shadow(0 0 0.75rem white);
-         color: var(--matrix-green-1);
+         filter: drop-shadow(0 0 0.95rem white);
+         color: var(--matrix-white-1);
          width:70%;
          height: 5vh;
          } 
@@ -930,7 +930,7 @@ v1.5
          -webkit-appearance: none;
          width: 12px;
          height: 12px;
-         background: lightgreen;
+         background: black;
          cursor: pointer;
          border-radius: 10px;
          opacity: 0.8;
@@ -938,7 +938,7 @@ v1.5
          input[type=range]::-moz-range-thumb {
          width: 12px;
          height: 12px;
-         background: lightgreen;
+         background: black;
          cursor: pointer;
          border-radius: 10px;
          opacity: 0.8;
@@ -947,7 +947,7 @@ v1.5
          input[type=range]::-webkit-slider-runnable-track {
          width: 30%;
          height: 4px;
-         background: lightgreen;
+         background: black;
          cursor: pointer;
          border-radius: 4px;
          opacity: 0.5;
@@ -955,7 +955,7 @@ v1.5
          input[type=range]::-moz-range-track {
          width: 30%;
          height: 4px;
-         background: lightgreen;
+         background: black;
          cursor: pointer;
          border-radius: 4px;
          opacity: 0.5;
@@ -976,7 +976,7 @@ v1.5
                </div>
                <div style="display: flex; justify-content: center; align-items: center;">
                   <button id="light_theme" >LIGHT</button>
-                  <input type="range" id="opacity-slider" min="0" max="100" value="30">
+                  <input type="range" id="opacity-slider" min="0" max="100" value="100">
                   <button id="dark_theme">DARK</button>
                </div>
                <h3>ask operator: </h3>
@@ -1013,6 +1013,7 @@ v1.5
             <div id="log-container"></div>
          </div>
       </div>
+          <br><br>
       <div class="container flex-container" style="container2">
          <div class="left-down-side">
             <div>
@@ -1032,12 +1033,10 @@ v1.5
             </div>
          </div>
       </div>
-          
+          <br><br>
       <div class="container flex-container" style="container3">
-            <h1>__create new document__</h1>
          <div class="left-down-down-side">
-             
-          
+            <h1>__create new document__</h1>
             <div class="quill-container">
                <button id="button" type="button" onclick="save_doc()">Save</button>
                <div id="quill-editor"></div>
@@ -1046,15 +1045,15 @@ v1.5
          </div>
          <div class=" middle-side">
          </div>
-             <h1>__vortex pdf preview__</h1>
          <div class="right-down-down-side">
-         
+            <h1>__vortex pdf preview__</h1>
             <div class="pdf-viewer">
                <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="94%">
             </div>
          </div>
       </div>
       </div>
+        <br><br>
       <div class="container flex-container" style="container4">
          <div class="left-down-down-down-side">
             <h1>__vortex sketch pad__</h1>
@@ -1213,10 +1212,14 @@ v1.5
          }
          
          function draw() {
-         	ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+         	const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+gradient.addColorStop(0, 'rgba(93, 104, 136, 0.15)');
+gradient.addColorStop(1, 'rgba(46, 61, 94, 0.25)');
+
+ctx.fillStyle = gradient;
          	ctx.fillRect(0, 0, canvas.width, canvas.height);
          
-         	ctx.fillStyle = '#474866';
+         	ctx.fillStyle = '#00214e';
          	ctx.font = `${fontSize}px monospace`;
          
          	for (let i = 0; i < drops.length; i++) {
@@ -1358,9 +1361,9 @@ v1.5
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
       function setCanvasOpacity() {
-      let opacity = 0; // Start with an opacity of 0
-      const increaseTime = 5000; // 8 seconds in milliseconds
-      const targetOpacity = 0.45; // Change this to your desired opacity
+      let opacity = 0.7; // Start with an opacity of 0
+      const increaseTime = 3000; // 8 seconds in milliseconds
+      const targetOpacity = 0.1; // Change this to your desired opacity
       
       const increaseOpacity = () => {
         opacity += 0.01;
@@ -1402,11 +1405,6 @@ v1.5
       });
       });
       });
-       
-document.getElementById("light_theme").addEventListener("click", function() {
-  document.documentElement.style.setProperty('--matrix-white-1', '#ff0550');
-  document.querySelector('canavas').style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--matrix-white-1');
-});    
-       
+ 
    </script>
 </html>
