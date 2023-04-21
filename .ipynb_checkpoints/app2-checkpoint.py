@@ -33,10 +33,6 @@ app.secret_key3 = "xxx777"
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 
-
-folder_name = 's3/data/'
-app = Flask(__name__, static_folder='/')
-app.secret_key = "xxx007"
 AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_DEFAULT_REGION = 'eu-north-1'
