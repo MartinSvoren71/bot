@@ -1057,13 +1057,14 @@ v1.5
     <span class="close" onclick="closeModal()">&times;</span>
     <h2>Upload File</h2>
     <form>
-    <input type="file" name="files" multiple required> <!-- Add the "multiple" attribute -->
+      <input type="file" id="file-input" multiple required>
       <button type="button" onclick="uploadFile()">Upload</button>
     </form>
     <input type="text" id="file-url" placeholder="File URL">
     <button type="button" onclick="shareFile()">Share</button>
   </div>
-</div>     </div>
+</div>
+  </div>
          </div>
          <div class=" middle-side">
          </div>
@@ -1480,7 +1481,7 @@ async function light(event) {
     quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0)';
   }
 });  
- function openModal() {
+function openModal() {
   document.getElementById("modal").style.display = "block";
 }
 
@@ -1489,8 +1490,20 @@ function closeModal() {
 }
 
 function uploadFile() {
-  // Code to upload file to S3 cloud and get file URL
-  document.getElementById("file-url").value = "https://s3.cloud.com/file-url";
+  const file = document.getElementById("file-input").files[0];
+  if (file) {
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append("file", file);
+    xhr.open("POST", "/upload");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        document.getElementById("file-url").value = response.url;
+      }
+    };
+    xhr.send(formData);
+  }
 }
 
 function shareFile() {
@@ -1498,6 +1511,7 @@ function shareFile() {
   alert("File shared successfully!");
   closeModal();
 }
+
       
    </script>
 </html>
