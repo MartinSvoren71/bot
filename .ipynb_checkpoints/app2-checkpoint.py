@@ -76,7 +76,7 @@ def list_files_and_urls(folder_path):
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        theme_sel = "light"
+        theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
