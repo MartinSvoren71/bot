@@ -29,20 +29,8 @@ from pdfminer.high_level import extract_text
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 app.secret_key2 = "xxx707"
-app.secret_key3 = "xxx777"
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
-
-AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_DEFAULT_REGION = 'eu-north-1'
-BUCKET_NAME = 'kv-shared-files'
-s3_client = boto3.client(
-    's3',
-    aws_access_key_id=AWS_ACCESS_KEY_ID,
-    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-    region_name=AWS_DEFAULT_REGION
-)
 
 #main landign page - login 
 @app.route("/", methods=["GET", "POST"])
@@ -50,7 +38,7 @@ def login():
     if request.method == "POST":
         password = request.form["key"]
         if password == app.secret_key :
-            session["logged_in"] = True 
+            session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
             return redirect(url_for("index"))
@@ -59,11 +47,6 @@ def login():
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
             return redirect(url_for("file_manager"))
-        elif password == app.secret_key3 :
-            session["logged_in"] = True
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("file_share"))
         else:
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
@@ -301,10 +284,7 @@ def get_folder_content():
     return {'folder_content': folder_content}
 
 
-@app.route('/filesharing/')
-def file_share(subpath=None):
 
-    return render_template('file_share.html')
 
 
 @app.route('/filemanager/')
