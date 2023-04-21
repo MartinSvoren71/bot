@@ -25,6 +25,17 @@ from concurrent.futures import ThreadPoolExecutor
 import warnings
 from pdfminer.high_level import extract_text
 
+BUCKET_NAME = "kv-shared-files"
+AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_DEFAULT_REGION = 'eu-north-1'
+
+s3 = boto3.client("s3",
+                   aws_access_key_id=AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+                    region_name=AWS_DEFAULT_REGION
+)
+
 
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
@@ -380,6 +391,27 @@ def delete_folder(folder_path):
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
     return send_from_directory(data_folder_path, file_path)
+
+
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    if request.method == "POST":
+        file = request.files["file"]
+        if file:
+            # Generate a unique filename
+            filename = str(uuid.uuid4()) + os.path.splitext(file.filename)[1]
+            
+            # Upload the file to S3 bucket
+            s3.upload_fileobj(file, BUCKET_NAME, filename)
+            
+            # Generate the S3 URL
+            url = f"https://{BUCKET_NAME}.s3.amazonaws.com/{filename}"
+            
+            # Return the S3 URL
+            return jsonify({"url": url})
+
+
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
