@@ -25,22 +25,10 @@ from concurrent.futures import ThreadPoolExecutor
 import warnings
 from pdfminer.high_level import extract_text
 
-BUCKET_NAME = "kv-shared-files"
-AWS_ACCESS_KEY_ID = 'AKIA5BVJA3S5MNPVO2MP'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_DEFAULT_REGION = 'eu-north-1'
-
-s3 = boto3.client("s3",
-                   aws_access_key_id=AWS_ACCESS_KEY_ID,
-                    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-                    region_name=AWS_DEFAULT_REGION
-)
-
 
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 app.secret_key2 = "xxx707"
-app.secret_key3= "xxx777"
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 
@@ -59,11 +47,6 @@ def login():
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
             return redirect(url_for("file_manager"))
-        elif password == app.secret_key3 :
-            session["logged_in"] = True
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("file_sharing"))
         else:
             flash("Bad key provided")
             return redirect(url_for("bad_key"))
@@ -331,10 +314,6 @@ def file_manager(subpath=None):
 
     return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
 
-@app.route('/filesharing/')
-def file_sharing(subpath=None):
-    return render_template('file_share.html')
-
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload/<path:subpath>', methods=['POST'])
 def upload(subpath=None):
@@ -401,47 +380,6 @@ def delete_folder(folder_path):
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
     return send_from_directory(data_folder_path, file_path)
-
-
-
-ef upload_file_to_s3(file, bucket_name, acl='public-read'):
-    try:
-        s3.upload_fileobj(
-            file,
-            bucket_name,
-            file.filename,
-            ExtraArgs={
-                'ACL': acl,
-                'ContentType': file.content_type
-            }
-        )
-    except botocore.exceptions.ClientError as e:
-        return False
-    return True
-
-def get_s3_file_url(file_name, bucket_name):
-    s3_client = boto3.client('s3')
-    return s3_client.generate_presigned_url(
-        'get_object',
-        Params={
-            'Bucket': bucket_name,
-            'Key': file_name
-        },
-        ExpiresIn=3600
-    )
-
-@app.route('/upload', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file:
-            if upload_file_to_s3(file, bucket_name):
-                file_url = get_s3_file_url(file.filename, bucket_name)
-                return render_template('file_upload.html', file_url=file_url)
-            else:
-                return 'Upload failed'
-    return render_template('file_upload.html')
-
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
