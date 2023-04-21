@@ -29,7 +29,7 @@ from pdfminer.high_level import extract_text
 app = Flask(__name__, static_folder='/')
 app.secret_key = "xxx007"
 app.secret_key2 = "xxx707"
-app.secret_key2 = "xxx777"
+app.secret_key3 = "xxx777"
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 
