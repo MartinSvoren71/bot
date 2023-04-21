@@ -54,7 +54,7 @@ def login():
     if request.method == "POST":
         password = request.form["key"]
         if password == app.secret_key :
-            session["logged_in"] = True
+            session["logged_in"] = True 
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
             return redirect(url_for("index"))
