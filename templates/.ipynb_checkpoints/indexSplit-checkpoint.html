@@ -83,8 +83,8 @@ v1.5
                </div>
                <div style="display: flex; justify-content: center; align-items: center;">
                   <input type="range" id="opacity-slider" min="0" max="100" value="70">
- <label for="toggleCheckbox">Toggle CSS</label>
-  <input type="checkbox" id="toggleCheckbox">               </div>
+  <input type="checkbox" id="toggleCheckbox">
+                </div>
                <h3>ask operator: </h3>
                <form id="ask-form" enctype="multipart/form-data" >
                   <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
@@ -526,7 +526,17 @@ async function light(event) {
   }
 });  
      
-   
+     
+           const toggleCheckbox = document.getElementById('toggleCheckbox');
+    const stylesheet = document.getElementById('stylesheet');
+
+    toggleCheckbox.addEventListener('change', () => {
+      if (toggleCheckbox.checked) {
+        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_dark.css');
+      } else {
+        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_light.css');
+      }
+    });    
        
    </script>
 </html>
