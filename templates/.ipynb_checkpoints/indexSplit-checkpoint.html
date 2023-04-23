@@ -70,41 +70,16 @@ v1.5
          #container {
          color: var(--matrix-black-1);
          font-family: 'Lucida Console', monospace;  
-         display: flex;
-         height: auto;
-         justify-content: center;
-         max-height: 100vh;
-        height: 100vh;
+      
+  width: 50%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
          }
-         #container2 {
-         font-family: 'Lucida Console', monospace;  
-         height: 50vh;
-         
-display: flex;
-         margin-bottom:1vh;
-         justify-content: center;
-         }
-         #container3 {
-         font-family: 'Lucida Console', monospace;  
-         display: flex;
-         height: 100vh;
-         align-items: center;
-         margin-bottom:1vh;
-         justify-content: center;
-         align-items: center;
-         display: flex;
-         }
-         #container4 {
-         padding-top:10vh;
-         font-family: 'Lucida Console', monospace;  
-         align-items: center;
-         justify-content: center;
-         align-items: center;
-         display: flex;
-         max-height: 60vh;
-         height: 60vh;
-         }
+        
          .footer {
          padding:40px;  
          }
@@ -138,7 +113,7 @@ display: flex;
          .content-wrapper {
          font-family: 'Lucida Console', monospace;  
          flex: 1;
-         display: fixed;
+         display: flex;
          flex-direction: column;
          align-items: center;
          width: 48%;
@@ -1019,14 +994,14 @@ display: flex;
 
       <canvas id="matrixCanvas"></canvas>
       <div class="container">
-         <div class="content-wrapper">
-            <div class="left-side">
+         <div class="container1">
+            
                <h1>__Knowledge Vortex__</h1>
                <img src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/logo1+(1).png" alt="KV Logo">
                <h2 id="datetime" style="color: red;"></h2>
                <div>
                   <h4>__opacity__ __light__</h4>
-               </div>
+             
                 
                <div style="display: flex; justify-content: center; align-items: center;">
                   <input type="range" id="opacity-slider" min="0" max="100" value="70">
@@ -1061,15 +1036,15 @@ display: flex;
          </div>
          <div class=" middle-side">
          </div>
-         <div class="right-side">
+         <div class="container2">
             <div>
                <h1>__vortex operator chat__</h1>
             </div>
             <div id="log-container"></div>
          </div>
       </div>
-      <div class="container flex-container" style="container2">
-         <div class="left-down-side">
+      <div class="container flex-container" style="container">
+         <div class="container3">
             <div>
                <h1>__vortex file bucket__</h1>
                <div class="list-container">
@@ -1079,7 +1054,7 @@ display: flex;
          </div>
          <div class=" middle-side">
          </div>
-         <div class="right-down-side">
+         <div class="container4">
             <div>
                <h1>__vortex search resoults__</h1>
             </div>
@@ -1087,8 +1062,8 @@ display: flex;
             </div>
          </div>
       </div>
-      <div class="container flex-container" style="container3">
-         <div class="left-down-down-side">
+      <div class="container flex-container" style="container">
+         <div class="container5">
             <h1>__create new document__</h1>
             <div class="quill-container">
                <button id="button" type="button" onclick="save_doc()">Save</button>
@@ -1098,19 +1073,13 @@ display: flex;
          </div>
          <div class=" middle-side">
          </div>
-         <div class="right-down-down-side">
+         <div class="container6">
             <h1>__vortex pdf preview__</h1>
             <div class="pdf-viewer">
                <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="94%">
             </div>
          </div>
       </div>
-      </div>
-      <div class="container flex-container" style="container4">
-         <div class="down-down-down-side">
-            <h1>__vortex mind map__</h1>
-            <iframe src="https://www.mindmaps.app/" width="100%" height="100%" frameborder="0"></iframe>
-         </div>
       </div>
       <div class="footer">
          <h3>Knowledge Vortex 2023</h3>

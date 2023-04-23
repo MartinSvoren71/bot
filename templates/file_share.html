@@ -1,38 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toggle CSS</title>
-  <style id="stylesheet">
-    /* Default styles */
-    body {
-      background-color: lightblue;
-      font-family: Arial, sans-serif;
-    }
-
-    /* Override styles */
-    body.dark {
-      background-color: darkblue;
-      color: white;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Responsive 2x3 Containers</title>
 </head>
 <body>
-  <label for="toggleCheckbox">Toggle CSS</label>
-  <input type="checkbox" id="toggleCheckbox">
-
-  <script>
-    const toggleCheckbox = document.getElementById('toggleCheckbox');
-    const body = document.querySelector('body');
-
-    toggleCheckbox.addEventListener('change', () => {
-      if (toggleCheckbox.checked) {
-        body.classList.add('dark');
-      } else {
-        body.classList.remove('dark');
-      }
-    });
-  </script>
+    <div class="container">
+        <div class="box box1">
+            <h1>Box 1</h1>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+            <input type="text" placeholder="Input text">
+            <button>Click me</button>
+        </div>
+        <div class="box box2">
+            <h1>Box 2</h1>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+            <input type="text" placeholder="Input text">
+            <button>Click me</button>
+        </div>
+        <div class="box box3">
+            <h1>Box 3</h1>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+            <input type="text" placeholder="Input text">
+            <button>Click me</button>
+        </div>
+        <div class="box box4">
+            <h1>Box 4</h1>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+            <input type="text" placeholder="Input text">
+            <button>Click me</button>
+        </div>
+        <div class="box box5">
+            <h1>Box 5</h1>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+            <input type="text" placeholder="Input text">
+            <button>Click me</button>
+        </div>
+        <div class="box box6">
+            <h1>Box 6</h1>
+            <select>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+            <input type="text" placeholder="Input text">
+            <button>Click me</button>
+        </div>
+    </div>
 </body>
 </html>
