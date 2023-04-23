@@ -138,16 +138,21 @@ v1.5
          height: auto;
          }
         
-            
-            .content-wrapper {
-         font-family: 'Lucida Console', monospace;  
+             .left-side {
+                        font-family: 'Lucida Console', monospace;  
+             left:0;
+             top:0;
          flex: 1;
-         display: flex;
+       display: fixed;
          flex-direction: column;
          align-items: center;
-min-width: 48%;
+         justify-content: center;
+       
+           max-width: 50%
     height: 100vh;
-         }
+
+         }     
+     
          .right-side {
          top: 0;
          right: 0;
@@ -157,7 +162,8 @@ min-width: 48%;
          align-items: center;
          background: var(--title-grad);
                   padding:1%;
-        width: 47%;
+            max-width: 46%;
+
     height: 100vh;
 
          }
@@ -174,16 +180,7 @@ min-width: 48%;
          .right-side::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .left-side {
-         top: 0;
-         left:0;
-         flex: 1;
-         display: fixed;
-         justify-content: center;
-         align-items: center;
-           width: 50%;
-    height: 100vh;
-         }
+   
          .left-down-side {
          top: 100vh;
          left:0;
@@ -308,7 +305,7 @@ min-width: 48%;
          max-width: 4%;
          width: 4%;
        
-         height: 100vh;
+         height: 60v;
          }
         
           .down-down-down-side {
@@ -998,55 +995,53 @@ min-width: 100%;
 
       <canvas id="matrixCanvas"></canvas>
       <div class="container">
-         <div class="content-wrapper">
-            <div class="left-side">
-               <h1>__Knowledge Vortex__</h1>
-               <img src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/logo1+(1).png" alt="KV Logo">
-               <h2 id="datetime" style="color: red;"></h2>
-               <div>
-                  <h4>__opacity__ __light__</h4>
-               </div>
-                
-               <div style="display: flex; justify-content: center; align-items: center;">
-                  <input type="range" id="opacity-slider" min="0" max="100" value="70">
-  <input type="checkbox" id="toggleCheckbox">
-                </div>
-                
-                
-               <h3>ask operator: </h3>
-               <form id="ask-form" enctype="multipart/form-data" >
-                  <textarea name="question" id="question" placeholder="How can I help?"required></textarea>
-                  <div id="loader2" style="display:none;width:20px;height:20px;"></div>
-                  <div>
-                     <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">public data request</button>
-                     <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">my data request</button>  
-                  </div>
-                  <h2 >library:</h2>
-                  <div class="select-container-2" id="select-container-2">
-                     <select name="folder-selector" id="folder-selector" onchange="saveFolderx()">
-                        {% for folder in folders %}
-                        <option value="{{ folder }}">{{ folder }}</option>
-                        {% endfor %}
-                     </select>
-                  </div>
-                  <pre id="console-output" style="white-space: pre-wrap;"></pre>
-                  <h1>__vortex keyword search__</h1>
-               <form id="search-form">
-                  <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
-                  <div id="loader" style="display:none;width:20px;height:20px;"></div>
-                  <button id="button-search" type="button" onclick="searchFiles()">Search</button>
-               </form>
-            </div>
-         </div>
-         <div class=" middle-side">
-         </div>
-         <div class="right-side">
-            <div>
-               <h1>__vortex operator chat__</h1>
-            </div>
-            <div id="log-container"></div>
-         </div>
+   <div class="left-side">
+      <h1>__Knowledge Vortex__</h1>
+      <img src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/logo1+(1).png" alt="KV Logo">
+      <h2 id="datetime" style="color: red;"></h2>
+      <h4>__opacity__ __light__</h4>
+      <div style="display: flex; justify-content: center; align-items: center;">
+         <input type="range" id="opacity-slider" min="0" max="100" value="70">
+         <input type="checkbox" id="toggleCheckbox">
       </div>
+      <h3>ask operator: </h3>
+      <form id="ask-form" enctype="multipart/form-data">
+         <textarea name="question" id="question" placeholder="How can I help?" required></textarea>
+         <div id="loader2" style="display:none;width:20px;height:20px;"></div>
+         <div>
+            <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">public data request</button>
+            <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">my data request</button>
+         </div>
+         <h2>library:</h2>
+         <div class="select-container-2" id="select-container-2">
+            <select name="folder-selector" id="folder-selector" onchange="saveFolderx()">
+               {% for folder in folders %}
+               <option value="{{ folder }}">{{ folder }}</option>
+               {% endfor %}
+            </select>
+         </div>
+         <pre id="console-output" style="white-space: pre-wrap;"></pre>
+         <h1>__vortex keyword search__</h1>
+      </form>
+      <form id="search-form">
+         <input type="text" id="keyword" name="keyword" placeholder="Enter keyword">
+         <div id="loader" style="display:none;width:20px;height:20px;"></div>
+         <button id="button-search" type="button" onclick="searchFiles()">Search</button>
+      </form>
+   </div>
+
+            
+       
+         <div class="middle-side">
+</div>
+<div class="right-side">
+   <div>
+      <h1>__vortex operator chat__</h1>
+   </div>
+   <div id="log-container"></div>
+</div>
+</div>
+
       <div class="container flex-container" style="container">
          <div class="left-down-side">
             <div>
