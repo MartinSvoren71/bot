@@ -87,7 +87,8 @@
          }
         
          .footer {
-         padding:40px;  
+         padding-bottom:0px;  
+             padding-top:20px;  
          }
          .flex-container {
          font-family: 'Lucida Console', monospace;  
