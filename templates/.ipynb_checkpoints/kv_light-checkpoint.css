@@ -1,4 +1,4 @@
- :root {
+ :root.light {
          --matrix-white-1:                #ffffff;
          --matrix-red-1:                  #ff000c;
          --matrix-red-2:                  #6b0c08;  
@@ -26,7 +26,7 @@
          width: 100vw;
          }     
          /* Style for the title text */
-         .title {
+         .title.light {
          color: var(--matrix-black-2);
          font-size: 2rem;
          text-align: center;
@@ -46,21 +46,21 @@
          right: 0;
          filter: drop-shadow(0 0 0.25rem white);
          }
-         #container {
+         #container.light {
          color: var(--matrix-black-1);
          font-family: 'Lucida Console', monospace;  
          display: flex;
          height: auto;
          justify-content: center;
          }
-         #container2 {
+         #container2.light {
          font-family: 'Lucida Console', monospace;  
          height: 50vh;
          display: flex;
          margin-bottom:1vh;
          justify-content: center;
          }
-         #container3 {
+         #container3.light {
          font-family: 'Lucida Console', monospace;  
          display: flex;
          height: 100vh;
@@ -70,7 +70,7 @@
          align-items: center;
          display: flex;
          }
-         #container4 {
+         #container4.light {
          padding-top:10vh;
          font-family: 'Lucida Console', monospace;  
          align-items: center;
@@ -80,18 +80,18 @@
          max-height: 60vh;
          height: 60vh;
          }
-         .footer {
+         .footer.light {
          padding:100px;  
          }
-         .flex-container {
+         .flex-container.light {
          font-family: 'Lucida Console', monospace;  
          display: flex;
          flex-direction: row;
          }
-         .flex-container > div {
+         .flex-container.light > div {
          flex: 1;
          }
-         .quill-container {
+         .quill-container.light {
          width: 100%; /* You can adjust the width as needed */
          font-family: 'Lucida Console', monospace;  
          height: 112.5vh;
@@ -103,14 +103,14 @@
          color: var(--matrix-black-2);
          opacity:1;
          }
-         .ql-container.ql-snow {
+         .ql-container.ql-snow.light {
          border: none;
          }
          .quill-editor img {
          max-width: 20%;
          height: auto;
          }
-         .content-wrapper {
+         .content-wrapper.light {
          font-family: 'Lucida Console', monospace;  
          flex: 1;
          position: top;
@@ -120,7 +120,7 @@
          justify-content: up;
    
          }
-         .right-side {
+         .right-side.light {
          top: 0;
          right: 0;
          flex: 1;
@@ -133,20 +133,20 @@
          background: var(--title-grad);
          padding 1%;
          }
-         .right-side::-webkit-scrollbar {
+         .right-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .right-side::-webkit-scrollbar-track {
+         .right-side.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .right-side::-webkit-scrollbar-thumb {
+         .right-side.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         .right-side::-webkit-scrollbar-thumb:hover {
+         .right-side.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .left-side {
+         .left-side.light {
          top: 0;
          left:0;
          flex: 1;
@@ -156,7 +156,7 @@
          max-width: 50%;
          width: 50%;
          }
-         .left-down-side {
+         .left-down-side.light {
          top: 100vh;
          left:0;
          padding 1%;
@@ -174,20 +174,20 @@
          overflow-y: auto;
          overflow-x: hidden; /* Add this line */
          }
-         .left-down-side::-webkit-scrollbar {
+         .left-down-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .left-down-side::-webkit-scrollbar-track {
+         .left-down-side.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .left-down-side::-webkit-scrollbar-thumb {
+         .left-down-side.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         .left-down-side::-webkit-scrollbar-thumb:hover {
+         .left-down-side.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .right-down-side {
+         .right-down-side.light {
          top: auto;
          right:0;
          padding 1%;
@@ -203,20 +203,20 @@
          height:80vh;
          background: var(--title-grad);
          }
-         .right-down-side::-webkit-scrollbar {
+         .right-down-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .right-down-side::-webkit-scrollbar-track {
+         .right-down-side.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .right-down-side::-webkit-scrollbar-thumb {
+         .right-down-side.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         .right-down-side::-webkit-scrollbar-thumb:hover {
+         .right-down-side.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .left-down-down-side {
+         .left-down-down-side.light {
          top: auto;
          left:0;
          flex: 1;
@@ -230,20 +230,20 @@
          background: var(--title-grad);
          color: var(--matrix-black-1);
          }
-         .left-down-down-side::-webkit-scrollbar {
+         .left-down-down-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .left-down-down-side::-webkit-scrollbar-track {
+         .left-down-down-side.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .left-down-down-side::-webkit-scrollbar-thumb {
+         .left-down-down-side.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         .left-down-down-side::-webkit-scrollbar-thumb:hover {
+         .left-down-down-side.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .right-down-down-side {
+         .right-down-down-side.light {
          top: auto;
          right:0;
          flex: 1;
@@ -257,20 +257,20 @@
          padding 1%;
          background: var(--title-grad);
          }
-         .right-down-down-side::-webkit-scrollbar {
+         .right-down-down-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .right-down-down-side::-webkit-scrollbar-track {
+         .right-down-down-side.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .right-down-down-side::-webkit-scrollbar-thumb {
+         .right-down-down-side.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         .right-down-down-side::-webkit-scrollbar-thumb:hover {
+         .right-down-down-side.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .left-down-down-down-side {
+         .left-down-down-down-side.light {
          top: auto;
          left:0;
          flex: 1;
@@ -285,20 +285,20 @@
          max-height: 80vh;
          height: 80vh;
          }
-         .left-down-down-down-side::-webkit-scrollbar {
+         .left-down-down-down-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .left-down-down-down-side::-webkit-scrollbar-track {
+         .left-down-down-down-side.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .left-down-down-down-side::-webkit-scrollbar-thumb {
+         .left-down-down-down-side.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         ..left-down-down-down-side::-webkit-scrollbar-thumb:hover {
+         ..left-down-down-down-side.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .middle-side {
+         .middle-side.light {
          top: auto;
          right:0;
          flex: 1;
@@ -311,10 +311,10 @@
          max-height: 80vh;
          height: 80vh;
          }
-         .right-down-down-down-side::-webkit-scrollbar {
+         .right-down-down-down-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .right-down-down-down-side {
+         .right-down-down-down-side.light {
          top: auto;
          right:0;
          flex: 1;
@@ -329,20 +329,20 @@
          max-height: 80vh;
          height: 80vh;
          }
-         .right-down-down-down-side::-webkit-scrollbar {
+         .right-down-down-down-side.light::-webkit-scrollbar {
          width: 6px;
          }
-         .right-down-down-down-side::-webkit-scrollbar-track {
+         .right-down-down-down-side.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .right-down-down-down-side::-webkit-scrollbar-thumb {
+         .right-down-down-down-side.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         .right-down-down-down-side::-webkit-scrollbar-thumb:hover {
+         .right-down-down-down-side.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-            .down-down-down-side {
+            .down-down-down-side.light {
          flex: 1;
          display: fixed;
          justify-content: center;
@@ -353,7 +353,7 @@
          max-height: 80vh;
          height: 80vh; 
          }
-         .bottom {
+         .bottom.light {
          flex: 1;
          display: fixed;
          justify-content: left;
@@ -363,7 +363,7 @@
          max-height: 500vh;
          color: var(--matrix-black-1);
          }       
-         body {
+         body.light {
          font-family: 'Lucida Console', monospace;  
          color: var(--matrix-black-1);
          margin: 0;
@@ -378,20 +378,20 @@
          overflow-x: hidden; /* Add this line */
          overflow-y: scroll;    
          }
-         body::-webkit-scrollbar {
+         body.light::-webkit-scrollbar {
          width: 6px;
          }
-         body::-webkit-scrollbar-track {
+         body.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         body::-webkit-scrollbar-thumb {
+         body.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         body::-webkit-scrollbar-thumb:hover {
+         body.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         canvas {
+         canvas.light {
          width: 100vw;
          z-index: -1;
          opacity: 0;
@@ -436,7 +436,7 @@
          transform: translate(0px, 0px);
          }
          }
-         img {
+         img.light {
          width: 100%;
          height: auto;
          max-width: 220px;
@@ -447,7 +447,7 @@
          filter: drop-shadow(0 0 0.85rem red);
          animation: pulse 8s infinite; /* Apply the pulse animation, and make it faster (1.5s) */
          }
-         #footer_image {
+         #footer_image.light {
          width: 35vw;
          height: auto;
          display: flex;
@@ -455,7 +455,7 @@
          margin-bottom: 1%;
          filter: drop-shadow(0 0 0.75rem green);   
          }
-         #log-container {
+         #log-container.light {
          padding: 2%;
          font-family: 'Lucida Console', monospace;  
          width: 96%;
@@ -470,84 +470,84 @@
          white-space: pre-wrap;
          color: var(--matrix-green-1);   
          }
-         .log-container::-webkit-scrollbar {
+         .log-container.light::-webkit-scrollbar {
          width: 6px;
          }
-         .log-container::-webkit-scrollbar-track {
+         .log-container.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         .log-container::-webkit-scrollbar-thumb {
+         .log-container.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         .log-container::-webkit-scrollbar-thumb:hover {
+         .log-container.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         #select-container-2{
+         #select-container-2.light{
          margin-top:2%;
          margin-bottom:0%;
          }
-         #log-container::-webkit-scrollbar {
+         #log-container.light::-webkit-scrollbar {
          display: none;
          }
-         h1 {
+         h1.light {
          max-width: 100%;
          font-size: 1.5em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
          color: var(--matrix-green-1);
          }
-         h2 {
+         h2.light{
          max-width: 100%;
          font-size: 1.2em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
          color: var(--matrix-green-1);
          }
-         h3 {
+         h3.light {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
          color: var(--matrix-green-1);
          }
-         h4 {
+         h4.light {
          max-width: 100%;
          font-size: 0.8em;
          text-align: center;
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          color: var(--matrix-green-2);
          }
-         a {
+         a.light {
          max-width: 100%;
          font-size: 1.0em;
          text-align: center;
          color: var(--matrix-blue-pill);
          }
-         .folder-content{
+         .folder-content.light{
          flex-direction: column;
          overflow-y: auto;
          max-height: 70vh;   
          white-space: pre-wrap;
          }
-         p {
+         p.light {
          max-width: 100%;
          font-size: 1em;
          text-align: center;
          color: var(--matrix-black-1);
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          }
-         form {
+         form.light {
          margin: 0 ;
          display: flex;
          flex-direction: column;
          justify-content: center;
          align-items: center;
          }
-         label {
+         label.light {
          font-size: 1.2em;
          }
-         textarea {
+         textarea.light {
          font-family: 'Lucida Console', monospace;  
          font-size: 1.1em;
          margin: 0px;
@@ -565,7 +565,7 @@
          min-height: 20vh; /* Adjust this to the desired minimum height */
          resize: vertical; /* Allow vertical resizing */
          }
-         .out_text  {
+         .out_text.light  {
          font-family: 'Lucida Console', monospace;  
          font-size: 1.1em;
          margin: 0px;
@@ -583,7 +583,7 @@
          height: 90vh; /* Adjust this to the desired minimum height */
          resize: vertical; /* Allow vertical resizing */
          }     
-         input[type="text"] {
+         input.light[type="text"] {
          font-family: 'Lucida Console', monospace;  
          font-size: 1.1em;
          margin: 0px;
@@ -599,12 +599,12 @@
          padding: 10px;
          width: 100%; /* Adjust this to the desired width */
          }
-         .button-wrapper {
+         .button-wrapper.light {
          display: flex;
          justify-content: center;
          width: 100%;
          }
-         out_text{
+         out_text.light{
          width: 100%;
          height: 100%;
          background-color: rgba(0, 0, 0, 0.2);
@@ -613,7 +613,7 @@
          font-weight: bold;
          white-space: pre-wrap;
          }
-         #button-search {
+         #button-search.light {
          font-size: 1.3em;
          padding: 10px;
          border-radius: 8px;
@@ -625,7 +625,7 @@
          cursor: pointer;
          filter: drop-shadow(0 0 0.15rem red);
          }
-         #button {
+         #button.light {
          font-size: 1.1em;
          padding: 10px;
          border-radius: 3px;
@@ -637,7 +637,7 @@
          cursor: pointer;
          filter: drop-shadow(0 0 0.15rem red);
          }
-         #button-GPT {
+         #button-GPT.light {
          font-size: 1.3em;
          padding: 10px;
          border-radius: 8px;
@@ -649,9 +649,9 @@
          cursor: pointer;
          filter: drop-shadow(0 0 0.15rem red);
          }
-         ask-form {
+         ask-form.light {
          }
-         #button-AI {
+         #button-AI.light {
          font-size: 1.3em;
          padding: 10px;
          border-radius: 8px;
@@ -663,19 +663,19 @@
          cursor: pointer;
          filter: drop-shadow(0 0 0.15rem cyan);
          }
-         #button-search:hover {
+         #button-search.light:hover {
          background-color: var(--matrix-amber-1);
          filter: drop-shadow(0 0 0.55rem var(--matrix-amber-1));
          }
-         #button-AI:hover {
+         #button-AI.light:hover {
          background-color: cyan;
          filter: drop-shadow(0 0 0.55rem cyan);
          }
-         #button-GPT:hover {
+         #button-GPT.light:hover {
          background-color: red;
          filter: drop-shadow(0 0 0.55rem red);
          }
-         .input-key {
+         .input-key.light {
          font-size: 1.2em;
          padding: 5px;
          border-radius: 10px;
@@ -684,20 +684,20 @@
          background-color: var(--matrix-gray-1);    
          color: var(--matrix-red-pill));
          }
-         document {
+         document.light {
          padding: 0px;
          width: 30%;
          height: 800px;
          }
-         .file-list-container {
+         .file-list-container.light {
          padding: 0;
          margin-top: 15px;
          width: auto;
          }
-         .container {
+         .container.light {
          display: flex;
          }
-         .list-container {
+         .list-container.light {
          color: var(--matrix-green-1));
          margin-bottom: 3%;
          max-height: 70vh;
@@ -710,62 +710,62 @@
          flex-direction: column;
          overflow-y: scroll;
          }
-         .list-container::-webkit-scrollbar {
+         .list-container.light::-webkit-scrollbar {
          width: 0.2em; /* Set the width of the scrollbar */
          }
-         .list-container::-webkit-scrollbar-track {
+         .list-container.light::-webkit-scrollbar-track {
          background-color: transparent; /* Set the background color of the track to transparent */
          }
-         .list-container::-webkit-scrollbar-thumb {
+         .list-container.light::-webkit-scrollbar-thumb {
          background-color: transparent; /* Set the background color of the thumb to transparent */
          }
-         a {
+         a.light {
          color: var(--matrix-red-pill));
          text-decoration: none;
          }
-         li a {
+         li.light a.light {
          font-size: 1.em;
          margin: 3px;
          padding: 3px;
          color: #003170;
          }
-         ul {
+         ul.light {
          margin: 3px;
          padding: 3px;
          }
-         ul li {
+         ul.light li.light {
          border: 0.2px ridge #173a3a;   
          border-radius: 3px;
          margin: 6px;
          padding: 3px;
          }
-         #question {
+         #question.light {
          margin: 1% auto;
          filter: drop-shadow(0 0 0.95rem white);
          color: var(--matrix-white-1);
          width:100%;
          height: 5vh;
          } 
-         #keyword {
+         #keyword.light {
          margin: 1% auto;
          filter: drop-shadow(0 0 0.95rem white);
          color: var(--matrix-white-1);
          width:70%;
          height: 5vh;
          } 
-         a:hover {
+         a.light:hover {
          color: #aaa;
          }
-         .list-container {
+         .list-container.light {
          width: 50vw;
          overflow: hiden;
          }
-         .pdf-container{
+         .pdf-container.light{
          width: 50vw;
          overflow: hiden;
          opacity: 0.4;
          }
-         #folder-selector {
+         #folder-selector.light {
          padding: 1%;
          border-radius: 4px;
          outline: none;
@@ -775,7 +775,7 @@
          font-size: 1.0em;
          filter: drop-shadow(0 0 0.35rem var(--matrix-amber-1));
          }
-         #folder-selector option {
+         #folder-selector.light option {
          font-size: 1.1em;
          padding: 8px 12px;
          border-radius: 4px;
@@ -785,15 +785,15 @@
          color: var(--matrix-black-1));
          cursor: pointer;
          }
-         #folder-selector option:hover {
+         #folder-selector.light option:hover {
          background-color: var(--matrix-green-1);
          background-color: var(--matrix-green-3);
          }
-         #folder-selector:focus,
-         #folder-selector:active {
+         #folder-selector.light:focus,
+         #folder-selector.light:active {
          border-color: var(--matrix-red-1);
          }
-         folder-selector
+         folder-selector.light
          #model {
          padding: 1%;
          border-radius: 4px;
@@ -804,7 +804,7 @@
          color: var(--matrix-black-1));
          font-size: 1.2em;
          }
-         #model option {
+         #model.light option {
          font-size: 1.3em;
          padding: 8px 12px;
          border-radius: 4px;
@@ -814,14 +814,14 @@
          color: var(--matrix-black-1));
          cursor: pointer;
          }
-         #model option:hover {
+         #model.light option:hover {
          background-color: var(--matrix-green-1);
          }
-         #model:focus,
-         #model:active {
+         #model.light:focus,
+         #model.light:active {
          border-color: var(--matrix-red-1);
          }
-         results {
+         results.light {
          width: 100%;
          padding:5%;
          height: 90%;
@@ -831,20 +831,20 @@
          max-height: 80vh;  
          white-space: pre-wrap;
          }
-         results::-webkit-scrollbar {
+         results.light::-webkit-scrollbar {
          width: 6px;
          }
-         results::-webkit-scrollbar-track {
+         results.light::-webkit-scrollbar-track {
          background-color: #333;
          }
-         results::-webkit-scrollbar-thumb {
+         results.light::-webkit-scrollbar-thumb {
          background-color: #666;
          border-radius: 3px;
          }
-         results::-webkit-scrollbar-thumb:hover {
+         results.light::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          } 
-         #loader {
+         #loader.light {
          border: 16px solid #a31c1c;
          border-top: 16px solid #050404;
          border-radius: 50%;
@@ -852,7 +852,7 @@
          height: 80px;
          animation: spin 1s linear infinite;
          }
-         #loader2 {
+         #loader2.light {
          border: 16px solid #a31c1c;
          border-top: 16px solid #050404;
          border-radius: 50%;
@@ -864,14 +864,14 @@
          0% { transform: rotate(0deg); }
          100% { transform: rotate(360deg); }
          }
-         #slider-wrapper {
+         #slider-wrapper.light {
          margin-top: 20px;
          padding: 10px; /* Add padding to the slider container */
          display: fixed;
          justify-content: center;
          align-items: center;
          }
-         input[type=range] {
+         input.light[type=range] {
          -webkit-appearance: none; /* Remove default appearance for WebKit browsers */
          width: 30%;
          background: transparent; /* Remove default background */
@@ -880,7 +880,7 @@
          justify-content: center;
          align-items: center;
          }
-         input[type=range]::-webkit-slider-thumb {
+         input.light[type=range]::-webkit-slider-thumb {
          -webkit-appearance: none;
          width: 12px;
          height: 12px;
@@ -889,7 +889,7 @@
          border-radius: 10px;
          opacity: 0.8;
          }
-         input[type=range]::-moz-range-thumb {
+         input.light[type=range]::-moz-range-thumb {
          width: 12px;
          height: 12px;
          background: black;
@@ -898,7 +898,7 @@
          opacity: 0.8;
          }
          /* Slider track styles */
-         input[type=range]::-webkit-slider-runnable-track {
+         input.light[type=range]::-webkit-slider-runnable-track {
          width: 30%;
          height: 4px;
          background: black;
@@ -906,7 +906,7 @@
          border-radius: 4px;
          opacity: 0.5;
          }
-         input[type=range]::-moz-range-track {
+         input.light[type=range]::-moz-range-track {
          width: 30%;
          height: 4px;
          background: black;
