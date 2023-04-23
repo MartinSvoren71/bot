@@ -45,7 +45,36 @@ v1.5
          font-family: 'Lucida Console', monospace;  
          max-width: 100vw;
          width: 100vw;
-         }     
+         } 
+                         :root.light {
+         --matrix-white-1:                #ffffff;
+         --matrix-red-1:                  #ff000c;
+         --matrix-red-2:                  #6b0c08;  
+         --matrix-green-1:                #000000;
+         --matrix-green-2:                #000000;
+         --matrix-green-3:                #ababab;
+         --matrix-green-4:                #2d9cca;
+         --matrix-blue-pill:                #57aebb;
+         --matrix-red-pill:                #c13939;        
+         --matrix-green-6:                #0e1c0d;  
+         --matrix-amber-1:                 #1a4a5a;
+         --matrix-amber-2:                 #a37828;
+         --matrix-black-1:                  #ffffff;      
+         --matrix-black-2:                   black;    
+         --text-1:                       #1cafec;
+         --text-2:                          #474866;
+         --gray-2:                        #29658a;    
+         --matrix-gray-1:                 #1f1f1f;
+         --title-grad:     white;
+             
+             
+             
+         font-family: 'Lucida Console', monospace;  
+         max-width: 100vw;
+         width: 100vw;
+         }    
+            
+            
          /* Style for the title text */
          .title {
          color: white;
@@ -108,13 +137,16 @@ v1.5
          max-width: 20%;
          height: auto;
          }
-         .content-wrapper {
+        
+            
+            .content-wrapper {
          font-family: 'Lucida Console', monospace;  
          flex: 1;
          display: flex;
          flex-direction: column;
          align-items: center;
-
+min-width: 48%;
+    height: 100vh;
          }
          .right-side {
          top: 0;
@@ -149,7 +181,7 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
-           width: 48%;
+           width: 50%;
     height: 100vh;
          }
          .left-down-side {
@@ -264,30 +296,7 @@ v1.5
          .right-down-down-side::-webkit-scrollbar-thumb:hover {
          background-color: #555;
          }
-         .left-down-down-down-side {
-         top: auto;
-         left:0;
-         flex: 1;
-         display: fixed;
-         justify-content: left;
-         align-items: center;
-         opacity:0.7;
-           width: 48%;
-    height: 100vh;
-         }
-         .left-down-down-down-side::-webkit-scrollbar {
-         width: 6px;
-         }
-         .left-down-down-down-side::-webkit-scrollbar-track {
-         background-color: #333;
-         }
-         .left-down-down-down-side::-webkit-scrollbar-thumb {
-         background-color: #666;
-         border-radius: 3px;
-         }
-         ..left-down-down-down-side::-webkit-scrollbar-thumb:hover {
-         background-color: #555;
-         }
+
          .middle-side {
          top: auto;
          right:0;
@@ -301,9 +310,7 @@ v1.5
        
          height: 100vh;
          }
-         .right-down-down-down-side::-webkit-scrollbar {
-         width: 6px;
-         }
+        
           .down-down-down-side {
          flex: 1;
          display: fixed;
@@ -316,32 +323,7 @@ v1.5
          height: 80vh; 
          }
           
-         .right-down-down-down-side {
-         top: auto;
-         right:0;
-         flex: 1;
-         display: fixed;
-         justify-content: center;
-         align-items: center;
-         max-width: 48%;
-         opacity:0.7;
-         width: 48%;
-         max-height: 80vh;
-         height: 80vh;
-         }
-         .right-down-down-down-side::-webkit-scrollbar {
-         width: 6px;
-         }
-         .right-down-down-down-side::-webkit-scrollbar-track {
-         background-color: #333;
-         }
-         .right-down-down-down-side::-webkit-scrollbar-thumb {
-         background-color: #666;
-         border-radius: 3px;
-         }
-         .right-down-down-down-side::-webkit-scrollbar-thumb:hover {
-         background-color: #555;
-         }
+     
          .bottom {
          flex: 1;
          display: fixed;
@@ -351,7 +333,9 @@ v1.5
          height: 120vh;
          max-height: 500vh;
          color: var(--matrix-black-1);
-         }       
+         }    
+            
+            
          body {
          font-family: 'Lucida Console', monospace;  
          color: var(--matrix-black-1);
@@ -903,33 +887,66 @@ v1.5
          border-radius: 4px;
          opacity: 0.5;
          }
-             :root.light {
-         --matrix-white-1:                #ffffff;
-         --matrix-red-1:                  #ff000c;
-         --matrix-red-2:                  #6b0c08;  
-         --matrix-green-1:                #000000;
-         --matrix-green-2:                #000000;
-         --matrix-green-3:                #ababab;
-         --matrix-green-4:                #2d9cca;
-         --matrix-blue-pill:                #57aebb;
-         --matrix-red-pill:                #c13939;        
-         --matrix-green-6:                #0e1c0d;  
-         --matrix-amber-1:                 #1a4a5a;
-         --matrix-amber-2:                 #a37828;
-         --matrix-black-1:                  #ffffff;      
-         --matrix-black-2:                   black;    
-         --text-1:                       #1cafec;
-         --text-2:                          #474866;
-         --gray-2:                        #29658a;    
-         --matrix-gray-1:                 #1f1f1f;
-         --title-grad:     white;
-             
-             
-             
-         font-family: 'Lucida Console', monospace;  
-         max-width: 100vw;
-         width: 100vw;
-         }     
+
+            
+            
+
+
+  @media (max-width: 1000px) {
+  
+    .content-wrapper {
+min-width: 100%;
+    height: 100vh;
+         }
+         .right-side {
+
+        width: 100%;
+    height: 100vh;
+
+         }
+         .left-side {
+
+           width: 100%;
+    height: 100vh;
+         }
+         .left-down-side {
+         width: 100%;
+    height: 100vh;
+
+         }
+        
+         .right-down-side {
+         width: 100%;
+    height: 100vh;
+         }
+       
+         .left-down-down-side {
+          width: 100%;
+    height: 100vh;
+
+         }
+   
+         .right-down-down-side {
+          width: 100%;
+    height: 100vh;
+
+         }
+       
+
+         .middle-side {
+         max-width: 0%;
+         width: 0%;
+         height: 100vh;
+         }
+        
+          .down-down-down-side {
+         max-width: 100%;
+         width: 100%;
+         max-height: 80vh;
+         height: 80vh; 
+         }
+          
+}
       
            </style>
        
