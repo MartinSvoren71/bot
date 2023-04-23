@@ -1070,6 +1070,32 @@ v1.5
        localStorage.setItem("folder-select", saveFolder);
       }  
        
+     const folderSelector = document.getElementById('folder-selector');
+
+    // Load saved values from local storage
+    const savedCheckboxState = localStorage.getItem('toggleCheckbox');
+    const savedSelectedFolder = localStorage.getItem('folder-selector');
+
+    if (savedCheckboxState) {
+      toggleCheckbox.checked = JSON.parse(savedCheckboxState);
+         if (toggleCheckbox.checked) {
+        root.classList.add('light');
+      } else {
+        root.classList.remove('light'); 
+      }
+    }
+    if (savedSelectedFolder) {
+      folderSelector.value = savedSelectedFolder;
+    }
+
+    // Save values to local storage when changed
+    toggleCheckbox.addEventListener('change', () => {
+      localStorage.setItem('toggleCheckbox', JSON.stringify(toggleCheckbox.checked));
+    });
+
+    folderSelector.addEventListener('change', () => {
+      localStorage.setItem('folder-selector', folderSelector.value);
+    });
           
        
       async function ask_LIB(event) {
@@ -1410,32 +1436,6 @@ async function light(event) {
       }
     });
        
-    const folderSelector = document.getElementById('folder-selector');
-
-    // Load saved values from local storage
-    const savedCheckboxState = localStorage.getItem('toggleCheckbox');
-    const savedSelectedFolder = localStorage.getItem('folder-selector');
-
-    if (savedCheckboxState) {
-      toggleCheckbox.checked = JSON.parse(savedCheckboxState);
-         if (toggleCheckbox.checked) {
-        root.classList.add('light');
-      } else {
-        root.classList.remove('light'); 
-      }
-    }
-    if (savedSelectedFolder) {
-      folderSelector.value = savedSelectedFolder;
-    }
-
-    // Save values to local storage when changed
-    toggleCheckbox.addEventListener('change', () => {
-      localStorage.setItem('toggleCheckbox', JSON.stringify(toggleCheckbox.checked));
-    });
-
-    folderSelector.addEventListener('change', () => {
-      localStorage.setItem('folder-selector', folderSelector.value);
-    });
-   updateFolderContent();
+ 
    </script>
 </html>
