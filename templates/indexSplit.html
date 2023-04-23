@@ -1469,15 +1469,15 @@ async function light(event) {
      
      
    const toggleCheckbox = document.getElementById('toggleCheckbox');
-    const body = document.querySelector('body');
+    const root = document.querySelector(':root');
 
     toggleCheckbox.addEventListener('change', () => {
       if (toggleCheckbox.checked) {
-        body.classList.add('dark');
+        root.classList.add('dark');
       } else {
-        body.classList.remove('dark');
+        root.classList.remove('dark');
       }
-    });  
+    });
        
    </script>
 </html>
