@@ -1435,6 +1435,10 @@ async function light(event) {
     folderSelector.addEventListener('change', () => {
       localStorage.setItem('folder-selector', folderSelector.value);
     });
-       
+          function preventDefaultOnClick(event) {
+         event.preventDefault();
+         // Add your custom behavior here
+         console.log('Link clicked, default behavior prevented.');
+      }
    </script>
 </html>
