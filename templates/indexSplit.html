@@ -20,16 +20,7 @@ v1.5
 
       <script>
           
-           const toggleCheckbox = document.getElementById('toggleCheckbox');
-    const stylesheet = document.getElementById('stylesheet');
-
-    toggleCheckbox.addEventListener('change', () => {
-      if (toggleCheckbox.checked) {
-        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_dark.css');
-      } else {
-        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_light.css');
-      }
-    });   
+ 
          window.onload = function() {
              const saveFolder = localStorage.getItem("folder-selector");
              if (saveFolder) {
