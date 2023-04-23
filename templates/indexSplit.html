@@ -1157,10 +1157,12 @@ v1.5
        
        
       function showPDF(url) {
+             event.preventDefault();
       document.getElementById('pdf-embed').src = '/lurl.pdf';
       setTimeout(() => {
         document.getElementById('pdf-embed').src = url;
-           pdfWindow.scrollTo(0, 2000);
+             
+
       }, 300);
       }
        
