@@ -1,101 +1,38 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Opacity Slider and Dark Mode Toggle Switch</title>
-        <style>
-            body {
-                background-color: white;
-                color: black;
-                transition: all 0.3s;
-            }
-            
-            .opacity-slider {
-                width: 300px;
-                height: 20px;
-                background-color: lightgray;
-                position: relative;
-            }
-            
-            .opacity-slider .slider {
-                width: 100%;
-                height: 100%;
-                background-color: gray;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-            
-            .toggle-switch {
-                position: relative;
-                display: inline-block;
-                width: 60px;
-                height: 34px;
-            }
-            
-            .toggle-switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-            
-            .toggle-switch .slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: gray;
-                transition: all 0.3s;
-            }
-            
-            .toggle-switch .slider:before {
-                position: absolute;
-                content: "";
-                height: 26px;
-                width: 26px;
-                left: 4px;
-                bottom: 4px;
-                background-color: white;
-                transition: all 0.3s;
-            }
-            
-            input:checked + .slider {
-                background-color: black;
-            }
-            
-            input:checked + .slider:before {
-                transform: translateX(26px);
-            }
-            
-            .dark-mode {
-                background-color: black;
-                color: white;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="opacity-slider">
-            <input type="range" min="0" max="100" value="100" class="slider" id="opacity-slider">
-        </div>
-        <br>
-        <label class="toggle-switch">
-            <input type="checkbox" id="dark-mode-toggle">
-            <span class="slider"></span>
-        </label>
-        <span>Dark Mode</span>
-        <script>
-            var opacitySlider = document.getElementById("opacity-slider");
-            var darkModeToggle = document.getElementById("dark-mode-toggle");
-            var body = document.getElementsByTagName("body")[0];
-            
-            opacitySlider.oninput = function() {
-                body.style.opacity = this.value / 100;
-            }
-            
-            darkModeToggle.onchange = function() {
-                body.classList.toggle("dark-mode");
-            }
-        </script>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle CSS</title>
+  <style id="stylesheet">
+    /* Default styles */
+    body {
+      background-color: lightblue;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Override styles */
+    body.dark {
+      background-color: darkblue;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <label for="toggleCheckbox">Toggle CSS</label>
+  <input type="checkbox" id="toggleCheckbox">
+
+  <script>
+    const toggleCheckbox = document.getElementById('toggleCheckbox');
+    const body = document.querySelector('body');
+
+    toggleCheckbox.addEventListener('change', () => {
+      if (toggleCheckbox.checked) {
+        body.classList.add('dark');
+      } else {
+        body.classList.remove('dark');
+      }
+    });
+  </script>
+</body>
 </html>
