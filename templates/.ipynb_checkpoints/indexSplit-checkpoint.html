@@ -504,7 +504,7 @@ v1.5
          max-width: 100%;
          font-size: 1em;
          text-align: center;
-         color: var(--matrix-green-1);
+         color: white;
          filter: drop-shadow(0 0 0.35rem var(--matrix-green-1));
          }
          form {
@@ -1157,12 +1157,9 @@ v1.5
        
        
       function showPDF(url) {
-             event.preventDefault();
       document.getElementById('pdf-embed').src = '/lurl.pdf';
       setTimeout(() => {
         document.getElementById('pdf-embed').src = url;
-             
-
       }, 300);
       }
        
