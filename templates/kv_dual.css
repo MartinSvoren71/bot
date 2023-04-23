@@ -85,6 +85,16 @@
         height: 100vh;
 
          }
+ #container_2 {
+         color: var(--matrix-black-1);
+         font-family: 'Lucida Console', monospace;  
+         display: flex;
+         height: auto;
+         justify-content: center;
+         max-height: 100vh;
+        height: 60vh;
+
+         }
         
          .footer {
          padding-bottom:0px;  
