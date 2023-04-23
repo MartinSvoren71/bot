@@ -1042,10 +1042,40 @@ v1.5
       </div>
    </body>
    <script>
+       
+         const folderSelector = document.getElementById('folder-selector');
+
+    // Load saved values from local storage
+    const savedCheckboxState = localStorage.getItem('toggleCheckbox');
+    const savedSelectedFolder = localStorage.getItem('folder-selector');
+
+    if (savedCheckboxState) {
+      toggleCheckbox.checked = JSON.parse(savedCheckboxState);
+         if (toggleCheckbox.checked) {
+        root.classList.add('light');
+      } else {
+        root.classList.remove('light'); 
+      }
+    }
+
+    if (savedSelectedFolder) {
+      folderSelector.value = savedSelectedFolder;
+    }
+
+    // Save values to local storage when changed
+    toggleCheckbox.addEventListener('change', () => {
+      localStorage.setItem('toggleCheckbox', JSON.stringify(toggleCheckbox.checked));
+    });
+
+    folderSelector.addEventListener('change', () => {
+      localStorage.setItem('folder-selector', folderSelector.value);
+    });
+       
       function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
       let pdfEmbed = document.getElementById('pdf-embed');
       pdfEmbed.setAttribute('src', presignedUrl);
+        window.scrollTo(0, 1000);  
       }
       
       
@@ -1410,37 +1440,7 @@ async function light(event) {
       }
     });
        
-    const folderSelector = document.getElementById('folder-selector');
-
-    // Load saved values from local storage
-    const savedCheckboxState = localStorage.getItem('toggleCheckbox');
-    const savedSelectedFolder = localStorage.getItem('folder-selector');
-
-    if (savedCheckboxState) {
-      toggleCheckbox.checked = JSON.parse(savedCheckboxState);
-         if (toggleCheckbox.checked) {
-        root.classList.add('light');
-      } else {
-        root.classList.remove('light'); 
-      }
-    }
-
-    if (savedSelectedFolder) {
-      folderSelector.value = savedSelectedFolder;
-    }
-
-    // Save values to local storage when changed
-    toggleCheckbox.addEventListener('change', () => {
-      localStorage.setItem('toggleCheckbox', JSON.stringify(toggleCheckbox.checked));
-    });
-
-    folderSelector.addEventListener('change', () => {
-      localStorage.setItem('folder-selector', folderSelector.value);
-    });
-          function preventDefaultOnClick(event) {
-         event.preventDefault();
-         // Add your custom behavior here
-         console.log('Link clicked, default behavior prevented.');
-      }
+  
+   
    </script>
 </html>
