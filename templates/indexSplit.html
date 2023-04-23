@@ -70,13 +70,11 @@ v1.5
          #container {
          color: var(--matrix-black-1);
          font-family: 'Lucida Console', monospace;  
-      
-  width: 50%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+         display: flex;
+         height: auto;
+         justify-content: center;
+         max-height: 100vh;
+        height: 100vh;
 
          }
         
@@ -116,23 +114,18 @@ v1.5
          display: flex;
          flex-direction: column;
          align-items: center;
-         width: 48%;
-         max-width: 48%;
-              max-height: 100vh;
-        height: 100vh;
+
          }
          .right-side {
          top: 0;
          right: 0;
-         flex: 1;
          display: fixed;
          justify-content: center;
          align-items: center;
-         max-width: 47%;
          background: var(--title-grad);
                   padding:1%;
-              max-height: 100vh;
-        height: 100vh;
+        width: 46%;
+    height: 100vh;
 
          }
          .right-side::-webkit-scrollbar {
@@ -155,8 +148,8 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
-         max-width: 50%;
-         width: 50%;
+           width: 48%;
+    height: 100vh;
          }
          .left-down-side {
          top: 100vh;
@@ -165,10 +158,8 @@ v1.5
          flex: 1;
          justify-content: center;
          align-items: center;
-         max-width: 48%;
          width: 48%;
-         max-width: 80%;
-         height:80vh;
+    height: 100vh;
          background: var(--title-grad);
          color: var(--matrix-red-pill);
    
@@ -194,16 +185,15 @@ v1.5
          right:0;
                   padding:1%;
 
-         max-width: 48%;
          width: 48%;
+    height: 100vh;
          flex: 1;
          color: var(--matrix-green-1);
          justify-content: center;
          align-items: center;
-         max-width: 80%;
          flex-direction: column;
          overflow-y: auto;
-         height:80vh;
+         
          background: var(--title-grad);
          }
          .right-down-side::-webkit-scrollbar {
@@ -226,9 +216,8 @@ v1.5
          display: fixed;
          justify-content: left;
          align-items: center;
-         max-width: 48%;
-         width: 48%;
-         height: 120vh;
+          width: 48%;
+    height: 100vh;
                   padding:1%;
 
          background: var(--title-grad);
@@ -254,10 +243,9 @@ v1.5
          display: fixed;
          justify-content: center;
          align-items: center;
-         max-width: 48%;
          opacity:0.7;
-         width: 48%;
-         height: 120vh;
+          width: 48%;
+    height: 100vh;
                   padding:1%;
 
          background: var(--title-grad);
@@ -283,10 +271,8 @@ v1.5
          justify-content: left;
          align-items: center;
          opacity:0.7;
-         max-width: 48%;
-         width: 48%;
-         max-height: 80vh;
-         height: 80vh;
+           width: 48%;
+    height: 100vh;
          }
          .left-down-down-down-side::-webkit-scrollbar {
          width: 6px;
@@ -311,8 +297,8 @@ v1.5
          opacity: 0.0;
          max-width: 4%;
          width: 4%;
-         max-height: 80vh;
-         height: 80vh;
+       
+         height: 100vh;
          }
          .right-down-down-down-side::-webkit-scrollbar {
          width: 6px;
@@ -994,14 +980,14 @@ v1.5
 
       <canvas id="matrixCanvas"></canvas>
       <div class="container">
-         <div class="container1">
-            
+         <div class="content-wrapper">
+            <div class="left-side">
                <h1>__Knowledge Vortex__</h1>
                <img src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/logo1+(1).png" alt="KV Logo">
                <h2 id="datetime" style="color: red;"></h2>
                <div>
                   <h4>__opacity__ __light__</h4>
-             
+               </div>
                 
                <div style="display: flex; justify-content: center; align-items: center;">
                   <input type="range" id="opacity-slider" min="0" max="100" value="70">
@@ -1036,7 +1022,7 @@ v1.5
          </div>
          <div class=" middle-side">
          </div>
-         <div class="container2">
+         <div class="right-side">
             <div>
                <h1>__vortex operator chat__</h1>
             </div>
@@ -1044,7 +1030,7 @@ v1.5
          </div>
       </div>
       <div class="container flex-container" style="container">
-         <div class="container3">
+         <div class="left-down-side">
             <div>
                <h1>__vortex file bucket__</h1>
                <div class="list-container">
@@ -1054,7 +1040,7 @@ v1.5
          </div>
          <div class=" middle-side">
          </div>
-         <div class="container4">
+         <div class="right-down-side">
             <div>
                <h1>__vortex search resoults__</h1>
             </div>
@@ -1063,7 +1049,7 @@ v1.5
          </div>
       </div>
       <div class="container flex-container" style="container">
-         <div class="container5">
+         <div class="left-down-down-side">
             <h1>__create new document__</h1>
             <div class="quill-container">
                <button id="button" type="button" onclick="save_doc()">Save</button>
@@ -1073,13 +1059,19 @@ v1.5
          </div>
          <div class=" middle-side">
          </div>
-         <div class="container6">
+         <div class="right-down-down-side">
             <h1>__vortex pdf preview__</h1>
             <div class="pdf-viewer">
                <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="94%">
             </div>
          </div>
       </div>
+      </div>
+      <div class="container flex-container" style="container">
+         <div class="down-down-down-side">
+            <h1>__vortex mind map__</h1>
+            <iframe src="https://www.mindmaps.app/" width="100%" height="100%" frameborder="0"></iframe>
+         </div>
       </div>
       <div class="footer">
          <h3>Knowledge Vortex 2023</h3>
