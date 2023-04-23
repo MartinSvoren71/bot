@@ -19,6 +19,17 @@ v1.5
          <link id="stylesheet" rel="stylesheet" href="style1.css">
 
       <script>
+          
+           const toggleCheckbox = document.getElementById('toggleCheckbox');
+    const stylesheet = document.getElementById('stylesheet');
+
+    toggleCheckbox.addEventListener('change', () => {
+      if (toggleCheckbox.checked) {
+        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_dark.css');
+      } else {
+        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_light.css');
+      }
+    });   
          window.onload = function() {
              const saveFolder = localStorage.getItem("folder-selector");
              if (saveFolder) {
@@ -515,16 +526,7 @@ async function light(event) {
   }
 });  
      
- const toggleCheckbox = document.getElementById('toggleCheckbox');
-    const stylesheet = document.getElementById('stylesheet');
-
-    toggleCheckbox.addEventListener('change', () => {
-      if (toggleCheckbox.checked) {
-        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_dark.css');
-      } else {
-        stylesheet.setAttribute('href', 'https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_css/kv_light.css');
-      }
-    });      
+   
        
    </script>
 </html>
