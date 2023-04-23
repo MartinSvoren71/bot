@@ -17,12 +17,7 @@ v1.5
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-    if (toggleCheckbox.checked) {
-        root.classList.add('light');
-      } else {
-        root.classList.remove('light');
-      }
-    });
+  
     </script>
         <style id="stylesheet">
          :root {
@@ -2397,6 +2392,13 @@ async function light(event) {
 
     folderSelector.addEventListener('change', () => {
       localStorage.setItem('folder-selector', folderSelector.value);
+    });
+       
+         if (toggleCheckbox.checked) {
+        root.classList.add('light');
+      } else {
+        root.classList.remove('light');
+      }
     });
        
    </script>
