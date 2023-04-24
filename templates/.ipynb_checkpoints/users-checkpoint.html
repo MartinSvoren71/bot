@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+</head>
+<body>
+    <h1>Create a new user</h1>
+    <form action="/create_user" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <button type="submit">Create User</button>
+    </form>
+
+    <h2>Current users</h2>
+    <ul id="user-list">
+        <!-- Users will be populated here using JavaScript -->
+    </ul>
+
+    <script>
+        function deleteUser(username) {
+            fetch('/delete_user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username: username})
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    location.reload();
+                } else {
+                    alert(data.message);
+                }
+            });
+        }
+
+        fetch('/get_users')
+            .then(response => response.json())
+            .then(users => {
+                const userList = document.getElementById('user-list');
+                users.forEach(user => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = user.username;
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.onclick = () => deleteUser(user.username);
+                    listItem.appendChild(deleteButton);
+                    userList.appendChild(listItem);
+                });
+            });
+    </script>
+</body>
+</html>
