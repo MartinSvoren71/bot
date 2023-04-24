@@ -14,7 +14,7 @@ def save_users(users):
 
 @app.route('/')
 def index():
-    return render_template('create_user.html')
+    return render_template('users.html')
 
 @app.route('/create_user', methods=['POST'])
 def create_user():
