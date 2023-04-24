@@ -25,34 +25,36 @@ from concurrent.futures import ThreadPoolExecutor
 import warnings
 from pdfminer.high_level import extract_text
 
-
 app = Flask(__name__, static_folder='/')
-app.secret_key = "xxx007"
-app.secret_key2 = "xxx707"
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 
-#main landign page - login 
+with open('user.json', 'r') as file:
+    users_data = json.load(file)
+
+# main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        password = request.form["key"]
-        if password == app.secret_key :
-            session["logged_in"] = True
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("index"))
-        elif password == app.secret_key2 :
-            session["logged_in"] = True
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(hours=1)
-            return redirect(url_for("file_manager"))
-        else:
-            flash("Bad key provided")
-            return redirect(url_for("bad_key"))
-    return render_template("login.html")
-@app.route("/bad_key")
+        username = request.form["username"]
+        password = request.form["password"]
 
+        if username in users_data and users_data[username] == password:
+            session["logged_in"] = True
+            session.permanent = True
+            app.permanent_session_lifetime = timedelta(hours=1)
+
+            if username == "admin":
+                return redirect(url_for("file_manager"))
+            else:
+                return redirect(url_for("index"))
+        else:
+            flash("Invalid username or password provided")
+            return redirect(url_for("bad_key"))
+
+    return render_template("login.html")
+
+@app.route("/bad_key")
 
 #when bed klogin key provided
 def bad_key():
