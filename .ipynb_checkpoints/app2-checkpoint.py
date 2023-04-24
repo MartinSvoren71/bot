@@ -54,7 +54,7 @@ def login():
             if username == "admin":
                 return redirect(url_for("file_manager"))
             elif username == "admin":
-                return redirect(url_for("user_manager")
+                return redirect(url_for("user_manager"))
             else:
                 return redirect(url_for("index"))
         else:
