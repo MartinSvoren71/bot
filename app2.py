@@ -41,7 +41,7 @@ def find_user(username, password):
 @app.route("/", methods=["GET", "POST"])
 def login():
     with open('user.json', 'r') as file:
-    users_data = json.load(file)
+        users_data = json.load(file)
 
     if request.method == "POST":
         username = request.form["username"]
