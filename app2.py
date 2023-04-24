@@ -30,8 +30,6 @@ app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 
-with open('user.json', 'r') as file:
-    users_data = json.load(file)
 
 def find_user(username, password):
     for user in users_data:
@@ -42,6 +40,9 @@ def find_user(username, password):
 # main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
+    with open('user.json', 'r') as file:
+    users_data = json.load(file)
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
