@@ -392,3 +392,13 @@ async function light(event) {
     folderSelector.addEventListener('change', () => {
       localStorage.setItem('folder-selector', folderSelector.value);
     });
+var myLink = document.getElementById("folder-content");
+  myLink.addEventListener("click", function(event) {
+    event.preventDefault();
+    // your custom code here
+  });
+var myLink = document.getElementById("results");
+  myLink.addEventListener("click", function(event) {
+    event.preventDefault();
+    // your custom code here
+  });

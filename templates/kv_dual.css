@@ -179,7 +179,7 @@
          justify-content: center;
          align-items: center;
          width: 48%;
-    height: 100vh;
+    height: 60vh;
          background: var(--title-grad);
          color: var(--matrix-red-pill);
    
@@ -206,7 +206,7 @@
                   padding:1%;
 
          width: 48%;
-    height: 100vh;
+    height: 60vh;
          flex: 1;
          color: var(--matrix-green-1);
          justify-content: center;
