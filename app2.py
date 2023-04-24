@@ -429,6 +429,8 @@ def create_user():
     save_users(users)
 
     return jsonify({"status": "success", "message": "User created successfully."})
+with open('user.json', 'r') as file:
+    users_data = json.load(file)
 
 @app.route('/get_users', methods=['GET'])
 def get_users():
