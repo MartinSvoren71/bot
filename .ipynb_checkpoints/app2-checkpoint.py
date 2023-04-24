@@ -399,7 +399,7 @@ def serve_file(file_path):
     return send_from_directory(data_folder_path, file_path)
                                 
                                 
-                                def load_users():
+def load_users():
     with open('user.json', 'r') as file:
         users = json.load(file)
     return users
