@@ -52,7 +52,7 @@ def login():
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
 
-            if username == "admin":
+            if username == "fileadmin":
                 return redirect(url_for("file_manager"))
             elif username == "useradmin":
                 return redirect(url_for("user_manager"))
