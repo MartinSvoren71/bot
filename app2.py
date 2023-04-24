@@ -28,6 +28,7 @@ from pdfminer.high_level import extract_text
 app = Flask(__name__, static_folder='/')
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
+app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 
 with open('user.json', 'r') as file:
     users_data = json.load(file)
