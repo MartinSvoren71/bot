@@ -62,7 +62,6 @@ def login():
     return render_template("login.html")
 
 @app.route("/bad_key")
-With these changes, your application should work correctly with the existing JSON format.
 
 
 
