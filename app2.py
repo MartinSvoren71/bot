@@ -53,6 +53,8 @@ def login():
 
             if username == "admin":
                 return redirect(url_for("file_manager"))
+            elif username == "admin":
+                return redirect(url_for("user_manager")
             else:
                 return redirect(url_for("index"))
         else:
@@ -395,6 +397,60 @@ def delete_folder(folder_path):
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
     return send_from_directory(data_folder_path, file_path)
+                                
+                                
+                                def load_users():
+    with open('user.json', 'r') as file:
+        users = json.load(file)
+    return users
+
+def save_users(users):
+    with open('user.json', 'w') as file:
+        json.dump(users, file)
+
+@app.route('/users')
+def user_manager():
+    return render_template('users.html')
+
+@app.route('/create_user', methods=['POST'])
+def create_user():
+    username = request.form['username']
+    password = request.form['password']
+
+    user = {
+        "username": username,
+        "password": password
+    }
+
+    users = load_users()
+    users.append(user)
+    save_users(users)
+
+    return jsonify({"status": "success", "message": "User created successfully."})
+
+@app.route('/get_users', methods=['GET'])
+def get_users():
+    users = load_users()
+    return jsonify(users)
+
+@app.route('/delete_user', methods=['POST'])
+def delete_user():
+    username = request.json['username']
+    users = load_users()
+    user_to_delete = None
+
+    for user in users:
+        if user['username'] == username:
+            user_to_delete = user
+            break
+
+    if user_to_delete:
+        users.remove(user_to_delete)
+        save_users(users)
+        return jsonify({"status": "success", "message": "User deleted successfully."})
+    else:
+        return
+                                
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
