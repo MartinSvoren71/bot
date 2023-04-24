@@ -397,8 +397,6 @@ def delete_folder(folder_path):
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
     return send_from_directory(data_folder_path, file_path)
-                                
-                                
 def load_users():
     with open('user.json', 'r') as file:
         users = json.load(file)
@@ -407,7 +405,7 @@ def load_users():
 def save_users(users):
     with open('user.json', 'w') as file:
         json.dump(users, file)
-    load_users()
+    return load_users()
 
 @app.route('/users')
 def user_manager():
@@ -425,14 +423,18 @@ def create_user():
 
     users = load_users()
     users.append(user)
-    save_users(users)
+    users = save_users(users)
+    formatted_users = get_users(users)
 
-    return jsonify({"status": "success", "message": "User created successfully."})
+    return jsonify({"status": "success", "message": "User created successfully.", "users": formatted_users})
 
 @app.route('/get_users', methods=['GET'])
-def get_users():
-    users = load_users()
-    return jsonify(users)
+def get_users(users=None):
+    if not users:
+        users = load_users()
+    # Format user data as required by your application
+    formatted_users = ...
+    return formatted_users
 
 @app.route('/delete_user', methods=['POST'])
 def delete_user():
@@ -447,11 +449,12 @@ def delete_user():
 
     if user_to_delete:
         users.remove(user_to_delete)
-        save_users(users)
-        return jsonify({"status": "success", "message": "User deleted successfully."})
+        users = save_users(users)
+        formatted_users = get_users(users)
+        return jsonify({"status": "success", "message": "User deleted successfully.", "users": formatted_users})
     else:
         return
-                                
+                
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
