@@ -407,6 +407,7 @@ def load_users():
 def save_users(users):
     with open('user.json', 'w') as file:
         json.dump(users, file)
+    load_users()
 
 @app.route('/users')
 def user_manager():
