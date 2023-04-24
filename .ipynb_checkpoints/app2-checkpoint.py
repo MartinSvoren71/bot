@@ -52,9 +52,9 @@ def login():
             app.permanent_session_lifetime = timedelta(hours=1)
 
             if username == "admin":
-                return redirect(url_for("index"))
-            else:
                 return redirect(url_for("file_manager"))
+            else:
+                return redirect(url_for("index"))
         else:
             flash("Invalid username or password provided")
             return redirect(url_for("bad_key"))
