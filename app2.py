@@ -32,6 +32,9 @@ app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 
 
 def find_user(username, password):
+    with open('user.json', 'r') as file:
+        users_data = json.load(file)
+
     for user in users_data:
         if user["username"] == username and user["password"] == password:
             return True
@@ -40,9 +43,6 @@ def find_user(username, password):
 # main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
-    with open('user.json', 'r') as file:
-        users_data = json.load(file)
-
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
