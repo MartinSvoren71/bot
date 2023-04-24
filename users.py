@@ -54,3 +54,5 @@ def delete_user():
         return jsonify({"status": "success", "message": "User deleted successfully."})
     else:
         return
+#runn app as local on port 5000 , accesible on private and public AWS IP
+app.run(host='0.0.0.0', port=5000)
