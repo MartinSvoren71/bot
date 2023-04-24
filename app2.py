@@ -33,6 +33,12 @@ app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 with open('user.json', 'r') as file:
     users_data = json.load(file)
 
+def find_user(username, password):
+    for user in users_data:
+        if user["username"] == username and user["password"] == password:
+            return True
+    return False
+
 # main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -40,15 +46,15 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        if username in users_data and users_data[username] == password:
+        if find_user(username, password):
             session["logged_in"] = True
             session.permanent = True
             app.permanent_session_lifetime = timedelta(hours=1)
 
             if username == "admin":
-                return redirect(url_for("file_manager"))
-            else:
                 return redirect(url_for("index"))
+            else:
+                return redirect(url_for("file_manager"))
         else:
             flash("Invalid username or password provided")
             return redirect(url_for("bad_key"))
@@ -56,6 +62,13 @@ def login():
     return render_template("login.html")
 
 @app.route("/bad_key")
+With these changes, your application should work correctly with the existing JSON format.
+
+
+
+
+
+
 
 #when bed klogin key provided
 def bad_key():
