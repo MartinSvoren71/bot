@@ -1,0 +1,16 @@
+Record details
+
+
+Edit record
+Record name
+knowledge-vortex.com
+Record type
+A
+Value
+s3-website.eu-north-1.amazonaws.com.
+Alias
+Yes
+TTL (seconds)
+-
+Routing policy
+Simple
