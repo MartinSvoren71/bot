@@ -81,16 +81,14 @@
                   <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">my data request</button>
                </div>
                <h2>library:</h2>
-           <div class="select-container-2" id="select-container-2">
-   <input type="text" name="folder-selector" id="folder-selector" placeholder="Type to filter...">
-   <select name="folder-selector-options" id="folder-selector-options" onchange="saveFolderx()">
-      {% for folder in folders %}
-      <option value="{{ folder }}">{{ folder }}</option>
-      {% endfor %}
-   </select>
-</div>
-<pre id="console-output" style="white-space: pre-wrap;"></pre>
-
+               <div class="select-container-2" id="select-container-2">
+                  <select name="folder-selector" id="folder-selector" onchange="saveFolderx()">
+                     {% for folder in folders %}
+                     <option value="{{ folder }}">{{ folder }}</option>
+                     {% endfor %}
+                  </select>
+               </div>
+               <pre id="console-output" style="white-space: pre-wrap;"></pre>
                <h1>__vortex keyword search__</h1>
             </form>
             <form id="search-form">
@@ -160,28 +158,5 @@
          </div>
       </div>
    </body>
-<script>
- function filterFolders() {
-        var input = document.getElementById("folder-selector");
-        var filter = input.value.toUpperCase();
-        var options = document.getElementsByTagName("option");
-        var select = document.getElementById("folder-options");
-
-        for (var i = 0; i < options.length; i++) {
-            var txtValue = options[i].textContent || options[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                options[i].style.display = "";
-            } else {
-                options[i].style.display = "none";
-            }
-        }
-
-        if (select.selectedIndex === -1) {
-            console.log("No matching options.");
-        } else {
-            console.log(select.options[select.selectedIndex].value + " selected.");
-        }
-    }
-    </script>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js/kv_js.js"></script>
 </html>
