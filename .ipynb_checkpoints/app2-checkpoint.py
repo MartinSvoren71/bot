@@ -25,11 +25,8 @@ from concurrent.futures import ThreadPoolExecutor
 import warnings
 from pdfminer.high_level import extract_text
 from builtins import len
-from flask_sslify import SSLify
 
 app = Flask(__name__, static_folder='/')
-sslify = SSLify(app, permanent=True)
-
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
