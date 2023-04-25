@@ -31,7 +31,7 @@ def ask_ai(question, current_folder):
     #documents = SimpleDirectoryReader(folder_path).load_data('index.json')
     #index = GPTSimpleVectorIndex.from_documents(documents)
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
-    response = index.query(question, mode="tree_summarize")  #
+    response = index.query(question, mode="tree_summarize")  #default #tree_sumarize
     log_file = os.path.join(os.getcwd(), 'log.txt')
     # Read the existing data in the log file
     with open(log_file, "r") as f:
