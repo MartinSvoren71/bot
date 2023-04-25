@@ -33,6 +33,9 @@ app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 
 
 def find_user(username, password):
+    if len(password) < 6:
+        raise ValueError("Password must be at least 6 characters long")
+
     with open('user.json', 'r') as file:
         users_data = json.load(file)
 
@@ -41,6 +44,7 @@ def find_user(username, password):
             return True
     return False
 
+
 # main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -48,31 +52,28 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
 
-        if find_user(username, password):
-            session["logged_in"] = True
-            session.permanent = True
-            app.permanent_session_lifetime = timedelta(hours=1)
+        try:
+            if find_user(username, password):
+                session["logged_in"] = True
+                session.permanent = True
+                app.permanent_session_lifetime = timedelta(hours=1)
 
-            if username == "fileadmin":
-                return redirect(url_for("file_manager"))
-            elif username == "useradmin":
-                return redirect(url_for("user_manager"))
-            else:
-                return redirect(url_for("index"))
-        else:
-            flash("Invalid username or password provided")
-            return redirect(url_for("bad_key"))
+                if username == "fileadmin":
+                    return redirect(url_for("file_manager"))
+                elif username == "useradmin":
+                    return redirect(url_for("user_manager"))
+                else:
+                    return redirect(url_for("index"))
+        except ValueError as e:
+            flash(str(e))
+
+        flash("Invalid username or password provided")
+        return redirect(url_for("bad_key"))
 
     return render_template("login.html")
 
+
 @app.route("/bad_key")
-
-
-
-
-
-
-
 #when bed klogin key provided
 def bad_key():
     return render_template("badkey.html")
