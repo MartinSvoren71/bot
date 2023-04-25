@@ -24,6 +24,7 @@ from flask import send_from_directory
 from concurrent.futures import ThreadPoolExecutor
 import warnings
 from pdfminer.high_level import extract_text
+from builtins import len
 
 app = Flask(__name__, static_folder='/')
 app.config['UPLOAD_FOLDER'] = 'Data/'
@@ -419,6 +420,10 @@ def user_manager():
 def create_user():
     username = request.form['username']
     password = request.form['password']
+
+    if len(password) < 6:
+        flash("Password must be at least 6 characters long")
+        return redirect(url_for("user_manager"))
 
     user = {
         "username": username,
