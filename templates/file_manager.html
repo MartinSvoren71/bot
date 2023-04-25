@@ -185,7 +185,8 @@ img {
     {% for file in files %}
         <li>
             <a href="{{ url_for('serve_file', file_path=(subpath or '') + '/' + file) }}">{{ file }}</a>
-            <a href="{{ url_for('delete', filename=(subpath or '') + '/' + file) }}">-- Delete</a>
+            <a href="{{ url_for('delete', filename=(subpath or '') + '/' + file) }}" onclick="return confirm('Are you sure?')">-- Delete</a>
+
         </li>
     {% endfor %}
 </ul>
