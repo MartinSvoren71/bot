@@ -429,7 +429,7 @@ def create_user():
     users.append(user)
     save_users(users)
 
-    return jsonify({"status": "success", "message": "User created successfully."})
+    return redirect('/users')
 with open('user.json', 'r') as file:
     users_data = json.load(file)
 
