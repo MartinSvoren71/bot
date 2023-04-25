@@ -214,6 +214,7 @@ img {
     <ul id="user-list">
         <!-- Users will be populated here using JavaScript -->
     </ul>
+    <a href="{{ url_for('file_manager', subpath='/'.join(subpath.split('/')[:-1])) }}">Back</a>
 
 <script>
          const canvas = document.getElementById('matrixCanvas');
