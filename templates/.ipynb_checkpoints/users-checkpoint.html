@@ -180,15 +180,18 @@ img {
  <title>Create User</title>
 <body>
     <h1>Create a new user</h1>
-    <form action="/create_user" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">Create User</button>
-    </form>
+   <form action="/create_user" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <label for="confirm-password">Confirm Password:</label>
+    <input type="password" id="confirm-password" name="confirm-password" required>
+    <br>
+    <button type="submit" id="submit-button">Create User</button>
+</form>
 
     <h2>Current users</h2>
     <ul id="user-list">
@@ -297,6 +300,27 @@ setCanvasOpacity();
                     userList.appendChild(listItem);
                 });
             });    
+    const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirm-password');
+const submitButton = document.getElementById('submit-button');
+
+function validatePasswords() {
+    if (passwordInput.value !== confirmPasswordInput.value) {
+        confirmPasswordInput.setCustomValidity("Passwords don't match");
+    } else {
+        confirmPasswordInput.setCustomValidity('');
+    }
+}
+
+passwordInput.addEventListener('change', validatePasswords);
+confirmPasswordInput.addEventListener('keyup', validatePasswords);
+
+submitButton.addEventListener('click', function(event) {
+    if (passwordInput.value !== confirmPasswordInput.value) {
+        event.preventDefault();
+        alert("Passwords don't match");
+    }
+});
       </script>
 </body>
 </html>
