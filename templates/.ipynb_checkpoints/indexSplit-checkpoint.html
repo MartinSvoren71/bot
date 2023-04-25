@@ -161,16 +161,27 @@
       </div>
    </body>
 <script>
-      input.addEventListener('input', function() {
-      for (var i = 0; i < options.length; i++) {
-         var option = options[i];
-         if (option.value.toLowerCase().indexOf(input.value.toLowerCase()) !== -1) {
-            option.style.display = '';
-         } else {
-            option.style.display = 'none';
-         }
-      }
-   });
+ function filterFolders() {
+        var input = document.getElementById("folder-selector");
+        var filter = input.value.toUpperCase();
+        var options = document.getElementsByTagName("option");
+        var select = document.getElementById("folder-options");
+
+        for (var i = 0; i < options.length; i++) {
+            var txtValue = options[i].textContent || options[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                options[i].style.display = "";
+            } else {
+                options[i].style.display = "none";
+            }
+        }
+
+        if (select.selectedIndex === -1) {
+            console.log("No matching options.");
+        } else {
+            console.log(select.options[select.selectedIndex].value + " selected.");
+        }
+    }
     </script>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js/kv_js.js"></script>
 </html>
