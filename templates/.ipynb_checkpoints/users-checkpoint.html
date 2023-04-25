@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Manager</title>
+    <title>User Manager</title>
         <style>
          body {
             background-color: #091918;
@@ -107,8 +107,8 @@
             display: inline-block;
             border: 2px solid #a9abb8;
             border-radius: 3px;
-            margin: 3px;
-            padding: 3px;
+            margin: 8px;
+            padding: 5px;
                          background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.4));
 
         }
@@ -181,13 +181,13 @@ img {
 <body>
     <h1>Create a new user</h1>
    <form action="/create_user" method="POST">
-    <label for="username">Username:</label>
+    <h2 for="username">Username:</h2>
     <input type="text" id="username" name="username" required>
     <br>
-    <label for="password">Password:</label>
+    <h2 for="password">Password:</h2>
     <input type="password" id="password" name="password" required>
     <br>
-    <label for="confirm-password">Confirm Password:</label>
+    <h2 for="confirm-password">Confirm Password:</h2>
     <input type="password" id="confirm-password" name="confirm-password" required>
     <br>
     <button type="submit" id="submit-button">Create User</button>
