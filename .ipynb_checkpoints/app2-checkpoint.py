@@ -484,15 +484,15 @@ def update_password():
     if user_to_update:
         if len(new_password) < 6:
             flash("New password must be at least 6 characters long")
-            return redirect(url_for("change_password_form"))
+            return render_template('badkey.html') 
 
         user_to_update['password'] = new_password
         save_users(users)
         flash("Password updated successfully")
-        return render_template('change_password.html')        
+        return redirect(url_for("index"))
     else:
         flash("Incorrect username or password")
-        return render_template('change_password.html')        
+        return render_template('badkey.html')        
 
 @app.route('/change_passwordX')
 def changepassword():
