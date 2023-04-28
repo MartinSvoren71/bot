@@ -499,18 +499,6 @@ def file_manager(subpath=None):
         return render_template('change_password.html')        
 
 
-    items = os.listdir(dir_path)
-    files = []
-    folders = []
-
-    for item in items:
-        item_path = os.path.join(dir_path, item)
-        if os.path.isfile(item_path):
-            files.append(item)
-        elif os.path.isdir(item_path):
-            folders.append(item)
-
-    return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)        
         
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
