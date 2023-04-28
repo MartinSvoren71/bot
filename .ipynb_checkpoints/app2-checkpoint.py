@@ -489,7 +489,7 @@ def update_password():
         user_to_update['password'] = new_password
         save_users(users)
         flash("Password updated successfully")
-        return redirect(url_for("indexSplit"))
+        return redirect(url_for("user_manager"))
     else:
         flash("Incorrect username or password")
         return redirect(url_for("change_password_form"))
