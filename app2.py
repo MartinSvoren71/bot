@@ -489,10 +489,10 @@ def update_password():
         user_to_update['password'] = new_password
         save_users(users)
         flash("Password updated successfully")
-        return redirect(url_for("user_manager"))
+        return render_template('change_password.html')        
     else:
         flash("Incorrect username or password")
-        return redirect(url_for("change_password_form"))
+        return render_template('change_password.html')        
 
 @app.route('/change_passwordX')
 def changepassword():
