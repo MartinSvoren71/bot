@@ -461,7 +461,41 @@ def delete_user():
         return jsonify({"status": "success", "message": "User deleted successfully."})
     else:
         return
-                                
+                     
+@app.route('/update_password', methods=['POST'])
+def update_password():
+    username = request.form['username']
+    current_password = request.form['current-password']
+    new_password = request.form['new-password']
+    confirm_password = request.form['confirm-password']
+
+    if new_password != confirm_password:
+        flash("New passwords do not match")
+        return redirect(url_for("change_password_form"))
+
+    users = load_users()
+    user_to_update = None
+
+    for user in users:
+        if user['username'] == username and user['password'] == current_password:
+            user_to_update = user
+            break
+
+    if user_to_update:
+        if len(new_password) < 6:
+            flash("New password must be at least 6 characters long")
+            return redirect(url_for("change_password_form"))
+
+        user_to_update['password'] = new_password
+        save_users(users)
+        flash("Password updated successfully")
+        return redirect(url_for("user_manager"))
+    else:
+        flash("Incorrect username or password")
+        return redirect(url_for("change_password_form"))
+        
+        
+        
 
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)

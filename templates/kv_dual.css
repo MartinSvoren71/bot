@@ -891,8 +891,8 @@
          }     
      
          .right-side {
-            max-width: 100%;
-width: 100%;
+            max-width: 50%;
+width: 50%;
 
          }
   
@@ -929,7 +929,11 @@ width: 100%;
         max-width: 200vw;
          width: 200vw;    
     }
-    
+       canvas {
+         width: 200vw;
+         height:200vh;    
+         filter: drop-shadow(0 0 0.9rem red);
+         } 
     
     
     
