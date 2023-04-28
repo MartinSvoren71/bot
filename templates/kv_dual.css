@@ -881,4 +881,60 @@
             
 
 
+
+@media screen and (max-width: 920px) {
+
+
+  .left-side {
+
+
+         }     
+     
+         .right-side {
+            max-width: 100%;
+width: 100%;
+
+         }
+  
+   
+         .left-down-side {
+     
+         width: 100%;
+
+         }
       
+         .right-down-side {
+ 
+         width: 100%;
+  
+ 
+         }
+     
+         .left-down-down-side {
+          width: 100%;
+         }
+     
+         .right-down-down-side {
+          width: 100%;
+    height: 100vh;
+
+         }
+
+        
+    :root.light{
+     max-width: 200vw;
+         width: 200vw;    
+    }
+    :root{
+        max-width: 200vw;
+         width: 200vw;    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+}
