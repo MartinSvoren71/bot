@@ -494,7 +494,7 @@ def update_password():
         flash("Incorrect username or password")
         return redirect(url_for("change_password_form"))
 
-@app.route('/change_passwordx')
+@app.route('/change_passwordX')
 def changepassword():
         return render_template('change_password.html')        
 
