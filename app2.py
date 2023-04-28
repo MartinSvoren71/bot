@@ -495,7 +495,7 @@ def update_password():
         return redirect(url_for("change_password_form"))
 
 @app.route('/change_passwordx')
-def file_manager(subpath=None):
+def changepassword():
         return render_template('change_password.html')        
 
 
