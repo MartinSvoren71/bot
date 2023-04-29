@@ -45,8 +45,7 @@ def ask_ai(question, current_folder):
         f.write(f"Question: {question}\n\n")
         f.write(f"Operator: {response.response}\n\n")
         
-        f.write("Token usage: " + str(index.llm_predictor.last_token_usage) + "\n\n")
-
+        f.write(f"Token usage: {llm_predictor.last_token_usage}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
@@ -76,7 +75,7 @@ def construct_index(current_folder):
 
     # Write the new data followed by the existing data
     with open(log_file, "w") as f:
-        f.write(f"Token usage: { index.llm_predictor.last_token_usage}\n\n")
+        f.write(f"Token usage: {llm_predictor.last_token_usage}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
