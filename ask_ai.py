@@ -73,7 +73,8 @@ def construct_index(current_folder):
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
 
-     index.llm_predictor.last_token_usagereturn index
+    index.llm_predictor.last_token_usage
+    return index
 
 
 
