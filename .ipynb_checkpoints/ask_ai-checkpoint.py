@@ -73,6 +73,8 @@ def construct_index(current_folder):
     index = GPTSimpleVectorIndex.from_documents(documents)
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
+    llm_token_usage = index.service_context.llm_predictor.last_token_usage
+    embed_token_usage = index.service_context.embed_model.last_token_usage
     with open(log_file, "r") as f:
         existing_data = f.read()
 
