@@ -72,7 +72,21 @@ def construct_index(current_folder):
     index = GPTSimpleVectorIndex.from_documents(documents)
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
+    with open(log_file, "r") as f:
+        existing_data = f.read()
 
+    # Write the new data followed by the existing data
+    with open(log_file, "w") as f:
+        f.write(f"Time: {datetime.datetime.now()}\n\n")
+        #f.write(f"Togen usage: {token_usage}\n\n")
+        f.write(f"Folder: {folder_path} index file successfully generated\n\n")
+        f.write(f"llm_token_usage: {llm_token_usage}\n\n")
+        f.write(f"embed_token_usage: {embed_token_usage}\n\n")
+       # f.write(f"Details: {response.source_nodes}\n\n")
+        f.write("======================================================================================\n")
+        f.write("                         Knowlege Vortex v1.5                                 \n")
+        f.write("=======================================================================================\n\n")
+        f.write(existing_data)
     return index
 
 
