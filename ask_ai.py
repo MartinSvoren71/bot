@@ -9,8 +9,9 @@ import json
 api_k=api_kx
 from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext
 from langchain import OpenAI
-lock = threading.Lock()
 import threading
+lock = threading.Lock()
+
 
 
 
