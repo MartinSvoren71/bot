@@ -68,7 +68,7 @@ def construct_index(current_folder):
     index = GPTSimpleVectorIndex.from_documents(documents)
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
-    window.alert('index created, token used :'+ index.llm_predictor.last_token_usage);
+    window.alert('index created, token used :'+ index.llm_predictor.last_token_usage)
     return index
 
 
