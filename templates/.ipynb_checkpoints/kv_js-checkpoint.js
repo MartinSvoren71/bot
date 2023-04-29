@@ -267,17 +267,30 @@
         });
       }  
        
-       function updateFolderContent() {
-        let selectedFolder = $('#folder-selector').val();
-        $.post('/get_folder_content', {selected_folder: selectedFolder}, function(data) {
-            $('#folder-content').html('');
-            for (let item of data.folder_content) {
-                let file_url = '/Data/' + selectedFolder + '/' + item;
-                // Modify this line to call openPdf function with the Presigned URL
-                $('#folder-content').append('<li><a href="#" onclick="openPdf(\'' + file_url + '\')">' + item + '</a></li>');
-            }
-        });
-      }
+function updateFolderContent() {
+    let selectedFolder = $('#folder-selector').val();
+    let domainName = window.location.origin;
+    $.post('/get_folder_content', {selected_folder: selectedFolder}, function(data) {
+        $('#folder-content').html('');
+        for (let item of data.folder_content) {
+            let file_url = domainName + '/Data/' + selectedFolder + '/' + item;
+            let share_btn = '<button onclick="copyUrlToClipboard(\'' + file_url + '\')">Share</button>';
+            let item_html = '<li><a href="#" onclick="openPdf(\'' + file_url + '\')">' + item + '</a>' + share_btn + '</li>';
+            $('#folder-content').append(item_html);
+        }
+    });
+}
+
+function copyUrlToClipboard(url) {
+    navigator.clipboard.writeText(url).then(function() {
+        console.log('URL copied to clipboard!');
+        window.alert('URL ' + url + ' was copied into clipboard!');
+    }, function(err) {
+        console.error('Failed to copy URL to clipboard: ', err);
+    });
+}
+
+
       
        $('#folder-selector').on('change', updateFolderContent);
       updateFolderContent();
@@ -316,7 +329,7 @@
       }
       document.addEventListener("DOMContentLoaded", function () {
       const slider = document.getElementById("opacity-slider");
-      const containers = document.querySelectorAll(".down-down-down-side, .right-down-down-side, .left-down-down-side, .quill-container, h4");
+      const containers = document.querySelectorAll(".left-down-down-side, .right-down-down-side,  h4, .right-side, .left-down-side, .right-down-side");
       
       slider.addEventListener("input", function () {
       const opacityValue = slider.value / 100;
