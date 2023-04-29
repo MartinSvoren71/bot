@@ -9,9 +9,6 @@ import json
 api_k=api_kx
 from llama_index import LLMPredictor, GPTSimpleVectorIndex, PromptHelper, ServiceContext
 from langchain import OpenAI
-import threading
-lock = threading.Lock()
-
 
 
 
@@ -102,8 +99,17 @@ def construct_index(current_folder):
         f.write(existing_data)
     return index
 
+
+import threading
+lock = threading.Lock()
+
+
 def update_token_usage(llm_token_usage, embed_token_usage, json_file='token_usage.json'):
     with lock:
+        # Convert string inputs to integers or floats
+        llm_token_usage = int(llm_token_usage) if llm_token_usage.isdigit() else float(llm_token_usage)
+        embed_token_usage = int(embed_token_usage) if embed_token_usage.isdigit() else float(embed_token_usage)
+
         # Read existing values from the JSON file, if it exists
         try:
             with open(json_file, 'r') as file:
