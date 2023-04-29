@@ -159,6 +159,8 @@ def ask_LIB_route():
     key = "nnp"
     if key == "nnp":  # Check if the key is "xxx007"
         response = ask_ai(question, current_folder) 
+        window.alert('token used :'+ index.llm_predictor.last_token_usage)
+
     else:
         return render_template('bad_key.html')
 
