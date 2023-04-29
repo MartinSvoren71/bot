@@ -46,7 +46,7 @@ def ask_ai(question, current_folder):
         f.write(f"Folder: {folder_path}\n\n")
         f.write(f"Question: {question}\n\n")
         f.write(f"Operator: {response.response}\n\n")
-         f.write(f"llm_token_usage: {llm_token_usage}\n\n")
+        f.write(f"llm_token_usage: {llm_token_usage}\n\n")
         f.write(f"embed_token_usage: {embed_token_usage}\n\n")
        # f.write(f"Details: {response.source_nodes}\n\n")
         f.write("======================================================================================\n")
