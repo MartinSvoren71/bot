@@ -104,11 +104,18 @@ import threading
 lock = threading.Lock()
 
 
+def is_number(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
+
 def update_token_usage(llm_token_usage, embed_token_usage, json_file='token_usage.json'):
     with lock:
-        # Convert string inputs to integers or floats
-        llm_token_usage = int(llm_token_usage) if llm_token_usage.isdigit() else float(llm_token_usage)
-        embed_token_usage = int(embed_token_usage) if embed_token_usage.isdigit() else float(embed_token_usage)
+        # Convert string inputs to integers or floats, if possible
+        llm_token_usage = float(llm_token_usage) if is_number(llm_token_usage) else 0
+        embed_token_usage = float(embed_token_usage) if is_number(embed_token_usage) else 0
 
         # Read existing values from the JSON file, if it exists
         try:
