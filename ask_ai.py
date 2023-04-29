@@ -35,6 +35,8 @@ def ask_ai(question, current_folder):
     log_file = os.path.join(os.getcwd(), 'log.txt')
     llm_token_usage = index.service_context.llm_predictor.last_token_usage
     embed_token_usage = index.service_context.embed_model.last_token_usage
+    llm_usage, embed_usage = update_token_usage(llm_token_count, embed_token_count)
+
     # Read the existing data in the log file
     with open(log_file, "r") as f:
         existing_data = f.read()
@@ -75,6 +77,8 @@ def construct_index(current_folder):
     index.save_to_disk(index_file)  # Save the index to the index_file
     llm_token_usage = index.service_context.llm_predictor.last_token_usage
     embed_token_usage = index.service_context.embed_model.last_token_usage
+    llm_usage, embed_usage = update_token_usage(llm_token_count, embed_token_count)
+
     with open(log_file, "r") as f:
         existing_data = f.read()
 
@@ -93,6 +97,26 @@ def construct_index(current_folder):
     return index
 
 
+def update_token_usage(llm_token_usage, embed_token_usage):
+    # Load the current token usage from the JSON files
+    with open('llm_usage.json', 'r') as f:
+        llm_usage = json.load(f)
+    with open('embed_usage.json', 'r') as f:
+        embed_usage = json.load(f)
 
+    # Update the token usage counts and running totals
+    llm_usage['count'] += llm_token_usage
+    llm_usage['total'] += 1
+    embed_usage['count'] += embed_token_usage
+    embed_usage['total'] += 1
+
+    # Write the updated token usage to the JSON files
+    with open('llm_usage.json', 'w') as f:
+        json.dump(llm_usage, f)
+    with open('embed_usage.json', 'w') as f:
+        json.dump(embed_usage, f)
+
+    # Return the updated token usage counts and running totals
+    return llm_usage, embed_usage
 
   
