@@ -33,6 +33,8 @@ def ask_ai(question, current_folder):
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, mode="embedding")  #default #embedding
     log_file = os.path.join(os.getcwd(), 'log.txt')
+    llm_token_usage = index.service_context.llm_predictor.last_token_usage
+    embed_token_usage = index.service_context.embed_model.last_token_usage
     # Read the existing data in the log file
     with open(log_file, "r") as f:
         existing_data = f.read()
@@ -44,14 +46,14 @@ def ask_ai(question, current_folder):
         f.write(f"Folder: {folder_path}\n\n")
         f.write(f"Question: {question}\n\n")
         f.write(f"Operator: {response.response}\n\n")
-        
-        f.write(f"Token usage: {llm_predictor.last_token_usage}\n\n")
+         f.write(f"llm_token_usage: {llm_token_usage}\n\n")
+        f.write(f"embed_token_usage: {embed_token_usage}\n\n")
+       # f.write(f"Details: {response.source_nodes}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
         f.write(existing_data)
    # return response.response
-
 
 
 def construct_index(current_folder):
@@ -70,20 +72,8 @@ def construct_index(current_folder):
     index = GPTSimpleVectorIndex.from_documents(documents)
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
-    with open(log_file, "r") as f:
-        existing_data = f.read()
 
-    # Write the new data followed by the existing data
-    with open(log_file, "w") as f:
-        f.write(f"Token usage: {llm_predictor.last_token_usage}\n\n")
-        f.write("======================================================================================\n")
-        f.write("                         Knowlege Vortex v1.5                                 \n")
-        f.write("=======================================================================================\n\n")
-        f.write(existing_data)
-   # return response.response
-
-    return index
-
+     index.llm_predictor.last_token_usagereturn index
 
 
 
