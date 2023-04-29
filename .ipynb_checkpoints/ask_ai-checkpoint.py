@@ -50,6 +50,8 @@ def ask_ai(question, current_folder):
         f.write("=======================================================================================\n\n")
         f.write(existing_data)
    # return response.response
+    window.alert('token used :'+ index.llm_predictor.last_token_usage)
+
 
 
 def construct_index(current_folder):
