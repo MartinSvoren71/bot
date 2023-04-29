@@ -276,7 +276,6 @@ function updateFolderContent() {
             let file_url = domainName + '/Data/' + selectedFolder + '/' + item;
             const unicodeChar = '\u{1F517}';
 let share_btn = '<button onclick="copyUrlToClipboard(\'' + file_url + '\')">' + unicodeChar + '</button>';
-This code snippet first creates a string with the Unicode character U+1F517 (🔗) and then 
             let item_html = '<li><a href="#" onclick="openPdf(\'' + file_url + '\')">' + item + '</a>' + share_btn + '</li>';
             $('#folder-content').append(item_html);
         }
