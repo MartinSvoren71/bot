@@ -57,6 +57,7 @@ def ask_ai(question, current_folder):
 
 
 def construct_index(current_folder):
+    log_file = os.path.join(os.getcwd(), 'log.txt')
 
     folder_path = current_folder
     index_file = f"{folder_path}/index.json"
