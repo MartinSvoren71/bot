@@ -274,7 +274,7 @@ function updateFolderContent() {
         $('#folder-content').html('');
         for (let item of data.folder_content) {
             let file_url = domainName + '/Data/' + selectedFolder + '/' + item;
-            let share_btn = '<button onclick="copyUrlToClipboard(\'' + file_url + '\')">🔗</button>';
+            let share_btn = '<button onclick="copyUrlToClipboard(\'' + file_url + '\')">'\u{1F517}'</button>';
             let item_html = '<li><a href="#" onclick="openPdf(\'' + file_url + '\')">' + item + '</a>' + share_btn + '</li>';
             $('#folder-content').append(item_html);
         }
