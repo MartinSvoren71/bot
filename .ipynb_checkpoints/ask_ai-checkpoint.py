@@ -76,6 +76,7 @@ def construct_index(current_folder):
     index.save_to_disk(index_file)  # Save the index to the index_file
     llm_token_usage = index.service_context.llm_predictor.last_token_usage
     embed_token_usage = index.service_context.embed_model.last_token_usage
+    update_token_usage(llm_token_usage, embed_token_usage)
 
     with open(log_file, "r") as f:
         existing_data = f.read()
@@ -94,3 +95,22 @@ def construct_index(current_folder):
         f.write(existing_data)
     return index
 
+def update_token_usage(llm_token_usage, embed_token_usage, json_file='token_usage.json'):
+    # Read existing values from the JSON file, if it exists
+    try:
+        with open(json_file, 'r') as file:
+            data = json.load(file)
+            current_llm_token_usage = data['llm_token_usage']
+            current_embed_token_usage = data['embed_token_usage']
+    except (FileNotFoundError, KeyError):
+        # If the file does not exist or the keys are not present, set the current values to 0
+        current_llm_token_usage = 0
+        current_embed_token_usage = 0
+
+    # Add the new values to the existing values
+    updated_llm_token_usage = current_llm_token_usage + llm_token_usage
+    updated_embed_token_usage = current_embed_token_usage + embed_token_usage
+
+    # Update the JSON file with the new values
+    with open(json_file, 'w') as file:
+        json.dump({'llm_token_usage': updated_llm_token_usage, 'embed_token_usage': updated_embed_token_usage}, file)
