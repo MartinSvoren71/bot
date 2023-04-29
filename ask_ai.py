@@ -44,13 +44,13 @@ def ask_ai(question, current_folder):
         f.write(f"Folder: {folder_path}\n\n")
         f.write(f"Question: {question}\n\n")
         f.write(f"Operator: {response.response}\n\n")
-       # f.write(f"Details: {response.source_nodes}\n\n")
+        
+        f.write(f"Token usage: { index.llm_predictor.last_token_usage}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
         f.write(existing_data)
    # return response.response
-    window.alert('token used :'+ index.llm_predictor.last_token_usage)
 
 
 
@@ -70,7 +70,18 @@ def construct_index(current_folder):
     index = GPTSimpleVectorIndex.from_documents(documents)
     #index.save_to_disk('index.json') # Save the index with the new version
     index.save_to_disk(index_file)  # Save the index to the index_file
-    window.alert('index created, token used :'+ index.llm_predictor.last_token_usage)
+    with open(log_file, "r") as f:
+        existing_data = f.read()
+
+    # Write the new data followed by the existing data
+    with open(log_file, "w") as f:
+        f.write(f"Token usage: { index.llm_predictor.last_token_usage}\n\n")
+        f.write("======================================================================================\n")
+        f.write("                         Knowlege Vortex v1.5                                 \n")
+        f.write("=======================================================================================\n\n")
+        f.write(existing_data)
+   # return response.response
+
     return index
 
 
