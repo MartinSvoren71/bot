@@ -39,6 +39,7 @@ def ask_ai(question, current_folder):
     log_file = os.path.join(os.getcwd(), 'log.txt')
     llm_token_usage = index.service_context.llm_predictor.last_token_usage
     embed_token_usage = index.service_context.embed_model.last_token_usage
+    update_token_usage(llm_token_usage, embed_token_usage)
 
     # Read the existing data in the log file
     with open(log_file, "r") as f:
