@@ -130,9 +130,8 @@
             <h1>__create new document__</h1>
             <div class="quill-container">
                 
-  <div id="editorX">
-  Welcome to TinyMCE!
-</div>
+     <iframe src="test.html" width="100%" height="500px" frameborder="0" title="Test HTML Iframe"></iframe>
+
             </div>
          </div>
          <div class=" middle-side">
@@ -159,24 +158,5 @@
       </div>
    </body>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js.js"></script>
-  <script src="https://cdn.tiny.cloud/1/pz2s3vf4c9ncfmcv0he20hx2046y36bp2aw8zs2vjqyalo3w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
-<script>
-     tinymce.init({
-      selector: '#editorX',
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name',
-      mergetags_list: [
-        { value: 'First.Name', title: 'First Name' },
-        { value: 'Email', title: 'Email' },
-      ]
-    });
-      document.addEventListener('DOMContentLoaded', function() {
-    tinymce.init({
-      selector: '#editorX'
-    });
-  });
-    </script>
 </html>
