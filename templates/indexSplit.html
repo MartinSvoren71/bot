@@ -131,8 +131,8 @@
             <h1>__create new document__</h1>
             <div class="quill-container">
                <button id="button" type="button" onclick="save_doc()">Save</button>
-               <div id="quill-editor"></div>
-               <input type="hidden" name="content" id="content">
+               <textarea id="editor"></textarea>
+
             </div>
          </div>
          <div class=" middle-side">
@@ -159,4 +159,7 @@
       </div>
    </body>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js.js"></script>
+<script src="{{ url_for('static', filename='ckeditor.js') }}"></script>
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+
 </html>

@@ -25,8 +25,11 @@ from concurrent.futures import ThreadPoolExecutor
 import warnings
 from pdfminer.high_level import extract_text
 from builtins import len
+from flask_ckeditor import CKEditor
 
 app = Flask(__name__, static_folder='/')
+ckeditor = CKEditor(app)
+
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
