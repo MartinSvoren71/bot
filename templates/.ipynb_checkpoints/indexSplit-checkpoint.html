@@ -17,6 +17,8 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.3/html2canvas.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
       <link rel="stylesheet" href="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_dual.css">
+           <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/decoupled-document/ckeditor.js"></script>
+
       <script>
          window.onload = function() {
                    const saveFolder = localStorage.getItem("folder-selector");
@@ -129,6 +131,10 @@
          <div class="left-down-down-side">
             <h1>__create new document__</h1>
             <div class="quill-container">
+                <div id="editor">
+        <p>This is the initial editor content.</p>
+    </div>
+
                </div>        </div>
          <div class=" middle-side">
          </div>
