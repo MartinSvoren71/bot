@@ -326,4 +326,3 @@ var myLink = document.getElementById("results");
     event.preventDefault();
     // your custom code here
   });
-
