@@ -52,21 +52,22 @@
        }  
        
        
-function save_doc() {
-            const editor = document.getElementById("editor");
+async function save_doc() {
+    const editor = document.getElementById("editor");
+    const pdf = new jsPDF();
 
-            const opt = {
-                margin: 1,
-                filename: "document.pdf",
-                image: { type: "jpeg", quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-            };
+    const canvas = await html2canvas(editor, { scale: 2 });
+    const imgData = canvas.toDataURL("image/png");
 
-            html2pdf().set(opt).from(editor).save();
-        }
+    const imgWidth = 210;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-        document.getElementById("button").addEventListener("click", save_doc);
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+    pdf.save("document.pdf");
+}
+
+document.getElementById("button").addEventListener("click", save_doc);
+
 
        
       
