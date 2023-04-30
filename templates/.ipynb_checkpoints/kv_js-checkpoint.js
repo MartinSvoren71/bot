@@ -53,20 +53,21 @@
        
        
 function save_doc() {
-    const editor = document.getElementById("editor");
+            const editor = document.getElementById("#editor");
 
-    const opt = {
-        margin: 1,
-        filename: "document.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    };
+            const opt = {
+                margin: 1,
+                filename: "document.pdf",
+                image: { type: "jpeg", quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+            };
 
-    html2pdf().set(opt).from(editor).save();
-}
+            html2pdf().set(opt).from(editor).save();
+        }
 
-document.getElementById("button").addEventListener("click", save_doc);
+        document.getElementById("button").addEventListener("click", save_doc);
+
        
       
        
