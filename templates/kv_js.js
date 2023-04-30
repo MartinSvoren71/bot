@@ -56,7 +56,8 @@
   event.preventDefault();
 
   // Extract the HTML content from the editor
-  const content = document.querySelector('#editor').innerHTML;
+  const content = document.querySelector('.editor').innerHTML
+
 
   // Create a new div element and set its innerHTML to the extracted content
   const contentDiv = document.createElement('div');
