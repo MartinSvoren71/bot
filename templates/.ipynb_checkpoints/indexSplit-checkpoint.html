@@ -19,6 +19,19 @@
 
 
       <script>
+          
+             tinymce.init({
+      selector: '#editorX',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ],
+    });
+          
          window.onload = function() {
                    const saveFolder = localStorage.getItem("folder-selector");
                    if (saveFolder) {
@@ -146,15 +159,13 @@
          </div>
       </div>
       </div>
-        <br><br>
+      <!--  <br><br>
          <div class="container flex-container" style="container">
             <div class="down-down-down-side">
                <h1>__vortex mind map__</h1>
-             <div id="editorXx">
-  Welcome to TinyMCE!
-</div>
+               <iframe src="https://www.mindmaps.app/" width="100%" height="100%" frameborder="0"></iframe>
             </div>
-         </div> 
+         </div> -->
       <div class="footer">
          <h3>______Knowledge Vortex 2023______</h3>
          <div>
@@ -163,17 +174,5 @@
    </body>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js.js"></script>
 
-<script>
-     tinymce.init({
-      selector: '#editorXx',
-      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-      tinycomments_mode: 'embedded',
-      tinycomments_author: 'Author name',
-      mergetags_list: [
-        { value: 'First.Name', title: 'First Name' },
-        { value: 'Email', title: 'Email' },
-      ]
-    });
-    </script>
+
 </html>
