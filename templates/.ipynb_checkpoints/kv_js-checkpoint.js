@@ -52,25 +52,6 @@
        }  
        
        
-function save_doc() {
-    const editor = document.getElementById("editor");
-
-    const opt = {
-        margin: [1, 0.5, 1, 0.5],
-        filename: "document.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "a4", orientation: "portrait" },
-        pagebreak: { mode: "avoid-all", before: ".beforeBreak", after: ".afterBreak" }
-    };
-
-    html2pdf().set(opt).from(editor).save();
-}
-
-document.getElementById("button").addEventListener("click", save_doc);
-
-       
-      
        
       function searchFiles() {
       searchFiles_1();

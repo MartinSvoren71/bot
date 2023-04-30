@@ -14,10 +14,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
   
       <link rel="stylesheet" href="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_dual.css">
-           <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/decoupled-document/ckeditor.js"></script>
+      
+  <script src="https://cdn.tiny.cloud/1/pz2s3vf4c9ncfmcv0he20hx2046y36bp2aw8zs2vjqyalo3w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
       <script>
          window.onload = function() {
@@ -131,12 +130,10 @@
          <div class="left-down-down-side">
             <h1>__create new document__</h1>
             <div class="quill-container">
-                <button id="button" type="button" onclick="save_doc()">Save</button>
                 
-                <div id="toolbar-container"></div>
-    <div class="ckeditor" name="editor" id="editor">
-        <p>This is the initial editor content.</p>
-    </div>
+   <textarea>
+     Welcome to TinyMCE!
+  </textarea>
             </div>
          </div>
          <div class=" middle-side">
@@ -164,15 +161,16 @@
    </body>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js.js"></script>
 <script>
-        DecoupledEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                const toolbarContainer = document.querySelector( '#toolbar-container' );
-
-                toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
+     tinymce.init({
+      selector: 'textarea',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ]
+    });
     </script>
 </html>
