@@ -53,7 +53,7 @@
        
        
 function save_doc() {
-            const editor = document.getElementById("#editor");
+            const editor = document.getElementById("editor");
 
             const opt = {
                 margin: 1,
