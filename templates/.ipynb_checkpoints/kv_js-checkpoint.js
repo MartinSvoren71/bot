@@ -1,4 +1,15 @@
-    function openPdf(presignedUrl) {
+   DecoupledEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+                toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+
+function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
       let pdfEmbed = document.getElementById('pdf-embed');
       pdfEmbed.setAttribute('src', presignedUrl);
