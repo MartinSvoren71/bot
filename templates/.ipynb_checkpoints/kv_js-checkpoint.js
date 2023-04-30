@@ -148,7 +148,7 @@ document.getElementById("button").addEventListener("click", save_doc);
       theme: 'snow'
       });
       
-      async function save_doc() {
+      async function save_docX() {
       // Get content from Quill editor
       const content = quill.root.innerHTML;
       
