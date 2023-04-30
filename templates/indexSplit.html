@@ -15,7 +15,6 @@
   
       <link rel="stylesheet" href="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_dual.css">
       
-  <script src="https://cdn.tiny.cloud/1/pz2s3vf4c9ncfmcv0he20hx2046y36bp2aw8zs2vjqyalo3w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 
       <script>
@@ -131,7 +130,7 @@
             <h1>__create new document__</h1>
             <div class="quill-container">
                 
-  <div id="editor">
+  <div id="editorX">
   Welcome to TinyMCE!
 </div>
             </div>
@@ -160,9 +159,11 @@
       </div>
    </body>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js.js"></script>
+  <script src="https://cdn.tiny.cloud/1/pz2s3vf4c9ncfmcv0he20hx2046y36bp2aw8zs2vjqyalo3w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script>
      tinymce.init({
-      selector: '#editor',
+      selector: '#editorX',
       plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
       tinycomments_mode: 'embedded',
