@@ -51,6 +51,12 @@
         });     
        }  
        
+       
+     
+      
+       
+      
+       
       function searchFiles() {
       searchFiles_1();
           wait();
@@ -124,7 +130,16 @@
          
          setInterval(draw, 33);
        
-  
+     
+      
+      
+      
+      // Create a new pdfmake instance
+      const pdfDoc = pdfMake.createPdf(docDefinition);
+      
+      // Save and download the PDF
+      pdfDoc.download('document.pdf');
+      }
       
       async function load_folders() {
       const response = await fetch('/list_folders');
