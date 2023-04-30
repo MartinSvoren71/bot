@@ -131,6 +131,7 @@
       <div class="container flex-container" style="container">
          <div class="left-down-down-side">
             <h1>__create new document__</h1>
+               <div id="toolbar-container"></div>
              <div id="editor">
         <p>This is the initial editor content.</p>
     </div>
@@ -160,5 +161,16 @@
       </div>
    </body>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js.js"></script>
+<script>
+   DecoupledEditor
+            .create( document.querySelector( '#editor' ) )
+            .then( editor => {
+                const toolbarContainer = document.querySelector( '#toolbar-container' );
 
+                toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+            } )
+            .catch( error => {
+                console.error( error );
+            } );
+</script>
 </html>
