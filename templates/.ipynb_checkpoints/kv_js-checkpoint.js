@@ -52,34 +52,34 @@
        }  
        
        
-      async function save(event) {
-      event.preventDefault();
-      
-      // Extract the HTML content from the Quill editor
-      const content = quill.root.innerHTML;
-      
-      // Create a new div element and set its innerHTML to the extracted content
-      const contentDiv = document.createElement('div');
-      contentDiv.innerHTML = content;
-      
-      // Render the content div using html2canvas with an increased scale factor
-      const scale = 3; // Increase the scale factor to improve resolution
-      const canvas = await html2canvas(contentDiv, { scale });
-      
-      // Create a new jsPDF instance
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      
-      // Add the rendered canvas to the PDF
-      const imgData = canvas.toDataURL('image/png');
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      
-      // Download the PDF
-      pdf.save('download.pdf');
-      }
-      
+    async function save(event) {
+  event.preventDefault();
+
+  // Extract the HTML content from the editor
+  const content = document.querySelector('#editor').innerHTML;
+
+  // Create a new div element and set its innerHTML to the extracted content
+  const contentDiv = document.createElement('div');
+  contentDiv.innerHTML = content;
+
+  // Render the content div using html2canvas with an increased scale factor
+  const scale = 3; // Increase the scale factor to improve resolution
+  const canvas = await html2canvas(contentDiv, { scale });
+
+  // Create a new jsPDF instance
+  const pdf = new jsPDF('p', 'mm', 'a4');
+
+  // Add the rendered canvas to the PDF
+  const imgData = canvas.toDataURL('image/png');
+  const imgProps = pdf.getImageProperties(imgData);
+  const pdfWidth = pdf.internal.pageSize.getWidth();
+  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+  pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+
+  // Download the PDF
+  pdf.save('download.pdf');
+}
+
        
       
        
