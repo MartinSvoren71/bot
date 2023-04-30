@@ -362,6 +362,13 @@ async function light(event) {
         });
       } 
        
+       quillContainer.addEventListener('input', function() {
+  if (quillContainer.textContent.length > 0) {
+    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+  } else {
+    quillContainer.style.backgroundColor = 'rgba(255, 255, 255, 0)';
+  }
+});  
      
      
    const toggleCheckbox = document.getElementById('toggleCheckbox');

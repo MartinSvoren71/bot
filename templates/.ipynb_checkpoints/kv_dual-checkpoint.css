@@ -108,7 +108,7 @@
          .flex-container > div {
          flex: 1;
          }
-         .editor {
+         .quill-container {
          width: 100%; /* You can adjust the width as needed */
          font-family: 'Lucida Console', monospace;  
          height: 95vh;
