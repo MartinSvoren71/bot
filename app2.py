@@ -108,7 +108,7 @@ def index():
         if theme == "light" :
             return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
         else :
-            return render_template("test.html", folders=data_folders, files=files, results={})
+            return render_template("indexSplit.html", folders=data_folders, files=files, results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))

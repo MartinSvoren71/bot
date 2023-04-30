@@ -15,6 +15,7 @@
   
       <link rel="stylesheet" href="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_dual.css">
       
+  <script src="https://cdn.tiny.cloud/1/pz2s3vf4c9ncfmcv0he20hx2046y36bp2aw8zs2vjqyalo3w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 
       <script>
@@ -128,8 +129,11 @@
       <div class="container flex-container" style="container">
          <div class="left-down-down-side">
             <h1>__create new document__</h1>
-            <div class="quill-container" id="ed">
-
+            <div class="quill-container">
+                
+  <div id="editorX">
+  Welcome to TinyMCE!
+</div>
             </div>
          </div>
          <div class=" middle-side">
@@ -142,13 +146,15 @@
          </div>
       </div>
       </div>
-      <!--  <br><br>
+        <br><br>
          <div class="container flex-container" style="container">
             <div class="down-down-down-side">
                <h1>__vortex mind map__</h1>
-               <iframe src="https://www.mindmaps.app/" width="100%" height="100%" frameborder="0"></iframe>
+             <div id="editorXx">
+  Welcome to TinyMCE!
+</div>
             </div>
-         </div> -->
+         </div> 
       <div class="footer">
          <h3>______Knowledge Vortex 2023______</h3>
          <div>
@@ -156,11 +162,10 @@
       </div>
    </body>
    <script src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/kv_js.js"></script>
-  <script src="https://cdn.tiny.cloud/1/pz2s3vf4c9ncfmcv0he20hx2046y36bp2aw8zs2vjqyalo3w/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
 <script>
      tinymce.init({
-      selector: '#ed',
+      selector: '#editorXx',
       plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
       toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
       tinycomments_mode: 'embedded',
