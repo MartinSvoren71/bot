@@ -362,13 +362,6 @@ async function light(event) {
         });
       } 
        
-       cke_editable.addEventListener('input', function() {
-  if (cke_editable.textContent.length > 0) {
-    cke_editable.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
-  } else {
-    cke_editable.style.backgroundColor = 'rgba(255, 255, 255, 0)';
-  }
-});  
      
      
    const toggleCheckbox = document.getElementById('toggleCheckbox');
