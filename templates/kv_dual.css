@@ -657,8 +657,11 @@
 
 }
 .editorX{
-             height: 94vh;
+             height: 94%;
     width: 100%;
+         overflow-x: hidden;
+         flex-direction: column;
+         overflow-y: auto;
 
 }
          .file-list-container {
