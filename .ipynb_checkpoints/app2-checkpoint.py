@@ -84,14 +84,14 @@ def bad_key():
 
 #list files from Data into web app
 @app.route("/get_updated_files", methods=["GET", "POST"])
-def list_files_and_urls(folder_path):
+def list_files_and_urls(folder_path, base_path):
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
             if not filename.startswith('.'):  # Ignore hidden files
                 file = {}
                 file["Key"] = os.path.join(root, filename)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                file["PresignedURL"] = url_for("static", filename=os.path.join(base_path, file["Key"]))
                 files.append(file)
     return files
 
@@ -108,14 +108,15 @@ def index():
         data_folders = get_subfolders_recursive('Data/')
         customer_data_folders = get_subfolders_recursive(f'CustomerData/{username}/')
 
-        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
-        files = list_files_and_urls(folder_path)
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files
+        files = list_files_and_urls(folder_path, "Data/")
+        customer_files = list_files_and_urls(f'CustomerData/{username}', "CustomerData/")
+
         folders = list_folders()
         if theme == "light" :
-            return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files, results={})
+            return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files+customer_files, results={})
         else :
-            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, files=files, results={})
-            
+            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, files=files+customer_files, results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
