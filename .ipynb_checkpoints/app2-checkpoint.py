@@ -102,7 +102,7 @@ def index():
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
-        customer_data_folders = get_subfolders_recursive('CustomerData/')
+        customer_data_folders = get_subfolders_recursive('CustomerData/{username}/')
 
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
