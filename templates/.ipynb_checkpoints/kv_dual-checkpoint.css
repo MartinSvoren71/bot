@@ -527,6 +527,10 @@
          max-height: 20vh; /* Adjust this to the desired minimum height */
          resize: vertical; /* Allow vertical resizing */
          }
+iframe {
+  border: none;
+  padding: 0;
+}
          .out_text  {
          font-family: 'Lucida Console', monospace;  
          font-size: 1.1em;
