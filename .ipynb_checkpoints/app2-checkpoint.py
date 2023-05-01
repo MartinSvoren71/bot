@@ -106,7 +106,7 @@ def index():
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
-        customer_data_folders = get_subfolders_recursive(f'Data/{username}/')
+        customer_data_folders = get_subfolders_recursive(f'CustomerData/{username}/')
 
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
@@ -312,7 +312,7 @@ def get_folder_content():
     selected_folder = request.form['selected_folder']
     folder_path = f'Data/{selected_folder}'
     if selected_folder.startswith(username):
-        folder_path = f'Data/{username}/{selected_folder}'
+        folder_path = f'CustomerData/{username}/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
