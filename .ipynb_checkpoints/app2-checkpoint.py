@@ -99,14 +99,14 @@ def list_files_and_urls(folder_path):
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-        
+
         username = session["username"]  # Retrieve the username from the session
-        
+
         print(username)
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
-        #customer_data_folders = get_subfolders_recursive(f'CustomerData/{username}/')
+        customer_data_folders = get_subfolders_recursive(f'Data/{username}/')
 
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
@@ -115,10 +115,11 @@ def index():
             return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files, results={})
         else :
             #return render_template("indexSplit.html", folders=data_folders+customer_data_folders, files=files, results={})
-            return render_template("indexSplit.html", folders=data_folders, files=files, results={})
+            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, files=files, results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
+
     
 @app.route("/theme", methods=["POST"])
 def set_theme():
@@ -308,10 +309,13 @@ def get_folder_content():
     global current_folder
     selected_folder = request.form['selected_folder']
     folder_path = f'Data/{selected_folder}'
+    if selected_folder.startswith(username):
+        folder_path = f'Data/{username}/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
     return {'folder_content': folder_content}
+
 
 
 
