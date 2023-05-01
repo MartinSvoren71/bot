@@ -102,13 +102,15 @@ def index():
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
+        customer_data_folders = get_subfolders_recursive('CustomerData/')
+
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
         if theme == "light" :
-            return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
+            return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files, results={})
         else :
-            return render_template("indexSplit.html", folders=data_folders, files=files, results={})
+            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, files=files, results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
