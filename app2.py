@@ -107,6 +107,7 @@ def index():
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
         customer_data_folders = get_subfolders_recursive(f'CustomerData/{username}/')
+
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
@@ -265,25 +266,6 @@ def generate_pdf_route():
 # return  data into selector in html
 def list_folders():
     folder_path = "Data/"
-    folders = []
-    for root, dirnames, filenames in os.walk(folder_path):
-        for dirname in dirnames:
-            if not dirname.startswith('.'):  # Ignore hidden directories
-                folders.append(os.path.join(root, dirname))
-    return folders
-    files = []
-    for root, dirnames, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if not filename.startswith('.'):  # Ignore hidden files
-                file = {}
-                file["Key"] = os.path.join(root, filename)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
-                files.append(file)
-    return files
-
-def list_folders():
-    username = session["username"]  # Retrieve the username from the session   
-    folder_path = f"CustomerData/{username}"
     folders = []
     for root, dirnames, filenames in os.walk(folder_path):
         for dirname in dirnames:
