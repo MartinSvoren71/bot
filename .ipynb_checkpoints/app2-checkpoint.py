@@ -58,7 +58,7 @@ def login():
         try:
             if find_user(username, password):
                 session["logged_in"] = True
-                session.permanent = True
+                session["username"] = username  # Store the username in the session
                 app.permanent_session_lifetime = timedelta(hours=1)
 
                 if username == "fileadmin":
@@ -99,6 +99,8 @@ def list_files_and_urls(folder_path):
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
+        
+        username = session["username"]  # Retrieve the username from the session
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
