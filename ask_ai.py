@@ -70,6 +70,7 @@ def construct_index(current_folder):
      # define LLM
     llm_predictor = LLMPredictor(llm=OpenAI(temperature=0, model_name="text-davinci-003"))
     max_input_size = 4096
+    reduce_k_below_max_tokens=True
     num_output = 256
     max_chunk_overlap = 20
     prompt_helper = PromptHelper(max_input_size, num_output, max_chunk_overlap)
