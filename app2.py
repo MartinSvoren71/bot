@@ -434,6 +434,7 @@ def user_manager():
     return render_template('users.html')
 
 @app.route('/create_user', methods=['POST'])
+@app.route('/create_user', methods=['POST'])
 def create_user():
     username = request.form['username']
     password = request.form['password']
@@ -451,9 +452,22 @@ def create_user():
     users.append(user)
     save_users(users)
 
+    # Check if the folder exists, if not, create the required folders
+    user_folder_path = os.path.join('CustomerData', username, username)
+    
+    if not os.path.exists(user_folder_path):
+        os.makedirs(user_folder_path)
+
     return redirect('/users')
-with open('user.json', 'r') as file:
-    users_data = json.load(file)
+
+def load_users():
+    with open('user.json', 'r') as file:
+        users_data = json.load(file)
+    return users_data
+
+def save_users(users):
+    with open('user.json', 'w') as file:
+        json.dump(users, file)
 
 @app.route('/get_users', methods=['GET'])
 def get_users():
