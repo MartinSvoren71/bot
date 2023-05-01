@@ -434,7 +434,6 @@ def user_manager():
     return render_template('users.html')
 
 @app.route('/create_user', methods=['POST'])
-@app.route('/create_user', methods=['POST'])
 def create_user():
     username = request.form['username']
     password = request.form['password']
