@@ -306,6 +306,8 @@ def get_files_recursive(path):
 
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
+    username = session["username"]  # Retrieve the username from the session
+
     global current_folder
     selected_folder = request.form['selected_folder']
     folder_path = f'Data/{selected_folder}'
