@@ -24,7 +24,7 @@ def ask_ai(question, current_folder):
     folder_path = f'Data/{current_folder}'
     index_file = f"{folder_path}/index.json"
     data_directory = folder_path
-
+    reduce_k_below_max_tokens=True
     if not os.path.exists(index_file):
         print(f"Constructing index from data in {data_directory}...")
         index = construct_index(data_directory)  # Save the returned index in a variable
