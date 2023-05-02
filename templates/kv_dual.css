@@ -454,7 +454,7 @@
          max-width: 100%;
          font-size: 1.5em;
          text-align: center;
-         filter: drop-shadow(0 0 0.35rem var(--matrix-red-pill));
+         filter: drop-shadow(0 0 0.35rem var(--matrix-green-1);
          color: var(--matrix-green-1);
          }
          h2 {
