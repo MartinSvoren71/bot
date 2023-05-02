@@ -315,9 +315,9 @@ def get_folder_content():
 
     global current_folder
     selected_folder = request.form['selected_folder']
-    folder_path = f'Data/{selected_folder}'
+    folder_path = f'Data/Data/{selected_folder}'
     if selected_folder.startswith(username):
-        folder_path = f'CustomerData/{username}/{selected_folder}'
+        folder_path = f'Data/Customers_Data/{username}/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
