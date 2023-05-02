@@ -290,12 +290,15 @@ def file_manager(subpath=None):
     files = []
     folders = []
     for item in items:
+        if item.startswith('.'):  # Skip items with names starting with a period
+            continue
         item_path = os.path.join(dir_path, item)
         if os.path.isfile(item_path):
             files.append(item)
         elif os.path.isdir(item_path):
             folders.append(item)
     return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
+
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload/<path:subpath>', methods=['POST'])
 def upload(subpath=None):
