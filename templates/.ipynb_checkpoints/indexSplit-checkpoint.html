@@ -26,8 +26,8 @@
         }
 
         function setImageSrc() {
-            const logoUrl = "{{ url_for('static', filename='logo/logo1-220.png') }}";
-            const fallbackLogoUrl = "{{ url_for('static', filename='logo/logo.png') }}";
+            const logoUrl = "{{ url_for('static', filename='static/logo/logo1-220.png') }}";
+            const fallbackLogoUrl = "{{ url_for('static', filename='static/logo/logo.png') }}";
             const logoImage = document.getElementById('logo');
 
             checkImageExists(logoUrl, function(exists) {
