@@ -88,6 +88,17 @@ def bad_key():
 
 # list files from Data into web app
 @app.route("/get_updated_files", methods=["GET", "POST"])
+def get_updated_files():
+    if request.method == "POST":
+        folder_path = request.json["selected_folder"]
+        if folder_path.startswith("CustomerData"):
+            folder_path = os.path.join("CustomerData", session["username"], folder_path)
+        files = list_files_and_urls(folder_path)
+        return jsonify(files)
+    else:
+        # Return an empty list or an error message
+        return jsonify([])
+    
 def list_files_and_urls(folder_path):
     files = []
     for root, dirnames, filenames in os.walk(folder_path):
@@ -95,9 +106,14 @@ def list_files_and_urls(folder_path):
             if not filename.startswith('.'):  # Ignore hidden files
                 file = {}
                 file["Key"] = os.path.join(root, filename)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                # Check if the file is in the CustomerData folder
+                if "CustomerData" in root:
+                    file["PresignedURL"] = url_for("static", filename=os.path.join("CustomerData", username, file["Key"]))
+                else:
+                    file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
+
 
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])

@@ -321,3 +321,23 @@ var myLink = document.getElementById("results");
     event.preventDefault();
     // your custom code here
   });
+function saveFolderx() {
+    const folderSelector = document.getElementById("folder-selector");
+    const selectedFolder = folderSelector.value;
+
+    // Send an AJAX request to the back-end to get the updated files
+    fetch('/get_updated_files', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({selected_folder: selectedFolder}),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Update the file list in your front-end based on the received data
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
