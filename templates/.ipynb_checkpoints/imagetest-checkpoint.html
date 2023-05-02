@@ -1,0 +1,58 @@
+<div class="mask-container">
+  <div class="circular-mask">
+    <img src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/logo1-p-800.png" alt="Circular Image">
+  </div>
+  <div class="slot-mask">
+    <img src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/logos/optixs.png" alt="Slot Image">
+  </div>
+</div>
+
+<style>
+  .mask-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .circular-mask {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+  }
+
+  .circular-mask img {
+    width: 100%;
+    height: auto;
+  }
+
+  .slot-mask {
+    position: relative;
+    width: 150px;
+    height: 50px;
+    overflow: hidden;
+    margin-left: -170px;
+    margin-top:  140px;
+  }
+
+  .slot-mask:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60%;
+    height: 100%;
+    background-color: white;
+    transform: skew(-20deg);
+    z-index: 1;
+  }
+
+  .slot-mask img {
+    position: relative;
+    left: -10%;
+    top: 0;
+    width: 120%;
+    height: auto;
+    z-index: 2;
+  }
+</style>
