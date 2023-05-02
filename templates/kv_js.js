@@ -321,3 +321,6 @@ var myLink = document.getElementById("results");
     event.preventDefault();
     // your custom code here
   });
+function saveFolderx() {
+    document.getElementById("folder-form").submit();
+}

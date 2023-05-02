@@ -29,12 +29,13 @@ from flask_ckeditor import CKEditor
 
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
-
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 
 
+
+# user login function loading posible users from user.json file
 def find_user(username, password):
     if len(password) < 6:
         raise ValueError("Password must be at least 6 characters long")
@@ -46,6 +47,7 @@ def find_user(username, password):
         if user["username"] == username and user["password"] == password:
             return True
     return False
+
 
 
 # main landing page - login
@@ -76,13 +78,15 @@ def login():
     return render_template("login.html")
 
 
+# bad login redirect
 @app.route("/bad_key")
 #when bed klogin key provided
 def bad_key():
     return render_template("badkey.html")
 
 
-#list files from Data into web app
+
+# list files from Data into web app
 @app.route("/get_updated_files", methods=["GET", "POST"])
 def list_files_and_urls(folder_path):
     files = []
@@ -107,8 +111,15 @@ def index():
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
         customer_data_folders = get_subfolders_recursive(f'CustomerData/{username}/')
+        if request.method == "POST":
+            selected_folder = request.form.get("selected_folder")
+        if selected_folder in data_folders:
+            folder_path = os.path.join("Data", selected_folder)
+        elif selected_folder in customer_data_folders:
+            folder_path = os.path.join("CustomerData", username, selected_folder)
+        
 
-        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
+        #folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         files = list_files_and_urls(folder_path)
         folders = list_folders()
         if theme == "light" :
@@ -134,6 +145,8 @@ def set_theme():
         # handle invalid theme value
         theme_var = "light"
     return index()
+
+
 
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
@@ -173,6 +186,7 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html')
 
+    
 # part_1 process search on pdf files
 def process_pdf_file(filepath, keyword, pattern):
     matches = []
