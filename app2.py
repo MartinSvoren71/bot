@@ -242,7 +242,7 @@ def list_folders():
 # function for splitting path and generating subfolder path
 
 def get_subfolders_recursive(path):
-    
+    username = session["username"]  # Retrieve the username from the session
     subfolders = []
     for root, dirs, _ in os.walk(path):
         for d in dirs:
@@ -250,7 +250,7 @@ def get_subfolders_recursive(path):
             if d.startswith("_"): 
                 
                 # Compare the folder name (excluding the dot) with the username
-                if d[1:] == "Biocev":
+                if d[1:] == username:
                     subfolders.append(os.path.relpath(os.path.join(root, d), path))
             else:
                 subfolders.append(os.path.relpath(os.path.join(root, d), path))
