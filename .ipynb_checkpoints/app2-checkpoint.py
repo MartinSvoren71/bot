@@ -70,8 +70,9 @@ def bad_key():
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
+    username = session["username"]
     if "logged_in" in session:
-        username = session["username"]
+        
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
