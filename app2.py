@@ -66,18 +66,7 @@ def login():
 #when bed klogin key provided
 def bad_key():
     return render_template("badkey.html")
-#list files from Data into web app
-@app.route("/get_updated_files", methods=["GET", "POST"])
-def list_files_and_urls(folder_path):
-    files = []
-    for root, dirnames, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if not filename.startswith('.'):  # Ignore hidden files
-                file = {}
-                file["Key"] = os.path.join(root, filename)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
-                files.append(file)
-    return files
+
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
@@ -86,7 +75,7 @@ def index():
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
-        #files = list_files_and_urls(folder_path)
+        
         folders = list_folders()
         if theme == "light" :
             return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
