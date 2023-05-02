@@ -675,6 +675,17 @@ iframe {
          overflow-y: auto;
 
 }
+.wrapperX {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.link {
+  font-size: 12px;
+  text-decoration: none;
+}
          .file-list-container {
          padding: 0;
          margin-top: 15px;
