@@ -4,22 +4,7 @@
        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script>
-         const form = document.getElementById('my-form');
-         form.addEventListener('submit', (event) => {
-           event.preventDefault(); // prevent default form submission
-           // handle form submission here
-         });
-         
-         // Listen for Enter key press on input field
-         const inputField = form.querySelector('input[name="input-field"]');
-         inputField.addEventListener('keydown', (event) => {
-           if (event.key === 'Enter') {
-             event.preventDefault(); // prevent Enter key from creating a new line
-             form.submit(); // submit the form
-           }
-         });
-        
-       function checkImageExists(imageUrl, callback) {
+           function checkImageExists(imageUrl, callback) {
             const img = new Image();
             img.onload = function() { callback(true); };
             img.onerror = function() { callback(false); };
@@ -41,6 +26,23 @@
         }
 
         window.onload = setImageSrc;
+          
+         const form = document.getElementById('my-form');
+         form.addEventListener('submit', (event) => {
+           event.preventDefault(); // prevent default form submission
+           // handle form submission here
+         });
+         
+         // Listen for Enter key press on input field
+         const inputField = form.querySelector('input[name="input-field"]');
+         inputField.addEventListener('keydown', (event) => {
+           if (event.key === 'Enter') {
+             event.preventDefault(); // prevent Enter key from creating a new line
+             form.submit(); // submit the form
+           }
+         });
+        
+      
           
       </script>
       <style>
