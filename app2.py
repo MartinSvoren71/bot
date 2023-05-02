@@ -241,7 +241,8 @@ def get_subfolders_recursive(path):
     for root, dirs, _ in os.walk(path):
         for d in dirs:
             # Check if the folder starts with a dot
-            if d.startswith("."): 
+            if d.startswith("_"): 
+                
                 # Compare the folder name (excluding the dot) with the username
                 if d[1:] == "Biocev":
                     subfolders.append(os.path.relpath(os.path.join(root, d), path))
