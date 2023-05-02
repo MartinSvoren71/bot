@@ -105,6 +105,7 @@ def index():
     if "logged_in" in session:
 
         username = session["username"]  # Retrieve the username from the session
+        selected_folder = None
 
         print(username)
         theme_sel = "dark"
