@@ -105,8 +105,8 @@ def index():
     if "logged_in" in session:
 
         username = session["username"]  # Retrieve the username from the session
+        folder_path = "Data/Coherent/Chameleon/"   # Default folder path
         selected_folder = None
-
         print(username)
         theme_sel = "dark"
         theme=theme_sel
@@ -120,7 +120,7 @@ def index():
             folder_path = os.path.join("CustomerData", username, selected_folder)
         
 
-        #folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
+       
         files = list_files_and_urls(folder_path)
         folders = list_folders()
         if theme == "light" :
