@@ -62,6 +62,7 @@ def login():
                 elif username == "useradmin":
                     return redirect(url_for("user_manager"))
                 else:
+                    session['username'] = request.form['username']
                     return redirect(url_for("index"))
         except ValueError as e:
             flash(str(e))
