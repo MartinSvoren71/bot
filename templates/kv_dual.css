@@ -411,6 +411,35 @@
          filter: drop-shadow(0 0 0.85rem red);
          animation: pulse 8s infinite; /* Apply the pulse animation, and make it faster (1.5s) */
          }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo-img-1 {
+    width: 100%;
+         height: auto;
+         max-width: 220px;
+         opacity: 0.85;
+         display: block;
+         margin: 0 auto;
+         margin-bottom: 50px;
+         filter: drop-shadow(0 0 0.85rem red);
+         animation: pulse 8s infinite; /* Apply the pulse animation, and make it faster (1.5s) */
+  }
+  .logo-img-2 {
+    width: 100%;
+         height: auto;
+         max-width: 220px;
+         opacity: 0.85;
+         display: block;
+         margin: 0 auto;
+         margin-bottom: 50px;
+         filter: drop-shadow(0 0 0.85rem red);
+         animation: pulse 8s infinite; /* Apply the pulse animation, and make it faster (1.5s) */
+  }
+
          #footer_image {
          width: 35vw;
          height: auto;
