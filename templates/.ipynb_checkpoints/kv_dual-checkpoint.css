@@ -96,6 +96,9 @@
         height: 60vh;
 
          }
+.panel{
+ border: solid 1px white;   
+}
         
          .footer {
          padding-bottom:0px;  
