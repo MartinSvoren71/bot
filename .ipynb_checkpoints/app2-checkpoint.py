@@ -381,9 +381,23 @@ def create_user():
     users = load_users()
     users.append(user)
     save_users(users)
+
+    # Create a new folder in Data/ with the folder name as _{username}
+    new_folder_path = os.path.join("Data", f"_{username}")
+    os.makedirs(new_folder_path, exist_ok=True)
+
     return redirect('/users')
-with open('user.json', 'r') as file:
-    users_data = json.load(file)
+
+def load_users():
+    with open('user.json', 'r') as file:
+        users_data = json.load(file)
+    return users_data
+
+def save_users(users_data):
+    with open('user.json', 'w') as file:
+        json.dump(users_data, file)
+
+# Your other routes and functions
 @app.route('/get_users', methods=['GET'])
 def get_users():
     users = load_users()
