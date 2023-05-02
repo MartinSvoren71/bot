@@ -1,4 +1,9 @@
-    function openPdf(presignedUrl) {
+   
+
+
+
+
+function openPdf(presignedUrl) {
       console.log('Presigned URL:', presignedUrl);
       let pdfEmbed = document.getElementById('pdf-embed');
       pdfEmbed.setAttribute('src', presignedUrl);
@@ -21,10 +26,7 @@
       loadLogFile();
              
       
-       function saveFolderx() {
-       const saveFolder = document.getElementById("folder-select").value;
-       localStorage.setItem("folder-select", saveFolder);
-      }  
+      
        
           
        

@@ -26,10 +26,7 @@ function openPdf(presignedUrl) {
       loadLogFile();
              
       
-       function saveFolderx() {
-       const saveFolder = document.getElementById("folder-select").value;
-       localStorage.setItem("folder-select", saveFolder);
-      }  
+      
        
           
        
