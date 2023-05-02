@@ -54,7 +54,7 @@ def ask_ai(question, current_folder):
         f.write(f"vortex_token_usage: {llm_token_usage}\n\n")
         f.write(f"openAI_token_usage: {embed_token_usage}\n\n")
        # f.write(f"Details: {response.source_nodes}\n\n")
-                f.write("======================================================================================\n")
+        f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
         f.write("=======================================================================================\n\n")
         f.write(existing_data)
