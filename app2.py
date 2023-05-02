@@ -279,15 +279,7 @@ def list_folders():
             if not dirname.startswith('.'):  # Ignore hidden directories
                 folders.append(os.path.join(root, dirname))
     return folders
-    files = []
-    for root, dirnames, filenames in os.walk(folder_path):
-        for filename in filenames:
-            if not filename.startswith('.'):  # Ignore hidden files
-                file = {}
-                file["Key"] = os.path.join(root, filename)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
-                files.append(file)
-    return files
+   
 
 
 # function for splitting path and generating subfolder path
