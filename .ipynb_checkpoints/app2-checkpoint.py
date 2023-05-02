@@ -116,9 +116,9 @@ def index():
        # files = list_files_and_urls(folder_path)
         #folders = list_folders()
         if theme == "light" :
-            return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files, results={})
+            return render_template("indexSplit_light.html")
         else :
-            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, results={})
+            return render_template("indexSplit.html", results={})
             
     else:
         flash("Please log in first")
