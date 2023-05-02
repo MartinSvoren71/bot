@@ -71,6 +71,7 @@ def bad_key():
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
+        username = session["username"]
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
@@ -217,13 +218,23 @@ def list_folders():
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
+
 # function for splitting path and generating subfolder path
-def get_subfolders_recursive(path):
+
+def get_subfolders_recursive(path, username):
     subfolders = []
     for root, dirs, _ in os.walk(path):
         for d in dirs:
-            subfolders.append(os.path.relpath(os.path.join(root, d), path))
+            # Check if the folder starts with a dot
+            if d.startswith("."):
+                # Compare the folder name (excluding the dot) with the username
+                if d[1:] == username:
+                    subfolders.append(os.path.relpath(os.path.join(root, d), path))
+            else:
+                subfolders.append(os.path.relpath(os.path.join(root, d), path))
     return subfolders
+
+
 def get_files_recursive(path):
     all_files = []
     for root, _, files in os.walk(path):
