@@ -109,8 +109,8 @@ def index():
         print(username)
         theme_sel = "dark"
         theme=theme_sel
-        data_folders = get_subfolders_recursive('Data/')
-        customer_data_folders = get_subfolders_recursive(f'CustomerData/{username}/')
+        data_folders = get_subfolders_recursive('Data/Data')
+        customer_data_folders = get_subfolders_recursive(f'Data/Customers_Data/{username}/')
 
         folder_path = ""   # those are used for listing pdf files 
        # files = list_files_and_urls(folder_path)
