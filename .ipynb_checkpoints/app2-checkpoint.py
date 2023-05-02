@@ -29,13 +29,12 @@ from flask_ckeditor import CKEditor
 
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
-app.config['UPLOAD_FOLDER'] = 'Data/Data/'
-current_folder = 'Data/Data/'
+
+app.config['UPLOAD_FOLDER'] = 'Data/'
+current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 
 
-
-# user login function loading posible users from user.json file
 def find_user(username, password):
     if len(password) < 6:
         raise ValueError("Password must be at least 6 characters long")
@@ -49,7 +48,6 @@ def find_user(username, password):
     return False
 
 
-
 # main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -60,7 +58,7 @@ def login():
         try:
             if find_user(username, password):
                 session["logged_in"] = True
-                session["username"] = username  # Store the username in the session
+                session.permanent = True
                 app.permanent_session_lifetime = timedelta(hours=1)
 
                 if username == "fileadmin":
@@ -78,52 +76,55 @@ def login():
     return render_template("login.html")
 
 
-# bad login redirect
 @app.route("/bad_key")
 #when bed klogin key provided
 def bad_key():
     return render_template("badkey.html")
 
 
-
-# list files from Data into web app
-#@app.route("/get_updated_files", methods=["GET", "POST"])
-#def list_files_and_urls(folder_path):
-    #files = []
-   # for root, dirnames, filenames in os.walk(folder_path):
-       # for filename in filenames:
-       #     if not filename.startswith('.'):  # Ignore hidden files
-       #         file = {}
-        #        file["Key"] = os.path.join(root, filename)
-        #        file["PresignedURL"] = url_for("static", filename=file["Key"])
-        #        files.append(file)
-    #return files
+#list files from Data into web app
+@app.route("/get_updated_files", methods=["GET", "POST"])
+def list_files_and_urls(folder_path):
+    files = []
+    for root, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            if not filename.startswith('.'):  # Ignore hidden files
+                file = {}
+                file["Key"] = os.path.join(root, filename)
+                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                files.append(file)
+    return files
 
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
     if "logged_in" in session:
-
-        username = session["username"]  # Retrieve the username from the session
-
-        print(username)
         theme_sel = "dark"
         theme=theme_sel
-        data_folders = get_subfolders_recursive('Data/Data')
-        customer_data_folders = get_subfolders_recursive(f'Data/Customers_Data/{username}/')
-
-        folder_path = ""   # those are used for listing pdf files 
+        data_folders = get_subfolders_recursive('Data/')
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
        # files = list_files_and_urls(folder_path)
-        #folders = list_folders()
+       # folders = list_folders()
         if theme == "light" :
-            return render_template("indexSplit_light.html")
+            return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
         else :
-            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, results={})
-            
+            return render_template("indexSplit.html", folders=data_folders, files=files, results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
-
+        print(username)
+        theme_sel = "dark"
+        theme=theme_sel
+        data_folders = get_subfolders_recursive('Data/')
+        customer_data_folders = get_subfolders_recursive(f'
+        folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
+        files = list_files_and_urls(folder_path)
+        folders = list_folders()
+        if theme == "light" :
+            return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files, results={})
+        else :
+            , folders=data_folders+customer_data_folders, files=files, results={})
+            
     
 @app.route("/theme", methods=["POST"])
 def set_theme():
@@ -138,7 +139,6 @@ def set_theme():
         # handle invalid theme value
         theme_var = "light"
     return index()
-
 
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
@@ -271,23 +271,23 @@ def generate_pdf_route():
 
 
 # return  data into selector in html
-#def list_folders():
-   # folder_path = "Data/"
-   # folders = []
-   # for root, dirnames, filenames in os.walk(folder_path):
-    #    for dirname in dirnames:
-    #        if not dirname.startswith('.'):  # Ignore hidden directories
-   #             folders.append(os.path.join(root, dirname))
-   # return folders
-  #  files = []
-  #  for root, dirnames, filenames in os.walk(folder_path):
-   #     for filename in filenames:
-     #       if not filename.startswith('.'):  # Ignore hidden files
-    #            file = {}
-     #           file["Key"] = os.path.join(root, filename)
-     #           file["PresignedURL"] = url_for("static", filename=file["Key"])
-      #          files.append(file)
-   # return files
+def list_folders():
+    folder_path = "Data/"
+    folders = []
+    for root, dirnames, filenames in os.walk(folder_path):
+        for dirname in dirnames:
+            if not dirname.startswith('.'):  # Ignore hidden directories
+                folders.append(os.path.join(root, dirname))
+    return folders
+    files = []
+    for root, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            if not filename.startswith('.'):  # Ignore hidden files
+                file = {}
+                file["Key"] = os.path.join(root, filename)
+                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                files.append(file)
+    return files
 
 
 # function for splitting path and generating subfolder path
@@ -311,18 +311,13 @@ def get_files_recursive(path):
 
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
-    username = session["username"]  # Retrieve the username from the session
-
     global current_folder
     selected_folder = request.form['selected_folder']
-    folder_path = f'Data/Data/{selected_folder}'
-    if selected_folder.startswith(username):
-        folder_path = f'Data/Customers_Data/{username}/{selected_folder}'
+    folder_path = f'Data/{selected_folder}'
     folder_content = get_files_recursive(folder_path)
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
     return {'folder_content': folder_content}
-
 
 
 
@@ -417,7 +412,7 @@ def delete_folder(folder_path):
     return redirect(url_for('file_manager'))
 
 
-@app.route('/Data/Data/<path:file_path>')
+@app.route('/Data/<path:file_path>')
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
     return send_from_directory(data_folder_path, file_path)
@@ -456,22 +451,9 @@ def create_user():
     users.append(user)
     save_users(users)
 
-    # Check if the folder exists, if not, create the required folders
-    user_folder_path = os.path.join('CustomerData', username, username)
-    
-    if not os.path.exists(user_folder_path):
-        os.makedirs(user_folder_path)
-
     return redirect('/users')
-
-def load_users():
-    with open('user.json', 'r') as file:
-        users_data = json.load(file)
-    return users_data
-
-def save_users(users):
-    with open('user.json', 'w') as file:
-        json.dump(users, file)
+with open('user.json', 'r') as file:
+    users_data = json.load(file)
 
 @app.route('/get_users', methods=['GET'])
 def get_users():
