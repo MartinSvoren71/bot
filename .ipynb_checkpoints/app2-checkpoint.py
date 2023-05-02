@@ -26,11 +26,16 @@ import warnings
 from pdfminer.high_level import extract_text
 from builtins import len
 from flask_ckeditor import CKEditor
+
+
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
+
 def find_user(username, password):
     if len(password) < 6:
         raise ValueError("Password must be at least 6 characters long")
