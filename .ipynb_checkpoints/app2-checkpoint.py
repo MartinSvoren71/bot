@@ -67,6 +67,20 @@ def login():
 def bad_key():
     return render_template("badkey.html")
 
+#list files from Data into web app
+@app.route("/get_updated_files", methods=["GET", "POST"])
+def list_files_and_urls(folder_path):
+    files = []
+    for root, dirnames, filenames in os.walk(folder_path):
+        for filename in filenames:
+            if not filename.startswith('.'):  # Ignore hidden files
+                file = {}
+                file["Key"] = os.path.join(root, filename)
+                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                files.append(file)
+    return files
+
+
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
