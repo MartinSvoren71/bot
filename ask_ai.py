@@ -90,7 +90,7 @@ def construct_index(current_folder):
         f.write(f"Time: {datetime.datetime.now()}\n\n")
         #f.write(f"Togen usage: {token_usage}\n\n")
         f.write(f"Folder: {folder_path} index file successfully generated\n\n")
-         f.write(f"vortex_token_usage: {llm_token_usage}\n\n")
+          f.write(f"vortex_token_usage: {llm_token_usage}\n\n")
         f.write(f"openAI_token_usage: {embed_token_usage}\n\n")
        # f.write(f"Details: {response.source_nodes}\n\n")
         f.write("======================================================================================\n")
