@@ -253,7 +253,7 @@ def get_subfolders_recursive(path):
                 # Compare the folder name (excluding the dot) with the username
                 if d[14:] == username:
                     subfolders.append(os.path.relpath(os.path.join(root, d), path))
-            else:
+            else: 
                 subfolders.append(os.path.relpath(os.path.join(root, d), path))
     return subfolders
 
