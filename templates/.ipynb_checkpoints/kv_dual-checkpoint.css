@@ -487,7 +487,8 @@
          a {
          max-width: 100%;
          font-size: 1.0em;
-         text-align: center;
+         justify-content: center;
+         align-items: center;
          color: var(--matrix-blue-pill);
          }
          .folder-content{
