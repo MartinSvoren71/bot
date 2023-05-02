@@ -87,8 +87,8 @@ def bad_key():
 
 
 # list files from Data into web app
-@app.route("/get_updated_files", methods=["GET", "POST"])
-def list_files_and_urls(folder_path):
+#@app.route("/get_updated_files", methods=["GET", "POST"])
+#def list_files_and_urls(folder_path):
     #files = []
    # for root, dirnames, filenames in os.walk(folder_path):
        # for filename in filenames:
@@ -97,7 +97,7 @@ def list_files_and_urls(folder_path):
         #        file["Key"] = os.path.join(root, filename)
         #        file["PresignedURL"] = url_for("static", filename=file["Key"])
         #        files.append(file)
-    return 
+    #return 
 
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
@@ -113,12 +113,12 @@ def index():
         customer_data_folders = get_subfolders_recursive(f'CustomerData/{username}/')
 
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
-        files = list_files_and_urls(folder_path)
+       # files = list_files_and_urls(folder_path)
         folders = list_folders()
         if theme == "light" :
             return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files, results={})
         else :
-            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, files=files, results={})
+            return render_template("indexSplit.html", folders=data_folders+customer_data_folders, results={})
             
     else:
         flash("Please log in first")
