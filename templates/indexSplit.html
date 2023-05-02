@@ -18,7 +18,28 @@
 
 
       <script>
-   
+       function checkImageExists(imageUrl, callback) {
+            const img = new Image();
+            img.onload = function() { callback(true); };
+            img.onerror = function() { callback(false); };
+            img.src = imageUrl;
+        }
+
+        function setImageSrc() {
+            const logoUrl = "{{ url_for('static', filename='logo/logo1-220.png') }}";
+            const fallbackLogoUrl = "{{ url_for('static', filename='logo/fallback_logo.png') }}";
+            const logoImage = document.getElementById('logo');
+
+            checkImageExists(logoUrl, function(exists) {
+                if (exists) {
+                    logoImage.src = logoUrl;
+                } else {
+                    logoImage.src = fallbackLogoUrl;
+                }
+            });
+        }
+
+        window.onload = setImageSrc;
                        
                 setInterval(function() {
                   // Code to refresh the log container
@@ -62,8 +83,9 @@
          <div class="left-side">
             <h1>___vortex control panel__</h1>
              <br><br>
-            <img src="https://knowledgevortex.s3.eu-north-1.amazonaws.com/logo1-p-800.png" alt="KV Logo">
-            <img src="{{ url_for('static', filename='static/logo/logo1-220.png') }}" alt="Your image">
+            
+            <img id="logo" alt="logo">
+             
      
 <div class="wrapperX">
   <a href="/" class="link">Log_out</a>
