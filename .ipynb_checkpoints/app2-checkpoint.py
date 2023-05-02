@@ -248,7 +248,7 @@ def get_subfolders_recursive(path):
     for root, dirs, _ in os.walk(path):
         for d in dirs:
             # Check if the folder starts with a dot
-            if d.startswith("_private_"): 
+            if d.startswith("_private-folder_"): 
                 
                 # Compare the folder name (excluding the dot) with the username
                 if d[9:] == username:
@@ -383,7 +383,7 @@ def create_user():
     save_users(users)
 
     # Create a new folder in Data/ with the folder name as _{username}
-    new_folder_path = os.path.join("Data", f"_private_{username}")
+    new_folder_path = os.path.join("Data", f"_private-folder_{username}")
     os.makedirs(new_folder_path, exist_ok=True)
 
     return redirect('/users')
