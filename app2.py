@@ -87,11 +87,11 @@ def index():
         data_folders = get_subfolders_recursive('Data/')
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
         #files = list_files_and_urls(folder_path)
-        #folders = list_folders()
+        folders = list_folders()
         if theme == "light" :
             return render_template("indexSplit_light.html", folders=data_folders, files=files, results={})
         else :
-            return render_template("indexSplit.html",results={})
+            return render_template("indexSplit.html", folders=data_folders,  results={})
     else:
         flash("Please log in first")
         return redirect(url_for("login"))
