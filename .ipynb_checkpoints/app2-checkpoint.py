@@ -417,7 +417,7 @@ def delete_folder(folder_path):
     return redirect(url_for('file_manager'))
 
 
-@app.route('/Data/<path:file_path>')
+@app.route('/Data/Data/<path:file_path>')
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
     return send_from_directory(data_folder_path, file_path)
