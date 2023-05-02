@@ -97,7 +97,7 @@ def bad_key():
         #        file["Key"] = os.path.join(root, filename)
         #        file["PresignedURL"] = url_for("static", filename=file["Key"])
         #        files.append(file)
-    #return 
+    #return files
 
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
@@ -114,7 +114,7 @@ def index():
 
         folder_path = "Data/Coherent/Chameleon/"   # those are used for listing pdf files 
        # files = list_files_and_urls(folder_path)
-        folders = list_folders()
+        #folders = list_folders()
         if theme == "light" :
             return render_template("indexSplit_light.html", folders=data_folders+customer_data_folders, files=files, results={})
         else :
@@ -283,11 +283,11 @@ def list_folders():
     for root, dirnames, filenames in os.walk(folder_path):
         for filename in filenames:
             if not filename.startswith('.'):  # Ignore hidden files
-                #file = {}
-               # file["Key"] = os.path.join(root, filename)
-                #file["PresignedURL"] = url_for("static", filename=file["Key"])
-                #files.append(file)
-    return 
+                file = {}
+                file["Key"] = os.path.join(root, filename)
+                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                files.append(file)
+    return files
 
 
 # function for splitting path and generating subfolder path
