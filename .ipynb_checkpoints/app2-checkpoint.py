@@ -26,15 +26,11 @@ import warnings
 from pdfminer.high_level import extract_text
 from builtins import len
 from flask_ckeditor import CKEditor
-
-
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
 app.config['UPLOAD_FOLDER'] = 'Data/'
 current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
-
-
 def find_user(username, password):
     if len(password) < 6:
         raise ValueError("Password must be at least 6 characters long")
@@ -44,8 +40,6 @@ def find_user(username, password):
         if user["username"] == username and user["password"] == password:
             return True
     return False
-
-
 # main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -68,8 +62,6 @@ def login():
         flash("Invalid username or password provided")
         return redirect(url_for("bad_key"))
     return render_template("login.html")
-
-
 @app.route("/bad_key")
 #when bed klogin key provided
 def bad_key():
@@ -78,8 +70,8 @@ def bad_key():
 # main web app wehn righ key is provided
 @app.route("/indexSplit", methods=["GET", "POST"])
 def index():
-      if "logged_in" in session:
-        
+    if "logged_in" in session:
+        username = session["username"]
         theme_sel = "dark"
         theme=theme_sel
         data_folders = get_subfolders_recursive('Data/')
