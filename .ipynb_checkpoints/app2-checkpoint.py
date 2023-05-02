@@ -95,7 +95,7 @@ def list_files_and_urls(folder_path):
             if not filename.startswith('.'):  # Ignore hidden files
                 file = {}
                 file["Key"] = os.path.join(root, filename)
-                file["PresignedURL"] = url_for("static", filename=file["Key"])
+                #file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
 
