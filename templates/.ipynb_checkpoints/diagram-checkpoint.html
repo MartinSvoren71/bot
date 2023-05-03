@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Diagram</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60%;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .small-box {
+      width: 30%;
+    }
+
+    .arrows {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      margin-top: 60px;
+      position: relative;
+    }
+
+    .arrow {
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 20px solid #4CAF50;
+      opacity: 0;
+      animation: slideDown 2s ease-in-out infinite;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .arrow-left {
+      animation-delay: 1s;
+      left: 30%;
+    }
+
+    .arrow-right {
+      animation-delay: 1.5s;
+      right: 30%;
+    }
+
+    .instances {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      position: relative;
+    }
+
+    .vertical-line {
+      width: 2px;
+      height: 100%;
+      background-color: #4CAF50;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .vertical-line-left {
+      left: 30%;
+    }
+
+    .vertical-line-right {
+      right: 30%;
+    }
+
+    .horizontal-arrows {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+    }
+
+    .horizontal-arrow {
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 20px solid #4CAF50;
+      position: absolute;
+    }
+
+    .horizontal-arrow-left {
+      left: 15%;
+    }
+
+    .horizontal-arrow-right {
+      right: 15%;
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="box box-main">
+      <h1>Your company and your documents</h1>
+    </div>
+    <div class="arrows">
+      <div class="vertical-line vertical-line-left"></div>
+      <div class="vertical-line vertical-line-right"></div>
+           <div class="arrow arrow-left" style="margin-left: 30%;"></div>
+      <div class="arrow arrow-right" style="margin-right: 30%;"></div>
+    </div>
+    <div class="instances">
+      <div class="box box-team">
+        <p>Instance for your team</p>
+      </div>
+      <div class="box box-customers">
+        <p>Instance for your customers</p>
+      </div>
+    </div>
+    <div class="horizontal-arrows">
+      <div class="horizontal-arrow horizontal-arrow-left" style="margin-top: -30px;"></div>
+      <div class="horizontal-arrow horizontal-arrow-right" style="margin-top: -30px;"></div>
+    </div>
+    <div class="small-box-container" style="display: flex; width: 60%; justify-content: space-between;">
+      <div style="display: flex; flex-direction: column; align-items: flex-end; width: 50%;">
+        <div class="box small-box">
+          <p>Small Box 1</p>
+        </div>
+        <div class="box small-box">
+          <p>Small Box 2</p>
+        </div>
+        <div class="box small-box">
+          <p>Small Box 3</p>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; width: 50%;">
+        <div class="box small-box">
+          <p>Small Box 4</p>
+        </div>
+        <div class="box small-box">
+          <p>Small Box 5</p>
+        </div>
+        <div class="box small-box">
+          <p>Small Box 6</p>
+        </div>
+      </div>
+    </div>
+  </div>+
+<div style="width: 960px; height: 720px; margin: 10px; position: relative;"><iframe allowfullscreen frameborder="0" style="width:960px; height:720px" src="https://lucid.app/documents/embedded/7188bdb0-9df0-40af-9b48-390aa11ec8c7" id="L0BU-PJbu6YR"></iframe></div>
+</body>
+</html>
