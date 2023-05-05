@@ -110,8 +110,7 @@
                <div class="select-container-2" id="select-container-2">
                   <select name="folder-selector" id="folder-selector" onchange="saveFolderx()">
                      {% for folder in folders %}
-                     <option value="{{ folder }}">{{ folder }}</option>
-                     {% endfor %}
+  <option value="{{ folder }}">📂 {{ folder }}</option>                     {% endfor %}
                   </select>
                </div>
                <pre id="console-output" style="white-space: pre-wrap;"></pre>
