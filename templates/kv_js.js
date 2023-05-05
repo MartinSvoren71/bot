@@ -182,8 +182,8 @@ function updateFolderContent() {
             const unicodeChar = '\u{1F517}';
             const unicodeChar1 = '\u{1F517}';
 
-let share_btn = '<button onclick="copyUrlToClipboard(\'🖺'+ file_url + '\')">' + "🔗" + '</button>';
-            let item_html = '<li><a href="#" onclick="openPdf(\'' + file_url + '\')">' + item + '</a>' + share_btn + '</li>';
+let share_btn = '<button onclick="copyUrlToClipboard(\''+ file_url + '\')">' + "🔗" + '</button>';
+            let item_html = '<li><a href="#" onclick="openPdf(\'🖺' + file_url + '\')">' + item + '</a>' + share_btn + '</li>';
             $('#folder-content').append(item_html);
         }
     });
