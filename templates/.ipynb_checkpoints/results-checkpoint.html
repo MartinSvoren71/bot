@@ -7,7 +7,7 @@
 </ul>
 {% endif %}
 {% for filepath, matches in results.items() %}
-<h2>{{ filepath }}</h2>
+<h2>🖺 {{ filepath }}</h2>
 <ul>
 {% for page_num, match in matches %}
   <li><a href="#" onclick="showPDF('/{{ filepath }}#page={{ page_num + 1 }}')">{{ filepath }} - page {{ page_num + 1 }}</a>: {{ match }}</li>
