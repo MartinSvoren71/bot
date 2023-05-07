@@ -11,13 +11,13 @@
          --matrix-green-6:                #0e1c0d;  
          --matrix-amber-1:                 #a9abb8;
          --matrix-amber-2:                 #ffdd9d;
-         --matrix-black-1:                  #081717;      
+         --matrix-black-1:                  #010509;      
          --matrix-black-2:                   black;    
          --text-1:                       #1cafec;
          --text-2:                          #474866
          --gray-2:                        #29658a;    
          --matrix-gray-1:                 #1f1f1f;
-         --title-grad:     radial-gradient(circle, rgba(12, 29, 29, 0.35) 0%, rgba(8, 23, 23, 0.5) 100%);
+         --title-grad:     radial-gradient(circle, rgba(4, 19, 30, 0.35) 0%, rgba(4, 19, 30, 0.5) 100%);
              
              
              
@@ -44,7 +44,7 @@
          --text-2:                          #474866;
          --gray-2:                        #29658a;    
          --matrix-gray-1:                 #1f1f1f;
-         --title-grad:     white;
+         --title-grad:     radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.5) 100%);
              
              
              
@@ -403,10 +403,10 @@
 }
          
          img  {
-         width: 330px;
+         width: 400px;
          height: auto;
-         max-width: 330px;
-         opacity: 0.85;
+         max-width: 400px;
+         opacity: 1;
          display: block;
          margin: 0 auto;
          margin-bottom: 10px;
