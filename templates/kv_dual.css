@@ -401,16 +401,15 @@
         transform: translate(0px, 0px);
     }
 }
-         }
-         img {
+         
+         img  {
          width: 330px;
          height: auto;
-         max-width: 10vw;
-         opacity: 0.85;
+         max-width: 330px;
+         opacity: 1;
          display: block;
          margin: 0 auto;
-         margin-bottom: 330px;
-         filter: drop-shadow(0 0 0.85rem red);
+         margin-bottom: 10px;
          animation: pulse 8s infinite; /* Apply the pulse animation, and make it faster (1.5s) */
          }
 
@@ -913,53 +912,7 @@ iframe {
          opacity: 0.8;
          }
 
-       .mask-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .circular-mask {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 20px;
-  }
-
-  .circular-mask img {
-    width: 100%;
-    height: auto;
-  }
-
-  .slot-mask {
-    position: relative;
-    width: 150px;
-    height: 50px;
-    overflow: hidden;
-    margin-left: -170px;
-    margin-top:  140px;
-  }
-
-  .slot-mask:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 60%;
-    height: 100%;
-    background-color: white;
-    transform: skew(-20deg);
-    z-index: 1;
-  }
-
-  .slot-mask img {
-    position: relative;
-    left: -10%;
-    top: 0;
-    width: 120%;
-    height: auto;
-    z-index: 2;
-  }     
+      
             
 
 
