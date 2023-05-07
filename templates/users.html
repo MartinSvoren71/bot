@@ -339,9 +339,9 @@ setCanvasOpacity();
                 const userList = document.getElementById('user-list');
                 users.forEach(user => {
                     const listItem = document.createElement('li');
-            listItem.textContent = `👨 ${user.username} `; // Add the icon here
+            listItem.textContent = `👤 ${user.username} `; // Add the icon here
                     const deleteButton = document.createElement('button');
-                    deleteButton.textContent = '🗑';
+                    deleteButton.textContent = '␡';
                     deleteButton.onclick = () => deleteUser(user.username);
                     listItem.appendChild(deleteButton);
                     userList.appendChild(listItem);
