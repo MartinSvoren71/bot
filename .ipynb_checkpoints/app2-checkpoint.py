@@ -343,6 +343,7 @@ def create_folder(subpath=None):
     else:
         flash('Folder already exists.')
     return redirect(url_for('file_manager', subpath=subpath))
+
 @app.route('/delete_folder/<path:folder_path>')
 def delete_folder(folder_path):
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_path)
@@ -351,7 +352,7 @@ def delete_folder(folder_path):
         flash('Folder deleted successfully.')
     else:
         flash('Folder not found or not a directory.')
-    return redirect(url_for('file_manager/<path:folder_path>'))
+    return redirect(request.url)  # Reload the current page
 @app.route('/Data/<path:file_path>')
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
