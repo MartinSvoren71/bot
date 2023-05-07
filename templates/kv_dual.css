@@ -402,9 +402,9 @@
          }
          }
          img {
-         width: 100%;
+         width: 20vw;
          height: auto;
-         max-width: 220px;
+         max-width: 20vw;
          opacity: 0.85;
          display: block;
          margin: 0 auto;

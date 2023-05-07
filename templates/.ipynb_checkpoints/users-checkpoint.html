@@ -12,7 +12,7 @@
         }
 
         function setImageSrc() {
-            const fallbackLogoUrl = "https://knowledgevortex.s3.eu-north-1.amazonaws.com/logo1-220.png";
+            const fallbackLogoUrl = "{{ url_for('static', filename='Data/system/logo/.logo1-220.png') }}";
             const logoUrl = "{{ url_for('static', filename='Data/system/logo/logo.png') }}";
             const logoImage = document.getElementById('logo');
 
@@ -204,9 +204,9 @@
 }
 
 img {
-    width: 100%;
-    height: auto;
-    max-width: 220px;
+      width: 20vw;
+         height: auto;
+         max-width: 20vw;
     display: block;
     margin: 0 auto;
     margin-bottom: 50px;
