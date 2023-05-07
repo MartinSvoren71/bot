@@ -403,13 +403,13 @@
 }
          }
          img {
-         width: 10vw;
+         width: 330px;
          height: auto;
          max-width: 10vw;
          opacity: 0.85;
          display: block;
          margin: 0 auto;
-         margin-bottom: 50px;
+         margin-bottom: 330px;
          filter: drop-shadow(0 0 0.85rem red);
          animation: pulse 8s infinite; /* Apply the pulse animation, and make it faster (1.5s) */
          }
