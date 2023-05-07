@@ -367,39 +367,40 @@
          height:100vh;    
          filter: drop-shadow(0 0 0.9rem red);
          } 
-         @keyframes pulse {
-         0% {
-         filter: drop-shadow(0 0 0.2rem yellow);
-         transform: translate(0px, 0px);
-         }
-         12% {
-         filter: drop-shadow(0 0 0.4rem yellow);
-         transform: translate(0px, 0px);
-         }
-         23% {
-         filter: drop-shadow(0 0 0.5rem orange);
-         transform: translate(0px,0px);
-         }
-         35% {
-         filter: drop-shadow(0 0 0.6rem red);
-         transform: translate(0px, 0px);
-         }
-         41% {
-         filter: drop-shadow(0 0 0.4rem green);
-         transform: translate(0px, 0px);
-         }
-         49% {
-         filter: drop-shadow(0 0 0.8rem green);
-         transform: translate(0px, 0px);
-         }
-         66% {
-         filter: drop-shadow(0 0 0.6rem red);
-         transform: translate(0px, 0px);
-         }
-         100% {
-         filter: drop-shadow(0 0 0.5rem orange);
-         transform: translate(0px, 0px);
-         }
+       @keyframes pulse {
+    0% {
+        filter: drop-shadow(0 0 0.2rem white);
+        transform: translate(0px, 0px);
+    }
+    12% {
+        filter: drop-shadow(0 0 0.4rem white);
+        transform: translate(0px, 0px);
+    }
+    23% {
+        filter: drop-shadow(0 0 0.5rem white);
+        transform: translate(0px,0px);
+    }
+     35% {
+        filter: drop-shadow(0 0 0.6rem cyan);
+        transform: translate(0px, 0px);
+    }
+    41% {
+        filter: drop-shadow(0 0 0.4rem cyan);
+        transform: translate(0px, 0px);
+    }
+    49% {
+        filter: drop-shadow(0 0 0.8rem white);
+        transform: translate(0px, 0px);
+    }
+    66% {
+        filter: drop-shadow(0 0 0.6rem white);
+        transform: translate(0px, 0px);
+    }
+    100% {
+        filter: drop-shadow(0 0 0.5rem white);
+        transform: translate(0px, 0px);
+    }
+}
          }
          img {
          width: 20vw;

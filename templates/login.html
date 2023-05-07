@@ -261,12 +261,12 @@ h1 {
          setInterval(draw, 33);
           
              function setCanvasOpacity() {
-    let opacity = 0; // Start with an opacity of 0
-    const increaseTime = 4000; // 8 seconds in milliseconds
+    let opacity = 0.5; // Start with an opacity of 0
+    const increaseTime = 2000; // 8 seconds in milliseconds
     const targetOpacity = 0.85; // Change this to your desired opacity
 
     const increaseOpacity = () => {
-        opacity += 0.2;
+        opacity += 0.1;
         canvas.style.opacity = opacity;
 
         if (opacity < targetOpacity) {
