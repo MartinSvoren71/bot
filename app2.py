@@ -352,11 +352,12 @@ def delete_folder(folder_path):
         flash('Folder deleted successfully.')
     else:
         flash('Folder not found or not a directory.')
-    return redirect(url_for('file_manager', subpath=subpath))
+    return redirect(request.url)  # Reload the current page
+
 @app.route('/Data/<path:file_path>')
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
-    return redirect(request.url)  # Reload the current page
+    return send_from_directory(data_folder_path, file_path)
                                 
                                 
 def load_users():
