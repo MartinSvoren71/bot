@@ -326,7 +326,7 @@ def delete(filename):
         flash('File deleted successfully.')
     else:
         flash('File not found.')
-    return redirect(url_for('file_manager', subpath=subpath))
+    return 
 @app.route('/create_folder/', methods=['POST'])
 @app.route('/create_folder/<path:subpath>', methods=['POST'])
 def create_folder(subpath=None):
@@ -352,7 +352,7 @@ def delete_folder(folder_path):
         flash('Folder deleted successfully.')
     else:
         flash('Folder not found or not a directory.')
-    return redirect(url_for('file_manager', subpath=subpath))
+    return 
 
 @app.route('/Data/<path:file_path>')
 def serve_file(file_path):
