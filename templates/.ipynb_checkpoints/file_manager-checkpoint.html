@@ -206,13 +206,13 @@ img {
     <button type="submit">Upload</button>
 </form>
 <ul id="folder-list">
-    {% for folder in folders %}
+    📁{% for folder in folders %}
         <li>
             <a href="{{ url_for('file_manager', subpath=(subpath or '') + '/' + folder) }}">{{ folder }}/</a>
             <a href="{{ url_for('delete_folder', folder_path=(subpath or '') + '/' + folder) }}" onclick="return confirm('Are you sure?')">-- Delete</a>
         </li>
     {% endfor %}
-    {% for file in files %}
+   🖺 {% for file in files %}
         <li>
             <a href="{{ url_for('serve_file', file_path=(subpath or '') + '/' + file) }}">{{ file }}</a>
             <a href="{{ url_for('delete', filename=(subpath or '') + '/' + file) }}" onclick="return confirm('Are you sure?')">-- Delete</a>
