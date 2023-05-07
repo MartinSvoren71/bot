@@ -351,7 +351,7 @@ def delete_folder(folder_path):
         flash('Folder deleted successfully.')
     else:
         flash('Folder not found or not a directory.')
-    return redirect(url_for('file_manager'))
+    return redirect(url_for('file_manager/<path:folder_path>'))
 @app.route('/Data/<path:file_path>')
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
