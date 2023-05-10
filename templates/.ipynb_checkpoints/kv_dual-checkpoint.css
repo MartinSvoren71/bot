@@ -919,7 +919,9 @@ iframe {
 
 @media screen and (max-width: 920px) {
 
-
+body {
+    zoom: 0.8; /* set the zoom scale to 80% */
+}
   .left-side {
 
 
