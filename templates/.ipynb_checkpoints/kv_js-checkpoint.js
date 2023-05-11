@@ -301,18 +301,14 @@ async function light(event) {
         root.classList.remove('light'); 
       }
     }
-    if (savedSelectedFolder) {
-      folderSelector.value = savedSelectedFolder;
-    }
+   
 
     // Save values to local storage when changed
     toggleCheckbox.addEventListener('change', () => {
       localStorage.setItem('toggleCheckbox', JSON.stringify(toggleCheckbox.checked));
     });
 
-    folderSelector.addEventListener('change', () => {
-      localStorage.setItem('folder-selector', folderSelector.value);
-    });
+   
 var myLink = document.getElementById("folder-content");
   myLink.addEventListener("click", function(event) {
     event.preventDefault();
