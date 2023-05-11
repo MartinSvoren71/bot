@@ -108,12 +108,15 @@
                   <button style="buttonGPT" id="button-GPT" onclick="ask_GPT(event)">public data request ֎</button>
                   <button style="buttonAI" id="button-AI" onclick="ask_LIB(event)">my data request 🗃</button>
                </div>
-               <h2>library:</h2>
+            
+                <h2>library:</h2>
                <div class="select-container-2" id="select-container-2">
-                  <select name="folder-selector" id="folder-selector" onchange="saveFolderx()">
-                     {% for folder in folders %}
-  <option value="{{ folder }}">🗁 {{ folder }}</option>                     {% endfor %}
-                  </select>
+               <input type="text" id="folder-search" onkeyup="searchFolders()" placeholder="Search folder">
+<select name="folder-selector" id="folder-selector" onchange="saveFolder()">
+  {% for folder in folders %}
+    <option value="{{ folder }}">🗁 {{ folder }}</option>
+  {% endfor %}
+</select>
                </div>
                <pre id="console-output" style="white-space: pre-wrap;"></pre>
                <h1>__vortex keyword search__</h1>
@@ -200,6 +203,22 @@
         { value: 'Email', title: 'Email' },
       ]
     });
+function searchFolders() {
+    const input = document.getElementById('folder-search').value.toLowerCase();
+    const select = document.getElementById('folder-selector');
+    const options = select.getElementsByTagName('option');
 
+    for (let i = 0; i < options.length; i++) {
+      const folderName = options[i].text.toLowerCase();
+      if (folderName.includes(input)) {
+        options[i].selected = true;
+        break; // Uncomment this line if you want to select the first matching option
+      }
+    }
+  }
+
+  function saveFolder() {
+    // Your save folder logic here
+  }
     </script>
 </html>
