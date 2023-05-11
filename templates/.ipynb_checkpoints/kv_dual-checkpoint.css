@@ -750,6 +750,13 @@ iframe {
          width:40%;
          height: 5vh;
          } 
+ #folder-search {
+         margin: 1% auto;
+         filter: drop-shadow(0 0 0.75rem white);
+         color: var(--matrix-green-1);
+         width:15%;
+         height: 1.4vh;
+         } 
          a:hover {
          color: #aaa;
          }
