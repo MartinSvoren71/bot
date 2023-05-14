@@ -84,6 +84,7 @@ function openPdf(presignedUrl) {
         }
       });
       }
+document.getElementById('folder-search').addEventListener('input', updateFolderContent);
        
        
       function showPDF(url) {
@@ -287,11 +288,9 @@ async function light(event) {
       }
     });
        
-    const folderSelector = document.getElementById('folder-selector');
 
     // Load saved values from local storage
     const savedCheckboxState = localStorage.getItem('toggleCheckbox');
-    const savedSelectedFolder = localStorage.getItem('folder-selector');
 
     if (savedCheckboxState) {
       toggleCheckbox.checked = JSON.parse(savedCheckboxState);

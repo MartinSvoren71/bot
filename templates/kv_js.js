@@ -84,6 +84,7 @@ function openPdf(presignedUrl) {
         }
       });
       }
+document.getElementById('folder-search').addEventListener('input', updateFolderContent);
        
        
       function showPDF(url) {
