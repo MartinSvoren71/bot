@@ -84,7 +84,6 @@ function openPdf(presignedUrl) {
         }
       });
       }
-document.getElementById('folder-search').addEventListener('input', updateFolderContent);
        
        
       function showPDF(url) {
@@ -189,6 +188,13 @@ let share_btn = '<button onclick="copyUrlToClipboard(\''+ file_url + '\')">' + "
         }
     });
 }
+let timeout = null;
+
+document.getElementById('folder-search').addEventListener('input', function() {
+    clearTimeout(timeout); // Clear the timeout if it exists
+    timeout = setTimeout(updateFolderContent, 400); // Set a new timeout
+});
+
 
 function copyUrlToClipboard(url) {
     navigator.clipboard.writeText(url).then(function() {
@@ -318,3 +324,34 @@ var myLink = document.getElementById("results");
     event.preventDefault();
     // your custom code here
   });
+
+
+     tinymce.init({
+      selector: '#editorX',
+      plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+      mergetags_list: [
+        { value: 'First.Name', title: 'First Name' },
+        { value: 'Email', title: 'Email' },
+      ]
+    });
+function searchFolders() {
+    const input = document.getElementById('folder-search').value.toLowerCase();
+    const select = document.getElementById('folder-selector');
+    const options = select.getElementsByTagName('option');
+
+    for (let i = 0; i < options.length; i++) {
+      const folderName = options[i].text.toLowerCase();
+      if (folderName.includes(input)) {
+        options[i].selected = true;
+        break; // Uncomment this line if you want to select the first matching option
+      }
+    }
+  }
+
+  function saveFolder() {
+    // Your save folder logic here
+  }
+ 
