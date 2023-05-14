@@ -747,15 +747,15 @@ iframe {
          margin: 1% auto;
          filter: drop-shadow(0 0 0.75rem white);
          color: var(--matrix-green-1);
-         width:95%;
+         width:40%;
          height: 5vh;
          } 
  #folder-search {
-         margin: 0.3%;
-         filter: drop-shadow(0 0 0.75rem white);
+         filter: drop-shadow(0 0 0.25rem white);
          color: var(--matrix-green-1);
-         width:15%;
-         height: 1.4vh;
+         width:95%;
+       justify-content: center;
+  align-items: center;
          } 
          a:hover {
          color: #aaa;
