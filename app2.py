@@ -170,11 +170,12 @@ def process_pdf_file(filepath, keyword, pattern):
             is_encrypted = True
         return filepath, matches, is_encrypted
     return filepath, matches, is_encrypted
+
 # part_2 process search on pdf files     
 def search_pdf_files(keyword, folder_path):
     results = {}
     encrypted_files = []
-    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)  # added re.I flag
     pdf_files = [os.path.join(root, filename)
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
@@ -188,6 +189,7 @@ def search_pdf_files(keyword, folder_path):
             elif matches:
                 results[filepath] = matches
     return results, encrypted_files
+
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
@@ -215,7 +217,7 @@ def search_files():
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
-# save and generate PDF document
+
 @app.route('/save', methods=['POST'])
 def generate_pdf_route():
     content = request.form['content']
