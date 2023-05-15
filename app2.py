@@ -152,8 +152,10 @@ def ask_LIB_route():
         response = ask_ai(question, current_folder) 
     else:
         return render_template('bad_key.html')
+from fuzzywuzzy import fuzz
+
 # part_1 process search on pdf files
-def process_pdf_file(filepath, keyword, pattern):
+def process_pdf_file(filepath, keyword, threshold):
     matches = []
     is_encrypted = False
     try:
@@ -162,8 +164,10 @@ def process_pdf_file(filepath, keyword, pattern):
             text = extract_text(filepath, password='', codec='utf-8')
             pages = text.split('\f')
         for page_num, page_text in enumerate(pages):
-            for match in pattern.finditer(page_text):
-                matches.append((page_num, match.group()))
+            words = page_text.split()
+            for word in words:
+                if fuzz.ratio(word.lower(), keyword.lower()) > threshold:
+                    matches.append((page_num, word))
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
         if 'file has not been decrypted' in str(e):
@@ -172,16 +176,15 @@ def process_pdf_file(filepath, keyword, pattern):
     return filepath, matches, is_encrypted
 
 # part_2 process search on pdf files     
-def search_pdf_files(keyword, folder_path):
+def search_pdf_files(keyword, folder_path, threshold=80):
     results = {}
     encrypted_files = []
-    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)  # added re.I flag
     pdf_files = [os.path.join(root, filename)
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
     with ThreadPoolExecutor() as executor:
-        future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
+        future_results = [executor.submit(process_pdf_file, filepath, keyword, threshold) for filepath in pdf_files]
         for future in future_results:
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
