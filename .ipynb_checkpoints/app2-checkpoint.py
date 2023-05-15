@@ -152,6 +152,9 @@ def ask_LIB_route():
         response = ask_ai(question, current_folder) 
     else:
         return render_template('bad_key.html')
+    
+    
+    
 from fuzzywuzzy import fuzz
 
 # part_1 process search on pdf files
@@ -165,9 +168,10 @@ def process_pdf_file(filepath, keyword, threshold):
             pages = text.split('\f')
         for page_num, page_text in enumerate(pages):
             words = page_text.split()
-            for word in words:
-                if fuzz.ratio(word.lower(), keyword.lower()) > threshold:
-                    matches.append((page_num, word))
+            for i in range(len(words)):
+                if fuzz.ratio(words[i].lower(), keyword.lower()) > threshold:
+                    surrounding_text = ' '.join(words[max(0, i - 5):min(len(words), i + 6)])  # 5 words before and after
+                    matches.append((page_num, surrounding_text))
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
         if 'file has not been decrypted' in str(e):
@@ -214,8 +218,8 @@ def search_files():
             f.write(f"Search keyword: {keyword}\n")
             for filepath, matches in search_results.items():
                 f.write(f"{filepath}\n")
-                for page_num, match in matches:
-                    f.write(f"  Page {page_num + 1}: {match}\n")
+                for page_num, surrounding_text in matches:
+                    f.write(f"  Page {page_num + 1}: {surrounding_text}\n")
                 f.write(os.linesep)
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
