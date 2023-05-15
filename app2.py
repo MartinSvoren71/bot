@@ -158,7 +158,7 @@ def ask_LIB_route():
 from fuzzywuzzy import fuzz
 
 # part_1 process search on pdf files
-def process_pdf_file(filepath, keyword, threshold):
+def process_pdf_file(filepath, keyword, pattern):
     matches = []
     is_encrypted = False
     try:
@@ -167,11 +167,8 @@ def process_pdf_file(filepath, keyword, threshold):
             text = extract_text(filepath, password='', codec='utf-8')
             pages = text.split('\f')
         for page_num, page_text in enumerate(pages):
-            words = page_text.split()
-            for i in range(len(words)):
-                if fuzz.ratio(words[i].lower(), keyword.lower()) > threshold:
-                    surrounding_text = ' '.join(words[max(0, i - 29):min(len(words), i + 30)])  # 5 words before and after
-                    matches.append((page_num, surrounding_text))
+            for match in pattern.finditer(page_text):
+                matches.append((page_num, match.group()))
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
         if 'file has not been decrypted' in str(e):
@@ -180,15 +177,16 @@ def process_pdf_file(filepath, keyword, threshold):
     return filepath, matches, is_encrypted
 
 # part_2 process search on pdf files     
-def search_pdf_files(keyword, folder_path, threshold=80):
+def search_pdf_files(keyword, folder_path):
     results = {}
     encrypted_files = []
+    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)  # added re.I flag
     pdf_files = [os.path.join(root, filename)
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
     with ThreadPoolExecutor() as executor:
-        future_results = [executor.submit(process_pdf_file, filepath, keyword, threshold) for filepath in pdf_files]
+        future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
@@ -218,12 +216,13 @@ def search_files():
             f.write(f"Search keyword: {keyword}\n")
             for filepath, matches in search_results.items():
                 f.write(f"{filepath}\n")
-                for page_num, surrounding_text in matches:
-                    f.write(f"  Page {page_num + 1}: {surrounding_text}\n")
+                for page_num, match in matches:
+                    f.write(f"  Page {page_num + 1}: {match}\n")
                 f.write(os.linesep)
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
+
 
 @app.route('/save', methods=['POST'])
 def generate_pdf_route():
