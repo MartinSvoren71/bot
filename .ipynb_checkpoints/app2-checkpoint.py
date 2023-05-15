@@ -170,7 +170,7 @@ def process_pdf_file(filepath, keyword, threshold):
             words = page_text.split()
             for i in range(len(words)):
                 if fuzz.ratio(words[i].lower(), keyword.lower()) > threshold:
-                    surrounding_text = ' '.join(words[max(0, i - 5):min(len(words), i + 6)])  # 5 words before and after
+                    surrounding_text = ' '.join(words[max(0, i - 13):min(len(words), i + 14)])  # 5 words before and after
                     matches.append((page_num, surrounding_text))
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
