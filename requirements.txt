@@ -18,3 +18,4 @@ sudo systemctl restart app2.service;
 sudo systemctl status app2.service;
 pip install wtforms;
 pip install flask flask-ckeditor;
+pip install fuzzywuzzy;
