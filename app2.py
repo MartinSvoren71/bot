@@ -156,7 +156,7 @@ def ask_LIB_route():
     
     
 from fuzzywuzzy import fuzz
-import time
+
 
 # part_1 process search on pdf files
 def process_pdf_file(filepath, keyword, pattern):
@@ -176,7 +176,6 @@ def process_pdf_file(filepath, keyword, pattern):
             is_encrypted = True
         return filepath, matches, is_encrypted
 
-    time.sleep(0.5)  # Introduce a small delay. Adjust as needed.
 
     return filepath, matches, is_encrypted
 
