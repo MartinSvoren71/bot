@@ -10,7 +10,7 @@ PORT=5000
 
 while true; do
     # Retrieve the current public IP address
-    CURRENT_IP=$(get_pr_ip)
+    CURRENT_IP="172.31.3.223:"
 
     # Function to check if the IP and port are responsive
     check_availability() {
