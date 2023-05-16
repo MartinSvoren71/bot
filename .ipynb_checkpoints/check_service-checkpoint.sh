@@ -30,7 +30,7 @@ while true; do
         sleep 5
         
         # Retrieve the new public IP address after restart
-        NEW_IP=$(get_public_ip)
+        NEW_IP=$(get_pr_ip)
         
         # Check if the new IP and port are responsive
         if check_availability; then
