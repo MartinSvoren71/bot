@@ -57,3 +57,58 @@ create recort ass subdomain - customers name, turn on Alias an select clasic loa
 == create new key 
 ===== in EC2 
 ==open new isntance, log into console, open main.py and paste api key
+
+
+
+
+
+
+
+
+
+
+To check the availability of a public IP on port 5000 and restart the `app2.service` if it's not responsive, you can use a script. Here's an example script in Bash:
+
+```bash
+#!/bin/bash
+
+# Define the IP address and port to check
+IP_ADDRESS="your_public_ip"
+PORT=5000
+
+# Function to check if the IP and port are responsive
+check_availability() {
+    nc -zv -w 5 $IP_ADDRESS $PORT > /dev/null 2>&1
+}
+
+# Check if the IP and port are responsive
+if check_availability; then
+    echo "IP is responsive"
+else
+    echo "IP is not responsive. Restarting app2.service..."
+    
+    # Restart the app2.service
+    systemctl restart app2.service
+    
+    # Check if the restart was successful
+    if check_availability; then
+        echo "Restart successful. IP is now responsive."
+    else
+        echo "Restart failed. IP is still not responsive."
+    fi
+fi
+```
+
+Make sure to replace `your_public_ip` with the actual public IP address you want to check. Save the script in a file, e.g., `check_ip.sh`, and make it executable by running `chmod +x check_ip.sh`.
+
+To run this script periodically, you can add it to a cron job. Use the `crontab -e` command to open the cron table and add an entry like the following to run the script every minute:
+
+```
+* * * * * /path/to/check_ip.sh >> /path/to/check_ip.log 2>&1
+```
+
+Replace `/path/to/check_ip.sh` with the actual path to your script file, and `/path/to/check_ip.log` with the desired path for the log file.
+
+This cron job will execute the script every minute, and any output or error messages will be logged to the specified log file.
+
+Note that this script assumes you have the necessary permissions to restart the `app2.service` using `systemctl`. Adjust the script accordingly if you need to use a different command or if additional permissions are required.
