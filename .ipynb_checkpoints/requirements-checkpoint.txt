@@ -1,6 +1,7 @@
 sudo yum install pip;
 sudo yum install python;
 sudo yum install git;
+sudo yum install htop;
 git clone https://github.com/MartinSvoren71/bot -b v2;
 pip install flask==2.2.4;
 pip install llama-index==0.5.25;
