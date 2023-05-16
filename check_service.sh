@@ -1,29 +1,34 @@
 #!/bin/bash
 
-# Define the IP address and port to check
-IP_ADDRESS="https://demo.knowledge-vortex.com"
+# Define the application URL to check
+APP_URL="https://demo.knowledge-vortex.com"
 
-# Function to check if the IP and port are responsive
+# Function to check if the application is responsive
 check_availability() {
-    nc -zv -w 5 $IP_ADDRESS  > /dev/null 2>&1
+    response=$(curl -IsS -k $APP_URL | head -n 1)
+    if [[ $response == *"200 OK"* ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # Infinite loop to check every 10 seconds
 while true; do
-    # Check if the IP and port are responsive
+    # Check if the application is responsive
     if check_availability; then
-        echo "IP is responsive"
+        echo "Application is responsive"
     else
-        echo "IP is not responsive. Restarting app2.service..."
+        echo "Application is not responsive. Restarting app2.service..."
         
         # Restart the app2.service
-       sudo systemctl restart app2.service
+        systemctl restart app2.service
         
         # Check if the restart was successful
         if check_availability; then
-            echo "Restart successful. IP is now responsive."
+            echo "Restart successful. Application is now responsive."
         else
-            echo "Restart failed. IP is still not responsive."
+            echo "Restart failed. Application is still not responsive."
         fi
     fi
     
