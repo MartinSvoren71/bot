@@ -176,7 +176,7 @@ def process_pdf_file(filepath, keyword, pattern):
             is_encrypted = True
         return filepath, matches, is_encrypted
 
-    time.sleep(0.1)  # Introduce a small delay. Adjust as needed.
+    time.sleep(0.5)  # Introduce a small delay. Adjust as needed.
 
     return filepath, matches, is_encrypted
 
