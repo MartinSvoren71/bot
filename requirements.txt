@@ -19,3 +19,4 @@ sudo systemctl status app2.service;
 pip install wtforms;
 pip install flask flask-ckeditor;
 pip install fuzzywuzzy;
+sudo yum install screen;

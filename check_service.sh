@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Function to retrieve the current public IP address
-get_public_ip() {
-    curl -sS ifconfig.me
+get_pr_ip() {
+    curl -sS http://169.254.169.254/latest/meta-data/local-ipv4
 }
 
 # Define the port to check
@@ -10,7 +10,7 @@ PORT=5000
 
 while true; do
     # Retrieve the current public IP address
-    CURRENT_IP=$(get_public_ip)
+    CURRENT_IP=$(get_pr_ip)
 
     # Function to check if the IP and port are responsive
     check_availability() {
