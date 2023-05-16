@@ -156,6 +156,7 @@ def ask_LIB_route():
     
     
 from fuzzywuzzy import fuzz
+import time
 
 # part_1 process search on pdf files
 def process_pdf_file(filepath, keyword, pattern):
@@ -174,6 +175,9 @@ def process_pdf_file(filepath, keyword, pattern):
         if 'file has not been decrypted' in str(e):
             is_encrypted = True
         return filepath, matches, is_encrypted
+
+    time.sleep(0.1)  # Introduce a small delay. Adjust as needed.
+
     return filepath, matches, is_encrypted
 
 # part_2 process search on pdf files     
@@ -185,7 +189,9 @@ def search_pdf_files(keyword, folder_path):
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
-    with ThreadPoolExecutor() as executor:
+
+    max_threads = 10  # Adjust this number as needed
+    with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
             filepath, matches, is_encrypted = future.result()
@@ -193,7 +199,9 @@ def search_pdf_files(keyword, folder_path):
                 encrypted_files.append(filepath)
             elif matches:
                 results[filepath] = matches
+
     return results, encrypted_files
+
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
