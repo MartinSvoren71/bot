@@ -36,7 +36,7 @@ def ask_ai(question, current_folder):
     #index = GPTSimpleVectorIndex.from_documents(documents)
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, mode="embedding")  #default #embedding
-    log_file = os.path.join(os.getcwd(), '/Data/system/log.txt')
+    log_file = os.path.join(os.getcwd(), 'Data/system/log.txt')
     llm_token_usage = index.service_context.llm_predictor.last_token_usage
     embed_token_usage = index.service_context.embed_model.last_token_usage
 
@@ -62,7 +62,7 @@ def ask_ai(question, current_folder):
 
 
 def construct_index(current_folder):
-    log_file = os.path.join(os.getcwd(), '/Data/system/log.txt')
+    log_file = os.path.join(os.getcwd(), 'Data/system/log.txt')
 
     folder_path = current_folder
     index_file = f"{folder_path}/index.json"
