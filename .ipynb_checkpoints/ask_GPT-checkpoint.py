@@ -28,7 +28,7 @@ def ask_GPT(question):
 
     answer = response.choices[0].text.strip()
 
-    log_file = os.path.join(os.getcwd(), 'log.txt')
+    log_file = os.path.join(os.getcwd(), '/Data/system/log.txt')
     
     # Read the existing data in the log file
     with open(log_file, "r") as f:

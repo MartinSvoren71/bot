@@ -120,10 +120,14 @@ def set_theme():
         # handle invalid theme value
         theme_var = "light"
     return index()
+
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
 def log_content():
-    file_path = os.path.join(os.getcwd(), 'log.txt')
+    file_path = os.path.join(os.getcwd(), 'Data/system/log.txt')
+    if not os.path.isfile(file_path):
+        open(file_path, 'w').close()
+
     with open(file_path, 'r') as file:
         content = file.read()
     return content

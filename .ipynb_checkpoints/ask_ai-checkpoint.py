@@ -36,7 +36,7 @@ def ask_ai(question, current_folder):
     #index = GPTSimpleVectorIndex.from_documents(documents)
     index = GPTSimpleVectorIndex.load_from_disk(index_file)
     response = index.query(question, mode="embedding")  #default #embedding
-    log_file = os.path.join(os.getcwd(), 'log.txt')
+    log_file = os.path.join(os.getcwd(), '/Data/system/log.txt')
     llm_token_usage = index.service_context.llm_predictor.last_token_usage
     embed_token_usage = index.service_context.embed_model.last_token_usage
 
@@ -52,7 +52,7 @@ def ask_ai(question, current_folder):
         f.write(f"Question: {question}\n\n")
         f.write(f"Operator: {response.response}\n\n")
         f.write(f"vortex_token_usage: {llm_token_usage}\n\n")
-        f.write(f"openAI_token_usage: {embed_token_usage}\n\n")
+        f.write(f"LLM_token_usage: {embed_token_usage}\n\n")
        # f.write(f"Details: {response.source_nodes}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
@@ -62,7 +62,7 @@ def ask_ai(question, current_folder):
 
 
 def construct_index(current_folder):
-    log_file = os.path.join(os.getcwd(), 'log.txt')
+    log_file = os.path.join(os.getcwd(), '/Data/system/log.txt')
 
     folder_path = current_folder
     index_file = f"{folder_path}/index.json"
@@ -91,7 +91,7 @@ def construct_index(current_folder):
         #f.write(f"Togen usage: {token_usage}\n\n")
         f.write(f"Folder: {folder_path} index file successfully generated\n\n")
         f.write(f"vortex_token_usage: {llm_token_usage}\n\n")
-        f.write(f"Index_token_usage: {embed_token_usage}\n\n")
+        f.write(f"LLM_token_usage: {embed_token_usage}\n\n")
        # f.write(f"Details: {response.source_nodes}\n\n")
         f.write("======================================================================================\n")
         f.write("                         Knowlege Vortex v1.5                                 \n")
