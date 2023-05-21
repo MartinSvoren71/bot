@@ -328,8 +328,8 @@ var myLink = document.getElementById("results");
 
      tinymce.init({
       selector: '#editorX',
-      plugins: 'anchor autolink charmap codesample  image link lists media searchreplace table visualblocks wordcount checklist casechange   advtable advcode editimage tinycomments    typography inlinecss',
-      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table  | addcomment showcomments |  typography | align lineheight | checklist numlist bullist indent outdent |  charmap | removeformat',
+      plugins: 'anchor autolink charmap codesample  image link lists media searchreplace table visualblocks wordcount       ',
+      toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table  | addcomment showcomments |  typography | align lineheight |  numlist bullist indent outdent |  charmap | removeformat',
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Author name',
       mergetags_list: [
