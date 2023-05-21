@@ -27,6 +27,7 @@ from pdfminer.high_level import extract_text
 from builtins import len
 from flask_ckeditor import CKEditor
 from flask_session import Session
+from celery_tasks import process_pdf_file
 
 
 app = Flask(__name__, static_folder='/')
@@ -164,7 +165,6 @@ from fuzzywuzzy import fuzz
 
 
 
-# part_2 process search on pdf files     
 def search_pdf_files(keyword, folder_path):
     results = {}
     encrypted_files = []
@@ -174,11 +174,12 @@ def search_pdf_files(keyword, folder_path):
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
 
-    max_threads = 20  # Adjust this number as needed
-    with ThreadPoolExecutor(max_workers=max_threads) as executor:
-        future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
-        for future in future_results:
-            filepath, matches, is_encrypted = future.result()
+    # replace ThreadPoolExecutor with Celery tasks
+    future_results = [process_pdf_file.delay(filepath, keyword, pattern) for filepath in pdf_files]
+    for future in future_results:
+        result = future.get(timeout=60*30)  # wait up to 10 minutes for each task
+        if result is not None:  # if the task didn't finish in time, result will be None
+            filepath, matches, is_encrypted = result
             if is_encrypted:
                 encrypted_files.append(filepath)
             elif matches:
