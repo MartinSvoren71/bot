@@ -212,7 +212,7 @@ def search_pdf_files(keyword, folder_path):
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
-    max_threads = 6  # Adjust this number as needed
+    max_threads = 1  # Adjust this number as needed
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
