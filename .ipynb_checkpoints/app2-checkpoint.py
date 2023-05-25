@@ -28,8 +28,6 @@ from builtins import len
 from flask_ckeditor import CKEditor
 from flask_session import Session
 import queue
-import threading
-
 from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__, static_folder='/')
@@ -212,7 +210,7 @@ def search_pdf_files(keyword, folder_path):
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
-    max_threads = 2  # Adjust this number as needed
+    max_threads = 2 # Adjust this number as needed
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
@@ -223,35 +221,6 @@ def search_pdf_files(keyword, folder_path):
                 results[filepath] = matches
 
     return results, encrypted_files
-
-# Create a Queue instance
-q = queue.Queue()
-
-# Wrap your function to be used with a queue
-def worker():
-    while True:
-        item = q.get()
-        if item is None:
-            break
-        keyword, folder_path = item
-        search_pdf_files(keyword, folder_path)
-        q.task_done()
-
-# Start your worker thread
-t = threading.Thread(target=worker)
-t.start()
-
-# Add items to the queue
-q.put(("Keyword 1", "Folder Path 1"))
-q.put(("Keyword 2", "Folder Path 2"))
-q.put(("Keyword 3", "Folder Path 3"))
-
-# Wait until all items in the queue have been processed
-q.join()
-
-# Stop the worker
-q.put(None)
-t.join()
 
 
 
