@@ -27,9 +27,6 @@ from pdfminer.high_level import extract_text
 from builtins import len
 from flask_ckeditor import CKEditor
 from flask_session import Session
-import queue
-from concurrent.futures import ThreadPoolExecutor
-import threading
 
 
 app = Flask(__name__, static_folder='/')
@@ -39,6 +36,7 @@ current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
+
 
 
 
@@ -224,35 +222,11 @@ def search_pdf_files(keyword, folder_path):
 
     return results, encrypted_files
 
-# Create a Queue instance
-q = queue.Queue()
+t1 = threading.Thread(target=search_pdf_files, args=(keyword, folder_path))
+t1.start()
 
-# Wrap your function to be used with a queue
-def worker():
-    while True:
-        item = q.get()
-        if item is None:
-            break
-        keyword, folder_path = item
-        search_pdf_files(keyword, folder_path)
-        q.task_done()
-
-# Start your worker thread
-t = threading.Thread(target=worker)
-t.start()
-
-# Add items to the queue
-q.put(("Keyword 1", "Folder Path 1"))
-q.put(("Keyword 2", "Folder Path 2"))
-q.put(("Keyword 3", "Folder Path 3"))
-
-# Wait until all items in the queue have been processed
-q.join()
-
-# Stop the worker
-q.put(None)
-t.join()
-
+print(threading.active_count())
+print(threading.enumerate())
 
 
 # part_3 process search on pdf files     + caller from web app
