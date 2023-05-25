@@ -29,6 +29,7 @@ from flask_ckeditor import CKEditor
 from flask_session import Session
 import threading
 import itertools
+from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
@@ -225,22 +226,19 @@ def search_pdf_files(keyword, folder_path):
 
 # List to hold keyword-folder pairs
 input_data = [("python", "/path/to/folder"), ("java", "/another/path"), ("ruby", "/yet/another/path")]
-# Or input_data can be obtained dynamically, e.g., from user inputs or a file
 
-threads = []
+# Counter for naming threads
 counter = itertools.count()
 
-# Create and start a new thread for each keyword-folder pair
-for keyword, folder_path in input_data:
-    t = threading.Thread(target=search_pdf_files, args=(keyword, folder_path), name="Thread-{}".format(next(counter)))
-    t.start()
-    threads.append(t)
+# Use a ThreadPoolExecutor
+# Adjust max_workers as needed. This is the maximum number of threads that can be active at the same time.
+with ThreadPoolExecutor(max_workers=10) as executor:
+    # Start a new task for each keyword-folder pair
+    futures = [executor.submit(search_pdf_files, keyword, folder_path) for keyword, folder_path in input_data]
 
-print(threading.active_count())
-print(threading.enumerate())
-
-for t in threads:
-    t.join()
+    # If you need to, you can collect and process the results here
+    for future in futures:
+        result = future.result()
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
