@@ -27,7 +27,7 @@ from pdfminer.high_level import extract_text
 from builtins import len
 from flask_ckeditor import CKEditor
 from flask_session import Session
-
+import time
 
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
