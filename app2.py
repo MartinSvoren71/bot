@@ -27,9 +27,7 @@ from pdfminer.high_level import extract_text
 from builtins import len
 from flask_ckeditor import CKEditor
 from flask_session import Session
-import threading
-import itertools
-from concurrent.futures import ThreadPoolExecutor
+
 
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
@@ -213,13 +211,14 @@ def search_pdf_files(keyword, folder_path):
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
     max_threads = 6  # Adjust this number as needed
+    last_time = time.time()  # store the time when we last slept
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
-            # Pause for 1 second every 5 seconds
-            if time.time() % 3 == 0:
-                time.sleep(1)
-
+            current_time = time.time()
+            if current_time - last_time >= 5:  # 5 seconds have passed
+                time.sleep(1)  # pause for 1 second
+                last_time = time.time()  # update the time we last slept
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
                 encrypted_files.append(filepath)
@@ -227,18 +226,6 @@ def search_pdf_files(keyword, folder_path):
                 results[filepath] = matches
 
     return results, encrypted_files
-
-# List to hold keyword-folder pairs
-input_data = [("python", "/path/to/folder"), ("java", "/another/path"), ("ruby", "/yet/another/path")]
-
-# Counter for naming threads
-counter = itertools.count()
-
-# Use a ThreadPoolExecutor
-# Adjust max_workers as needed. This is the maximum number of threads that can be active at the same time.
-with ThreadPoolExecutor(max_workers=10) as executor:
-    # Start a new task for each keyword-folder pair
-    futures = [executor.submit(search_pdf_files, keyword, folder_path) for keyword, folder_path in input_data]
 
 
 
