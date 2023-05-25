@@ -204,8 +204,7 @@ def process_pdf_file(filepath, keyword, pattern):
 
 
 # part_2 process search on pdf files     
-def search_pdf_files(input):
-    keyword, folder_path = input
+def search_pdf_files(keyword, folder_path):
     results = {}
     encrypted_files = []
     pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)  # added re.I flag
@@ -234,7 +233,8 @@ def worker():
         item = q.get()
         if item is None:
             break
-        search_pdf_files(item)
+        keyword, folder_path = item
+        search_pdf_files(keyword, folder_path)
         q.task_done()
 
 # Start your worker thread
