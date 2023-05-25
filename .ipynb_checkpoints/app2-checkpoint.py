@@ -236,9 +236,13 @@ with ThreadPoolExecutor(max_workers=10) as executor:
     # Start a new task for each keyword-folder pair
     futures = [executor.submit(search_pdf_files, keyword, folder_path) for keyword, folder_path in input_data]
 
-    # If you need to, you can collect and process the results here
-    for future in futures:
-        result = future.result()
+# Now, you can perform other tasks without waiting for the search tasks to complete.
+do_some_other_work()
+
+# If you need to, you can collect and process the results here. But note that calling future.result() will block until the task is done.
+for future in futures:
+    result = future.result()  # This will block until the task is done
+    # Process result...
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
