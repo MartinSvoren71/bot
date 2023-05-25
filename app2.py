@@ -27,7 +27,8 @@ from pdfminer.high_level import extract_text
 from builtins import len
 from flask_ckeditor import CKEditor
 from flask_session import Session
-
+import queue
+from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__, static_folder='/')
 ckeditor = CKEditor(app)
@@ -36,6 +37,8 @@ current_folder = 'Data/'
 app.config['SECRET_KEY'] = 'xxx007'  # Add this line
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
+
+
 
 def find_user(username, password):
     if len(password) < 6:
@@ -46,6 +49,9 @@ def find_user(username, password):
         if user["username"] == username and user["password"] == password:
             return True
     return False
+
+
+
 # main landing page - login
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -70,9 +76,14 @@ def login():
         return redirect(url_for("bad_key"))
     return render_template("login.html")
 @app.route("/bad_key")
+
+
+
 #when bed klogin key provided
 def bad_key():
     return render_template("badkey.html")
+
+
 
 #list files from Data into web app
 @app.route("/get_updated_files", methods=["GET", "POST"])
@@ -86,6 +97,7 @@ def list_files_and_urls(folder_path):
                 file["PresignedURL"] = url_for("static", filename=file["Key"])
                 files.append(file)
     return files
+
 
 
 # main web app wehn righ key is provided
@@ -107,6 +119,8 @@ def index():
         flash("Please log in first")
         return redirect(url_for("login"))
     
+    
+    
 @app.route("/theme", methods=["POST"])
 def set_theme():
     theme = request.form.get("theme")
@@ -121,6 +135,8 @@ def set_theme():
         theme_var = "light"
     return index()
 
+
+
 # provide log.txt with open ai results of queries 
 @app.route('/log-content')
 def log_content():
@@ -131,6 +147,9 @@ def log_content():
     with open(file_path, 'r') as file:
         content = file.read()
     return content
+
+
+
 # runn ask openai GPT / button trigger   
 @app.route('/ask_gpt', methods=['POST'])
 def ask_GPT_route():
@@ -157,8 +176,7 @@ def ask_LIB_route():
     else:
         return render_template('bad_key.html')
     
-    
-    
+
 from fuzzywuzzy import fuzz
 
 
@@ -179,12 +197,13 @@ def process_pdf_file(filepath, keyword, pattern):
         if 'file has not been decrypted' in str(e):
             is_encrypted = True
         return filepath, matches, is_encrypted
-
-
     return filepath, matches, is_encrypted
 
+
+
 # part_2 process search on pdf files     
-def search_pdf_files(keyword, folder_path):
+def search_pdf_files(input):
+    keyword, folder_path = input
     results = {}
     encrypted_files = []
     pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)  # added re.I flag
@@ -192,7 +211,6 @@ def search_pdf_files(keyword, folder_path):
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
-
     max_threads = 6  # Adjust this number as needed
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
@@ -205,18 +223,45 @@ def search_pdf_files(keyword, folder_path):
 
     return results, encrypted_files
 
+# Create a Queue instance
+q = queue.Queue()
+
+# Wrap your function to be used with a queue
+def worker():
+    while True:
+        item = q.get()
+        if item is None:
+            break
+        search_pdf_files(item)
+        q.task_done()
+
+# Start your worker thread
+t = threading.Thread(target=worker)
+t.start()
+
+# Add items to the queue
+q.put(("Keyword 1", "Folder Path 1"))
+q.put(("Keyword 2", "Folder Path 2"))
+q.put(("Keyword 3", "Folder Path 3"))
+
+# Wait until all items in the queue have been processed
+q.join()
+
+# Stop the worker
+q.put(None)
+t.join()
+
+
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
-    
     # Set the folder path to search for PDF files
     select_folder = ''
     folder_path = f'Data/{current_folder}'
-    print(f"Selected folder for search: {current_folder}")  # Print the selected folder in the terminal
-    
+    print(f"Selected folder for search: {current_folder}")  # Print the selected folder in the terminal  
     if request.method == 'POST':
         keyword = request.form['keyword']
         
@@ -233,6 +278,7 @@ def search_files():
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
+
 
 
 @app.route('/save', methods=['POST'])
@@ -259,8 +305,9 @@ def list_folders():
                 files.append(file)
     return files
 
-# function for splitting path and generating subfolder path
 
+
+# function for splitting path and generating subfolder path
 def get_subfolders_recursive(path):
     username = session["username"]  # Retrieve the username from the session
     subfolders = []
@@ -277,6 +324,7 @@ def get_subfolders_recursive(path):
     return subfolders
 
 
+
 def get_files_recursive(path):
     all_files = []
     for root, _, files in os.walk(path):
@@ -284,6 +332,8 @@ def get_files_recursive(path):
             rel_path = os.path.relpath(os.path.join(root, f), path)
             all_files.append(rel_path)
     return all_files
+
+
 @app.route('/get_folder_content', methods=['POST'])
 def get_folder_content():
     global current_folder
@@ -293,6 +343,9 @@ def get_folder_content():
     print(f"Selected folder: {selected_folder}")  # Print the selected folder in the terminal
     current_folder = selected_folder
     return {'folder_content': folder_content}
+
+
+
 @app.route('/filemanager/')
 @app.route('/filemanager/<path:subpath>')
 def file_manager(subpath=None):
@@ -318,6 +371,8 @@ def file_manager(subpath=None):
             folders.append(item)
     return render_template('file_manager.html', files=files, folders=folders, subpath=subpath)
 
+
+
 @app.route('/upload/', methods=['POST'])
 @app.route('/upload/<path:subpath>', methods=['POST'])
 def upload(subpath=None):
@@ -337,6 +392,9 @@ def upload(subpath=None):
             return redirect(url_for('file_manager', subpath=subpath))
     flash('Error uploading files.')
     return redirect(url_for('file_manager', subpath=subpath))
+
+
+
 @app.route('/delete/<path:filename>')
 def delete(filename):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -346,6 +404,9 @@ def delete(filename):
     else:
         flash('File not found.')
     return redirect(url_for('file_manager'))
+
+
+
 @app.route('/create_folder/', methods=['POST'])
 @app.route('/create_folder/<path:subpath>', methods=['POST'])
 def create_folder(subpath=None):
@@ -363,6 +424,8 @@ def create_folder(subpath=None):
         flash('Folder already exists.')
     return redirect(url_for('file_manager', subpath=subpath))
 
+
+
 @app.route('/delete_folder/<path:folder_path>')
 def delete_folder(folder_path):
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_path)
@@ -373,24 +436,35 @@ def delete_folder(folder_path):
         flash('Folder not found or not a directory.')
     return redirect(url_for('file_manager'))
 
+
+
 @app.route('/Data/<path:file_path>')
 def serve_file(file_path):
     data_folder_path = os.path.abspath('Data')
     return send_from_directory(data_folder_path, file_path)
-                                
+           
+    
                                 
 def load_users():
     with open('user.json', 'r') as file:
         users = json.load(file)
     return users
+
+
+
 def save_users(users):
     with open('user.json', 'w') as file:
         json.dump(users, file)
     load_users()
     get_users()
+    
+    
+    
 @app.route('/users')
 def user_manager():
     return render_template('users.html')
+
+
 @app.route('/create_user', methods=['POST'])
 def create_user():
     username = request.form['username']
@@ -405,27 +479,34 @@ def create_user():
     users = load_users()
     users.append(user)
     save_users(users)
-
     # Create a new folder in Data/ with the folder name as _{username}
     new_folder_path = os.path.join("Data", f"PrivateFolder_{username}")
     os.makedirs(new_folder_path, exist_ok=True)
-
     return redirect('/users')
+
+
 
 def load_users():
     with open('user.json', 'r') as file:
         users_data = json.load(file)
     return users_data
 
+
+
 def save_users(users_data):
     with open('user.json', 'w') as file:
         json.dump(users_data, file)
 
+        
+        
 # Your other routes and functions
 @app.route('/get_users', methods=['GET'])
 def get_users():
     users = load_users()
     return jsonify(users)
+
+
+
 @app.route('/delete_user', methods=['POST'])
 def delete_user():
     username = request.json['username']
@@ -441,7 +522,9 @@ def delete_user():
         return jsonify({"status": "success", "message": "User deleted successfully."})
     else:
         return
-                     
+      
+        
+        
 @app.route('/update_password', methods=['POST'])
 def update_password():
     username = request.form['username']
@@ -467,10 +550,15 @@ def update_password():
         return redirect(url_for("index"))
     else:
         flash("Incorrect username or password")
-        return render_template('badkey.html')        
+        return render_template('badkey.html')  
+    
+    
+    
 @app.route('/change_passwordX')
 def changepassword():
-        return render_template('change_password.html')        
+        return render_template('change_password.html')     
+    
+    
         
 #runn app as local on port 5000 , accesible on private and public AWS IP
 app.run(host='0.0.0.0', port=5000)
