@@ -216,8 +216,8 @@ def search_pdf_files(keyword, folder_path):
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
             current_time = time.time()
-            if current_time - last_time >= 5:  # 5 seconds have passed
-                time.sleep(1)  # pause for 1 second
+            if current_time - last_time >= 4:  # 5 seconds have passed
+                time.sleep(2)  # pause for 1 second
                 last_time = time.time()  # update the time we last slept
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
