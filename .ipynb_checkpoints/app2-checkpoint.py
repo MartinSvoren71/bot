@@ -239,6 +239,8 @@ for keyword, folder_path in input_data:
 print(threading.active_count())
 print(threading.enumerate())
 
+for t in threads:
+    t.join()
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
