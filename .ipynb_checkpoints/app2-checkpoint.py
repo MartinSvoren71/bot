@@ -222,7 +222,7 @@ def search_pdf_files(keyword, folder_path):
 
     return results, encrypted_files
 
-t1 = threading.Thread(target=search_pdf_files, args=())
+t1 = threading.Thread(target=search_pdf_files, args=("python", "/path/to/folder"))
 t1.start()
 
 print(threading.active_count())
