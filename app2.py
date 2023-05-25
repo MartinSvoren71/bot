@@ -199,10 +199,19 @@ def process_pdf_file(filepath, keyword, pattern):
         return filepath, matches, is_encrypted
     return filepath, matches, is_encrypted
 
+pause_flag = False
 
+def set_pause_flag():
+    global pause_flag
+    while True:
+        time.sleep(5)  # After every 5 seconds, set the pause_flag
+        pause_flag = True
+        time.sleep(1)  # Keep the flag set for 1 second
+        pause_flag = False
 
 # part_2 process search on pdf files     
 def search_pdf_files(keyword, folder_path):
+    global pause_flag
     results = {}
     encrypted_files = []
     pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)  # added re.I flag
@@ -210,15 +219,12 @@ def search_pdf_files(keyword, folder_path):
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
-    max_threads = 6  # Adjust this number as needed
-    last_time = time.time()  # store the time when we last slept
+    max_threads = 2  # Adjust this number as needed
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
-            current_time = time.time()
-            if current_time - last_time >= 4:  # 5 seconds have passed
-                time.sleep(2)  # pause for 1 second
-                last_time = time.time()  # update the time we last slept
+            while pause_flag:  # If pause_flag is set, pause this thread
+                time.sleep(0.1)  # Sleep for a short duration to avoid busy waiting
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
                 encrypted_files.append(filepath)
@@ -227,7 +233,11 @@ def search_pdf_files(keyword, folder_path):
 
     return results, encrypted_files
 
+# Create and start the pause flag thread
+t_pause = threading.Thread(target=set_pause_flag)
+t_pause.start()
 
+# Now you can start your search threads
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
