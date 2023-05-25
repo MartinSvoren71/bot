@@ -222,8 +222,18 @@ def search_pdf_files(keyword, folder_path):
 
     return results, encrypted_files
 
-t1 = threading.Thread(target=search_pdf_files, args=("python", "/path/to/folder"))
-t1.start()
+# List to hold keyword-folder pairs
+input_data = [("python", "/path/to/folder"), ("java", "/another/path"), ("ruby", "/yet/another/path")]
+# Or input_data can be obtained dynamically, e.g., from user inputs or a file
+
+threads = []
+counter = itertools.count()
+
+# Create and start a new thread for each keyword-folder pair
+for keyword, folder_path in input_data:
+    t = threading.Thread(target=search_pdf_files, args=(keyword, folder_path), name="Thread-{}".format(next(counter)))
+    t.start()
+    threads.append(t)
 
 print(threading.active_count())
 print(threading.enumerate())
