@@ -216,6 +216,10 @@ def search_pdf_files(keyword, folder_path):
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
+            # Pause for 1 second every 5 seconds
+            if time.time() % 3 == 0:
+                time.sleep(1)
+
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
                 encrypted_files.append(filepath)
