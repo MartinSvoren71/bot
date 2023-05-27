@@ -205,9 +205,9 @@ pause_flag = False
 def set_pause_flag():
     global pause_flag
     while True:
-        time.sleep(5)  # After every 5 seconds, set the pause_flag
+        time.sleep(2)  # After every 5 seconds, set the pause_flag
         pause_flag = True
-        time.sleep(1)  # Keep the flag set for 1 second
+        time.sleep(2)  # Keep the flag set for 1 second
         pause_flag = False
 
 # part_2 process search on pdf files     
@@ -220,12 +220,12 @@ def search_pdf_files(keyword, folder_path):
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
-    max_threads = 2  # Adjust this number as needed
+    max_threads = 4  # Adjust this number as needed
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
             while pause_flag:  # If pause_flag is set, pause this thread
-                time.sleep(0.1)  # Sleep for a short duration to avoid busy waiting
+                time.sleep(0.3)  # Sleep for a short duration to avoid busy waiting
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
                 encrypted_files.append(filepath)
