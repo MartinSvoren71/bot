@@ -191,9 +191,9 @@ pause_flag = False
 def set_pause_flag():
     global pause_flag
     while True:
-        time.sleep(4)  # After every 4 seconds, set the pause_flag
+        time.sleep(2)  # After every 4 seconds, set the pause_flag
         pause_flag = True
-        time.sleep(1)  # Keep the flag set for 1 second
+        time.sleep(2)  # Keep the flag set for 1 second
         pause_flag = False
 
 def process_pdf_file(filepath, keyword, pattern):
