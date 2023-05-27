@@ -196,12 +196,15 @@ def process_pdf_file(filepath, keyword, pattern):
         for page_num, page_text in enumerate(pages):
             for match in pattern.finditer(page_text):
                 matches.append((page_num, match.group()))
+            with pause_condition:  # Check for pause after processing each page
+                pause_condition.wait()
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
         if 'file has not been decrypted' in str(e):
             is_encrypted = True
         return filepath, matches, is_encrypted
     return filepath, matches, is_encrypted
+
 
 def set_pause_condition():
     global pause_condition
