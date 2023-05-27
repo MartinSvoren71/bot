@@ -200,7 +200,7 @@ def process_pdf_file(filepath, keyword, pattern):
         return filepath, matches, is_encrypted
     return filepath, matches, is_encrypted
 
-pause_flag = False
+pause_flag = True
 
 def set_pause_flag():
     global pause_flag
