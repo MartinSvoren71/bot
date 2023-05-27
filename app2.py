@@ -181,9 +181,11 @@ def ask_LIB_route():
     
 
 from fuzzywuzzy import fuzz
+import threading
+import time
 
 # Initialise the threading condition
-pause_condition = Condition()
+pause_condition = threading.Condition()
 
 def process_pdf_file(filepath, keyword, pattern):
     matches = []
@@ -210,8 +212,8 @@ def set_pause_condition():
     global pause_condition
     while True:
         with pause_condition:
-            pause_condition.wait(4)  # After every 4 seconds, pause this condition
-            pause_condition.notify_all()  # Resume all threads after 1 second
+            time.sleep(2)  # Pause for 2 seconds
+            pause_condition.notify_all()  # Resume all threads after 2 seconds
 
 def search_pdf_files(keyword, folder_path):
     global pause_condition
@@ -241,6 +243,7 @@ def search_pdf_files(keyword, folder_path):
 # Create and start the pause flag thread
 t_pause = threading.Thread(target=set_pause_condition)
 t_pause.start()
+
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
