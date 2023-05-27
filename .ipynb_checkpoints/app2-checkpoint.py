@@ -182,19 +182,8 @@ def ask_LIB_route():
 
 from fuzzywuzzy import fuzz
 
-import os
-from concurrent.futures import ThreadPoolExecutor
-import time
-
-pause_flag = False
-
-def set_pause_flag():
-    global pause_flag
-    while True:
-        time.sleep(2)  # After every 4 seconds, set the pause_flag
-        pause_flag = True
-        time.sleep(2)  # Keep the flag set for 1 second
-        pause_flag = False
+# Initialise the threading condition
+pause_condition = Condition()
 
 def process_pdf_file(filepath, keyword, pattern):
     matches = []
@@ -207,8 +196,8 @@ def process_pdf_file(filepath, keyword, pattern):
         for page_num, page_text in enumerate(pages):
             for match in pattern.finditer(page_text):
                 matches.append((page_num, match.group()))
-            if pause_flag:  # Check for pause after processing each page
-                time.sleep(1)
+            with pause_condition:  # Check for pause after processing each page
+                pause_condition.wait()
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
         if 'file has not been decrypted' in str(e):
@@ -216,8 +205,16 @@ def process_pdf_file(filepath, keyword, pattern):
         return filepath, matches, is_encrypted
     return filepath, matches, is_encrypted
 
+
+def set_pause_condition():
+    global pause_condition
+    while True:
+        with pause_condition:
+            pause_condition.wait(4)  # After every 4 seconds, pause this condition
+            pause_condition.notify_all()  # Resume all threads after 1 second
+
 def search_pdf_files(keyword, folder_path):
-    global pause_flag
+    global pause_condition
     results = {}
     encrypted_files = []
     pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)
@@ -231,6 +228,8 @@ def search_pdf_files(keyword, folder_path):
     with ThreadPoolExecutor(max_workers=max_threads) as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
         for future in future_results:
+            with pause_condition:
+                pause_condition.wait()  # Pause this thread if condition is paused
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
                 encrypted_files.append(filepath)
@@ -240,9 +239,8 @@ def search_pdf_files(keyword, folder_path):
     return results, encrypted_files
 
 # Create and start the pause flag thread
-t_pause = threading.Thread(target=set_pause_flag)
+t_pause = threading.Thread(target=set_pause_condition)
 t_pause.start()
-
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
