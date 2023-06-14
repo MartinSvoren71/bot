@@ -180,53 +180,44 @@ def ask_LIB_route():
         return render_template('bad_key.html')
     
 
-from fuzzywuzzy import fuzz
-
-# Initialise the threading condition
-pause_condition = Condition()
-
+# part_1 process search on pdf files
 def process_pdf_file(filepath, keyword, pattern):
     matches = []
     is_encrypted = False
+
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
             text = extract_text(filepath, password='', codec='utf-8')
             pages = text.split('\f')
+
         for page_num, page_text in enumerate(pages):
             for match in pattern.finditer(page_text):
                 matches.append((page_num, match.group()))
+
     except Exception as e:
         print(f"Error processing file {filepath}: {e}")
         if 'file has not been decrypted' in str(e):
             is_encrypted = True
         return filepath, matches, is_encrypted
+
     return filepath, matches, is_encrypted
 
-def set_pause_condition():
-    global pause_condition
-    while True:
-        with pause_condition:
-            pause_condition.wait(2)  # After every 4 seconds, pause this condition
-            pause_condition.notify_all(1)  # Resume all threads after 1 second
-
+# part_2 process search on pdf files     
 def search_pdf_files(keyword, folder_path):
-    global pause_condition
     results = {}
     encrypted_files = []
-    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword), re.I)
+    pattern = re.compile(r'(?<=\.)([^.]*\b{}\b[^.]*(?:\.[^.]*){{0,1}})'.format(keyword))
+
     pdf_files = [os.path.join(root, filename)
                  for root, _, filenames in os.walk(folder_path)
                  for filename in filenames
                  if filename.lower().endswith('.pdf')]
-    
-    max_threads = 1  # Set to number of cores in CPU
-    
-    with ThreadPoolExecutor(max_workers=max_threads) as executor:
+
+    with ThreadPoolExecutor() as executor:
         future_results = [executor.submit(process_pdf_file, filepath, keyword, pattern) for filepath in pdf_files]
+
         for future in future_results:
-            with pause_condition:
-                pause_condition.wait()  # Pause this thread if condition is paused
             filepath, matches, is_encrypted = future.result()
             if is_encrypted:
                 encrypted_files.append(filepath)
@@ -235,19 +226,20 @@ def search_pdf_files(keyword, folder_path):
 
     return results, encrypted_files
 
-# Create and start the pause flag thread
-t_pause = threading.Thread(target=set_pause_condition)
-t_pause.start()
+
+
 
 # part_3 process search on pdf files     + caller from web app
 @app.route('/search_pdf_files', methods=['POST'])
 def search_files():
     search_results = {}
     encrypted_files = []
+    
     # Set the folder path to search for PDF files
     select_folder = ''
     folder_path = f'Data/{current_folder}'
-    print(f"Selected folder for search: {current_folder}")  # Print the selected folder in the terminal  
+    print(f"Selected folder for search: {current_folder}")  # Print the selected folder in the terminal
+    
     if request.method == 'POST':
         keyword = request.form['keyword']
         
@@ -262,8 +254,10 @@ def search_files():
                     f.write(f"  Page {page_num + 1}: {match}\n")
                 f.write(os.linesep)
             f.write('-' * 80 + '\n')  # Add a separator line between different search results
+
     rendered_template = render_template('results.html', results=search_results, encrypted_files=encrypted_files)
     return jsonify({'rendered_template': rendered_template})
+
 
 
 
