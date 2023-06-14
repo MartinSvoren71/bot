@@ -207,8 +207,8 @@ def set_pause_condition():
     global pause_condition
     while True:
         with pause_condition:
-            pause_condition.wait(4)  # After every 4 seconds, pause this condition
-            pause_condition.notify_all()  # Resume all threads after 1 second
+            pause_condition.wait(2)  # After every 4 seconds, pause this condition
+            pause_condition.notify_all(1)  # Resume all threads after 1 second
 
 def search_pdf_files(keyword, folder_path):
     global pause_condition
